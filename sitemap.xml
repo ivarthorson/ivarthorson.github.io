@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://ivarthorson.github.io/blog/hyperbolic-geometry-and-special-relativity/</loc>
+<lastmod>2017-06-02T00:00:00-07:00</lastmod>
+</url>
+<url>
 <loc>https://ivarthorson.github.io/blog/reviving-the-dead/</loc>
 <lastmod>2017-05-30T00:00:00-07:00</lastmod>
 </url>
@@ -22,5 +26,13 @@
 </url>
 <url>
 <loc>https://ivarthorson.github.io/articles/</loc>
+</url>
+<url>
+<loc>https://ivarthorson.github.io/about/portfolio_2017-05-30_ivar-thorson.pdf</loc>
+<lastmod>2017-06-02T07:42:19-07:00</lastmod>
+</url>
+<url>
+<loc>https://ivarthorson.github.io/about/resume_2017-05-31_ivar-thorson.pdf</loc>
+<lastmod>2017-06-02T07:42:19-07:00</lastmod>
 </url>
 </urlset>

@@ -2,6 +2,14 @@
 
   
     {
+      "title"			: "Hyperbolic Geometry & Special Relativity",
+      "link"			: "https://ivarthorson.github.io/blog/hyperbolic-geometry-and-special-relativity/",
+      "excerpt"		: "While studying An Introduction to Particle Physics on a recent flight to Japan – yes, I know you all have secret nerdy hobbies so please allow me my interest in mathematics that is way over my head – I came across a simple viewpoint on special relativity that really stunned me:"
+    }
+  
+
+  
+    ,{
       "title"			: "Reviving the Dead...Content",
       "link"			: "https://ivarthorson.github.io/blog/reviving-the-dead/",
       "excerpt"		: "From 2003 until 2016, I had a personal website at roboloco.net. It lasted until last year, when I finally grew tired of upgrading applications, keeping comments free of spam, and the servers secure from hackers and the occasional website defacement. Thank you, GitHub, for providing this terrible sysadmin a free place to store this content, and one that requires no regular maintanance!"
