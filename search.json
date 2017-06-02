@@ -3,7 +3,7 @@
   
     {
       "title"			: "Reviving the Dead...Content",
-      "link"			: "http://localhost:4000/blog/reviving-the-dead/",
+      "link"			: "https://ivarthorson.github.io/blog/reviving-the-dead/",
       "excerpt"		: "From 2003 until 2016, I had a personal website at roboloco.net. It lasted until last year, when I finally grew tired of upgrading applications, keeping comments free of spam, and the servers secure from hackers and the occasional website defacement. Thank you, GitHub, for providing this terrible sysadmin a free place to store this content, and one that requires no regular maintanance!"
     }
   
@@ -11,7 +11,7 @@
   
     ,{
       "title"			: "Sample Post",
-      "link"			: "http://localhost:4000/articles/sample-article/",
+      "link"			: "https://ivarthorson.github.io/articles/sample-article/",
       "excerpt"		: "Just about everything you’ll need to style in the theme: headings, paragraphs, blockquotes, tables, code blocks, and more."
     }
   
@@ -31,7 +31,7 @@
   
     ,{
       "title"			: "About",
-      "link"			: "http://localhost:4000/about/",
+      "link"			: "https://ivarthorson.github.io/about/",
       "excerpt"		: "About Me"
     }
   
