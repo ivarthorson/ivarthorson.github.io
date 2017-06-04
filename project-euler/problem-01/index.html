@@ -1,0 +1,271 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Project Euler Problem 1 &#8211; Art is Never Finished</title>
+<meta name="description" content="As part of my efforts to learn Clojure, I am starting to work through the Project Euler a little bit each day to sharpen my programming skills without the pressure of having to get any real work done. I’ll post my notes here as I go along for everyone to enjoy, critique, or just laugh at.
+
+">
+<meta name="keywords" content="lazy-seqs, macros">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Project Euler Problem 1">
+<meta name="twitter:description" content="As part of my efforts to learn Clojure, I am starting to work through the Project Euler a little bit each day to sharpen my programming skills without the pressure of having to get any real work done. I’ll post my notes here as I go along for everyone to enjoy, critique, or just laugh at.
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ivarthorson.github.io/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Euler Problem 1">
+<meta property="og:description" content="As part of my efforts to learn Clojure, I am starting to work through the Project Euler a little bit each day to sharpen my programming skills without the pressure of having to get any real work done. I’ll post my notes here as I go along for everyone to enjoy, critique, or just laugh at.
+
+">
+<meta property="og:url" content="https://ivarthorson.github.io/project-euler/problem-01/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="https://ivarthorson.github.io/project-euler/problem-01/">
+<link href="https://ivarthorson.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://ivarthorson.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://ivarthorson.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://ivarthorson.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ivarthorson.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ivarthorson.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ivarthorson.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://ivarthorson.github.io/about/" >About</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="https://ivarthorson.github.io/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://ivarthorson.github.io/tags/#lazy-seqs" title="Pages tagged lazy-seqs">lazy-seqs</a></li><li><a href="https://ivarthorson.github.io/tags/#macros" title="Pages tagged macros">macros</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Project Euler Problem 1</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://ivarthorson.github.io/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2010-04-06T22:23:33-07:00"><i class="fa fa-calendar-o"></i> April 06, 2010</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>As part of my efforts to learn Clojure, I am starting to work through the <a href="http://projecteuler.net/">Project Euler</a> a little bit each day to sharpen my programming skills without the pressure of having to get any real work done. I’ll post my notes here as I go along for everyone to enjoy, critique, or just laugh at.</p>
+
+<p>For reference, <a href="http://projecteuler.net/index.php?section=problems&amp;id=1"> here is the description of Project Euler Problem #1</a>.</p>
+
+<p>My first solution was:</p>
+
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">multiple-of-3-or-5?</span><span class="w"> 
+   </span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w">
+   </span><span class="p">(</span><span class="nb">or</span><span class="w"> </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="nf">mod</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span><span class="w">
+       </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="nf">mod</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="mi">5</span><span class="p">))))</span><span class="w">
+
+</span><span class="p">(</span><span class="nb">apply</span><span class="w"> </span><span class="nb">+</span><span class="w"> </span><span class="p">(</span><span class="nb">filter</span><span class="w"> </span><span class="n">multiple-of-3-or-5?</span><span class="w"> </span><span class="p">(</span><span class="nb">range</span><span class="w"> </span><span class="mi">1000</span><span class="p">)))</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>But, after looking at <a href="http://clojure-euler.wikispaces.com/Problem+001">other people’s solutions</a>, I noticed that:</p>
+
+<ol>
+  <li>Using <code class="highlighter-rouge">reduce</code> instead of <code class="highlighter-rouge">apply</code> would probably be more idiomatic, although I don’t notice any real performance difference.</li>
+  <li>Using <code class="highlighter-rouge">rem</code> instead of <code class="highlighter-rouge">mod</code> is clearer.</li>
+  <li>Using <code class="highlighter-rouge">zero?</code> instead of <code class="highlighter-rouge">(= 0 ...) </code> is also more idiomatic.</li>
+</ol>
+
+<p>So my revised solution is:</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">multiple-of-3-or-5?</span> [n]
+      (<span style="color: #8ae234;">or</span> (zero? (<span style="color: #729fcf;">rem</span> n 3))
+          (zero? (<span style="color: #729fcf;">rem</span> n 5))))
+    
+    (<span style="color: #729fcf;">reduce</span> + (<span style="color: #729fcf;">filter</span> multiple-of-3-or-5? (<span style="color: #729fcf;">range</span> 1000)))</code></pre>
+
+<p>Solving this problem in lazy style with a clojure set is also an intriguing problem:</p>
+
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="w">    </span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">by-ns</span><span class="w"> </span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">iterate</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nb">+</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="n">%</span><span class="p">)</span><span class="w"> </span><span class="n">n</span><span class="p">))</span><span class="w">
+    
+    </span><span class="p">(</span><span class="nb">reduce</span><span class="w"> </span><span class="nb">+</span><span class="w"> </span><span class="p">(</span><span class="nb">-&gt;</span><span class="w"> </span><span class="o">#</span><span class="p">{}</span><span class="w">
+                  </span><span class="p">(</span><span class="nb">into</span><span class="w"> </span><span class="p">(</span><span class="nb">take-while</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nb">&lt;</span><span class="w"> </span><span class="n">%</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nf">by-ns</span><span class="w"> </span><span class="mi">3</span><span class="p">)))</span><span class="w">
+                  </span><span class="p">(</span><span class="nb">into</span><span class="w"> </span><span class="p">(</span><span class="nb">take-while</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nb">&lt;</span><span class="w"> </span><span class="n">%</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nf">by-ns</span><span class="w"> </span><span class="mi">5</span><span class="p">)))))</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>Performance for the lazy method isn’t as good as the naive remainder method for small numbers like 3 or 5, but this approach might yield some improvement for bigger divisors like 103 or 117.</p>
+
+<p>Now for some obfuscation…er, I mean beautification. Looking at the above, I wish there was a way to get ride of the arrow operator…if only <code class="highlighter-rouge">into</code> supported multiple collections…maybe we could call it <code class="highlighter-rouge">all-into</code>?</p>
+
+<pre><code>(<span style="color: #8ae234;">defmacro</span> <span style="color: #edd400; font-weight: bold;">all-into</span> [to &amp; froms]
+      <span style="color: #fd7f98;">"Returns a new coll consisting of to-coll with all items of all from-colls
+      conjoined. See also: clojure.core/into"</span>
+      `(<span style="color: #8ae234;">-&gt;</span> ~to ~@(<span style="color: #729fcf;">map</span> #(<span style="color: #729fcf;">list</span> into %) froms)))
+    
+    (<span style="color: #729fcf;">reduce</span> + (all-into #{}
+                        (<span style="color: #729fcf;">take-while</span> #(<span style="color: #729fcf;">&lt;</span> % 1000) (by-ns 3))
+                        (<span style="color: #729fcf;">take-while</span> #(<span style="color: #729fcf;">&lt;</span> % 1000) (by-ns 5))))</code></pre>
+
+<p>That’s a bit better, but didn’t really solve the problem. Since we’re already having fun with unnecessary macros, what we really need to do is remove the duplication in the <code class="highlighter-rouge">take-whiles</code>.</p>
+
+<pre><code>(<span style="color: #8ae234;">defmacro</span> <span style="color: #edd400; font-weight: bold;">multi-take-while</span> [pred &amp; colls]
+      <span style="color: #fd7f98;">"Applies pred to each lazy coll, and takes elements lazily from the first
+      coll while pred is true, then from the second coll while pred is true,
+      and so on until all possible elements from all colls have been taken.
+      See also: clojure.core/take-while"</span>
+      `(<span style="color: #729fcf;">lazy-cat</span> ~@(<span style="color: #729fcf;">map</span> #(<span style="color: #729fcf;">list</span> take-while pred %) colls)))
+    
+    (<span style="color: #729fcf;">reduce</span> + (<span style="color: #729fcf;">into</span> #{} (multi-take-while #(<span style="color: #729fcf;">&lt;</span> % 1000) (by-ns 3) (by-ns 5))))</code></pre>
+
+<p>There! A single line expressing the problem without any redundancy.</p>
+
+<p>Finally, we can check that multi-take-while is probably still lazy by running:</p>
+
+<pre><code><span style="color: #8ae234;">user&gt; </span><span style="font-weight: bold;">(time (take 10 (multi-take-while #(&lt; % 100000000) (by-ns 3) (by-ns 5))))</span>
+    <span style="color: #Fd7f98;">"Elapsed time: 0.296369 msecs"
+    </span>(3 6 9 12 15 18 21 24 27 30)</code></pre>
+
+<p>This code was sponsored by the Association for No Code Duplication, a group of OCD sufferers who use macros to turn any readable, multi-line program into a single line of incomprehensibility.</p>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-02/" class="btn" title="Project Euler Problem 2">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2017 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://ivarthorson.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://ivarthorson.github.io';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://ivarthorson.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://ivarthorson.github.io/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

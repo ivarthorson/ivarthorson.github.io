@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://ivarthorson.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ivarthorson.github.io/" rel="alternate" type="text/html" /><updated>2017-06-02T08:53:45-07:00</updated><id>https://ivarthorson.github.io/</id><title type="html">Art is Never Finished</title><subtitle>...Only Abandoned. – Leonardo da Vinci</subtitle><entry><title type="html">Hyperbolic Geometry &amp;amp; Special Relativity</title><link href="https://ivarthorson.github.io/blog/hyperbolic-geometry-and-special-relativity/" rel="alternate" type="text/html" title="Hyperbolic Geometry &amp; Special Relativity" /><published>2017-06-02T00:00:00-07:00</published><updated>2017-06-02T00:00:00-07:00</updated><id>https://ivarthorson.github.io/blog/hyperbolic-geometry-and-special-relativity</id><content type="html" xml:base="https://ivarthorson.github.io/blog/hyperbolic-geometry-and-special-relativity/">&lt;p&gt;While studying &lt;a href=&quot;https://arxiv.org/abs/0810.3328&quot;&gt;An Introduction to Particle Physics&lt;/a&gt; on a recent flight to Japan – yes, I know you all have secret nerdy hobbies so please allow me my interest in mathematics that is way over my head – I came across a simple viewpoint on special relativity that really stunned me:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://ivarthorson.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ivarthorson.github.io/" rel="alternate" type="text/html" /><updated>2017-06-03T21:41:43-07:00</updated><id>https://ivarthorson.github.io/</id><title type="html">Art is Never Finished</title><subtitle>...Only Abandoned. – Leonardo da Vinci</subtitle><entry><title type="html">Hyperbolic Geometry &amp;amp; Special Relativity</title><link href="https://ivarthorson.github.io/blog/hyperbolic-geometry-and-special-relativity/" rel="alternate" type="text/html" title="Hyperbolic Geometry &amp; Special Relativity" /><published>2017-06-02T00:00:00-07:00</published><updated>2017-06-02T00:00:00-07:00</updated><id>https://ivarthorson.github.io/blog/hyperbolic-geometry-and-special-relativity</id><content type="html" xml:base="https://ivarthorson.github.io/blog/hyperbolic-geometry-and-special-relativity/">&lt;p&gt;While studying &lt;a href=&quot;https://arxiv.org/abs/0810.3328&quot;&gt;An Introduction to Particle Physics&lt;/a&gt; on a recent flight to Japan – studying math that is way above my head is a nerdy hobby of mine – I came across a simple viewpoint on special relativity that really stunned me:&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Consider a spatial rotation around, say, the z-axis (or, equivalently, mixing the x and y coordinates). Such a transformation is called an &lt;strong&gt;Euler Transformation&lt;/strong&gt;, and takes the form&lt;/p&gt;
@@ -39,130 +39,379 @@ z^{\prime} &amp; = &amp; z\end{eqnarray*} %]]&gt;&lt;/script&gt;
 \sinh(x) &amp; = &amp; \frac{1}{2}(e^{x}-e^{-x}) &amp; = &amp; \sum_{k=0}^{\infty}\frac{x^{2k+1}}{(2k+1)!} \\
 \cosh(x) &amp; = &amp; \frac{1}{2}(e^{x}+e^{-x}) &amp; = &amp; \sum_{k=0}^{\infty}\frac{x^{2k}}{(2k)!} \end{eqnarray} %]]&gt;&lt;/script&gt;
 
-&lt;p&gt;Look at how the hyperbolic trig functions have no need of the imaginary number \(i=\sqrt{-1}\) or the alternating -1’s in the infinite series. One of the most frustrating things about \(i\) is that it is so incredibly useful algebraically, but it also makes things more cumbersome because expressions in general become more – pardon the pun – complex. The geometric meaning of the imaginary number is often associated with rotations, but I wonder if there are better geometric ways of doing the same algebra that has no need for the imaginary number per se. I would prefer to see mathematical expressions that are as simple as possible, but no simpler.&lt;/p&gt;
+&lt;p&gt;Look at how the hyperbolic trig functions have no need of the imaginary number \(i=\sqrt{-1}\) or the alternating -1’s in the infinite series. One of the most frustrating things about \(i\) is that it is so incredibly useful algebraically, but it also makes things more cumbersome because expressions in general become more – pardon the pun – complex. The geometric meaning of the imaginary number is often associated with rotations, but I wonder if there are more geometric ways of understanding the same operation that have no need for the imaginary number per se. I would prefer to see mathematical expressions that are as simple as possible, but no simpler.&lt;/p&gt;
 
 &lt;p&gt;Even now, as I stare at the infinite series for hyperbolic sine and cosine, and their definitions in terms of the all-important exponential function, I wonder if in fact that “things with the imaginary number are wrong” in the same way that &lt;a href=&quot;http://tauday.com/&quot;&gt;“pi is wrong”&lt;/a&gt;. It is not that sines are incorrect in an algebraic or mathematical sense, because they are clearly not. Rather, I am wondering whether, due to the way mathematics developed historically, perhaps we are using algebra that is more cumbersome than necessary to describe two legs of the same geometric elephant.&lt;/p&gt;
 
-&lt;p&gt;I would welcome good book recommendations connecting the essential geometry of hyperbolas to special relativity!&lt;/p&gt;</content><summary type="html">While studying An Introduction to Particle Physics on a recent flight to Japan – yes, I know you all have secret nerdy hobbies so please allow me my interest in mathematics that is way over my head – I came across a simple viewpoint on special relativity that really stunned me:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ivarthorson.github.io{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Reviving the Dead…Content</title><link href="https://ivarthorson.github.io/blog/reviving-the-dead/" rel="alternate" type="text/html" title="Reviving the Dead...Content" /><published>2017-05-30T00:00:00-07:00</published><updated>2017-05-30T00:00:00-07:00</updated><id>https://ivarthorson.github.io/blog/reviving-the-dead</id><content type="html" xml:base="https://ivarthorson.github.io/blog/reviving-the-dead/">&lt;p&gt;From 2003 until 2016, I had a personal website at &lt;a href=&quot;https://roboloco.net/&quot;&gt;roboloco.net&lt;/a&gt;. It lasted until last year, when I finally grew tired of upgrading applications, keeping comments free of spam, and the servers secure from hackers and the occasional website defacement. Thank you, GitHub, for providing this terrible sysadmin a free place to store this content, and one that requires no regular maintanance!&lt;/p&gt;
+&lt;p&gt;I would welcome good book recommendations connecting the essential geometry of hyperbolas to special relativity!&lt;/p&gt;</content><summary type="html">While studying An Introduction to Particle Physics on a recent flight to Japan – studying math that is way above my head is a nerdy hobby of mine – I came across a simple viewpoint on special relativity that really stunned me:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ivarthorson.github.io{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Reviving the Dead…Content</title><link href="https://ivarthorson.github.io/blog/reviving-the-dead/" rel="alternate" type="text/html" title="Reviving the Dead...Content" /><published>2017-05-30T00:00:00-07:00</published><updated>2017-05-30T00:00:00-07:00</updated><id>https://ivarthorson.github.io/blog/reviving-the-dead</id><content type="html" xml:base="https://ivarthorson.github.io/blog/reviving-the-dead/">&lt;p&gt;From 2003 until 2016, I had a personal website at &lt;a href=&quot;https://roboloco.net/&quot;&gt;roboloco.net&lt;/a&gt;. It lasted until last year, when I finally grew tired of upgrading applications, keeping comments free of spam, and the servers secure from hackers and the occasional website defacement. Thank you, GitHub, for providing this terrible sysadmin a free place to store this content, and one that requires no regular maintanance!&lt;/p&gt;
 
-&lt;p&gt;Now! To slowly revive some of the content that has been offline for the past year…does GitHub have a tool for poking me to do that as well?&lt;/p&gt;</content><category term="news" /><summary type="html">From 2003 until 2016, I had a personal website at roboloco.net. It lasted until last year, when I finally grew tired of upgrading applications, keeping comments free of spam, and the servers secure from hackers and the occasional website defacement. Thank you, GitHub, for providing this terrible sysadmin a free place to store this content, and one that requires no regular maintanance!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ivarthorson.github.io{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Sample Post</title><link href="https://ivarthorson.github.io/articles/sample-article/" rel="alternate" type="text/html" title="Sample Post" /><published>2016-06-01T00:00:00-07:00</published><updated>2016-06-01T00:00:00-07:00</updated><id>https://ivarthorson.github.io/articles/sample-article</id><content type="html" xml:base="https://ivarthorson.github.io/articles/sample-article/">&lt;p&gt;Below is just about everything you’ll need to style in the theme. Check the source code to see the many embedded elements within paragraphs.&lt;/p&gt;
+&lt;p&gt;Now! To slowly revive some of the content that has been offline for the past year…does GitHub have a tool for poking me to do that as well?&lt;/p&gt;</content><category term="news" /><summary type="html">From 2003 until 2016, I had a personal website at roboloco.net. It lasted until last year, when I finally grew tired of upgrading applications, keeping comments free of spam, and the servers secure from hackers and the occasional website defacement. Thank you, GitHub, for providing this terrible sysadmin a free place to store this content, and one that requires no regular maintanance!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ivarthorson.github.io{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Project Euler Problem 89</title><link href="https://ivarthorson.github.io/project-euler/problem-89/" rel="alternate" type="text/html" title="Project Euler Problem 89" /><published>2010-11-16T09:28:30-08:00</published><updated>2010-11-16T09:28:30-08:00</updated><id>https://ivarthorson.github.io/project-euler/problem-89</id><content type="html" xml:base="https://ivarthorson.github.io/project-euler/problem-89/">&lt;p&gt;&lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=89&quot;&gt;Problem 89&lt;/a&gt; was kind of fun: we needed to convert some sloppily written roman-numerals into their more efficient, minimal representations.&lt;/p&gt;
 
-&lt;h1 id=&quot;heading-1&quot;&gt;Heading 1&lt;/h1&gt;
-
-&lt;h2 id=&quot;heading-2&quot;&gt;Heading 2&lt;/h2&gt;
-
-&lt;h3 id=&quot;heading-3&quot;&gt;Heading 3&lt;/h3&gt;
-
-&lt;h4 id=&quot;heading-4&quot;&gt;Heading 4&lt;/h4&gt;
-
-&lt;h5 id=&quot;heading-5&quot;&gt;Heading 5&lt;/h5&gt;
-
-&lt;h6 id=&quot;heading-6&quot;&gt;Heading 6&lt;/h6&gt;
-
-&lt;h3 id=&quot;body-text&quot;&gt;Body text&lt;/h3&gt;
-
-&lt;p&gt;Lorem ipsum dolor sit amet, test link adipiscing elit. &lt;strong&gt;This is strong&lt;/strong&gt;. Nullam dignissim convallis est. Quisque aliquam.&lt;/p&gt;
-
-&lt;p class=&quot;pull-right&quot;&gt;&lt;img src=&quot;https://ivarthorson.github.io/images/3953273590_704e3899d5_m.jpg&quot; alt=&quot;Smithsonian Image&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;This is emphasized&lt;/em&gt;. Donec faucibus. Nunc iaculis suscipit dui. 53 = 125. Water is H&lt;sub&gt;2&lt;/sub&gt;O. Nam sit amet sem. Aliquam libero nisi, imperdiet at, tincidunt nec, gravida vehicula, nisl. The New York Times &lt;cite&gt;(That’s a citation)&lt;/cite&gt;. &lt;u&gt;Underline&lt;/u&gt;. Maecenas ornare tortor. Donec sed tellus eget sapien fringilla nonummy. Mauris a ante. Suspendisse quam sem, consequat at, commodo vitae, feugiat in, nunc. Morbi imperdiet augue quis tellus.&lt;/p&gt;
-
-&lt;p&gt;HTML and &lt;abbr title=&quot;cascading stylesheets&quot;&gt;CSS&lt;abbr&gt; are our tools. Mauris a ante. Suspendisse quam sem, consequat at, commodo vitae, feugiat in, nunc. Morbi imperdiet augue quis tellus. Praesent mattis, massa quis luctus fermentum, turpis mi volutpat justo, eu volutpat enim diam eget metus.&lt;/abbr&gt;&lt;/abbr&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;blockquotes&quot;&gt;Blockquotes&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Lorem ipsum dolor sit amet, test link adipiscing elit. Nullam dignissim convallis est. Quisque aliquam.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;list-types&quot;&gt;List Types&lt;/h2&gt;
-
-&lt;h3 id=&quot;ordered-lists&quot;&gt;Ordered Lists&lt;/h3&gt;
+&lt;p&gt;There are two tricks to doing this easily:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;Item one
-    &lt;ol&gt;
-      &lt;li&gt;sub item one&lt;/li&gt;
-      &lt;li&gt;sub item two&lt;/li&gt;
-      &lt;li&gt;sub item three&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Item two&lt;/li&gt;
+  &lt;li&gt;When converting from roman numerals to decimal digits, it is simplest to process the roman numeral from right to left.&lt;/li&gt;
+  &lt;li&gt;Since I can only be placed before V and X, X before L and C, and C before D and M, the symmetry of these results as you move up by powers of ten suggests that we use a few simple &lt;code class=&quot;highlighter-rouge&quot;&gt;cond&lt;/code&gt; statements to handle numbers from 1 to 10, and recurse to handle the increasingly higher powers of ten.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;unordered-lists&quot;&gt;Unordered Lists&lt;/h3&gt;
+&lt;p&gt;The code to implement these rules wasn’t particularly long. As usual, zipmap is very concise at creating mappings from characters to digits.&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;Item one&lt;/li&gt;
-  &lt;li&gt;Item two&lt;/li&gt;
-  &lt;li&gt;Item three&lt;/li&gt;
-&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;(&lt;span style=&quot;color: #729fcf;&quot;&gt;use&lt;/span&gt; '[clojure.contrib.duck-streams &lt;span style=&quot;color: #729fcf;&quot;&gt;:only&lt;/span&gt; (read-lines)])
 
-&lt;h2 id=&quot;tables&quot;&gt;Tables&lt;/h2&gt;
+(&lt;span style=&quot;color: #8ae234;&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;r2n&lt;/span&gt; (zipmap &lt;span style=&quot;color: #Fd7f98;&quot;&gt;&quot;IVXLCDM&quot;&lt;/span&gt; [1 5 10 50 100 500 1000]))
 
-&lt;table class=&quot;table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;Header1&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Header2&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;Header3&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;cell1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;cell2&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;cell3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;cell4&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;cell5&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;cell6&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;cell1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;cell2&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;cell3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;cell4&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;cell5&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;cell6&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tfoot&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Foot1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Foot2&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;Foot3&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tfoot&gt;
-&lt;/table&gt;
+(&lt;span style=&quot;color: #8ae234;&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;n2r&lt;/span&gt; (zipmap (&lt;span style=&quot;color: #729fcf;&quot;&gt;vals&lt;/span&gt; r2n) (&lt;span style=&quot;color: #729fcf;&quot;&gt;keys&lt;/span&gt; r2n)))
 
-&lt;h2 id=&quot;code-snippets&quot;&gt;Code Snippets&lt;/h2&gt;
+&lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;Do things in reverse and it's so much easier to solve!
+&lt;/span&gt;(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;de-romanize&lt;/span&gt;
+  &lt;span style=&quot;color: #888a85;&quot;&gt;&quot;Returns the decimal representation of a roman numeral string s. &quot;&lt;/span&gt;
+  ([s] (de-romanize (&lt;span style=&quot;color: #729fcf;&quot;&gt;reverse&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; r2n s)) 0 0))
+  ([s total mx] (&lt;span style=&quot;color: #8ae234;&quot;&gt;if-let&lt;/span&gt; [c (&lt;span style=&quot;color: #729fcf;&quot;&gt;first&lt;/span&gt; s)]
+                  (&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;gt;=&lt;/span&gt; c mx)
+                    (&lt;span style=&quot;color: #8ae234;&quot;&gt;recur&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;rest&lt;/span&gt; s) (&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; total c) (&lt;span style=&quot;color: #729fcf;&quot;&gt;max&lt;/span&gt; c mx))
+                    (&lt;span style=&quot;color: #8ae234;&quot;&gt;recur&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;rest&lt;/span&gt; s) (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; total c) mx))
+                  total)))
 
-&lt;p&gt;Syntax highlighting via Rouge&lt;/p&gt;
+(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;romanize&lt;/span&gt;
+  &lt;span style=&quot;color: #888a85;&quot;&gt;&quot;Returns the minimal roman numeral representation of n&quot;&lt;/span&gt;
+  ([n]
+     {&lt;span style=&quot;color: #729fcf;&quot;&gt;:pre&lt;/span&gt; [(&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;=&lt;/span&gt; n 10000 )]}
+     (romanize (&lt;span style=&quot;color: #729fcf;&quot;&gt;quot&lt;/span&gt; n 10) (&lt;span style=&quot;color: #729fcf;&quot;&gt;rem&lt;/span&gt; n 10) 1))
+  ([q r x]
+     (&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;gt;&lt;/span&gt; x 100)
+       (&lt;span style=&quot;color: #729fcf;&quot;&gt;repeat&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; q r) (n2r x))
+       (&lt;span style=&quot;color: #8ae234;&quot;&gt;-&amp;gt;&amp;gt;&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;concat&lt;/span&gt;
+             (romanize (&lt;span style=&quot;color: #729fcf;&quot;&gt;quot&lt;/span&gt; q 10) (&lt;span style=&quot;color: #729fcf;&quot;&gt;rem&lt;/span&gt; q 10) (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; x 10))
+             (&lt;span style=&quot;color: #8ae234;&quot;&gt;cond&lt;/span&gt;
+              (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; r 4) (&lt;span style=&quot;color: #729fcf;&quot;&gt;repeat&lt;/span&gt; r (n2r x))
+              (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; r 4) [(n2r x) (n2r (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; 5 x))]
+              (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; r 9) (&lt;span style=&quot;color: #729fcf;&quot;&gt;concat&lt;/span&gt; [(n2r (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; 5 x))] (&lt;span style=&quot;color: #729fcf;&quot;&gt;repeat&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; r 5) (n2r x))) 
+              (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; r 9) [(n2r x) (n2r (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; 10 x))]
+              &lt;span style=&quot;color: #729fcf;&quot;&gt;:else&lt;/span&gt; &lt;span style=&quot;color: #Fd7f98;&quot;&gt;&quot;&quot;&lt;/span&gt;))
+           (&lt;span style=&quot;color: #729fcf;&quot;&gt;apply&lt;/span&gt; str )))))
 
-&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;#container&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-240px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;euler-89&lt;/span&gt; [file]
+  (&lt;span style=&quot;color: #729fcf;&quot;&gt;reduce&lt;/span&gt;
+   +
+   (&lt;span style=&quot;color: #8ae234;&quot;&gt;for&lt;/span&gt; [l (read-lines file)]
+     (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; l)
+        (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; (romanize (de-romanize l)))))))
 
-&lt;p&gt;Non Rouge code example&lt;/p&gt;
+(euler-89 &lt;span style=&quot;color: #Fd7f98;&quot;&gt;&quot;roman.txt&quot;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;div id=&quot;awesome&quot;&amp;gt;
-    &amp;lt;p&amp;gt;This is great isn't it?&amp;lt;/p&amp;gt;
-&amp;lt;/div&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;p&gt;You may notice that I used preconditions to indicate the &lt;code class=&quot;highlighter-rouge&quot;&gt;romanize&lt;/code&gt; function only works for numbers less than 10000.&lt;/p&gt;</content><category term="project-euler" /><category term="roman numerals" /><summary type="html">Problem 89 was kind of fun: we needed to convert some sloppily written roman-numerals into their more efficient, minimal representations.</summary></entry><entry><title type="html">Project Euler Problem 87</title><link href="https://ivarthorson.github.io/project-euler/problem-87/" rel="alternate" type="text/html" title="Project Euler Problem 87" /><published>2010-10-20T08:27:12-07:00</published><updated>2010-10-20T08:27:12-07:00</updated><id>https://ivarthorson.github.io/project-euler/problem-87</id><content type="html" xml:base="https://ivarthorson.github.io/project-euler/problem-87/">&lt;p&gt;&lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=87&quot;&gt;Problem 87&lt;/a&gt; asks us to find how many numbers below 50 million that can be expressed as the sum of a prime square, cube, and fourth power.&lt;/p&gt;
 
-&lt;h2 id=&quot;buttons&quot;&gt;Buttons&lt;/h2&gt;
+&lt;p&gt;By now we are old hands at this type of problem. By caching the exponents of prime numbers and using a set to filter out duplicates, we can find the solution in roughly 4 seconds:&lt;/p&gt;
 
-&lt;p&gt;Make any link standout more when applying the &lt;code class=&quot;highlighter-rouge&quot;&gt;.btn&lt;/code&gt; class.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;euler-87&lt;/span&gt; [top]
+  (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt;
+   (&lt;span style=&quot;color: #729fcf;&quot;&gt;into&lt;/span&gt;
+    #{}
+    (&lt;span style=&quot;color: #8ae234;&quot;&gt;let&lt;/span&gt; [squares (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; #(expt % 2) primes)
+          cubes   (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; #(expt % 3) primes)
+          quads   (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; #(expt % 4) primes)]
+      (&lt;span style=&quot;color: #8ae234;&quot;&gt;for&lt;/span&gt; [i (&lt;span style=&quot;color: #729fcf;&quot;&gt;take-while&lt;/span&gt; #(&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; % top) squares)
+            j (&lt;span style=&quot;color: #729fcf;&quot;&gt;take-while&lt;/span&gt; #(&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; % (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; top i)) cubes)
+            k (&lt;span style=&quot;color: #729fcf;&quot;&gt;take-while&lt;/span&gt; #(&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; % (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; top i j)) quads)
+            s [(&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; i j k)]
+            &lt;span style=&quot;color: #729fcf;&quot;&gt;:when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; s top)]
+        s)))))
 
-&lt;div&gt;&lt;a href=&quot;#&quot; class=&quot;btn&quot;&gt;This is a button&lt;/a&gt;&lt;/div&gt;</content><category term="sample-post" /><summary type="html">Just about everything you'll need to style in the theme: headings, paragraphs, blockquotes, tables, code blocks, and more.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ivarthorson.github.io{&quot;feature&quot;=&gt;&quot;so-simple-sample-image-1.jpg&quot;, &quot;credit&quot;=&gt;&quot;WeGraphics&quot;, &quot;creditlink&quot;=&gt;&quot;http://wegraphics.net/downloads/free-ultimate-blurred-background-pack/&quot;}" /></entry></feed>
+(&lt;span style=&quot;color: #729fcf;&quot;&gt;time&lt;/span&gt; (euler-87 50000000))  &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;&quot;Elapsed time: 3954.751452 msecs&quot;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content><category term="project-euler" /><category term="primes" /><summary type="html">Problem 87 asks us to find how many numbers below 50 million that can be expressed as the sum of a prime square, cube, and fourth power.</summary></entry><entry><title type="html">Project Euler Problem 86</title><link href="https://ivarthorson.github.io/project-euler/problem-86/" rel="alternate" type="text/html" title="Project Euler Problem 86" /><published>2010-10-20T07:56:03-07:00</published><updated>2010-10-20T07:56:03-07:00</updated><id>https://ivarthorson.github.io/project-euler/problem-86</id><content type="html" xml:base="https://ivarthorson.github.io/project-euler/problem-86/">&lt;p&gt;Despite it’s relative simplicity, I wasted hours on &lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=86&quot;&gt;problem 86&lt;/a&gt;. One important thing that I learned is:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Sometimes you absolutely must formulate the problem in an incremental form!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;My long and complex first attempt at this problem began by generating Pythagorean triples (as we did in &lt;a href=&quot;?tag=pythagorean-triplets&quot;&gt;previous problems&lt;/a&gt;), and computing cuboids whose geodesics were the same as those triples. Unfortunately, although this worked well, I did not formulate it in an incremental manner, so at best it would have O(n^2) performance for this kind of incremental search problem, as I realized in the final step.&lt;/p&gt;
+
+&lt;p&gt;On the other hand, if you formulate the problem in an incremental form, it is remarkably simple to solve:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;square?&lt;/span&gt; [x] (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; x (expt (&lt;span style=&quot;color: #729fcf;&quot;&gt;int&lt;/span&gt; (sqrt x)) 2)))
+
+(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;cuboids&lt;/span&gt; [m]
+  (&lt;span style=&quot;color: #729fcf;&quot;&gt;reduce&lt;/span&gt;
+   +
+   (&lt;span style=&quot;color: #8ae234;&quot;&gt;for&lt;/span&gt; [a (&lt;span style=&quot;color: #729fcf;&quot;&gt;filter&lt;/span&gt; #(square? (&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; % %) (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; m m)))
+                   (&lt;span style=&quot;color: #729fcf;&quot;&gt;range&lt;/span&gt; 1 (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; 2 m))))]
+     (&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;gt;&lt;/span&gt; a m)
+       (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;quot&lt;/span&gt; a 2) (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; a m 1))
+       (&lt;span style=&quot;color: #729fcf;&quot;&gt;quot&lt;/span&gt; a 2)))))
+
+(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;euler-86&lt;/span&gt; [L]
+  (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;take-while&lt;/span&gt; #(&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;gt;&lt;/span&gt; L %) (reductions + (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; cuboids (&lt;span style=&quot;color: #729fcf;&quot;&gt;range&lt;/span&gt;))))))
+
+(&lt;span style=&quot;color: #729fcf;&quot;&gt;time&lt;/span&gt; (euler-86 1000000)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;&quot;Elapsed time: 3872.220781 msecs&quot;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content><category term="project-euler" /><category term="incremental" /><category term="Pythagorean triplets" /><category term="spider-fly" /><summary type="html">Despite it’s relative simplicity, I wasted hours on problem 86. One important thing that I learned is:</summary></entry><entry><title type="html">Project Euler Problem 85</title><link href="https://ivarthorson.github.io/project-euler/problem-85/" rel="alternate" type="text/html" title="Project Euler Problem 85" /><published>2010-10-19T05:47:08-07:00</published><updated>2010-10-19T05:47:08-07:00</updated><id>https://ivarthorson.github.io/project-euler/problem-85</id><content type="html" xml:base="https://ivarthorson.github.io/project-euler/problem-85/">&lt;p&gt;&lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=85&quot;&gt;Problem 85&lt;/a&gt; asks us to find the number of rectangles that can be drawn in a grid of size m by n.&lt;/p&gt;
+
+&lt;p&gt;It may help to work out the answer to a few of the grids until you see the pattern: the number of rectangles is equal to the product of two summations.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(&lt;span style=&quot;color: #8ae234;&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;sums&lt;/span&gt; (reductions + (&lt;span style=&quot;color: #729fcf;&quot;&gt;range&lt;/span&gt;)))
+
+(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;num-rects&lt;/span&gt; [m n] (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; sums m) (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; sums n)))
+
+(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;smallest-second&lt;/span&gt; [coll]
+  (&lt;span style=&quot;color: #729fcf;&quot;&gt;reduce&lt;/span&gt; #(&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;second&lt;/span&gt; %1) (&lt;span style=&quot;color: #729fcf;&quot;&gt;second&lt;/span&gt; %2)) %1 %2) coll))
+
+(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;euler-85&lt;/span&gt; [goal]
+  (&lt;span style=&quot;color: #729fcf;&quot;&gt;first&lt;/span&gt;
+   (smallest-second
+    (&lt;span style=&quot;color: #8ae234;&quot;&gt;for&lt;/span&gt; [i (&lt;span style=&quot;color: #729fcf;&quot;&gt;take-while&lt;/span&gt; #(&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; (num-rects % 1) goal) (&lt;span style=&quot;color: #729fcf;&quot;&gt;rest&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;range&lt;/span&gt;)))
+          j (&lt;span style=&quot;color: #729fcf;&quot;&gt;take-while&lt;/span&gt; #(&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; 0 (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; goal (num-rects i %))) (&lt;span style=&quot;color: #729fcf;&quot;&gt;rest&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;range&lt;/span&gt;)))]
+      [(&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; i j) (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; goal (num-rects i j))]))))
+
+(&lt;span style=&quot;color: #729fcf;&quot;&gt;time&lt;/span&gt; (euler-85 2000000)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;&quot;Elapsed time: 1607.372755 msecs&quot;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Of course the above is straightforward, but we might as well remember the &lt;a href=&quot;http://en.wikipedia.org/wiki/Carl_Friedrich_Gauss#Early_years_.281777.E2.80.931798.29&quot;&gt; story of Gauss as a young boy&lt;/a&gt; and use an analytic solution for &lt;code class=&quot;highlighter-rouge&quot;&gt;num-rects&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;num-rects&lt;/span&gt; [m n]
+  (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;/&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; m m) m) 2)
+     (&lt;span style=&quot;color: #729fcf;&quot;&gt;/&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; n n) n) 2)))
+
+(&lt;span style=&quot;color: #729fcf;&quot;&gt;time&lt;/span&gt; (euler-85 2000000)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;&quot;Elapsed time: 45.927094 msecs&quot;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I’m somewhat surprised that is so much faster – I would have thought that caching the values in the lazy list would have been only slightly slower, but it seems that my intuition was incorrect. The evils of premature optimization appears again.&lt;/p&gt;</content><category term="project-euler" /><category term="grids" /><category term="summation" /><summary type="html">Problem 85 asks us to find the number of rectangles that can be drawn in a grid of size m by n.</summary></entry><entry><title type="html">Project Euler Problem 84</title><link href="https://ivarthorson.github.io/project-euler/problem-84/" rel="alternate" type="text/html" title="Project Euler Problem 84" /><published>2010-10-19T05:29:12-07:00</published><updated>2010-10-19T05:29:12-07:00</updated><id>https://ivarthorson.github.io/project-euler/problem-84</id><content type="html" xml:base="https://ivarthorson.github.io/project-euler/problem-84/">&lt;p&gt;&lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=84&quot;&gt;Problem 84&lt;/a&gt; asks us to implement the classic game &lt;a href=&quot;http://en.wikipedia.org/wiki/Monopoly_%28game%29&quot;&gt;Monopoly&lt;/a&gt; and find the most-visited spaces on the board…if we used two 4-sided dice instead of 6-sided ones.&lt;/p&gt;
+
+&lt;p&gt;Although it would probably be straightforward to compute probabilities directly using fractions, or indirectly approximate them with Hidden Markov Models, for now let’s just brute force it and use Clojure’s ability to run things in parallel.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(&lt;span style=&quot;color: #8ae234;&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;board&lt;/span&gt; [&lt;span style=&quot;color: #729fcf;&quot;&gt;:GO&lt;/span&gt;   &lt;span style=&quot;color: #729fcf;&quot;&gt;:A1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:CC1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:A2&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:T1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:R1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:B1&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:CH1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:B2&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:B3&lt;/span&gt;
+            &lt;span style=&quot;color: #729fcf;&quot;&gt;:JAIL&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:C1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:U1&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:C2&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:C3&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:R2&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:D1&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:CC2&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:D2&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:D3&lt;/span&gt;
+            &lt;span style=&quot;color: #729fcf;&quot;&gt;:FP&lt;/span&gt;   &lt;span style=&quot;color: #729fcf;&quot;&gt;:E1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:CH2&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:E2&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:E3&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:R3&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:F1&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:F2&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:U2&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:F3&lt;/span&gt;
+            &lt;span style=&quot;color: #729fcf;&quot;&gt;:G2J&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:G1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:G2&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:CC3&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:G3&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:R4&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:CH3&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:H1&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:T2&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:H2&lt;/span&gt;])
+
+(&lt;span style=&quot;color: #8ae234;&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;b2i&lt;/span&gt; (zipmap board (&lt;span style=&quot;color: #729fcf;&quot;&gt;range&lt;/span&gt;))) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;Board symbols to integers
+&lt;/span&gt;
+(&lt;span style=&quot;color: #8ae234;&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;i2b&lt;/span&gt; (zipmap (&lt;span style=&quot;color: #729fcf;&quot;&gt;range&lt;/span&gt;) board)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;Integers to board symbols
+&lt;/span&gt;
+(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;card-CC&lt;/span&gt;
+  &lt;span style=&quot;color: #888a85;&quot;&gt;&quot;Community Chest. Returns the number of the square to move to.&quot;&lt;/span&gt;
+  [n]
+  (&lt;span style=&quot;color: #8ae234;&quot;&gt;let&lt;/span&gt; [options (&lt;span style=&quot;color: #729fcf;&quot;&gt;concat&lt;/span&gt; [(b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:GO&lt;/span&gt;) (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:JAIL&lt;/span&gt;)] (&lt;span style=&quot;color: #729fcf;&quot;&gt;repeat&lt;/span&gt; 14 n))]
+    (rand-nth options)))
+
+(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;card-CH&lt;/span&gt;
+  &lt;span style=&quot;color: #888a85;&quot;&gt;&quot;Chance card. Returns the number of the square to move to.&quot;&lt;/span&gt;
+  [n]
+  (&lt;span style=&quot;color: #8ae234;&quot;&gt;let&lt;/span&gt; [options [&lt;span style=&quot;color: #729fcf;&quot;&gt;:X&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:X&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:X&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:X&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:X&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:X&lt;/span&gt;
+                 &lt;span style=&quot;color: #729fcf;&quot;&gt;:GO&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:JAIL&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:C1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:E3&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:H2&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:R1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:NextR&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:NextR&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:NextU&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:Back3&lt;/span&gt;]
+        event (rand-nth options)]
+    (&lt;span style=&quot;color: #8ae234;&quot;&gt;condp&lt;/span&gt; = event 
+        &lt;span style=&quot;color: #729fcf;&quot;&gt;:X&lt;/span&gt; n                                    &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;Do nothing
+&lt;/span&gt;        &lt;span style=&quot;color: #729fcf;&quot;&gt;:NextR&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; b2i [&lt;span style=&quot;color: #729fcf;&quot;&gt;:R1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:R2&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:R3&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:R4&lt;/span&gt;]) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;Next railroad
+&lt;/span&gt;                    (&lt;span style=&quot;color: #729fcf;&quot;&gt;rem&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;quot&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; 5 n) 10) 4))
+        &lt;span style=&quot;color: #729fcf;&quot;&gt;:NextU&lt;/span&gt; (&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #8ae234;&quot;&gt;and&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;gt;&lt;/span&gt; n (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:U1&lt;/span&gt;)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;Next Utility
+&lt;/span&gt;                        (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; n (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:U2&lt;/span&gt;)))
+                 (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:U2&lt;/span&gt;)
+                 (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:U1&lt;/span&gt;))     
+        &lt;span style=&quot;color: #729fcf;&quot;&gt;:Back3&lt;/span&gt; (&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; n 3) (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:CC3&lt;/span&gt;))
+                 (card-CC (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; n 3)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;Sometimes you land on another CC
+&lt;/span&gt;                 (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; n 3))          &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;But mostly you don't
+&lt;/span&gt;        (b2i event))))
+
+(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;dice-4&lt;/span&gt; [] (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;rand-int&lt;/span&gt; 4)))
+
+(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;move&lt;/span&gt; [[n doubles]]
+  (&lt;span style=&quot;color: #8ae234;&quot;&gt;let&lt;/span&gt; [d1 (dice-4)
+        d2 (dice-4)
+        m (&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #8ae234;&quot;&gt;and&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; d1 d2) (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; 2 doubles))
+            (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:JAIL&lt;/span&gt;)
+            (&lt;span style=&quot;color: #729fcf;&quot;&gt;rem&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; n d1 d2) 40))]
+    [(&lt;span style=&quot;color: #8ae234;&quot;&gt;condp&lt;/span&gt; = m
+         (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:G2J&lt;/span&gt;) (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:JAIL&lt;/span&gt;)
+         (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:CC1&lt;/span&gt;) (card-CC m)
+         (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:CC2&lt;/span&gt;) (card-CC m)
+         (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:CC2&lt;/span&gt;) (card-CC m)
+         (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:CH1&lt;/span&gt;) (card-CH m)
+         (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:CH2&lt;/span&gt;) (card-CH m)
+         (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:CH3&lt;/span&gt;) (card-CH m)
+         m)
+     (&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; d1 d2)
+       (&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;not&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; 2 doubles)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;reset if 3rd double in a row
+&lt;/span&gt;         (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; doubles)
+         0)
+       0)]))
+
+(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;compute-monopoly-freqs&lt;/span&gt; []
+  (&lt;span style=&quot;color: #8ae234;&quot;&gt;let&lt;/span&gt; [trials 1000000
+        games 10
+        sim (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [trials]
+              (frequencies (&lt;span style=&quot;color: #729fcf;&quot;&gt;take&lt;/span&gt; trials (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; first (&lt;span style=&quot;color: #729fcf;&quot;&gt;iterate&lt;/span&gt; move [0 0])))))
+        freqs (&lt;span style=&quot;color: #729fcf;&quot;&gt;apply&lt;/span&gt; merge-with + (&lt;span style=&quot;color: #729fcf;&quot;&gt;pmap&lt;/span&gt; sim (&lt;span style=&quot;color: #729fcf;&quot;&gt;repeat&lt;/span&gt; games trials)))
+        ps (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[c v]]
+                  [(i2b c) (&lt;span style=&quot;color: #729fcf;&quot;&gt;double&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; 100 (&lt;span style=&quot;color: #729fcf;&quot;&gt;/&lt;/span&gt; v trials games)))])
+                (&lt;span style=&quot;color: #729fcf;&quot;&gt;sort&lt;/span&gt; freqs))]
+    (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; #(b2i (&lt;span style=&quot;color: #729fcf;&quot;&gt;first&lt;/span&gt; %)) (&lt;span style=&quot;color: #729fcf;&quot;&gt;take&lt;/span&gt; 3 (&lt;span style=&quot;color: #729fcf;&quot;&gt;reverse&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;sort-by&lt;/span&gt; second ps))))))
+
+(&lt;span style=&quot;color: #729fcf;&quot;&gt;time&lt;/span&gt; (compute-monopoly-freqs)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;&quot;Elapsed time: 10217.921373 msecs&quot;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With the work of 10,000,000 trials divided evenly across 10 threads and evaluated in parallel in roughly 10 seconds, this gives the correct answer on my machine. However, the probabilities that I compute for the 6-sided dice are slightly different from the ones given on the Project Euler website, so this implementation is probably slightly incorrect. Can you find the mistake?&lt;/p&gt;</content><category term="project-euler" /><category term="monopoly" /><category term="pmap" /><summary type="html">Problem 84 asks us to implement the classic game Monopoly and find the most-visited spaces on the board…if we used two 4-sided dice instead of 6-sided ones.</summary></entry><entry><title type="html">Project Euler Problem 83</title><link href="https://ivarthorson.github.io/project-euler/problem-83/" rel="alternate" type="text/html" title="Project Euler Problem 83" /><published>2010-10-18T09:23:14-07:00</published><updated>2010-10-18T09:23:14-07:00</updated><id>https://ivarthorson.github.io/project-euler/problem-83</id><content type="html" xml:base="https://ivarthorson.github.io/project-euler/problem-83/">&lt;p&gt;&lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=83&quot;&gt;Problem 83&lt;/a&gt; can be solved with A* exactly like the we did in &lt;a href=&quot;?p=660&quot;&gt;problem 81&lt;/a&gt;. The only code that needs to be changed is the neighbors function &lt;code class=&quot;highlighter-rouge&quot;&gt;neigh&lt;/code&gt; and the estimated cost-to-goal function &lt;code class=&quot;highlighter-rouge&quot;&gt;est&lt;/code&gt;. Everything else can be reused from problem 81.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;euler-83&lt;/span&gt; []
+  (&lt;span style=&quot;color: #8ae234;&quot;&gt;let&lt;/span&gt; [mat   (load-matrix &lt;span style=&quot;color: #Fd7f98;&quot;&gt;&quot;/zzz/work/matrix.txt&quot;&lt;/span&gt;)
+        m     (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; mat)
+        n     (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;first&lt;/span&gt; mat))
+        cost  (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]] (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; mat (&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; i)) (&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; j)))
+        start [1 1]
+        goal  [m n]
+        goal? (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [e] (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; e goal))
+        est   (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]] 0)
+        neigh (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]]
+                (&lt;span style=&quot;color: #729fcf;&quot;&gt;merge&lt;/span&gt;
+                 (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; i m) {[(&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; i) j] (cost [(&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; i) j])})
+                 (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; j n) {[i (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; j)] (cost [i (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; j)])})
+                 (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; 1 i) {[(&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; i) j] (cost [(&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; i) j])})
+                 (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; 1 j) {[i (&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; j)] (cost [i (&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; j)])})))
+        path  (a*-search est neigh start goal?)]
+    (&lt;span style=&quot;color: #729fcf;&quot;&gt;reduce&lt;/span&gt; + (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; cost path))))
+
+(&lt;span style=&quot;color: #729fcf;&quot;&gt;time&lt;/span&gt; (euler-83))&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With &lt;code class=&quot;highlighter-rouge&quot;&gt;est&lt;/code&gt; set to always return zero, the A* search becomes effectively a memory-hungry version of &lt;a href=&quot;http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm&quot;&gt;Dijkstra’s Algorithm&lt;/a&gt;.&lt;/p&gt;</content><category term="project-euler" /><category term="a* algorithm" /><category term="dijkstra's algorithm" /><category term="search" /><summary type="html">Problem 83 can be solved with A* exactly like the we did in problem 81. The only code that needs to be changed is the neighbors function neigh and the estimated cost-to-goal function est. Everything else can be reused from problem 81.
+
+(defn euler-83 []
+  (let [mat   (load-matrix &quot;/zzz/work/matrix.txt&quot;)
+        m     (count mat)
+        n     (count (first mat))
+        cost  (fn [[i j]] (nth (nth mat (dec i)) (dec j)))
+        start [1 1]
+        goal  [m n]
+        goal? (fn [e] (= e goal))
+        est   (fn [[i j]] 0)
+        neigh (fn [[i j]]
+                (merge
+                 (when (&amp;lt; i m) {[(inc i) j] (cost [(inc i) j])})
+                 (when (&amp;lt; j n) {[i (inc j)] (cost [i (inc j)])})
+                 (when (&amp;lt; 1 i) {[(dec i) j] (cost [(dec i) j])})
+                 (when (&amp;lt; 1 j) {[i (dec j)] (cost [i (dec j)])})))
+        path  (a*-search est neigh start goal?)]
+    (reduce + (map cost path))))</summary></entry><entry><title type="html">Project Euler Problem 82</title><link href="https://ivarthorson.github.io/project-euler/problem-82/" rel="alternate" type="text/html" title="Project Euler Problem 82" /><published>2010-10-18T09:10:45-07:00</published><updated>2010-10-18T09:10:45-07:00</updated><id>https://ivarthorson.github.io/project-euler/problem-82</id><content type="html" xml:base="https://ivarthorson.github.io/project-euler/problem-82/">&lt;p&gt;As I mentioned in the &lt;a href=&quot;?p=660&quot;&gt;previous post (#81)&lt;/a&gt;, we can use [A&lt;em&gt;](http://en.wikipedia.org/wiki/A&lt;/em&gt;) to easily solve &lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=82&quot;&gt;problem 82&lt;/a&gt; as well.&lt;/p&gt;
+
+&lt;p&gt;One way to solve this problem is to perform the A* search from each element on the leftmost column, and then take the minimum length path amongst all these results.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;euler-82&lt;/span&gt; []
+  (&lt;span style=&quot;color: #8ae234;&quot;&gt;let&lt;/span&gt; [mat   (load-matrix &lt;span style=&quot;color: #Fd7f98;&quot;&gt;&quot;/path/to/matrix.txt&quot;&lt;/span&gt;)
+        m     (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; mat)
+        n     (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;first&lt;/span&gt; mat))
+        goal? (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [e] (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;second&lt;/span&gt; e) n))
+        cost  (&lt;span style=&quot;color: #729fcf;&quot;&gt;memoize&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]] (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; mat (&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; i)) (&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; j))))
+        est   (&lt;span style=&quot;color: #729fcf;&quot;&gt;memoize&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]] (&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; m i) (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; n j))))
+        neigh (&lt;span style=&quot;color: #729fcf;&quot;&gt;memoize&lt;/span&gt;
+               (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]]
+                (&lt;span style=&quot;color: #729fcf;&quot;&gt;merge&lt;/span&gt;
+                 (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; i m) {[(&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; i) j] (cost [(&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; i) j])})
+                 (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; j n) {[i (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; j)] (cost [i (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; j)])})
+                 (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; 1 i) {[(&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; i) j] (cost [(&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; i) j])}))))]
+    (&lt;span style=&quot;color: #729fcf;&quot;&gt;apply&lt;/span&gt;
+     min
+     (&lt;span style=&quot;color: #8ae234;&quot;&gt;for&lt;/span&gt; [i (&lt;span style=&quot;color: #729fcf;&quot;&gt;range&lt;/span&gt; 1 (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; m))
+           start [[i 1]]
+           path  [(a*-search est neigh start goal?)]]
+       (&lt;span style=&quot;color: #729fcf;&quot;&gt;reduce&lt;/span&gt; + (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; cost path))))))
+
+
+(&lt;span style=&quot;color: #729fcf;&quot;&gt;time&lt;/span&gt; (euler-82)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;&quot;Elapsed time: 8053.744512 msecs&quot;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note how we can memoize the functions passed to A* to improve the speed of A* searches slightly. We possibly could probably have come up with a faster solution by memoizing the collections internal to A&lt;em&gt;, but that would have meant exposing the details of the A&lt;/em&gt; to the outside world, which I don’t think is advisable in this case.&lt;/p&gt;
+
+&lt;p&gt;A better approach towards improving performance is to start thinking outside the box – or in this case, outside the grid. If we redefine the cost and neighbor functions to have a special ‘leftmost’ starting point that has all the elements in the first column as children, we can solve the problem in a single A* search. Let’s mark this new starting point with the coordinate [0 0], to mark that it is ‘off the grid’.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;euler-82-better&lt;/span&gt; []
+  (&lt;span style=&quot;color: #8ae234;&quot;&gt;let&lt;/span&gt; [mat   (load-matrix &lt;span style=&quot;color: #Fd7f98;&quot;&gt;&quot;/path/to/matrix.txt&quot;&lt;/span&gt;)
+        m     (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; mat)
+        n     (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;first&lt;/span&gt; mat))
+        start [0 0] &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;special node left of the whole matrix
+&lt;/span&gt;        goal? (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [e] (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;second&lt;/span&gt; e) n))
+        cost  (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]]
+                (&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; [i j] [0 0])
+                  0
+                  (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; mat (&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; i)) (&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; j))))
+        est   (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]] (&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; m i) (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; n j)))
+        neigh (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]]
+                (&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; [i j] [0 0])
+                  (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [i] [[i 1] (cost [i 1])]) (&lt;span style=&quot;color: #729fcf;&quot;&gt;range&lt;/span&gt; 1 (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; m)))
+                  (&lt;span style=&quot;color: #729fcf;&quot;&gt;merge&lt;/span&gt;
+                   (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; i m) {[(&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; i) j] (cost [(&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; i) j])})
+                   (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; j n) {[i (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; j)] (cost [i (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; j)])})
+                   (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; 1 i) {[(&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; i) j] (cost [(&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; i) j])}))))
+        path  (a*-search est neigh start goal?)]
+    (&lt;span style=&quot;color: #729fcf;&quot;&gt;reduce&lt;/span&gt; + (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; cost path))))
+
+(&lt;span style=&quot;color: #729fcf;&quot;&gt;time&lt;/span&gt; (euler-82-better)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;&quot;Elapsed time: 244.770152 msecs&quot;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This really shows the versatility of the A* search method.&lt;/p&gt;</content><category term="project-euler" /><category term="a* algorithm" /><category term="search" /><summary type="html">As I mentioned in the previous post (#81), we can use [A](http://en.wikipedia.org/wiki/A) to easily solve problem 82 as well.</summary></entry><entry><title type="html">Project Euler Problem 81</title><link href="https://ivarthorson.github.io/project-euler/problem-81/" rel="alternate" type="text/html" title="Project Euler Problem 81" /><published>2010-10-18T06:05:41-07:00</published><updated>2010-10-18T06:05:41-07:00</updated><id>https://ivarthorson.github.io/project-euler/problem-81</id><content type="html" xml:base="https://ivarthorson.github.io/project-euler/problem-81/">&lt;p&gt;I’m actually a little proud of this one – this simple implementation of &lt;a href=&quot;http://en.wikipedia.org/wiki/A*&quot;&gt;A* search&lt;/a&gt; seems to be one of the prettier pieces of code I have written, and it was implemented abstractly enough to solve &lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=81&quot;&gt;problems 81&lt;/a&gt;, &lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=82&quot;&gt;82&lt;/a&gt;, and &lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=83&quot;&gt;83&lt;/a&gt; without changing the core algorithm.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=81&quot;&gt;Problem 81&lt;/a&gt; asks us to find the lowest-cost path through a matrix. While the algorithm from &lt;a href=&quot;?p=223&quot;&gt;problem 18&lt;/a&gt; or &lt;a href=&quot;?p=567&quot;&gt;67&lt;/a&gt; might work here, it wouldn’t work for problem 83, and I wanted to kill all three of these problems in one fell swoop. [A&lt;em&gt;](http://en.wikipedia.org/wiki/A&lt;/em&gt;) was the ax that I used.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;Thanks to cgrande for making me aware of priority-map
+&lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;http://clj-me.cgrand.net/2010/09/04/a-in-clojure/
+&lt;/span&gt;
+(&lt;span style=&quot;color: #729fcf;&quot;&gt;use&lt;/span&gt; '[clojure.contrib.duck-streams &lt;span style=&quot;color: #729fcf;&quot;&gt;:only&lt;/span&gt; (read-lines)]
+     '[clojure.contrib.priority-map &lt;span style=&quot;color: #729fcf;&quot;&gt;:only&lt;/span&gt; [priority-map]])
+
+(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;load-matrix&lt;/span&gt; [file]
+  (&lt;span style=&quot;color: #729fcf;&quot;&gt;vec&lt;/span&gt;
+   (&lt;span style=&quot;color: #8ae234;&quot;&gt;for&lt;/span&gt; [l (read-lines file)]
+     (&lt;span style=&quot;color: #8ae234;&quot;&gt;-&amp;gt;&amp;gt;&lt;/span&gt; (partition-by #(&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; % \,) l)
+          (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; #(&lt;span style=&quot;color: #729fcf;&quot;&gt;apply&lt;/span&gt; str %))
+          (&lt;span style=&quot;color: #729fcf;&quot;&gt;filter&lt;/span&gt; #(&lt;span style=&quot;color: #729fcf;&quot;&gt;not&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #Fd7f98;&quot;&gt;&quot;,&quot;&lt;/span&gt; %)))
+          (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; #(Integer/parseInt %))
+          vec))))
+
+(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;a*-search&lt;/span&gt;
+  &lt;span style=&quot;color: #888a85;&quot;&gt;&quot;Performs an a* search over the data using heuristic est-cost.
+  
+  ARGUMENTS:
+    est-cost(e)  The estimate of the cost to the goal.
+    neighbors(e) Returns map of neighbors at i,j and their costs
+    start        The element at which to start
+    goal?(e)     Function that checks if the goal has been reached.
+
+  RETURNS: 
+    The list of elements in the optimal path. &quot;&lt;/span&gt;
+  [est-cost neighbors start goal?]
+  (&lt;span style=&quot;color: #8ae234;&quot;&gt;loop&lt;/span&gt; [open   (priority-map start [0 nil])
+         closed {}]
+    (&lt;span style=&quot;color: #8ae234;&quot;&gt;let&lt;/span&gt; [[e [s p]] (&lt;span style=&quot;color: #729fcf;&quot;&gt;first&lt;/span&gt; open)]
+      (&lt;span style=&quot;color: #8ae234;&quot;&gt;cond&lt;/span&gt;
+       (&lt;span style=&quot;color: #729fcf;&quot;&gt;nil?&lt;/span&gt; e)  &lt;span style=&quot;color: #Fd7f98;&quot;&gt;&quot;Path not found! No more elements to try!&quot;&lt;/span&gt;
+       (goal? e) (&lt;span style=&quot;color: #8ae234;&quot;&gt;-&amp;gt;&amp;gt;&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;conj&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;iterate&lt;/span&gt; #(&lt;span style=&quot;color: #729fcf;&quot;&gt;second&lt;/span&gt; (closed %)) p) e)
+                      (&lt;span style=&quot;color: #729fcf;&quot;&gt;take-while&lt;/span&gt; #(&lt;span style=&quot;color: #729fcf;&quot;&gt;not&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;nil?&lt;/span&gt; %)))
+                      reverse)
+       &lt;span style=&quot;color: #729fcf;&quot;&gt;:else&lt;/span&gt; (&lt;span style=&quot;color: #8ae234;&quot;&gt;recur&lt;/span&gt;
+              (&lt;span style=&quot;color: #729fcf;&quot;&gt;merge-with&lt;/span&gt; #(&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;first&lt;/span&gt; %1) (&lt;span style=&quot;color: #729fcf;&quot;&gt;first&lt;/span&gt; %2)) %1 %2)
+                          (&lt;span style=&quot;color: #729fcf;&quot;&gt;dissoc&lt;/span&gt; open e)
+                          (&lt;span style=&quot;color: #729fcf;&quot;&gt;into&lt;/span&gt; {} (&lt;span style=&quot;color: #8ae234;&quot;&gt;for&lt;/span&gt; [[n ns] (neighbors e)
+                                         &lt;span style=&quot;color: #729fcf;&quot;&gt;:when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;not&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;get&lt;/span&gt; closed n))]
+                                     [n [(&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; ns s (est-cost n)) e]])))
+              (&lt;span style=&quot;color: #729fcf;&quot;&gt;assoc&lt;/span&gt; closed e [s p]))))))
+
+(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;euler-81&lt;/span&gt; []
+  (&lt;span style=&quot;color: #8ae234;&quot;&gt;let&lt;/span&gt; [mat   (load-matrix &lt;span style=&quot;color: #Fd7f98;&quot;&gt;&quot;/zzz/work/matrix.txt&quot;&lt;/span&gt;)
+        m     (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; mat)
+        n     (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;first&lt;/span&gt; mat))
+        cost  (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]] (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; mat (&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; i)) (&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; j)))
+        start [1 1]
+        goal  [m n]
+        goal? (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [e] (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; e goal))
+        est   (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]] (&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; m i) (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; n j)))
+        neigh (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]]
+                (&lt;span style=&quot;color: #729fcf;&quot;&gt;merge&lt;/span&gt;
+                 (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; i m) {[(&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; i) j] (cost [(&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; i) j])})
+                 (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; j n) {[i (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; j)] (cost [i (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; j)])})))
+        path  (a*-search est neigh start goal?)]
+    (&lt;span style=&quot;color: #729fcf;&quot;&gt;reduce&lt;/span&gt; + (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; cost path))))
+
+(&lt;span style=&quot;color: #729fcf;&quot;&gt;time&lt;/span&gt; (euler-81)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;&quot;Elapsed time: 153.287587 msecs&quot;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It was really, really tempting to keep the map from elements-&amp;gt;parents separate from the map of elements-&amp;gt;score, so that the children could simply be merged with (merge-with min A B) instead of the more complicated expression above, but in the end that required simultaneously processing two maps based on the contents of one map, and felt even more awkward than the above solution.&lt;/p&gt;
+
+&lt;p&gt;In the future, it would be interesting to modify the A* search to be concurrent – by searching the nth lowest-scoring candidates simultaneously, we could perhaps achieve some significant search speed improvement, especially for problems like this one where the heuristic information is very weak.&lt;/p&gt;
+
+&lt;p&gt;Also, this problem in fact very nearly reduces to &lt;a href=&quot;http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm&quot;&gt;Dijkstra’s algorithm&lt;/a&gt; because the admissible heuristic estimated-cost-to-goal function improves efficiency so little in this case.&lt;/p&gt;
+
+&lt;p&gt;It may also be interesting to compare this a* search function to &lt;a href=&quot;http://clj-me.cgrand.net/2010/09/04/a-in-clojure/&quot;&gt;that of cgrande’s&lt;/a&gt;.&lt;/p&gt;</content><category term="project-euler" /><category term="a* algorithm" /><category term="dijkstra's algorithm" /><category term="search" /><summary type="html">I’m actually a little proud of this one – this simple implementation of A* search seems to be one of the prettier pieces of code I have written, and it was implemented abstractly enough to solve problems 81, 82, and 83 without changing the core algorithm.</summary></entry></feed>

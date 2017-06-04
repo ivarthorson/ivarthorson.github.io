@@ -1,0 +1,302 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Project Euler Problem 23 &#8211; Art is Never Finished</title>
+<meta name="description" content="Trying to solve this problem the naive way quickly led me into computational problems…
+
+(defn proper-divisors [n]
+  "Returns a list of the proper divisors of n."
+  (filter #(zero? (mod n %)) (range 1 (+ 1 (/ n 2)))))
+
+
+">
+<meta name="keywords" content="binomial coefficients, primes, proper divisors">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Project Euler Problem 23">
+<meta name="twitter:description" content="Trying to solve this problem the naive way quickly led me into computational problems…
+
+(defn proper-divisors [n]
+  "Returns a list of the proper divisors of n."
+  (filter #(zero? (mod n %)) (range 1 (+ 1 (/ n 2)))))
+
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ivarthorson.github.io/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Euler Problem 23">
+<meta property="og:description" content="Trying to solve this problem the naive way quickly led me into computational problems…
+
+(defn proper-divisors [n]
+  "Returns a list of the proper divisors of n."
+  (filter #(zero? (mod n %)) (range 1 (+ 1 (/ n 2)))))
+
+
+">
+<meta property="og:url" content="https://ivarthorson.github.io/project-euler/problem-23/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="https://ivarthorson.github.io/project-euler/problem-23/">
+<link href="https://ivarthorson.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://ivarthorson.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://ivarthorson.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://ivarthorson.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ivarthorson.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ivarthorson.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ivarthorson.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://ivarthorson.github.io/about/" >About</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="https://ivarthorson.github.io/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://ivarthorson.github.io/tags/#binomial coefficients" title="Pages tagged binomial coefficients">binomial coefficients</a></li><li><a href="https://ivarthorson.github.io/tags/#primes" title="Pages tagged primes">primes</a></li><li><a href="https://ivarthorson.github.io/tags/#proper divisors" title="Pages tagged proper divisors">proper divisors</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Project Euler Problem 23</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://ivarthorson.github.io/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2010-07-02T01:38:01-07:00"><i class="fa fa-calendar-o"></i> July 02, 2010</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>Trying to solve <a href="http://projecteuler.net/index.php?section=problems&amp;id=23">this problem</a> the naive way quickly led me into computational problems…</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">proper-divisors</span> [n]
+  <span style="color: #Fd7f98;">"Returns a list of the proper divisors of n."</span>
+  (<span style="color: #729fcf;">filter</span> #(zero? (<span style="color: #729fcf;">mod</span> n %)) (<span style="color: #729fcf;">range</span> 1 (<span style="color: #729fcf;">+</span> 1 (<span style="color: #729fcf;">/</span> n 2)))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">abundant?</span> [n]
+  (<span style="color: #729fcf;">&lt;</span> n (<span style="color: #729fcf;">reduce</span> + (proper-divisors n))))
+
+(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">abundant-numbers</span> (<span style="color: #729fcf;">filter</span> abundant? (<span style="color: #729fcf;">range</span> 1 20000)))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">all-pairs</span> [coll]
+  (<span style="color: #8ae234;">for</span> [i (<span style="color: #729fcf;">range</span> (<span style="color: #729fcf;">count</span> coll))
+        j (<span style="color: #729fcf;">range</span> (<span style="color: #729fcf;">inc</span> i) (<span style="color: #729fcf;">count</span> coll))]
+    [(<span style="color: #729fcf;">nth</span> coll i) (<span style="color: #729fcf;">nth</span> coll j)]))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-23</span> []
+  (<span style="color: #8ae234;">let</span> [sums (<span style="color: #729fcf;">into</span> #{} (<span style="color: #729fcf;">map</span> (<span style="color: #729fcf;">fn</span> [[a b]] (<span style="color: #729fcf;">+</span> a b))
+                            (all-pairs abundant-numbers)))
+        not-sums (<span style="color: #729fcf;">filter</span> #(<span style="color: #729fcf;">nil?</span> (sums %)) (<span style="color: #729fcf;">range</span> 1 2000))]
+    (<span style="color: #729fcf;">reduce</span> + not-sums)))
+
+(euler-23)</code></pre>
+
+<p>After two minutes passed and no signs of stopping, I killed the process and decided to check how much time it was taking just to generate the abundant numbers.</p>
+
+<pre><code>(<span style="color: #729fcf;">time</span> (<span style="color: #729fcf;">reduce</span> + (<span style="color: #729fcf;">filter</span> abundant? (<span style="color: #729fcf;">range</span> 1 28123))))
+<span style="color: #Fd7f98;">"Elapsed time: 37798.750415 msecs"</span></code></pre>
+
+<p>Aha! It looks like it’s finally time to implement a more efficient version of proper-divisors, since that function has come up twice before, and is clearly one of the bottlenecks in this problem.</p>
+
+<p>Back in problem 12 we used a trick to find the number of proper divisors from the number of primes, but stopped short of actually computing all of the proper divisors. It’s time for that to change.</p>
+
+<p>The hypothesis that I am working under is that if we generate the list of proper divisors directly from prime numbers, it will be more efficient than finding the proper divisors through trial and error.</p>
+
+<p>Here is the code, explanation to follow:</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">all-pairs</span> [coll]
+  (<span style="color: #8ae234;">for</span> [i (<span style="color: #729fcf;">range</span> (<span style="color: #729fcf;">count</span> coll))
+        j (<span style="color: #729fcf;">range</span> (<span style="color: #729fcf;">inc</span> i) (<span style="color: #729fcf;">count</span> coll))]
+    [(<span style="color: #729fcf;">nth</span> coll i) (<span style="color: #729fcf;">nth</span> coll j)]))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">choose-k</span> [coll k]
+  <span style="color: #Fd7f98;">"Returns all possible unique groups of size k in coll."</span>
+  (<span style="color: #8ae234;">let</span> [n (<span style="color: #729fcf;">count</span> coll)]
+    (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">&lt;=</span> k 1)
+      (<span style="color: #729fcf;">map</span> vector coll)
+      (<span style="color: #729fcf;">reduce</span> into []
+              (<span style="color: #8ae234;">for</span> [i (<span style="color: #729fcf;">range</span> 1 (<span style="color: #729fcf;">inc</span> n))]
+                (<span style="color: #729fcf;">map</span> #(<span style="color: #729fcf;">into</span> [(<span style="color: #729fcf;">nth</span> coll (<span style="color: #729fcf;">dec</span> i))] %)
+                     (choose-k (<span style="color: #729fcf;">drop</span> i coll) (<span style="color: #729fcf;">dec</span> k))))))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">all-combos</span> [coll]
+  <span style="color: #Fd7f98;">"Returns all possible unique combos of elements of coll."</span>
+  (<span style="color: #729fcf;">reduce</span> into []
+          (<span style="color: #729fcf;">map</span> #(choose-k coll %) (<span style="color: #729fcf;">range</span> 1 (<span style="color: #729fcf;">inc</span> (<span style="color: #729fcf;">count</span> coll))))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">proper-divisors-from-primes</span> [num]
+  (<span style="color: #729fcf;">into</span> #{1} (<span style="color: #729fcf;">map</span> #(<span style="color: #729fcf;">apply</span> * %) (all-combos (prime-factors-of num)))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">abundant?</span> [n]
+  (<span style="color: #729fcf;">&lt;</span> n (<span style="color: #729fcf;">reduce</span> + (proper-divisors-from-primes n))))
+
+(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">abundant-numbers</span> (<span style="color: #729fcf;">filter</span> abundant? (<span style="color: #729fcf;">range</span> 1 28123)))
+
+(<span style="color: #729fcf;">time</span> (<span style="color: #729fcf;">reduce</span> + abundant-numbers)) 
+<span style="color: #Fd7f98;">"Elapsed time: 7342.117583 msecs"</span></code></pre>
+
+<p>It was difficult for me to come up with the algorithm behind <code class="highlighter-rouge">choose-k</code>, and it took more than an hour of concentration to figure out exactly how to make it properly recursive. It’s an interesting exercise which I solved by first writing <code class="highlighter-rouge">by-pairs</code>, then writing <code class="highlighter-rouge">by-triples</code>, then <code class="highlighter-rouge">by-quads</code>, etc until the pattern became obvious enough to refactor the code into a recursive definition.</p>
+
+<p>Once <code class="highlighter-rouge">choose-k</code> worked smoothly, everything else flowed out smoothly, and the performance of this way of generating primes is much better! Nothing like a 5-fold improvement to brighten my day.</p>
+
+<p>Alas, this was not the only performance problem of the naive algorithm: generating all of those sums of abundant numbers had too heavy a performance toll. What is a better way?</p>
+
+<p>This time, my curiosity to know the answer overwhelmed my discipline to always solve the problem myself first, and I admit that I peeked at the <a href="http://clojure-euler.wikispaces.com/Problem+023">interesting solution that hircus wrote</a> on clojure-euler. Putting the abundant numbers into a hashmap, and checking for pairs the way he did is very clever, and I reprint it here:</p>
+
+<pre><code><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">This is a clever one-liner! Thanks "hircus"
+</span>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">sum-of-abundants?</span> [i abundants]
+  (<span style="color: #729fcf;">some</span> (<span style="color: #729fcf;">fn</span> [a] (abundants (<span style="color: #729fcf;">-</span> i a))) abundants))
+ 
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-23</span> []
+  (<span style="color: #8ae234;">let</span> [abundants (<span style="color: #729fcf;">into</span> (<span style="color: #729fcf;">sorted-set</span>) (<span style="color: #729fcf;">filter</span> abundant? (<span style="color: #729fcf;">range</span> 12 28112)))]
+    (<span style="color: #729fcf;">reduce</span> + (<span style="color: #8ae234;">for</span> [i (<span style="color: #729fcf;">range</span> 1 28124)
+                    <span style="color: #729fcf;">:when</span> (<span style="color: #729fcf;">not</span> (sum-of-abundants? i abundants))]
+                i))))</code></pre>
+
+<p>In the end, the performance of my approach was half as fast as the solution posted at clojure-euler (7.68secs vs 3.93secs), although creating a function able to generate all possible combinations of elements in a list – as I did in this exercise – may prove useful later. Hircus’s solution uses a tight loop and finds two divisors at a time, which gives good performance that is pretty hard to beat.</p>
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-22/" class="btn" title="Project Euler Problem 22">Previous</a>
+      
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-24/" class="btn" title="Project Euler Problem 24">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2017 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://ivarthorson.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://ivarthorson.github.io';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://ivarthorson.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://ivarthorson.github.io/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

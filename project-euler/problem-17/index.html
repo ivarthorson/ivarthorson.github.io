@@ -1,0 +1,284 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Project Euler Problem 17 &#8211; Art is Never Finished</title>
+<meta name="description" content="For Project Euler Problem 17, I fell back to a more C-style pattern (almost like a big case statement). This is admittedly not the most beautiful solution, but I am comfortable with that as the problem itself doesn’t hide any particular mathematical elegance.
+
+(defn tens [n s sub]
+  (if (zero? (mod n 10))
+    s
+    (apply str (concat s "-"(verbally (- n sub))))))
+
+
+">
+<meta name="keywords" content="strings, words">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Project Euler Problem 17">
+<meta name="twitter:description" content="For Project Euler Problem 17, I fell back to a more C-style pattern (almost like a big case statement). This is admittedly not the most beautiful solution, but I am comfortable with that as the problem itself doesn’t hide any particular mathematical elegance.
+
+(defn tens [n s sub]
+  (if (zero? (mod n 10))
+    s
+    (apply str (concat s "-"(verbally (- n sub))))))
+
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ivarthorson.github.io/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Euler Problem 17">
+<meta property="og:description" content="For Project Euler Problem 17, I fell back to a more C-style pattern (almost like a big case statement). This is admittedly not the most beautiful solution, but I am comfortable with that as the problem itself doesn’t hide any particular mathematical elegance.
+
+(defn tens [n s sub]
+  (if (zero? (mod n 10))
+    s
+    (apply str (concat s "-"(verbally (- n sub))))))
+
+
+">
+<meta property="og:url" content="https://ivarthorson.github.io/project-euler/problem-17/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="https://ivarthorson.github.io/project-euler/problem-17/">
+<link href="https://ivarthorson.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://ivarthorson.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://ivarthorson.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://ivarthorson.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ivarthorson.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ivarthorson.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ivarthorson.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://ivarthorson.github.io/about/" >About</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="https://ivarthorson.github.io/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://ivarthorson.github.io/tags/#strings" title="Pages tagged strings">strings</a></li><li><a href="https://ivarthorson.github.io/tags/#words" title="Pages tagged words">words</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Project Euler Problem 17</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://ivarthorson.github.io/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2010-06-26T06:16:52-07:00"><i class="fa fa-calendar-o"></i> June 26, 2010</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>For <a href="http://projecteuler.net/index.php?section=problems&amp;id=17">Project Euler Problem 17</a>, I fell back to a more C-style pattern (almost like a big case statement). This is admittedly not the most beautiful solution, but I am comfortable with that as the problem itself doesn’t hide any particular mathematical elegance.</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">tens</span> [n s sub]
+  (<span style="color: #8ae234;">if</span> (zero? (<span style="color: #729fcf;">mod</span> n 10))
+    s
+    (<span style="color: #729fcf;">apply</span> str (<span style="color: #729fcf;">concat</span> s <span style="color: #Fd7f98;">"-"</span>(verbally (<span style="color: #729fcf;">-</span> n sub))))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">hundreds</span> [n s sub]
+  (<span style="color: #8ae234;">if</span> (zero? (<span style="color: #729fcf;">mod</span> n 100))
+    (<span style="color: #729fcf;">apply</span> str (<span style="color: #729fcf;">concat</span> s <span style="color: #Fd7f98;">"-hundred"</span>))
+    (<span style="color: #729fcf;">apply</span> str (<span style="color: #729fcf;">concat</span> s <span style="color: #Fd7f98;">"-hundred and "</span>(verbally (<span style="color: #729fcf;">-</span> n sub))))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">verbally</span> [n]
+  (<span style="color: #8ae234;">cond</span>
+   (<span style="color: #729fcf;">=</span> n 1) <span style="color: #Fd7f98;">"one"</span>
+   (<span style="color: #729fcf;">=</span> n 2) <span style="color: #Fd7f98;">"two"</span>
+   (<span style="color: #729fcf;">=</span> n 3) <span style="color: #Fd7f98;">"three"</span>
+   (<span style="color: #729fcf;">=</span> n 4) <span style="color: #Fd7f98;">"four"</span>
+   (<span style="color: #729fcf;">=</span> n 5) <span style="color: #Fd7f98;">"five"</span>
+   (<span style="color: #729fcf;">=</span> n 6) <span style="color: #Fd7f98;">"six"</span>
+   (<span style="color: #729fcf;">=</span> n 7) <span style="color: #Fd7f98;">"seven"</span>
+   (<span style="color: #729fcf;">=</span> n 8) <span style="color: #Fd7f98;">"eight"</span>
+   (<span style="color: #729fcf;">=</span> n 9) <span style="color: #Fd7f98;">"nine"</span>
+   (<span style="color: #729fcf;">=</span> n 10) <span style="color: #Fd7f98;">"ten"</span>
+   (<span style="color: #729fcf;">=</span> n 11) <span style="color: #Fd7f98;">"eleven"</span>
+   (<span style="color: #729fcf;">=</span> n 12) <span style="color: #Fd7f98;">"twelve"</span>
+   (<span style="color: #729fcf;">=</span> n 13) <span style="color: #Fd7f98;">"thirteen"</span>
+   (<span style="color: #729fcf;">=</span> n 14) <span style="color: #Fd7f98;">"fourteen"</span>
+   (<span style="color: #729fcf;">=</span> n 15) <span style="color: #Fd7f98;">"fifteen"</span>
+   (<span style="color: #729fcf;">=</span> n 16) <span style="color: #Fd7f98;">"sixteen"</span>
+   (<span style="color: #729fcf;">=</span> n 17) <span style="color: #Fd7f98;">"seventeen"</span>
+   (<span style="color: #729fcf;">=</span> n 18) <span style="color: #Fd7f98;">"eighteen"</span>
+   (<span style="color: #729fcf;">=</span> n 19) <span style="color: #Fd7f98;">"nineteen"</span>
+
+   (<span style="color: #729fcf;">&lt;</span> n 30) (tens n <span style="color: #Fd7f98;">"twenty"</span>  20)
+   (<span style="color: #729fcf;">&lt;</span> n 40) (tens n <span style="color: #Fd7f98;">"thirty"</span>  30)
+   (<span style="color: #729fcf;">&lt;</span> n 50) (tens n <span style="color: #Fd7f98;">"forty"</span>   40)
+   (<span style="color: #729fcf;">&lt;</span> n 60) (tens n <span style="color: #Fd7f98;">"fifty"</span>   50)
+   (<span style="color: #729fcf;">&lt;</span> n 70) (tens n <span style="color: #Fd7f98;">"sixty"</span>   60)
+   (<span style="color: #729fcf;">&lt;</span> n 80) (tens n <span style="color: #Fd7f98;">"seventy"</span> 70)
+   (<span style="color: #729fcf;">&lt;</span> n 90) (tens n <span style="color: #Fd7f98;">"eighty"</span>  80)
+   (<span style="color: #729fcf;">&lt;</span> n 100) (tens n <span style="color: #Fd7f98;">"ninety"</span> 90)
+
+   (<span style="color: #729fcf;">&lt;</span> n 200) (hundreds n <span style="color: #Fd7f98;">"one"</span>   100)
+   (<span style="color: #729fcf;">&lt;</span> n 300) (hundreds n <span style="color: #Fd7f98;">"two"</span>   200)
+   (<span style="color: #729fcf;">&lt;</span> n 400) (hundreds n <span style="color: #Fd7f98;">"three"</span> 300)
+   (<span style="color: #729fcf;">&lt;</span> n 500) (hundreds n <span style="color: #Fd7f98;">"four"</span>  400)
+   (<span style="color: #729fcf;">&lt;</span> n 600) (hundreds n <span style="color: #Fd7f98;">"five"</span>  500)
+   (<span style="color: #729fcf;">&lt;</span> n 700) (hundreds n <span style="color: #Fd7f98;">"six"</span>   600)
+   (<span style="color: #729fcf;">&lt;</span> n 800) (hundreds n <span style="color: #Fd7f98;">"seven"</span> 700)
+   (<span style="color: #729fcf;">&lt;</span> n 900) (hundreds n <span style="color: #Fd7f98;">"eight"</span> 800)
+   (<span style="color: #729fcf;">&lt;</span> n 1000) (hundreds n <span style="color: #Fd7f98;">"nine"</span>  900)
+   (<span style="color: #729fcf;">=</span> n 1000) <span style="color: #Fd7f98;">"one thousand"</span>
+   true <span style="color: #Fd7f98;">"BIG NUMBER"</span>
+   ))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">lc-alpha?</span> [char]
+  (<span style="color: #729fcf;">some</span> #(<span style="color: #729fcf;">=</span> char %) <span style="color: #Fd7f98;">"abcdefghijklmnopqrstuvwxyz"</span>))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-17</span> []
+  (<span style="color: #729fcf;">count</span> (<span style="color: #729fcf;">filter</span> lc-alpha? (<span style="color: #729fcf;">apply</span> concat (<span style="color: #729fcf;">map</span> verbally (<span style="color: #729fcf;">range</span> 1 1001))))))</code></pre>
+
+<p>Obviously, the <code class="highlighter-rouge">verbally</code> function is the problem. Packaging up that cond statement into something more elegant (such as an array) would go a long way towards making this shorter, as some people at <a href="http://clojure-euler.wikispaces.com/Problem+017">clojure-euler</a> did for this problem. I leave further exploration to them.</p>
+
+<p>Finally, it’s interesting to also think about the question “What if other languages besides English have strange ways of counting that require some strange conditional patterns? “ For example, the French say “quatre-vingt-dix” (four twenties and ten) for the number 90, the Germans count in an irregular order (e.g. einhunderteinundzwanzig = “one-hundred, one-and-twenty”), and the Japanese don’t even break things into groups of thousands, millions, billions the way europeans do (Japanese count by <a href="http://japanese.about.com/library/bllesson10.htm">groups of 10,000</a> not 1,000. They would say the number 1,000,000 as “one-hundred ten-thousands”).</p>
+
+<p>How would one extend their code to work multi-lingually, or would it be wiser just to hand code a new function for each language?</p>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-16/" class="btn" title="Project Euler Problem 16">Previous</a>
+      
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-18/" class="btn" title="Project Euler Problem 18">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2017 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://ivarthorson.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://ivarthorson.github.io';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://ivarthorson.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://ivarthorson.github.io/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Project Euler Problem 13 &#8211; Art is Never Finished</title>
+<meta name="description" content="Problem 13 was ridiculously easy. Once again I forgo any numerical trickery, preferring to convert back and forth between strings and large numbers in a casual and easy-to-understand manner:
+
+(defn euler-13 [nums]
+  (apply str (take 10 (str (reduce + nums)))))
+
+
+">
+<meta name="keywords" content="strings, too easy">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Project Euler Problem 13">
+<meta name="twitter:description" content="Problem 13 was ridiculously easy. Once again I forgo any numerical trickery, preferring to convert back and forth between strings and large numbers in a casual and easy-to-understand manner:
+
+(defn euler-13 [nums]
+  (apply str (take 10 (str (reduce + nums)))))
+
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ivarthorson.github.io/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Euler Problem 13">
+<meta property="og:description" content="Problem 13 was ridiculously easy. Once again I forgo any numerical trickery, preferring to convert back and forth between strings and large numbers in a casual and easy-to-understand manner:
+
+(defn euler-13 [nums]
+  (apply str (take 10 (str (reduce + nums)))))
+
+
+">
+<meta property="og:url" content="https://ivarthorson.github.io/project-euler/problem-13/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="https://ivarthorson.github.io/project-euler/problem-13/">
+<link href="https://ivarthorson.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://ivarthorson.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://ivarthorson.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://ivarthorson.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ivarthorson.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ivarthorson.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ivarthorson.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://ivarthorson.github.io/about/" >About</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="https://ivarthorson.github.io/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://ivarthorson.github.io/tags/#strings" title="Pages tagged strings">strings</a></li><li><a href="https://ivarthorson.github.io/tags/#too easy" title="Pages tagged too easy">too easy</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Project Euler Problem 13</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://ivarthorson.github.io/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2010-06-12T06:56:07-07:00"><i class="fa fa-calendar-o"></i> June 12, 2010</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p><a href="http://projecteuler.net/index.php?section=problems&amp;id=13">Problem 13</a> was ridiculously easy. Once again I forgo any numerical trickery, preferring to convert back and forth between strings and large numbers in a casual and easy-to-understand manner:</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-13</span> [nums]
+  (<span style="color: #729fcf;">apply</span> str (<span style="color: #729fcf;">take</span> 10 (<span style="color: #729fcf;">str</span> (<span style="color: #729fcf;">reduce</span> + nums)))))
+
+(euler-13 [37107287533902102798797998220837590246510135740250
+           46376937677490009712648124896970078050417018260538
+           74324986199524741059474233309513058123726617309629
+           91942213363574161572522430563301811072406154908250
+           23067588207539346171171980310421047513778063246676
+           89261670696623633820136378418383684178734361726757
+           28112879812849979408065481931592621691275889832738
+           44274228917432520321923589422876796487670272189318
+           47451445736001306439091167216856844588711603153276
+           70386486105843025439939619828917593665686757934951
+           62176457141856560629502157223196586755079324193331
+           64906352462741904929101432445813822663347944758178
+           92575867718337217661963751590579239728245598838407
+           58203565325359399008402633568948830189458628227828
+           80181199384826282014278194139940567587151170094390
+           35398664372827112653829987240784473053190104293586
+           86515506006295864861532075273371959191420517255829
+           71693888707715466499115593487603532921714970056938
+           54370070576826684624621495650076471787294438377604
+           53282654108756828443191190634694037855217779295145
+           36123272525000296071075082563815656710885258350721
+           45876576172410976447339110607218265236877223636045
+           17423706905851860660448207621209813287860733969412
+           81142660418086830619328460811191061556940512689692
+           51934325451728388641918047049293215058642563049483
+           62467221648435076201727918039944693004732956340691
+           15732444386908125794514089057706229429197107928209
+           55037687525678773091862540744969844508330393682126
+           18336384825330154686196124348767681297534375946515
+           80386287592878490201521685554828717201219257766954
+           78182833757993103614740356856449095527097864797581
+           16726320100436897842553539920931837441497806860984
+           48403098129077791799088218795327364475675590848030
+           87086987551392711854517078544161852424320693150332
+           59959406895756536782107074926966537676326235447210
+           69793950679652694742597709739166693763042633987085
+           41052684708299085211399427365734116182760315001271
+           65378607361501080857009149939512557028198746004375
+           35829035317434717326932123578154982629742552737307
+           94953759765105305946966067683156574377167401875275
+           88902802571733229619176668713819931811048770190271
+           25267680276078003013678680992525463401061632866526
+           36270218540497705585629946580636237993140746255962
+           24074486908231174977792365466257246923322810917141
+           91430288197103288597806669760892938638285025333403
+           34413065578016127815921815005561868836468420090470
+           23053081172816430487623791969842487255036638784583
+           11487696932154902810424020138335124462181441773470
+           63783299490636259666498587618221225225512486764533
+           67720186971698544312419572409913959008952310058822
+           95548255300263520781532296796249481641953868218774
+           76085327132285723110424803456124867697064507995236
+           37774242535411291684276865538926205024910326572967
+           23701913275725675285653248258265463092207058596522
+           29798860272258331913126375147341994889534765745501
+           18495701454879288984856827726077713721403798879715
+           38298203783031473527721580348144513491373226651381
+           34829543829199918180278916522431027392251122869539
+           40957953066405232632538044100059654939159879593635
+           29746152185502371307642255121183693803580388584903
+           41698116222072977186158236678424689157993532961922
+           62467957194401269043877107275048102390895523597457
+           23189706772547915061505504953922979530901129967519
+           86188088225875314529584099251203829009407770775672
+           11306739708304724483816533873502340845647058077308
+           82959174767140363198008187129011875491310547126581
+           97623331044818386269515456334926366572897563400500
+           42846280183517070527831839425882145521227251250327
+           55121603546981200581762165212827652751691296897789
+           32238195734329339946437501907836945765883352399886
+           75506164965184775180738168837861091527357929701337
+           62177842752192623401942399639168044983993173312731
+           32924185707147349566916674687634660915035914677504
+           99518671430235219628894890102423325116913619626622
+           73267460800591547471830798392868535206946944540724
+           76841822524674417161514036427982273348055556214818
+           97142617910342598647204516893989422179826088076852
+           87783646182799346313767754307809363333018982642090
+           10848802521674670883215120185883543223812876952786
+           71329612474782464538636993009049310363619763878039
+           62184073572399794223406235393808339651327408011116
+           66627891981488087797941876876144230030984490851411
+           60661826293682836764744779239180335110989069790714
+           85786944089552990653640447425576083659976645795096
+           66024396409905389607120198219976047599490197230297
+           64913982680032973156037120041377903785566085089252
+           16730939319872750275468906903707539413042652315011
+           94809377245048795150954100921645863754710598436791
+           78639167021187492431995700641917969777599028300699
+           15368713711936614952811305876380278410754449733078
+           40789923115535562561142322423255033685442488917353
+           44889911501440648020369068063960672322193204149535
+           41503128880339536053299340368006977710650566631954
+           81234880673210146739058568557934581403627822703280
+           82616570773948327592232845941706525094512325230608
+           22918802058777319719839450180888072429661980811197
+           77158542502016545090413245809786882778948721859617
+           72107838435069186155435662884062257473692284509516
+           20849603980134001723930671666823555245252804609722
+           53503534226472524250874054075591789781264330331690])</code></pre>
+
+<p>I wonder in what languages (C? Java?) this is so hard to write that merely adding big numbers together merits status as a Project Euler problem? Certainly Clojure doesn’t have a problem dealing with these!</p>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-12/" class="btn" title="Project Euler Problem 12">Previous</a>
+      
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-14/" class="btn" title="Project Euler Problem 14">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2017 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://ivarthorson.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://ivarthorson.github.io';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://ivarthorson.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://ivarthorson.github.io/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Project Euler Problem 54 &#8211; Art is Never Finished</title>
+<meta name="description" content="Poker! In order to solve problem 54, we need to basically model a poker hand and compute the strength of it relative to another hand.
+
+">
+<meta name="keywords" content="poker">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Project Euler Problem 54">
+<meta name="twitter:description" content="Poker! In order to solve problem 54, we need to basically model a poker hand and compute the strength of it relative to another hand.
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ivarthorson.github.io/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Euler Problem 54">
+<meta property="og:description" content="Poker! In order to solve problem 54, we need to basically model a poker hand and compute the strength of it relative to another hand.
+
+">
+<meta property="og:url" content="https://ivarthorson.github.io/project-euler/problem-54/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="https://ivarthorson.github.io/project-euler/problem-54/">
+<link href="https://ivarthorson.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://ivarthorson.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://ivarthorson.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://ivarthorson.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ivarthorson.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ivarthorson.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ivarthorson.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://ivarthorson.github.io/about/" >About</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="https://ivarthorson.github.io/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://ivarthorson.github.io/tags/#poker" title="Pages tagged poker">poker</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Project Euler Problem 54</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://ivarthorson.github.io/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2010-08-13T10:10:42-07:00"><i class="fa fa-calendar-o"></i> August 13, 2010</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>Poker! In order to solve <a href="http://projecteuler.net/index.php?section=problems&amp;id=54">problem 54</a>, we need to basically model a poker hand and compute the strength of it relative to another hand.</p>
+
+<p>I was surprised at how concisely the game of poker could be modeled in Clojure. Most of the work is done in a few <code class="highlighter-rouge">let</code> statements, followed by a small amount of branching logic. A more complete implementation of poker would probably require better management of a deck, as well as perhaps a better representation of a the data describing a card. A two-character string is a perhaps a little awkward to use at times.</p>
+
+<pre><code><span style="color: #729fcf;">use</span> '[clojure.contrib.duck-streams <span style="color: #729fcf;">:only</span> (read-lines)])
+
+(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">card-nums</span> (zipmap <span style="color: #Fd7f98;">"23456789TJQKA"</span> (<span style="color: #729fcf;">iterate</span> inc 2)))
+
+(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">card-suits</span> (<span style="color: #729fcf;">set</span> <span style="color: #Fd7f98;">"HDSC"</span>)) 
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">card-val</span> [c] (card-nums (<span style="color: #729fcf;">first</span> c)))
+
+(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">hand-rank</span> (zipmap [<span style="color: #729fcf;">:straight-flush</span>
+                        <span style="color: #729fcf;">:four-of-a-kind</span>
+                        <span style="color: #729fcf;">:full-house</span>
+                        <span style="color: #729fcf;">:flush</span>
+                        <span style="color: #729fcf;">:straight</span>
+                        <span style="color: #729fcf;">:three-of-a-kind</span>
+                        <span style="color: #729fcf;">:two-pairs</span>
+                        <span style="color: #729fcf;">:pair</span>
+                        <span style="color: #729fcf;">:high-card</span>] (<span style="color: #729fcf;">range</span>)))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">hand</span>
+  <span style="color: #888a85;">"Returns the type of the hand and a list of the card groups."</span>
+  [cards]
+  (<span style="color: #8ae234;">let</span> [cs (<span style="color: #729fcf;">sort</span> #(<span style="color: #729fcf;">&gt;</span> (card-val %1) (card-val  %2)) cards)
+        ns (<span style="color: #729fcf;">into</span> (<span style="color: #729fcf;">sorted-set</span>) (<span style="color: #729fcf;">map</span> #(card-val %) cs))
+        straight? (<span style="color: #8ae234;">and</span> (<span style="color: #729fcf;">=</span> 5 (<span style="color: #729fcf;">count</span> ns)) (<span style="color: #729fcf;">=</span> 4 (<span style="color: #729fcf;">-</span> (<span style="color: #729fcf;">last</span> ns) (<span style="color: #729fcf;">first</span> ns))))
+        flush? (<span style="color: #729fcf;">apply</span> = (<span style="color: #729fcf;">map</span> second cards))
+        groups (<span style="color: #729fcf;">sort</span> #(<span style="color: #729fcf;">&gt;</span> (<span style="color: #729fcf;">count</span> %1) (<span style="color: #729fcf;">count</span> %2))
+                     (<span style="color: #729fcf;">vals</span> (group-by #(card-val %) cs)))
+        g1 (<span style="color: #729fcf;">count</span> (<span style="color: #729fcf;">first</span> groups))
+        g2 (<span style="color: #729fcf;">count</span> (<span style="color: #729fcf;">second</span> groups))
+        hand-type (<span style="color: #8ae234;">cond</span>
+                   (<span style="color: #8ae234;">and</span> straight? flush?)  <span style="color: #729fcf;">:straight-flush</span> 
+                   (<span style="color: #729fcf;">=</span> 4 g1)                <span style="color: #729fcf;">:four-of-a-kind</span> 
+                   (<span style="color: #8ae234;">and</span> (<span style="color: #729fcf;">=</span> 3 g1) (<span style="color: #729fcf;">=</span> 2 g2)) <span style="color: #729fcf;">:full-house</span> 
+                   flush?                  <span style="color: #729fcf;">:flush</span> 
+                   straight?               <span style="color: #729fcf;">:straight</span>
+                   (<span style="color: #729fcf;">=</span> 3 g1)                <span style="color: #729fcf;">:three-of-a-kind</span>
+                   (<span style="color: #8ae234;">and</span> (<span style="color: #729fcf;">=</span> 2 g1) (<span style="color: #729fcf;">=</span> 2 g2)) <span style="color: #729fcf;">:two-pairs</span>
+                   (<span style="color: #729fcf;">=</span> 2 g1)                <span style="color: #729fcf;">:pair</span>
+                   <span style="color: #729fcf;">:else</span>                   <span style="color: #729fcf;">:high-card</span>)]
+    [hand-type groups]))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">break-tie</span>
+  <span style="color: #888a85;">"Assuming that g1 and g2 represent the same type of hand (eg: full house),
+  returns the outcome for the g1 hand (:win, :lose, or rarely :tie)"</span>
+  [g1 g2]
+   (<span style="color: #8ae234;">let</span> [a (<span style="color: #729fcf;">first</span> (<span style="color: #729fcf;">first</span> g1))
+        b (<span style="color: #729fcf;">first</span> (<span style="color: #729fcf;">first</span> g2))]
+    (<span style="color: #8ae234;">if</span> (<span style="color: #8ae234;">or</span> (<span style="color: #729fcf;">nil?</span> a) (<span style="color: #729fcf;">nil?</span> b))
+      <span style="color: #729fcf;">:tie</span>
+      (<span style="color: #8ae234;">cond</span>
+       (<span style="color: #729fcf;">&gt;</span> (card-val a) (card-val b)) <span style="color: #729fcf;">:win</span>
+       (<span style="color: #729fcf;">&lt;</span> (card-val a) (card-val b)) <span style="color: #729fcf;">:lose</span>
+       <span style="color: #729fcf;">:else</span> (<span style="color: #8ae234;">recur</span> (<span style="color: #729fcf;">next</span> g1) (<span style="color: #729fcf;">next</span> g2))))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">i-win?</span> [me you]
+  (<span style="color: #8ae234;">let</span> [[tm gm] (hand me)
+        [ty gy] (hand you)]
+    (<span style="color: #8ae234;">cond</span>
+     (<span style="color: #729fcf;">&lt;</span> (hand-rank tm) (hand-rank ty)) <span style="color: #729fcf;">:win</span>
+     (<span style="color: #729fcf;">&gt;</span> (hand-rank tm) (hand-rank ty)) <span style="color: #729fcf;">:lose</span>
+     <span style="color: #729fcf;">:else</span> (break-tie gm gy))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-53</span> [file]
+  (<span style="color: #729fcf;">count</span>
+   (<span style="color: #8ae234;">for</span> [line (read-lines file)
+         [me you] [(<span style="color: #729fcf;">split-at</span> 5 (<span style="color: #729fcf;">re-seq</span> #<span style="color: #Fd7f98;">"\S+"</span> line))] 
+         <span style="color: #729fcf;">:when</span> (<span style="color: #729fcf;">=</span> (i-win? me you) <span style="color: #729fcf;">:win</span>)]
+     <span style="color: #729fcf;">:win</span>)))
+
+(<span style="color: #729fcf;">time</span> (euler-53 <span style="color: #Fd7f98;">"/path/to/poker.txt"</span>))</code></pre>
+
+<p>That solves the problem, but we can’t stop there! Let’s just use a brute-force approach to compute the probability of a given hand beating n opponents in a random 5-card no-draw game of poker. Let’s start by adding some functionality for a deck of cards. It wouldn’t make much sense if you could get the same cards as your opponent!</p>
+
+<pre><code>(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">plain-deck</span> (<span style="color: #8ae234;">for</span> [n <span style="color: #Fd7f98;">"23456789TJQKA"</span>
+                      suit <span style="color: #Fd7f98;">"DHCS"</span>]
+                  (<span style="color: #729fcf;">apply</span> str (<span style="color: #729fcf;">str</span> n) (<span style="color: #729fcf;">str</span> suit))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">take-n-hands</span> [n deck]
+  {<span style="color: #729fcf;">:pre</span> [(<span style="color: #729fcf;">&lt;</span> (<span style="color: #729fcf;">*</span> n 5) (<span style="color: #729fcf;">count</span> deck))]}
+  (<span style="color: #8ae234;">loop</span> [r []
+         d (shuffle deck)]
+    (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">&gt;=</span> (<span style="color: #729fcf;">count</span> r) n)
+      [r d]
+      (<span style="color: #8ae234;">recur</span> (<span style="color: #729fcf;">conj</span> r (<span style="color: #729fcf;">take</span> 5 d)) (shuffle (<span style="color: #729fcf;">drop</span> 5 d))))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">test-2-players</span> [_]
+  (<span style="color: #8ae234;">let</span> [[hs deck] (take-n-hands 2 plain-deck)
+        [a b] hs]
+    (i-win? a b)))
+
+(frequencies (<span style="color: #729fcf;">map</span> test-2-players (<span style="color: #729fcf;">range</span> 100000))) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Wins about 50% of the time
+</span></code></pre>
+
+<p>Now we can define a hand for ourselves, and compute the probability that we will defeat 3 opponents in a no-draw, simplest-poker-possible kind of situation:</p>
+
+<pre><code>(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">my-hand</span> [<span style="color: #Fd7f98;">"2C"</span> <span style="color: #Fd7f98;">"3S"</span> <span style="color: #Fd7f98;">"8S"</span> <span style="color: #Fd7f98;">"8D"</span> <span style="color: #Fd7f98;">"TD"</span>])
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">frequencies-i-win</span> [my-cards other-players trials]
+  (frequencies
+   (<span style="color: #8ae234;">for</span> [d [(<span style="color: #729fcf;">remove</span> (<span style="color: #729fcf;">into</span> #{} my-hand) plain-deck)]
+         t (<span style="color: #729fcf;">range</span> trials)
+         [others _] [(take-n-hands other-players d)]]
+     (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">every?</span> #(<span style="color: #729fcf;">=</span> <span style="color: #729fcf;">:win</span> %) (<span style="color: #729fcf;">map</span> #(i-win? my-cards %) others))
+       <span style="color: #729fcf;">:win</span>
+       <span style="color: #729fcf;">:lose</span>))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">probability-i-win</span> [my-cards other-players trials]
+  (<span style="color: #8ae234;">let</span> [fs (frequencies-i-win my-cards other-players trials)
+        w (<span style="color: #8ae234;">if-let</span> [wins (<span style="color: #729fcf;">:win</span> fs)] wins 0 )
+        l (<span style="color: #8ae234;">if-let</span> [losses (<span style="color: #729fcf;">:lose</span> fs)] losses 0)]
+    (<span style="color: #729fcf;">str</span> (<span style="color: #729fcf;">*</span> 100.0 (<span style="color: #729fcf;">/</span> w trials)) <span style="color: #Fd7f98;">"% chance of win"</span>)))
+ 
+(probability-i-win my-hand 1 100000) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"69.878% chance of win"</span></code></pre>
+
+<p>I imagine that a human-machine combination such as this – one in which a computer could help you evaluate the mathematical strength of your hand – would be very useful for improving your understanding of the strength of a particular hand.</p>
+
+<p>Of course, the real magic of poker is in the betting strategy, and any simple computer algorithm I could implement here would doubtlessly do poorly against all but the most inexperienced of beginners.</p>
+
+<p>Still, it might be fun to expand on this later, add a GUI, and some logic for <a href="http://en.wikipedia.org/wiki/Texas_hold-em">Texas Hold ‘em</a>.</p>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-53/" class="btn" title="Project Euler Problem 53">Previous</a>
+      
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-55/" class="btn" title="Project Euler Problem 55">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2017 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://ivarthorson.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://ivarthorson.github.io';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://ivarthorson.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://ivarthorson.github.io/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

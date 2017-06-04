@@ -1,0 +1,237 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Project Euler Problem 28 &#8211; Art is Never Finished</title>
+<meta name="description" content="Problem 28 asks us to find the sums of the diagonals in a square matrix of numbers created by spiraling outward from the number 1 in a clockwise direction.
+
+">
+<meta name="keywords" content="diagonals, spiral">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Project Euler Problem 28">
+<meta name="twitter:description" content="Problem 28 asks us to find the sums of the diagonals in a square matrix of numbers created by spiraling outward from the number 1 in a clockwise direction.
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ivarthorson.github.io/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Euler Problem 28">
+<meta property="og:description" content="Problem 28 asks us to find the sums of the diagonals in a square matrix of numbers created by spiraling outward from the number 1 in a clockwise direction.
+
+">
+<meta property="og:url" content="https://ivarthorson.github.io/project-euler/problem-28/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="https://ivarthorson.github.io/project-euler/problem-28/">
+<link href="https://ivarthorson.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://ivarthorson.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://ivarthorson.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://ivarthorson.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ivarthorson.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ivarthorson.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ivarthorson.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://ivarthorson.github.io/about/" >About</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="https://ivarthorson.github.io/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://ivarthorson.github.io/tags/#diagonals" title="Pages tagged diagonals">diagonals</a></li><li><a href="https://ivarthorson.github.io/tags/#spiral" title="Pages tagged spiral">spiral</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Project Euler Problem 28</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://ivarthorson.github.io/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2010-07-15T06:25:53-07:00"><i class="fa fa-calendar-o"></i> July 15, 2010</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p><a href="http://projecteuler.net/index.php?section=problems&amp;id=28">Problem 28</a> asks us to find the sums of the diagonals in a square matrix of numbers created by spiraling outward from the number 1 in a clockwise direction.</p>
+
+<p>My first attempt was a little clunky because I named too many things:</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">diagonals</span> [start space]
+  (<span style="color: #729fcf;">take</span> 4 (<span style="color: #729fcf;">drop</span> 1 (<span style="color: #729fcf;">take-nth</span> space (<span style="color: #729fcf;">range</span> start (<span style="color: #729fcf;">+</span> start (<span style="color: #729fcf;">*</span> 5 space)))))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-28</span> [spiral]
+  (<span style="color: #8ae234;">loop</span> [sum 1
+         start 1
+         by 2]
+    (<span style="color: #8ae234;">let</span> [ds (diagonals start by)]
+      (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">&gt;=</span> start (<span style="color: #729fcf;">*</span> spiral spiral))
+        sum
+        (<span style="color: #8ae234;">recur</span> (<span style="color: #729fcf;">+</span> sum (<span style="color: #729fcf;">reduce</span> + ds)) (<span style="color: #729fcf;">last</span> ds) (<span style="color: #729fcf;">+</span> 2 by))))))
+
+(euler-28 1001)</code></pre>
+
+<p>However, a little thought and I realized I could simplify this a little without too much ugliness:</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-28-revised</span> [n]
+  <span style="color: #Fd7f98;">"Compute the sum of the diagonals in an n by n clockwise spiral. "</span>
+  (<span style="color: #729fcf;">assert</span> (<span style="color: #8ae234;">and</span> (<span style="color: #729fcf;">&gt;</span> n 0) (<span style="color: #729fcf;">odd?</span> n))) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Must be odd to have diagonals!
+</span>  (<span style="color: #8ae234;">let</span> [diags (<span style="color: #729fcf;">fn</span> [m] (<span style="color: #729fcf;">take</span> 4 (<span style="color: #729fcf;">iterate</span> #(<span style="color: #729fcf;">-</span> % (<span style="color: #729fcf;">dec</span> m)) (<span style="color: #729fcf;">*</span> m m))))
+        squares (<span style="color: #729fcf;">take-while</span> #(<span style="color: #729fcf;">&gt;</span> % 1) (<span style="color: #729fcf;">iterate</span> #(<span style="color: #729fcf;">-</span> % 2) n))]
+    (<span style="color: #729fcf;">reduce</span> + (flatten [(<span style="color: #729fcf;">map</span> diags squares) 1]))))
+
+(euler-28-revised 1001)</code></pre>
+
+<p>Maybe that code is a bit dense, but it doesn’t have any recursion, which means it should be safe for the stack even for very big spirals. If <code class="highlighter-rouge">flatten</code> is incremental, it probably is safe for the heap as well and could be used to compute really really big spirals. Let’s check if <code class="highlighter-rouge">flatten</code> is incremental and lazy:</p>
+
+<pre><code><span style="color: #8ae234;">user&gt; </span><span style="font-weight: bold;">(take 6 (flatten (partition 2 1 (range))))</span>
+(0 1 1 2 2 3)</code></pre>
+
+<p>Since <code class="highlighter-rouge">flatten</code> is working lazily, I am going to guess that when combined with <code class="highlighter-rouge">reduce</code> in the above, only a very small number of elements are held in memory here and this will not damage the heap even with a gajillion elements.</p>
+
+<p>I added the <code class="highlighter-rouge">assert</code> just to prevent myself from accidentally giving the function meaningless input values, but I’ve seen very little clojure code that uses <code class="highlighter-rouge">assert</code> yet so I’m not sure of the proper idiom for using it.</p>
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-27/" class="btn" title="Project Euler Problem 27">Previous</a>
+      
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-29/" class="btn" title="Project Euler Problem 29">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2017 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://ivarthorson.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://ivarthorson.github.io';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://ivarthorson.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://ivarthorson.github.io/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

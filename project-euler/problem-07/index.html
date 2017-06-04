@@ -1,0 +1,473 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Project Euler Problem 7 &#8211; Art is Never Finished</title>
+<meta name="description" content="The seventh euler problem requires us to compute the 10001st prime number. To make this problem a bit harder, I decided that the function which will generate prime numbers must be lazy, or at least appear so to the consumer.
+
+">
+<meta name="keywords" content="benchmarks, primes">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Project Euler Problem 7">
+<meta name="twitter:description" content="The seventh euler problem requires us to compute the 10001st prime number. To make this problem a bit harder, I decided that the function which will generate prime numbers must be lazy, or at least appear so to the consumer.
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ivarthorson.github.io/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Euler Problem 7">
+<meta property="og:description" content="The seventh euler problem requires us to compute the 10001st prime number. To make this problem a bit harder, I decided that the function which will generate prime numbers must be lazy, or at least appear so to the consumer.
+
+">
+<meta property="og:url" content="https://ivarthorson.github.io/project-euler/problem-07/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="https://ivarthorson.github.io/project-euler/problem-07/">
+<link href="https://ivarthorson.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://ivarthorson.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://ivarthorson.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://ivarthorson.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ivarthorson.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ivarthorson.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ivarthorson.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://ivarthorson.github.io/about/" >About</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="https://ivarthorson.github.io/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://ivarthorson.github.io/tags/#benchmarks" title="Pages tagged benchmarks">benchmarks</a></li><li><a href="https://ivarthorson.github.io/tags/#primes" title="Pages tagged primes">primes</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Project Euler Problem 7</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://ivarthorson.github.io/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2010-06-04T01:29:30-07:00"><i class="fa fa-calendar-o"></i> June 04, 2010</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>The <a href="http://projecteuler.net/index.php?section=problems&amp;id=7">seventh euler problem</a> requires us to compute the 10001st prime number. To make this problem a bit harder, I decided that the function which will generate prime numbers must be lazy, or at least appear so to the consumer.</p>
+
+<p>My first try involved using the well-known <a href="http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes">Sieve of Eratosthenes</a> in an unusually clumsy fashion: with a lazy wrapper around it to manage caching of values. It not only kept a list of primes (which takes storage space), but because I hadn’t yet thought much about how many prime numbers to generate, it conservatively generates up to way more primes than it really needs.</p>
+
+<p>Ugly and inefficient code may be good enough for one-off hacks, but part of the reason I am working through Project Euler is to improve my own ability to program, so I will iterate my solution to this a few times until I get a blend of efficiency and cleanliness that I can be satisfied with.</p>
+
+<p>As the programmer’s adage goes, <a href="http://www.c2.com/cgi/wiki?MakeItWorkMakeItRightMakeItFast">“Make it work, make it right, make it fast.”</a> Of those three steps, here was my step one:</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">zeroify-multiples</span> [n offset v]
+  <span style="color: #Fd7f98;">"Sets every nth element in sequence v to zero, starting at
+  the index indicated by offset."</span>
+  (<span style="color: #8ae234;">loop</span> [i   (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">nil?</span> offset) 0 offset)
+         tr  (<span style="color: #729fcf;">transient</span> (<span style="color: #729fcf;">vec</span> v))
+         len (<span style="color: #729fcf;">count</span> v)]
+    (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">&lt;</span> i len)
+      (<span style="color: #8ae234;">recur</span> (<span style="color: #729fcf;">+</span> i n) (<span style="color: #729fcf;">assoc!</span> tr i 0) len)
+      (<span style="color: #729fcf;">persistent!</span> tr))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">calc-primes</span> [primes]
+  <span style="color: #Fd7f98;">"Returns a list of new primes found between p and 2p, where
+  p is the last prime in the (assumed sorted &lt;) list of known primes."</span>
+  (<span style="color: #8ae234;">let</span> [highest    (<span style="color: #729fcf;">last</span> primes)
+        primecount (<span style="color: #729fcf;">count</span> primes)]
+    (<span style="color: #8ae234;">loop</span> [i  0
+           ns (<span style="color: #729fcf;">vec</span> (<span style="color: #729fcf;">range</span> highest (<span style="color: #729fcf;">*</span> highest 2)))]
+      (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">&lt;</span> i primecount)
+        (<span style="color: #8ae234;">let</span> [prime (<span style="color: #729fcf;">nth</span> primes i)]
+          (<span style="color: #8ae234;">recur</span> (<span style="color: #729fcf;">inc</span> i)
+                 (zeroify-multiples prime (<span style="color: #729fcf;">-</span> prime (<span style="color: #729fcf;">mod</span> highest prime)) ns)))
+        (<span style="color: #729fcf;">rest</span> (<span style="color: #729fcf;">remove</span> zero? ns))))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">prime-cacher</span> [[prime new old]]
+  <span style="color: #Fd7f98;">"Caches prime numbers that were computed already using the
+  non-lazy process."</span>
+  (<span style="color: #8ae234;">let</span> [nf (<span style="color: #729fcf;">first</span> new)
+        nr (<span style="color: #729fcf;">rest</span> new)
+        o  (<span style="color: #729fcf;">cons</span> nf old)
+        nw (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">&lt;</span> 0 (<span style="color: #729fcf;">count</span> nr))
+             nr
+             (calc-primes (<span style="color: #729fcf;">reverse</span> o)))]
+    [nf nw o]))
+
+(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">lazy-primes-1</span> (<span style="color: #729fcf;">map</span> first (<span style="color: #729fcf;">iterate</span> prime-cacher [2 [3 5 7] [2]])))
+
+(<span style="color: #729fcf;">nth</span> lazy-primes-1 10000) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">nth uses 0, not 1 for first element index
+</span></code></pre>
+
+<p>Not too pretty, is it? After I finished writing that, I realized I had missed another obvious improvement: I don’t need to keep the full list of all numbers in the sieve of Eratosthenes, I just needed to keep a list of the highest multiple of each prime factor in the search so far. This is a much smaller list of numbers to maintain.</p>
+
+<p>But before I rewrote anything, I decided to stop and think about what I had learned from the first implementation. Well, two properties of primes had become obvious to me:</p>
+
+<ol>
+  <li>All primes are odd except 2.</li>
+  <li>If we haven’t found any prime factors less than or equal to sqrt(n), then the number n must be prime.</li>
+</ol>
+
+<p>I wondered if perhaps abandoning the sieve algorithm all together and just trying to write a tight loop that exploited that second property would be fast enough for my purposes. This was my second attempt, which uses a completely different (naive) algorithm for computing primes.</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">lazy-primes-2</span> []
+  <span style="color: #Fd7f98;">"A vector-based lazy primes generator."</span>
+  (<span style="color: #8ae234;">letfn</span> [(next-prime [primes n]
+            (<span style="color: #8ae234;">let</span> [sqrt-n (<span style="color: #729fcf;">int</span> (Math/sqrt n))]
+              (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">some</span> #(<span style="color: #729fcf;">=</span> 0 (<span style="color: #729fcf;">rem</span> n %)) (<span style="color: #729fcf;">take-while</span> #(<span style="color: #729fcf;">&lt;=</span> % sqrt-n) primes))
+                (<span style="color: #8ae234;">recur</span> primes (<span style="color: #729fcf;">+</span> n 2))
+                (<span style="color: #729fcf;">cons</span> n (<span style="color: #729fcf;">lazy-seq</span> (next-prime (<span style="color: #729fcf;">conj</span> primes n) (<span style="color: #729fcf;">+</span> n 2)))))))]
+    (<span style="color: #729fcf;">concat</span> [2] (<span style="color: #729fcf;">lazy-seq</span> (next-prime [] 3)))))
+
+(<span style="color: #729fcf;">nth</span> (lazy-primes-2) 10000) </code></pre>
+
+<p>That’s much cleaner and easier to understand, and I can see that performance is much better even without any benchmarking yet, but one thing still bugs me. Once a prime number (say, 19) is in the vector of smaller primes, all odd numbers greater than the square of this prime (19^2) will have to be checked against it. That is, say we are checking 403, 405, 407, etc for primality. We will still divide each of these by 19, even though it is obvious that we should only be checking every 19th number. That’s why the Sieve of Eratosthenes could still have better performance here; it wouldn’t perform such obviously unneeded tests.</p>
+
+<p>Then I had an insight into how to implement the Sieve of Eratosthenes in a lazy manner: I could queue up the prime factors under each composite number in a hash map! My third attempt I was thus:</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">lazy-primes-3</span> []
+  (<span style="color: #8ae234;">letfn</span> [(append-under-key [h key val]
+             (<span style="color: #729fcf;">assoc</span> h key (<span style="color: #729fcf;">conj</span> (h key) val)))
+          (run-iterators [h n]
+             (<span style="color: #729fcf;">dissoc</span> (<span style="color: #729fcf;">reduce</span> #(append-under-key %1 (<span style="color: #729fcf;">+</span> n %2) %2) h (h n)) n))
+          (next-prime [h n]
+             (<span style="color: #8ae234;">if</span> (h n) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">If h has any items, it is not prime
+</span>               (<span style="color: #8ae234;">recur</span> (run-iterators h n) (<span style="color: #729fcf;">+</span> n 2))
+               (<span style="color: #729fcf;">cons</span> n (<span style="color: #729fcf;">lazy-seq</span>
+                        (next-prime (append-under-key h (<span style="color: #729fcf;">*</span> n n) (<span style="color: #729fcf;">+</span> n n)) (<span style="color: #729fcf;">+</span> n 2))))))]
+    (<span style="color: #729fcf;">cons</span> 2 (<span style="color: #729fcf;">lazy-seq</span> (next-prime {} 3)))))
+
+(<span style="color: #729fcf;">time</span> (<span style="color: #729fcf;">nth</span> (lazy-primes-3) 10000))</code></pre>
+
+<p>Isn’t that better?</p>
+
+<p>Now it’s time to see how well my 2nd and 3rd attempts fare against other people’s code. Nothing at <a href="http://clojure-euler.wikispaces.com/Problem+007">clojure-euler </a>really caught my eye for this particular problem, but the one in the ‘<a href="http://clojure-euler.wikispaces.com/The+Optimal+Toolkit">optimal toolkit</a>’ by puzzler was rather long and sophisticated; I surmised that its length must result from some optimization. We’ll hold off on that for a moment, but just look at the length of it:</p>
+
+<pre><code><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">From the optimal toolkit at:
+</span><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">http://clojure-euler.wikispaces.com/The+Optimal+Toolkit
+</span>
+(<span style="color: #8ae234;">defn-</span> <span style="color: #edd400; font-weight: bold;">wheel2357</span> [] (<span style="color: #729fcf;">cycle</span> [2 4 2 4 6 2 6 4 2 4 6 6 2 6 4 2 6 4 6 8 4 2 4 2 4 8
+ 6 4 6 2 4 6 2 6 6 4 2 4 6 2 6 4 2 4 2 10 2 10]))
+ 
+(<span style="color: #8ae234;">defn-</span> <span style="color: #edd400; font-weight: bold;">spin</span> [l n] (<span style="color: #729fcf;">lazy-seq</span> (<span style="color: #729fcf;">cons</span> n (spin (<span style="color: #729fcf;">rest</span> l) (<span style="color: #729fcf;">+</span> n (<span style="color: #729fcf;">first</span> l))))))
+ 
+(<span style="color: #8ae234;">defn-</span> <span style="color: #edd400; font-weight: bold;">insert-prime</span> [p xs table]
+  (<span style="color: #729fcf;">update-in</span> table [(<span style="color: #729fcf;">*</span> p p)] #(<span style="color: #729fcf;">conj</span> % (<span style="color: #729fcf;">map</span> (<span style="color: #729fcf;">fn</span> [n] (<span style="color: #729fcf;">*</span> n p)) xs))))
+ 
+(<span style="color: #8ae234;">defn-</span> <span style="color: #edd400; font-weight: bold;">reinsert</span> [table x table-x]
+  (<span style="color: #8ae234;">loop</span> [m (<span style="color: #729fcf;">dissoc</span> table x), elems table-x]
+    (<span style="color: #8ae234;">if-let</span> [elems (<span style="color: #729fcf;">seq</span> elems)]
+      (<span style="color: #8ae234;">let</span> [elem (<span style="color: #729fcf;">first</span> elems)]
+    (<span style="color: #8ae234;">recur</span> (<span style="color: #729fcf;">update-in</span> m [(<span style="color: #729fcf;">first</span> elem)] #(<span style="color: #729fcf;">conj</span> % (<span style="color: #729fcf;">rest</span> elem))) (<span style="color: #729fcf;">rest</span> elems)))
+      m)))
+ 
+(<span style="color: #8ae234;">defn-</span> <span style="color: #edd400; font-weight: bold;">adjust</span> [x table]
+  (<span style="color: #8ae234;">let</span> [nextTable (<span style="color: #729fcf;">first</span> table),
+    n (nextTable 0)]
+    (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">&lt;=</span> n x) (<span style="color: #8ae234;">recur</span> x (reinsert table n (nextTable 1)))
+    table)))
+ 
+(<span style="color: #8ae234;">defn-</span> <span style="color: #edd400; font-weight: bold;">sieve-helper</span> [s table]
+  (<span style="color: #8ae234;">when-let</span> [ss (<span style="color: #729fcf;">seq</span> s)]
+    (<span style="color: #8ae234;">let</span> [x (<span style="color: #729fcf;">first</span> ss), xs (<span style="color: #729fcf;">rest</span> ss),
+      nextTable (<span style="color: #729fcf;">first</span> table),
+      nextComposite (nextTable 0)]
+      (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">&gt;</span> nextComposite x)
+    (<span style="color: #729fcf;">lazy-seq</span> (<span style="color: #729fcf;">cons</span> x (sieve-helper xs (insert-prime x xs table))))
+    (<span style="color: #8ae234;">recur</span> xs (adjust x table))))))
+ 
+(<span style="color: #8ae234;">defn-</span> <span style="color: #edd400; font-weight: bold;">sieve</span> [s]
+  (<span style="color: #8ae234;">when-let</span> [ss (<span style="color: #729fcf;">seq</span> s)]
+    (<span style="color: #8ae234;">let</span> [x (<span style="color: #729fcf;">first</span> ss), xs (<span style="color: #729fcf;">rest</span> ss)]
+      (<span style="color: #729fcf;">cons</span> x (sieve-helper xs (insert-prime x xs
+                                             (<span style="color: #729fcf;">sorted-map</span>)))))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">lazy-primes-puzzler</span>  []
+  (<span style="color: #729fcf;">concat</span> [2 3 5 7] (sieve (spin (wheel2357) 11))))</code></pre>
+
+<p>Interestingly, the code for <code class="highlighter-rouge">clojure.contrib.lazy-seq/primes</code> does not use the sieve of Eratosthenes, and uses the same algorithm that I used in <code class="highlighter-rouge">lazy-primes-2</code>. As near as I can tell, it exploits clojure’s memoization on lazy lists by carefully using the same var, rather than using an explicit vector as in <code class="highlighter-rouge">lazy-primes-2</code>. The automatic memoization makes it a little hard to benchmark directly, so I defined two new versions (the memoryless ‘<code class="highlighter-rouge">func</code>’) version, and the memoized ‘<code class="highlighter-rouge">var</code>’ version. By running ‘anti-memoization-hack’ between tests, the var containing the lazy seq will be reset between benchmarks so that memozation only occurs within a single benchmark run. Let’s compare their code:</p>
+
+<pre><code>(<span style="color: #729fcf;">use</span> 'clojure.contrib.def)
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">anti-memoization-hack</span> []
+  (<span style="color: #8ae234;">defvar</span> <span style="color: #edd400; font-weight: bold;">lazy-primes-contrib</span>
+    (<span style="color: #729fcf;">concat</span>
+     [2 3 5 7]
+     (<span style="color: #729fcf;">lazy-seq</span>
+      (<span style="color: #8ae234;">let</span> [primes-from
+            (<span style="color: #729fcf;">fn</span> <span style="color: #edd400; font-weight: bold;">primes-from</span> [n [f &amp; r]]
+              (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">some</span> #(zero? (<span style="color: #729fcf;">rem</span> n %))
+                        (<span style="color: #729fcf;">take-while</span> #(<span style="color: #729fcf;">&lt;=</span> (<span style="color: #729fcf;">*</span> % %) n) lazy-primes-contrib))
+                (<span style="color: #8ae234;">recur</span> (<span style="color: #729fcf;">+</span> n f) r)
+                (<span style="color: #729fcf;">lazy-seq</span> (<span style="color: #729fcf;">cons</span> n (primes-from (<span style="color: #729fcf;">+</span> n f) r)))))
+            wheel (<span style="color: #729fcf;">cycle</span> [2 4 2 4 6 2 6 4 2 4 6 6 2 6 4 2
+                          6 4 6 8 4 2 4 2 4 8 6 4 6 2 4 6
+                          2 6 6 4 2 4 6 2 6 4 2 4 2 10 2 10])]
+        (primes-from 11 wheel)))))
+  (<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">lazy-primes-contrib-var</span> (<span style="color: #729fcf;">fn</span> [] lazy-primes-contrib)))
+
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">lazy-primes-contrib-func</span> []
+  (<span style="color: #729fcf;">concat</span>
+   [2 3 5 7]
+   (<span style="color: #729fcf;">lazy-seq</span>
+    (<span style="color: #8ae234;">let</span> [primes-from
+          (<span style="color: #729fcf;">fn</span> <span style="color: #edd400; font-weight: bold;">primes-from</span> [n [f &amp; r]]
+            (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">some</span> #(zero? (<span style="color: #729fcf;">rem</span> n %))
+                      (<span style="color: #729fcf;">take-while</span> #(<span style="color: #729fcf;">&lt;=</span> (<span style="color: #729fcf;">*</span> % %) n) (lazy-primes-contrib-func)))
+              (<span style="color: #8ae234;">recur</span> (<span style="color: #729fcf;">+</span> n f) r)
+              (<span style="color: #729fcf;">lazy-seq</span> (<span style="color: #729fcf;">cons</span> n (primes-from (<span style="color: #729fcf;">+</span> n f) r)))))
+          wheel (<span style="color: #729fcf;">cycle</span> [2 4 2 4 6 2 6 4 2 4 6 6 2 6 4 2
+                        6 4 6 8 4 2 4 2 4 8 6 4 6 2 4 6
+                        2 6 6 4 2 4 6 2 6 4 2 4 2 10 2 10])]
+      (primes-from 11 wheel)))))</code></pre>
+
+<p>As you can see, <code class="highlighter-rouge">lazy-primes-contrib-var</code> will still exploit memoization, while <code class="highlighter-rouge">lazy-primes-contrib-func</code> will not have any memory at all, and act similar to those one-line <a href="http://www.haskell.org/haskellwiki/Prime_numbers">haskell snippets for making primes</a> that people throw around on the web.</p>
+
+<p>My favorite solution was by <a href="http://clj-me.cgrand.net/2009/07/30/everybody-loves-the-sieve-of-eratosthenes/">Cristophe Grande</a>, not just because he followed a similar approach to me, but also because he was very clever in his use of the hash map. He realized that there is no need to ‘queue’ the entries in the map as I had done; once a number has been marked ‘composite’ in the map, we don’t need to mark it again with each new factor we find. Instead of appending a vector of the prime factors under each composite number key, we could just continue searching for higher, as-yet-unmarked composite that we would have to find later anyway.</p>
+
+<p>I reprint his solution here:</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">lazy-primes-cgrande</span> []
+  (<span style="color: #8ae234;">letfn</span> [(enqueue [sieve n step]
+            (<span style="color: #8ae234;">let</span> [m (<span style="color: #729fcf;">+</span> n step)]
+              (<span style="color: #8ae234;">if</span> (sieve m)
+                (<span style="color: #8ae234;">recur</span> sieve m step)
+                (<span style="color: #729fcf;">assoc</span> sieve m step))))
+          (next-sieve [sieve n]            
+            (<span style="color: #8ae234;">if-let</span> [step (sieve n)]
+              (<span style="color: #8ae234;">-&gt;</span> sieve
+                  (<span style="color: #729fcf;">dissoc</span> n)    
+                  (enqueue n step))
+              (enqueue sieve n (<span style="color: #729fcf;">+</span> n n))))
+          (next-primes [sieve n]
+            (<span style="color: #8ae234;">if</span> (sieve n) 
+              (<span style="color: #8ae234;">recur</span> (next-sieve sieve n) (<span style="color: #729fcf;">+</span> n 2))
+              (<span style="color: #729fcf;">cons</span> n (<span style="color: #729fcf;">lazy-seq</span> (next-primes (next-sieve sieve n) (<span style="color: #729fcf;">+</span> n 2))))))]
+    (<span style="color: #729fcf;">cons</span> 2 (<span style="color: #729fcf;">lazy-seq</span> (next-primes {} 3)))))
+
+(<span style="color: #729fcf;">time</span> (<span style="color: #729fcf;">nth</span> (lazy-primes-cgrande) 10000))</code></pre>
+
+<p>It’s tempting to try to play with Christophe’s code an try to improve it further, but I don’t see any obvious ways to parallelize this without creating some significant redundancy, and overhead of coordinating multiple threads probably won’t net us any benefits unless we have really a lot of cores available.</p>
+
+<p>On to the benchmarking…</p>
+
+<p>Let’s see how well everyone did on step three, “Make it fast”, by measuring how fast each of these functions are in an absolutely meaningless benchmark: how fast it runs on my computer! Of course, there will be no controls or attempts to make this scientific.</p>
+
+<p>I used the following code to perform my little benchmark:</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">avg</span> [v] (<span style="color: #729fcf;">double</span> (<span style="color: #729fcf;">/</span> (<span style="color: #729fcf;">reduce</span> + v) (<span style="color: #729fcf;">count</span> v))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">as-tabbed-line</span> [v] (<span style="color: #729fcf;">apply</span> str (<span style="color: #729fcf;">apply</span> str (<span style="color: #729fcf;">interpose</span> <span style="color: #Fd7f98;">"\t"</span> v)) <span style="color: #Fd7f98;">"\n"</span>))
+
+(<span style="color: #8ae234;">defmacro</span> <span style="color: #edd400; font-weight: bold;">bench</span> [n expr]
+  <span style="color: #Fd7f98;">"Runs expression n times and returns the execution times."</span>
+  `(<span style="color: #8ae234;">for</span> [_# (<span style="color: #729fcf;">range</span> ~n)]
+     (<span style="color: #8ae234;">let</span> [start# (System/nanoTime)
+           ret# ~expr
+           end# (System/nanoTime)]
+       (anti-memoization-hack)
+       (<span style="color: #729fcf;">/</span> (<span style="color: #729fcf;">double</span> (<span style="color: #729fcf;">-</span> end# start#)) 1000000.0))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">test-prime-generators</span> [max generators]
+  <span style="color: #Fd7f98;">"Average the result of 50 timed trials to generate X primes
+  between 100 and max, spaced logarithmically so X grows 5% each time"</span>
+  (<span style="color: #8ae234;">let</span> [trials 50
+        num-primes  (<span style="color: #729fcf;">take-while</span> #(<span style="color: #729fcf;">&gt;</span> max %) (<span style="color: #729fcf;">iterate</span> #(<span style="color: #729fcf;">int</span> (<span style="color: #729fcf;">*</span> 1.05 %)) 100))
+        take-trials (<span style="color: #729fcf;">fn</span> [tr gen pri]
+                      (avg (bench tr (<span style="color: #729fcf;">nth</span> (gen) pri))))]
+    (<span style="color: #729fcf;">println</span>
+     (<span style="color: #8ae234;">for</span> [num num-primes]
+       (as-tabbed-line
+        (<span style="color: #729fcf;">concat</span> [num] (<span style="color: #8ae234;">for</span> [g generators]
+                        (take-trials trials g num))))))))
+
+(test-prime-generators 1000 [lazy-primes-1
+                             lazy-primes-2
+                             lazy-primes-3
+                             lazy-primes-cgrande
+                             lazy-primes-puzzler
+                             lazy-primes-contrib-var
+                             lazy-primes-contrib-func])
+
+(test-prime-generators 10000 [lazy-primes-2
+                              lazy-primes-3
+                              lazy-primes-cgrande
+                              lazy-primes-puzzler
+                              lazy-primes-contrib-var])</code></pre>
+
+<p>Pushing the results of those last two expressions into files, I got the following pretty graphs using Gnuplot:</p>
+
+<p>[caption id=”attachment_122” align=”aligncenter” width=”500” caption=”Average performance of various lazy-prime generators. Notice the stair-stepping performance of the caching system of lazy-primes-1.”]<a href="http://clojure.roboloco.net/wp-content/uploads/2010/06/primes1.png"><img src="http://clojure.roboloco.net/wp-content/uploads/2010/06/primes1.png" alt="" /></a>[/caption]</p>
+
+<p>[caption id=”attachment_123” align=”aligncenter” width=”500” caption=”We can see that cgrande's code seems to work remarkably well, followed closely by lazy-primes-3.”]<a href="http://clojure.roboloco.net/wp-content/uploads/2010/06/primes2.png"><img src="http://clojure.roboloco.net/wp-content/uploads/2010/06/primes2.png" alt="" /></a>[/caption]</p>
+
+<p>These trends continue out to at least the first 1,000,000 primes on my machine:</p>
+
+<pre><code>user&gt; (<span style="color: #729fcf;">time</span> (<span style="color: #729fcf;">nth</span> (lazy-primes-3) 1000000))
+<span style="color: #Fd7f98;">"Elapsed time: 19697.895423 msecs"</span>
+user&gt; (<span style="color: #729fcf;">time</span> (<span style="color: #729fcf;">nth</span> (lazy-primes-cgrande) 1000000))
+<span style="color: #Fd7f98;">"Elapsed time: 19107.089807 msecs"</span>
+user&gt; (<span style="color: #729fcf;">time</span> (<span style="color: #729fcf;">nth</span> (lazy-primes-puzzler) 1000000))
+<span style="color: #Fd7f98;">"Elapsed time: 44241.588567 msecs"</span>
+(<span style="color: #729fcf;">time</span> (<span style="color: #729fcf;">nth</span> (lazy-primes-contrib-var) 1000000))
+<span style="color: #Fd7f98;">"Elapsed time: 120645.257555 msecs"</span></code></pre>
+
+<p>Neat!</p>
+
+<p>My takeaway from this exercise was:</p>
+
+<ul>
+  <li>Implementing the sieve properly (unlike <code class="highlighter-rouge">lazy-primes-1</code>) is essential.</li>
+  <li>A better algorithm (the Sieve vs Naive algorithm) wins.</li>
+  <li>A simpler datastructure (<code class="highlighter-rouge">lazy-primes-cgrande</code>) wins.</li>
+  <li>More sophisticated code may be mildly counterproductive. (<code class="highlighter-rouge">lazy-primes-puzzler</code>)</li>
+  <li>Hashmaps can be really fast! (<code class="highlighter-rouge">lazy-primes-cgrande</code>,<code class="highlighter-rouge">lazy-primes-3</code>)</li>
+  <li>Managing the list of primes manually (<code class="highlighter-rouge">lazy-primes-2</code>) is slightly faster than letting clojure memoize automatically (<code class="highlighter-rouge">clojure.contrib.lazy-seqs/primes</code>), but then again memoization will probably be better for most applications.</li>
+</ul>
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-06/" class="btn" title="Project Euler Problem 6">Previous</a>
+      
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-08/" class="btn" title="Project Euler Problem 8">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2017 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://ivarthorson.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://ivarthorson.github.io';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://ivarthorson.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://ivarthorson.github.io/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

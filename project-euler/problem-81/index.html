@@ -1,0 +1,272 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Project Euler Problem 81 &#8211; Art is Never Finished</title>
+<meta name="description" content="I’m actually a little proud of this one – this simple implementation of A* search seems to be one of the prettier pieces of code I have written, and it was implemented abstractly enough to solve problems 81, 82, and 83 without changing the core algorithm.
+
+">
+<meta name="keywords" content="a* algorithm, dijkstra's algorithm, search">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Project Euler Problem 81">
+<meta name="twitter:description" content="I’m actually a little proud of this one – this simple implementation of A* search seems to be one of the prettier pieces of code I have written, and it was implemented abstractly enough to solve problems 81, 82, and 83 without changing the core algorithm.
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ivarthorson.github.io/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Euler Problem 81">
+<meta property="og:description" content="I’m actually a little proud of this one – this simple implementation of A* search seems to be one of the prettier pieces of code I have written, and it was implemented abstractly enough to solve problems 81, 82, and 83 without changing the core algorithm.
+
+">
+<meta property="og:url" content="https://ivarthorson.github.io/project-euler/problem-81/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="https://ivarthorson.github.io/project-euler/problem-81/">
+<link href="https://ivarthorson.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://ivarthorson.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://ivarthorson.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://ivarthorson.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ivarthorson.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ivarthorson.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ivarthorson.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://ivarthorson.github.io/about/" >About</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="https://ivarthorson.github.io/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://ivarthorson.github.io/tags/#a* algorithm" title="Pages tagged a* algorithm">a* algorithm</a></li><li><a href="https://ivarthorson.github.io/tags/#dijkstra's algorithm" title="Pages tagged dijkstra's algorithm">dijkstra's algorithm</a></li><li><a href="https://ivarthorson.github.io/tags/#search" title="Pages tagged search">search</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Project Euler Problem 81</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://ivarthorson.github.io/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2010-10-18T06:05:41-07:00"><i class="fa fa-calendar-o"></i> October 18, 2010</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>I’m actually a little proud of this one – this simple implementation of <a href="http://en.wikipedia.org/wiki/A*">A* search</a> seems to be one of the prettier pieces of code I have written, and it was implemented abstractly enough to solve <a href="http://projecteuler.net/index.php?section=problems&amp;id=81">problems 81</a>, <a href="http://projecteuler.net/index.php?section=problems&amp;id=82">82</a>, and <a href="http://projecteuler.net/index.php?section=problems&amp;id=83">83</a> without changing the core algorithm.</p>
+
+<p><a href="http://projecteuler.net/index.php?section=problems&amp;id=81">Problem 81</a> asks us to find the lowest-cost path through a matrix. While the algorithm from <a href="?p=223">problem 18</a> or <a href="?p=567">67</a> might work here, it wouldn’t work for problem 83, and I wanted to kill all three of these problems in one fell swoop. [A<em>](http://en.wikipedia.org/wiki/A</em>) was the ax that I used.</p>
+
+<pre><code><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Thanks to cgrande for making me aware of priority-map
+</span><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">http://clj-me.cgrand.net/2010/09/04/a-in-clojure/
+</span>
+(<span style="color: #729fcf;">use</span> '[clojure.contrib.duck-streams <span style="color: #729fcf;">:only</span> (read-lines)]
+     '[clojure.contrib.priority-map <span style="color: #729fcf;">:only</span> [priority-map]])
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">load-matrix</span> [file]
+  (<span style="color: #729fcf;">vec</span>
+   (<span style="color: #8ae234;">for</span> [l (read-lines file)]
+     (<span style="color: #8ae234;">-&gt;&gt;</span> (partition-by #(<span style="color: #729fcf;">=</span> % \,) l)
+          (<span style="color: #729fcf;">map</span> #(<span style="color: #729fcf;">apply</span> str %))
+          (<span style="color: #729fcf;">filter</span> #(<span style="color: #729fcf;">not</span> (<span style="color: #729fcf;">=</span> <span style="color: #Fd7f98;">","</span> %)))
+          (<span style="color: #729fcf;">map</span> #(Integer/parseInt %))
+          vec))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">a*-search</span>
+  <span style="color: #888a85;">"Performs an a* search over the data using heuristic est-cost.
+  
+  ARGUMENTS:
+    est-cost(e)  The estimate of the cost to the goal.
+    neighbors(e) Returns map of neighbors at i,j and their costs
+    start        The element at which to start
+    goal?(e)     Function that checks if the goal has been reached.
+
+  RETURNS: 
+    The list of elements in the optimal path. "</span>
+  [est-cost neighbors start goal?]
+  (<span style="color: #8ae234;">loop</span> [open   (priority-map start [0 nil])
+         closed {}]
+    (<span style="color: #8ae234;">let</span> [[e [s p]] (<span style="color: #729fcf;">first</span> open)]
+      (<span style="color: #8ae234;">cond</span>
+       (<span style="color: #729fcf;">nil?</span> e)  <span style="color: #Fd7f98;">"Path not found! No more elements to try!"</span>
+       (goal? e) (<span style="color: #8ae234;">-&gt;&gt;</span> (<span style="color: #729fcf;">conj</span> (<span style="color: #729fcf;">iterate</span> #(<span style="color: #729fcf;">second</span> (closed %)) p) e)
+                      (<span style="color: #729fcf;">take-while</span> #(<span style="color: #729fcf;">not</span> (<span style="color: #729fcf;">nil?</span> %)))
+                      reverse)
+       <span style="color: #729fcf;">:else</span> (<span style="color: #8ae234;">recur</span>
+              (<span style="color: #729fcf;">merge-with</span> #(<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">&lt;</span> (<span style="color: #729fcf;">first</span> %1) (<span style="color: #729fcf;">first</span> %2)) %1 %2)
+                          (<span style="color: #729fcf;">dissoc</span> open e)
+                          (<span style="color: #729fcf;">into</span> {} (<span style="color: #8ae234;">for</span> [[n ns] (neighbors e)
+                                         <span style="color: #729fcf;">:when</span> (<span style="color: #729fcf;">not</span> (<span style="color: #729fcf;">get</span> closed n))]
+                                     [n [(<span style="color: #729fcf;">+</span> ns s (est-cost n)) e]])))
+              (<span style="color: #729fcf;">assoc</span> closed e [s p]))))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-81</span> []
+  (<span style="color: #8ae234;">let</span> [mat   (load-matrix <span style="color: #Fd7f98;">"/zzz/work/matrix.txt"</span>)
+        m     (<span style="color: #729fcf;">count</span> mat)
+        n     (<span style="color: #729fcf;">count</span> (<span style="color: #729fcf;">first</span> mat))
+        cost  (<span style="color: #729fcf;">fn</span> [[i j]] (<span style="color: #729fcf;">nth</span> (<span style="color: #729fcf;">nth</span> mat (<span style="color: #729fcf;">dec</span> i)) (<span style="color: #729fcf;">dec</span> j)))
+        start [1 1]
+        goal  [m n]
+        goal? (<span style="color: #729fcf;">fn</span> [e] (<span style="color: #729fcf;">=</span> e goal))
+        est   (<span style="color: #729fcf;">fn</span> [[i j]] (<span style="color: #729fcf;">+</span> (<span style="color: #729fcf;">-</span> m i) (<span style="color: #729fcf;">-</span> n j)))
+        neigh (<span style="color: #729fcf;">fn</span> [[i j]]
+                (<span style="color: #729fcf;">merge</span>
+                 (<span style="color: #8ae234;">when</span> (<span style="color: #729fcf;">&lt;</span> i m) {[(<span style="color: #729fcf;">inc</span> i) j] (cost [(<span style="color: #729fcf;">inc</span> i) j])})
+                 (<span style="color: #8ae234;">when</span> (<span style="color: #729fcf;">&lt;</span> j n) {[i (<span style="color: #729fcf;">inc</span> j)] (cost [i (<span style="color: #729fcf;">inc</span> j)])})))
+        path  (a*-search est neigh start goal?)]
+    (<span style="color: #729fcf;">reduce</span> + (<span style="color: #729fcf;">map</span> cost path))))
+
+(<span style="color: #729fcf;">time</span> (euler-81)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 153.287587 msecs"
+</span></code></pre>
+
+<p>It was really, really tempting to keep the map from elements-&gt;parents separate from the map of elements-&gt;score, so that the children could simply be merged with (merge-with min A B) instead of the more complicated expression above, but in the end that required simultaneously processing two maps based on the contents of one map, and felt even more awkward than the above solution.</p>
+
+<p>In the future, it would be interesting to modify the A* search to be concurrent – by searching the nth lowest-scoring candidates simultaneously, we could perhaps achieve some significant search speed improvement, especially for problems like this one where the heuristic information is very weak.</p>
+
+<p>Also, this problem in fact very nearly reduces to <a href="http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra’s algorithm</a> because the admissible heuristic estimated-cost-to-goal function improves efficiency so little in this case.</p>
+
+<p>It may also be interesting to compare this a* search function to <a href="http://clj-me.cgrand.net/2010/09/04/a-in-clojure/">that of cgrande’s</a>.</p>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-80/" class="btn" title="Project Euler Problem 80">Previous</a>
+      
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-82/" class="btn" title="Project Euler Problem 82">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2017 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://ivarthorson.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://ivarthorson.github.io';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://ivarthorson.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://ivarthorson.github.io/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

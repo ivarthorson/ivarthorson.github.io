@@ -1,0 +1,707 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Project Euler First 100 Problems &#8211; Art is Never Finished</title>
+
+<meta name="keywords" content="project-euler, lazy-seqs, macros">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Project Euler First 100 Problems">
+
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ivarthorson.github.io/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Euler First 100 Problems">
+
+<meta property="og:url" content="https://ivarthorson.github.io/project-euler/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="https://ivarthorson.github.io/project-euler/">
+<link href="https://ivarthorson.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://ivarthorson.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://ivarthorson.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://ivarthorson.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ivarthorson.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ivarthorson.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ivarthorson.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="page">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://ivarthorson.github.io/about/" >About</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="https://ivarthorson.github.io/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="entry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <h1 class="entry-title">Project Euler First 100 Problems</h1>
+      </header>
+      <div class="entry-content">
+        <p>A few years ago when I began to learn Clojure, I completed the first 100 of the Project Euler mathematical problems. The goal was not just to solve them, but to practice solving them in the <strong>right</strong> way and learn a new language at the same time.</p>
+
+<p>Please be warned that many of the uses of <code class="highlighter-rouge">clojure.contrib</code> are deprecated in more modern versions of Clojure. I suggest that new students find the equivalent functionality in standard libraries whenever such outdated libraries appear.</p>
+
+<ul>
+  
+  
+    
+      <li>
+        <a href="/project-euler/problem-01/">Project Euler Problem 1</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-02/">Project Euler Problem 2</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-03/">Project Euler Problem 3</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-04/">Project Euler Problem 4</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-05/">Project Euler Problem 5</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-06/">Project Euler Problem 6</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-07/">Project Euler Problem 7</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-08/">Project Euler Problem 8</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-09/">Project Euler Problem 9</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-10/">Project Euler Problem 10</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-11/">Project Euler Problem 11</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-12/">Project Euler Problem 12</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-13/">Project Euler Problem 13</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-14/">Project Euler Problem 14</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-15/">Project Euler Problem 15</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-16/">Project Euler Problem 16</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-17/">Project Euler Problem 17</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-18/">Project Euler Problem 18</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-19/">Project Euler Problem 19</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-20/">Project Euler Problem 20</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-21/">Project Euler Problem 21</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-22/">Project Euler Problem 22</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-23/">Project Euler Problem 23</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-24/">Project Euler Problem 24</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-25/">Project Euler Problem 25</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-26/">Project Euler Problem 26</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-27/">Project Euler Problem 27</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-28/">Project Euler Problem 28</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-29/">Project Euler Problem 29</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-30/">Project Euler Problem 30</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-31/">Project Euler Problem 31</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-32/">Project Euler Problem 32</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-33/">Project Euler Problem 33</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-34/">Project Euler Problem 34</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-35/">Project Euler Problem 35</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-36/">Project Euler Problem 36</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-37/">Project Euler Problem 37</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-38/">Project Euler Problem 38</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-39/">Project Euler Problem 39</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-40/">Project Euler Problem 40</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-41/">Project Euler Problem 41</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-42/">Project Euler Problem 42</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-43/">Project Euler Problem 43</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-44/">Project Euler Problem 44</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-45-2/">Project Euler Problem 45</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-46/">Project Euler Problem 46</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-47/">Project Euler Problem 47</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-48/">Project Euler Problem 48</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-49/">Project Euler Problem 49</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-50/">Project Euler Problem 50</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-51/">Project Euler Problem 51</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-52/">Project Euler Problem 52</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-53/">Project Euler Problem 53</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-54/">Project Euler Problem 54</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-55/">Project Euler Problem 55</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-56/">Project Euler Problem 56</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-57/">Project Euler Problem 57</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-58/">Project Euler Problem 58</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-59/">Project Euler Problem 59</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-60/">Project Euler Problem 60</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-61/">Project Euler Problem 61</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-62/">Project Euler Problem 62</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-63/">Project Euler Problem 63</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-64/">Project Euler Problem 64</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-65/">Project Euler Problem 65</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-66/">Project Euler Problem 66</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-67/">Project Euler Problem 67</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-68/">Project Euler Problem 68</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-69/">Project Euler Problem 69</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-70/">Project Euler Problem 70</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-71/">Project Euler Problem 71</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-72/">Project Euler Problem 72</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-73/">Project Euler Problem 73</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-74/">Project Euler Problem 74</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-75/">Project Euler Problem 75</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-76/">Project Euler Problem 76</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-77/">Project Euler Problem 77</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-78/">Project Euler Problem 78</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-79/">Project Euler Problem 79</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-80/">Project Euler Problem 80</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-81/">Project Euler Problem 81</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-82/">Project Euler Problem 82</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-83/">Project Euler Problem 83</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-84/">Project Euler Problem 84</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-85/">Project Euler Problem 85</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-86/">Project Euler Problem 86</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-87/">Project Euler Problem 87</a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="/project-euler/problem-89/">Project Euler Problem 89</a>
+      </li>
+    
+  
+    
+  
+    
+  
+</ul>
+
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2017 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://ivarthorson.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://ivarthorson.github.io';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://ivarthorson.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://ivarthorson.github.io/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Project Euler Problem 32 &#8211; Art is Never Finished</title>
+<meta name="description" content="Project Euler Problem 32 asks us to once again find numbers that are pandigital from 1 to 9. This time, the digits of the numbers are taken from the equation (a*b=c), ignoring the * and = symbols.
+
+;; Only two possible patterns of multiplications that produce 9 digits
+;; 1. A 1 digit number times a 4 digit number can be 4 digits long.
+;; 2. A 2 digit number times a 3 digit number can be 4 digits long. 
+
+(defn as-digits [num]
+  (map #(Character/getNumericValue %) (str num)))
+
+
+">
+<meta name="keywords" content="combinations, digits, pandigital, permutations">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Project Euler Problem 32">
+<meta name="twitter:description" content="Project Euler Problem 32 asks us to once again find numbers that are pandigital from 1 to 9. This time, the digits of the numbers are taken from the equation (a*b=c), ignoring the * and = symbols.
+
+;; Only two possible patterns of multiplications that produce 9 digits
+;; 1. A 1 digit number times a 4 digit number can be 4 digits long.
+;; 2. A 2 digit number times a 3 digit number can be 4 digits long. 
+
+(defn as-digits [num]
+  (map #(Character/getNumericValue %) (str num)))
+
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ivarthorson.github.io/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Euler Problem 32">
+<meta property="og:description" content="Project Euler Problem 32 asks us to once again find numbers that are pandigital from 1 to 9. This time, the digits of the numbers are taken from the equation (a*b=c), ignoring the * and = symbols.
+
+;; Only two possible patterns of multiplications that produce 9 digits
+;; 1. A 1 digit number times a 4 digit number can be 4 digits long.
+;; 2. A 2 digit number times a 3 digit number can be 4 digits long. 
+
+(defn as-digits [num]
+  (map #(Character/getNumericValue %) (str num)))
+
+
+">
+<meta property="og:url" content="https://ivarthorson.github.io/project-euler/problem-32/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="https://ivarthorson.github.io/project-euler/problem-32/">
+<link href="https://ivarthorson.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://ivarthorson.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://ivarthorson.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://ivarthorson.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ivarthorson.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ivarthorson.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ivarthorson.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://ivarthorson.github.io/about/" >About</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="https://ivarthorson.github.io/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://ivarthorson.github.io/tags/#combinations" title="Pages tagged combinations">combinations</a></li><li><a href="https://ivarthorson.github.io/tags/#digits" title="Pages tagged digits">digits</a></li><li><a href="https://ivarthorson.github.io/tags/#pandigital" title="Pages tagged pandigital">pandigital</a></li><li><a href="https://ivarthorson.github.io/tags/#permutations" title="Pages tagged permutations">permutations</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Project Euler Problem 32</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://ivarthorson.github.io/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2010-07-19T09:55:47-07:00"><i class="fa fa-calendar-o"></i> July 19, 2010</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p><a href="http://projecteuler.net/index.php?section=problems&amp;id=32">Project Euler Problem 32</a> asks us to once again find numbers that are pandigital from 1 to 9. This time, the digits of the numbers are taken from the equation (a*b=c), ignoring the * and = symbols.</p>
+
+<pre><code><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Only two possible patterns of multiplications that produce 9 digits
+</span><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">1. A 1 digit number times a 4 digit number can be 4 digits long.
+</span><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">2. A 2 digit number times a 3 digit number can be 4 digits long. 
+</span>
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">as-digits</span> [num]
+  (<span style="color: #729fcf;">map</span> #(Character/getNumericValue %) (<span style="color: #729fcf;">str</span> num)))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">product-digits</span> [a b]
+  <span style="color: #Fd7f98;">"Returns a list of digits of a, b, and (* a b)."</span>
+  (<span style="color: #729fcf;">lazy-cat</span> (as-digits a) (as-digits b) (as-digits (<span style="color: #729fcf;">*</span> a b))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">all-unique?</span> [digits]
+  (<span style="color: #8ae234;">let</span> [unique (<span style="color: #729fcf;">distinct</span> digits)]
+    (<span style="color: #729fcf;">=</span> (<span style="color: #729fcf;">count</span> unique) (<span style="color: #729fcf;">count</span> digits))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">pandigital-9?</span> [digits]
+  (<span style="color: #8ae234;">and</span> (<span style="color: #729fcf;">nil?</span> (<span style="color: #729fcf;">some</span> zero? digits))
+       (<span style="color: #729fcf;">=</span> 9 (<span style="color: #729fcf;">count</span> digits))
+       (all-unique? digits)))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-32</span> []
+  (<span style="color: #729fcf;">reduce</span> + (<span style="color: #729fcf;">into</span> #{} (<span style="color: #729fcf;">concat</span>
+                       (<span style="color: #8ae234;">for</span> [a (<span style="color: #729fcf;">range</span> 1 10)
+                             b (<span style="color: #729fcf;">range</span> 1000 10000)
+                             <span style="color: #729fcf;">:when</span> (pandigital-9? (product-digits a b))]
+                         (<span style="color: #729fcf;">*</span> a b))
+                       (<span style="color: #8ae234;">for</span> [a (<span style="color: #729fcf;">range</span> 10 100)
+                             b (<span style="color: #729fcf;">range</span> a 1000)
+                             <span style="color: #729fcf;">:when</span> (pandigital-9? (product-digits a b))]
+                         (<span style="color: #729fcf;">*</span> a b))))))
+
+(euler-32)</code></pre>
+
+<p>With a bit of effort, I was able to shorten this definition into the much more succinct one that follows:</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">pandigital-multiplication?</span> [a b]
+  (<span style="color: #729fcf;">=</span> <span style="color: #Fd7f98;">"123456789"</span> (<span style="color: #729fcf;">apply</span> str (<span style="color: #729fcf;">sort</span> (flatten (<span style="color: #729fcf;">map</span> as-digits [a b (<span style="color: #729fcf;">*</span> a b)]))))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-32-concise</span> []
+  (<span style="color: #729fcf;">reduce</span> + (<span style="color: #729fcf;">distinct</span> (<span style="color: #8ae234;">for</span> [a (<span style="color: #729fcf;">range</span> 2 5000)
+                            b (<span style="color: #729fcf;">range</span> a (<span style="color: #729fcf;">/</span> 9999 a))
+                            <span style="color: #729fcf;">:when</span> (pandigital-multiplication? a b)]
+                        (<span style="color: #729fcf;">*</span> a b)))))
+
+(<span style="color: #729fcf;">time</span> (euler-32-concise)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 3415.286711 msecs"
+</span></code></pre>
+
+<p>Yet again, the folks over at <a href="http://clojure-euler.wikispaces.com/Problem+032">clojure-euler</a> have even more performant solutions, but what was most surprising to me is how changing the definition of <code class="highlighter-rouge">pandigital-multiplication?</code> could speed up my code by 10x:</p>
+
+<pre><code><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Using split (thanks, semmons99!)
+</span>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">pandigital-multiplication?</span> [a b]
+  (<span style="color: #729fcf;">=</span> <span style="color: #Fd7f98;">"123456789"</span> (<span style="color: #729fcf;">apply</span> str (<span style="color: #729fcf;">sort</span> (<span style="color: #729fcf;">rest</span> (.split (<span style="color: #729fcf;">str</span> a b (<span style="color: #729fcf;">*</span> a b)) <span style="color: #Fd7f98;">""</span>))))))
+
+(<span style="color: #729fcf;">time</span> (euler-32-concise)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 161.618939 msecs"
+</span></code></pre>
+
+<p>Try as a might to modify it, I couldn’t get the algorithmically superior approach posted on <a href="http://clojure-euler.wikispaces.com/Problem+032">clojure-euler</a> by bibi (which uses <code class="highlighter-rouge">combinations</code> and <code class="highlighter-rouge">permutations</code> from <code class="highlighter-rouge">clojure.contrib.combinatorics</code>) to go faster than the above code. I guess the overhead of creating the combinations and permutations exceeds the benefit obtained through the reduction in the number of required tests for pandigitality.</p>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-31/" class="btn" title="Project Euler Problem 31">Previous</a>
+      
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-33/" class="btn" title="Project Euler Problem 33">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2017 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://ivarthorson.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://ivarthorson.github.io';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://ivarthorson.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://ivarthorson.github.io/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

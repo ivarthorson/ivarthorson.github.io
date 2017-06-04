@@ -1,0 +1,345 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Project Euler Problem 52 &#8211; Art is Never Finished</title>
+<meta name="description" content="Problem 52 was too easy, so I took the time to use it’s simplicity and study how lazy sequences are chunked, and how they are grouped when apply‘d.
+
+">
+<meta name="keywords" content="chunking, higher-order, obsessive">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Project Euler Problem 52">
+<meta name="twitter:description" content="Problem 52 was too easy, so I took the time to use it’s simplicity and study how lazy sequences are chunked, and how they are grouped when apply‘d.
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ivarthorson.github.io/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Euler Problem 52">
+<meta property="og:description" content="Problem 52 was too easy, so I took the time to use it’s simplicity and study how lazy sequences are chunked, and how they are grouped when apply‘d.
+
+">
+<meta property="og:url" content="https://ivarthorson.github.io/project-euler/problem-52/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="https://ivarthorson.github.io/project-euler/problem-52/">
+<link href="https://ivarthorson.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://ivarthorson.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://ivarthorson.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://ivarthorson.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ivarthorson.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ivarthorson.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ivarthorson.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://ivarthorson.github.io/about/" >About</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="https://ivarthorson.github.io/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://ivarthorson.github.io/tags/#chunking" title="Pages tagged chunking">chunking</a></li><li><a href="https://ivarthorson.github.io/tags/#higher-order" title="Pages tagged higher-order">higher-order</a></li><li><a href="https://ivarthorson.github.io/tags/#obsessive" title="Pages tagged obsessive">obsessive</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Project Euler Problem 52</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://ivarthorson.github.io/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2010-08-11T09:32:38-07:00"><i class="fa fa-calendar-o"></i> August 11, 2010</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p><a href="http://projecteuler.net/index.php?section=problems&amp;id=52">Problem 52</a> was too easy, so I took the time to use it’s simplicity and study how lazy sequences are chunked, and how they are grouped when <code class="highlighter-rouge">apply</code>‘d.</p>
+
+<p>Because this is such a simple problem, I’ll show you the step-by-step refactoring process as I took as I tried to improve the performance and simplicity of the code.</p>
+
+<p>Our goal in this problem was to find a number that when multiplied by 2,3,4,5, and 6 has the exact same digits, but in a different order.</p>
+
+<p>First, let’s write something that solves the problem.</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">digs</span> [n] (<span style="color: #729fcf;">sort</span> (<span style="color: #729fcf;">str</span> n)))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-52</span> []
+  (<span style="color: #729fcf;">first</span>
+   (<span style="color: #8ae234;">for</span> [x (<span style="color: #729fcf;">iterate</span> inc 1)
+         <span style="color: #729fcf;">:when</span> (<span style="color: #729fcf;">every?</span> #(<span style="color: #729fcf;">=</span> (digs x) %)
+                       (<span style="color: #729fcf;">map</span> #(digs (<span style="color: #729fcf;">*</span> x %)) [2 3 4 5 6]))]
+     x)))
+
+(<span style="color: #729fcf;">time</span> (euler-52)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 563.332529 msecs"
+</span></code></pre>
+
+<p>Since that was trivial to write, let’s see if we can’t make it more elegant and faster. First, let’s make it faster by using the short-circuiting behavior of <code class="highlighter-rouge">and</code>:</p>
+
+<pre><code><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">short circuits using and
+</span>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-52-b</span> []
+  (<span style="color: #8ae234;">loop</span> [n 1
+         d (digs n)]
+    (<span style="color: #8ae234;">if</span> (<span style="color: #8ae234;">and</span> (<span style="color: #729fcf;">=</span> d (digs (<span style="color: #729fcf;">*</span> 2 n)))
+             (<span style="color: #729fcf;">=</span> d (digs (<span style="color: #729fcf;">*</span> 3 n)))
+             (<span style="color: #729fcf;">=</span> d (digs (<span style="color: #729fcf;">*</span> 4 n)))
+             (<span style="color: #729fcf;">=</span> d (digs (<span style="color: #729fcf;">*</span> 5 n)))
+             (<span style="color: #729fcf;">=</span> d (digs (<span style="color: #729fcf;">*</span> 6 n))))
+      n
+      (<span style="color: #8ae234;">recur</span> (<span style="color: #729fcf;">inc</span> n) (digs (<span style="color: #729fcf;">inc</span> n))))))
+
+(<span style="color: #729fcf;">time</span> (euler-52-b)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 159.1435 msecs"
+</span></code></pre>
+
+<p>What about if we wanted to improve the brevity? Maybe we can use <code class="highlighter-rouge">apply</code> and <code class="highlighter-rouge">=</code> to avoid treating the n case different from the 2n, 3n, …6n, cases.</p>
+
+<pre><code><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Short circuiting broken because of chunking
+</span>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-52-c</span> []
+  (<span style="color: #729fcf;">first</span>
+   (<span style="color: #729fcf;">filter</span>
+    (<span style="color: #729fcf;">fn</span> [n] (<span style="color: #729fcf;">apply</span> = (<span style="color: #729fcf;">map</span> #(digs (<span style="color: #729fcf;">*</span> n %)) [1 2 3 4 5 6])))
+    (<span style="color: #729fcf;">iterate</span> inc 1))))
+
+(<span style="color: #729fcf;">time</span> (euler-52-c)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 603.714745 msecs"
+</span></code></pre>
+
+<p>You may be wondering, “Why did the performance get so bad? Shouldn’t the performance be nearly as good as <code class="highlighter-rouge">euler-52-b</code>?”</p>
+
+<p>The answer to this question is that the chunking behavior of sequences (which takes things in groups of 32) meant that the entire array <code class="highlighter-rouge">[1 2 3 4 5 6]</code> was being evaluated and passed through the map. Also, the behavior of <code class="highlighter-rouge">apply</code> when given a long list is that it will take its arguments in groups of four, which is more than is needed.</p>
+
+<p>If you want to see this chunking behavior visually, try the following two lines of code in your REPL:</p>
+
+<pre><code>(<span style="color: #729fcf;">apply</span> = (<span style="color: #729fcf;">map</span> #(<span style="color: #8ae234;">do</span> (<span style="color: #729fcf;">print</span> %) %) (<span style="color: #729fcf;">iterate</span> inc 1))) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Groups by 4 during apply
+</span>(<span style="color: #729fcf;">apply</span> = (<span style="color: #729fcf;">map</span> #(<span style="color: #8ae234;">do</span> (<span style="color: #729fcf;">print</span> %) %) (<span style="color: #729fcf;">range</span>)))  <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Seqs chunk by 32's
+</span></code></pre>
+
+<p>Thinking of workarounds for the natural behavior of <code class="highlighter-rouge">apply</code> (it may be instructive to look in clojure.core’s source to see how apply is implemented if you are curious why it acts this way), I tried to use <code class="highlighter-rouge">take-while</code> and count that all the elements were consumed, but the result is a little cumbersome.</p>
+
+<pre><code><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Short circuits because of take-while
+</span>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-52-d</span> []
+  (<span style="color: #729fcf;">first</span>
+   (<span style="color: #729fcf;">filter</span>
+    (<span style="color: #729fcf;">fn</span> [n]
+      (<span style="color: #8ae234;">let</span> [d (digs n)]
+        (<span style="color: #729fcf;">=</span> 5 (<span style="color: #729fcf;">count</span> (<span style="color: #729fcf;">take-while</span> #(<span style="color: #729fcf;">=</span> d (digs (<span style="color: #729fcf;">*</span> n %))) [2 3 4 5 6])))))
+    (<span style="color: #729fcf;">iterate</span> inc 1))))
+
+(<span style="color: #729fcf;">time</span> (euler-52-d)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 236.771 msecs"
+</span></code></pre>
+
+<p>Changing hats once again and thinking once again about brevity, let’s use <code class="highlighter-rouge">recur</code> to shorten our definition…</p>
+
+<pre><code><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Nice and short
+</span>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-52-f</span> [n]
+  (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">apply</span> = (<span style="color: #729fcf;">map</span> #(<span style="color: #729fcf;">sort</span> (<span style="color: #729fcf;">str</span> (<span style="color: #729fcf;">*</span> n %))) [1 2 3 4 5 6]))
+    n
+    (<span style="color: #8ae234;">recur</span> (<span style="color: #729fcf;">inc</span> n))))
+
+(<span style="color: #729fcf;">time</span> (euler-52-f 1)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 552.148607 msecs"
+</span></code></pre>
+
+<p>That worked well and is certainly clearer. Now let’s combine it with our earlier <code class="highlighter-rouge">take-while</code> trick and see if we can improve performance again:</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-52-g</span> [n]
+  (<span style="color: #8ae234;">let</span> [d (<span style="color: #729fcf;">sort</span> (<span style="color: #729fcf;">str</span> n))]
+    (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">=</span> 5 (<span style="color: #729fcf;">count</span> (<span style="color: #729fcf;">take-while</span> #(<span style="color: #729fcf;">=</span> d (<span style="color: #729fcf;">sort</span> (<span style="color: #729fcf;">str</span> (<span style="color: #729fcf;">*</span> n %)))) [2 3 4 5 6])))
+      n
+      (<span style="color: #8ae234;">recur</span> (<span style="color: #729fcf;">inc</span> n)))))
+
+(<span style="color: #729fcf;">time</span> (euler-52-g 1)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 187.475716 msecs"
+</span></code></pre>
+
+<p>Great! I think most people would just stop at <code class="highlighter-rouge">euler-52-g</code> in the refactoring process, but let’s do one more just to flex our computer scientist muscles, and then we’ll call it quits for today.</p>
+
+<p>Theoretically, short-circuiting behavior on our sequence processing could improve performance by removing the unnecessary computation invoked by chunking and the take-by-four behavior of <code class="highlighter-rouge">apply</code>. If we had a version of <code class="highlighter-rouge">apply</code> that short-circuited, we could write a function like <code class="highlighter-rouge">euler-52-f</code> that would be as performant as anything else.</p>
+
+<p>Of course, we don’t want to actually rewrite <code class="highlighter-rouge">apply</code>, and nothing in the standard sequence library quite fits. So, let’s take the time to write two functions that may be useful in the future:</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">reducep</span>
+  <span style="color: #888a85;">"Like reduce, but for use with a predicate. Short-circuits on first false."</span>
+  ([p coll]
+     (<span style="color: #8ae234;">if-let</span> [s (<span style="color: #729fcf;">seq</span> coll)]
+       (reducep p (<span style="color: #729fcf;">first</span> s) (<span style="color: #729fcf;">next</span> s))
+       (p)))
+  ([p val coll]
+     (<span style="color: #8ae234;">if-let</span> [s (<span style="color: #729fcf;">seq</span> coll)]
+       (<span style="color: #8ae234;">if-let</span> [v (p val (<span style="color: #729fcf;">first</span> s))]
+         (<span style="color: #8ae234;">recur</span> p (<span style="color: #729fcf;">first</span> s) (<span style="color: #729fcf;">next</span> s))
+         false)
+       true)))
+    
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">unchunk</span>
+  <span style="color: #888a85;">"Forces a sequence to be evaluated element by element.
+  Modified from code by Stuart Sierra"</span>
+  [s]
+  (<span style="color: #8ae234;">when-first</span> [x s]
+    (<span style="color: #729fcf;">lazy-seq</span> (<span style="color: #729fcf;">cons</span> x (unchunk (<span style="color: #729fcf;">next</span> s))))))</code></pre>
+
+<p>With those two functions in hand, we can have our cake and eat it too: brevity and reasonable performance.</p>
+
+<p>Using just <code class="highlighter-rouge">unchunk</code>, we can write:</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-52-h</span> [n]
+  (<span style="color: #8ae234;">let</span> [d (<span style="color: #729fcf;">sort</span> (<span style="color: #729fcf;">str</span> n))]
+    (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">every?</span> #(<span style="color: #729fcf;">=</span> d %1) (<span style="color: #729fcf;">map</span> #(<span style="color: #729fcf;">sort</span> (<span style="color: #729fcf;">str</span> (<span style="color: #729fcf;">*</span> n %)))
+                               (unchunk [2 3 4 5 6])))
+      n
+      (<span style="color: #8ae234;">recur</span> (<span style="color: #729fcf;">inc</span> n)))))</code></pre>
+
+<p>Or better yet,</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-52-z</span> [n]
+  (<span style="color: #8ae234;">if</span> (reducep = (<span style="color: #729fcf;">map</span> #(<span style="color: #729fcf;">sort</span> (<span style="color: #729fcf;">str</span> (<span style="color: #729fcf;">*</span> n %))) (unchunk [1 2 3 4 5 6])))
+        n
+        (<span style="color: #8ae234;">recur</span> (<span style="color: #729fcf;">inc</span> n))))
+
+(<span style="color: #729fcf;">time</span> (euler-52-z 1)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 336.205473 msecs"
+</span></code></pre>
+
+<p>Which version did you like the best? The easy-to-understand <code class="highlighter-rouge">euler-52-b</code>? The brief definition in <code class="highlighter-rouge">euler-52-f</code> or it’s more performant sister <code class="highlighter-rouge">euler-52-g</code>? Or the <code class="highlighter-rouge">reducep</code> abstraction approach of <code class="highlighter-rouge">euler-52-z</code>?</p>
+
+<p>Ciao!</p>
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-51/" class="btn" title="Project Euler Problem 51">Previous</a>
+      
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-53/" class="btn" title="Project Euler Problem 53">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2017 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://ivarthorson.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://ivarthorson.github.io';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://ivarthorson.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://ivarthorson.github.io/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

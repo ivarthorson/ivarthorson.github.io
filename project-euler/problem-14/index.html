@@ -1,0 +1,505 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Project Euler Problem 14 &#8211; Art is Never Finished</title>
+<meta name="description" content="This problem was rather fun to solve. The Collatz sequence is a rather simple pattern that is as-yet mathematically unproven to converge, at least according to wikipedia.
+
+">
+<meta name="keywords" content="arrays, Collatz Sequence, int-array, lazy vectors, lazy-seqs">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Project Euler Problem 14">
+<meta name="twitter:description" content="This problem was rather fun to solve. The Collatz sequence is a rather simple pattern that is as-yet mathematically unproven to converge, at least according to wikipedia.
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ivarthorson.github.io/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Euler Problem 14">
+<meta property="og:description" content="This problem was rather fun to solve. The Collatz sequence is a rather simple pattern that is as-yet mathematically unproven to converge, at least according to wikipedia.
+
+">
+<meta property="og:url" content="https://ivarthorson.github.io/project-euler/problem-14/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="https://ivarthorson.github.io/project-euler/problem-14/">
+<link href="https://ivarthorson.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://ivarthorson.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://ivarthorson.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://ivarthorson.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ivarthorson.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ivarthorson.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ivarthorson.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://ivarthorson.github.io/about/" >About</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="https://ivarthorson.github.io/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://ivarthorson.github.io/tags/#arrays" title="Pages tagged arrays">arrays</a></li><li><a href="https://ivarthorson.github.io/tags/#Collatz Sequence" title="Pages tagged Collatz Sequence">Collatz Sequence</a></li><li><a href="https://ivarthorson.github.io/tags/#int-array" title="Pages tagged int-array">int-array</a></li><li><a href="https://ivarthorson.github.io/tags/#lazy vectors" title="Pages tagged lazy vectors">lazy vectors</a></li><li><a href="https://ivarthorson.github.io/tags/#lazy-seqs" title="Pages tagged lazy-seqs">lazy-seqs</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Project Euler Problem 14</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://ivarthorson.github.io/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2010-06-23T05:24:21-07:00"><i class="fa fa-calendar-o"></i> June 23, 2010</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p><a href="http://projecteuler.net/index.php?section=problems&amp;id=14">This problem</a> was rather fun to solve. The Collatz sequence is a rather simple pattern that is as-yet mathematically unproven to converge, at least <a href="http://en.wikipedia.org/wiki/Collatz_sequence">according to wikipedia</a>.</p>
+
+<p>Because writing a solution to the problem is remarkably simple, I chose to focus on brainstorming a variety of lazy solutions to the problem to see what I could learn about clojure’s performance with lazy sequences. Readers who finish this post may also see how to easily create stack and heap overflows…</p>
+
+<p>But before we dive into descriptions about Collatz sequences, let’s define a function to find the position of the maximum element in the sequence. I had two initial ideas on how to do this:</p>
+
+<pre><code><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">The easy way
+</span>(<span style="color: #729fcf;">use</span> 'clojure.contrib.seq-utils)
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">max-at</span> [s]
+  (<span style="color: #729fcf;">reduce</span> #(<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">&gt;</span> (<span style="color: #729fcf;">second</span> %1) (<span style="color: #729fcf;">second</span> %2)) %1 %2) (indexed s)))
+
+<span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Doesn't create ephemeral garbage, so is faster
+</span>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">max-at</span> [s]
+  <span style="color: #Fd7f98;">"Returns [xi x], where xi is the index number of the max element,
+  (indexed from 1) and x is the max of s."</span>
+  (<span style="color: #8ae234;">letfn</span> [(find-max [s n x xi]
+             (<span style="color: #8ae234;">let</span> [f (<span style="color: #729fcf;">first</span> s)
+                   r (<span style="color: #729fcf;">rest</span> s)]
+               (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">nil?</span> f)
+                 [xi x]
+                 (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">&gt;</span> f x)
+                   (<span style="color: #8ae234;">recur</span> r (<span style="color: #729fcf;">inc</span> n) f n)
+                   (<span style="color: #8ae234;">recur</span> r (<span style="color: #729fcf;">inc</span> n) x xi)))))]
+    (find-max s 1 0 0)))</code></pre>
+
+<p>The first definition is succinct but unfortunately generates lots of ephemeral garbage because it needs to create so many small vectors. Because I anticipate that this type of function will be used a lot in future problems, I took the time to write the second definition. Because it uses recur, the second definition traverses the list without needing much memory and is so is faster.</p>
+
+<p>Next: Collatz Sequences! I started with the typical brute force, low-memory-use approach, avoiding both recursion and the necessity of even recording the particular numbers in the chain. This type of solution uses a minimum amount of memory and is a fairly tight loop. Remember that <code class="highlighter-rouge">reduce</code>ing lazy sequences means only two elements need to be produced and held in memory at one time.</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">collatz-seq-length</span> [num]
+  (<span style="color: #8ae234;">loop</span> [len 1
+         n  num]
+    (<span style="color: #8ae234;">cond</span>
+     (<span style="color: #729fcf;">=</span> n 1) len 
+     (<span style="color: #729fcf;">odd?</span> n) (<span style="color: #8ae234;">recur</span> (<span style="color: #729fcf;">inc</span> len) (<span style="color: #729fcf;">+</span> 1 (<span style="color: #729fcf;">*</span> 3 n)))
+     true     (<span style="color: #8ae234;">recur</span> (<span style="color: #729fcf;">inc</span> len) (<span style="color: #729fcf;">/</span> n 2)))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-14-loop</span> [num]
+  (max-at (<span style="color: #729fcf;">map</span> collatz-seq-length (<span style="color: #729fcf;">range</span> 1 num))))
+
+(<span style="color: #8ae234;">dotimes</span> [_ 5]
+  (<span style="color: #729fcf;">time</span> (euler-14-loop 1000000)))
+
+<span style="color: #Fd7f98;">"Elapsed time: 10459.657878 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 10401.909871 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 10394.646465 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 10399.737577 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 10394.974482 msecs"</span></code></pre>
+
+<p>Performance wasn’t bad, but we could easily improve upon it with a little memoization, right?</p>
+
+<pre><code>(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">memoized-collatz-seq-length</span>
+     (<span style="color: #729fcf;">memoize</span>
+      (<span style="color: #729fcf;">fn</span> [n]
+        (<span style="color: #8ae234;">cond</span>
+         (<span style="color: #729fcf;">=</span> n 1) 1 
+         (<span style="color: #729fcf;">odd?</span> n) (<span style="color: #729fcf;">+</span> 1 (memoized-collatz-seq-length (<span style="color: #729fcf;">+</span> 1 (<span style="color: #729fcf;">*</span> 3 n))))
+         true     (<span style="color: #729fcf;">+</span> 1 (memoized-collatz-seq-length (<span style="color: #729fcf;">/</span> n 2)))))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-14-memoized</span> [num]
+  (max-at (<span style="color: #729fcf;">map</span> memoized-collatz-seq-length (<span style="color: #729fcf;">range</span> 1 num))))
+
+(<span style="color: #8ae234;">dotimes</span> [_ 5]
+  (<span style="color: #729fcf;">time</span> (euler-14-memoized 1000000)))
+
+<span style="color: #Fd7f98;">"Elapsed time: 7803.967211 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 1877.55123 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 774.759701 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 743.353267 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 739.709821 msecs"</span></code></pre>
+
+<p>As expected, memoization cached the collatz length values for us after they were created, but it didn’t help us much to create the values in the first place so the first run. Maybe we can improve on that?</p>
+
+<p>One obvious thing about collatz sequences is that if they all return to 1 in the end, then if we compute many collatz sequences we are going to traverse the same pattern of numbers over and over again.</p>
+
+<p>By caching the sequences of numbers that we have traversed before, we should be able to trade some of our surplus memory for a mild increase in speed. The larger the collatz numbers we try to compute, the more this type of tradeoff will become computationally advantageous.</p>
+
+<p>A russian engineering professor of mine once said that we should always start by imagining the ideal final result of our solution. So, I wrote down this (broken) piece of code:</p>
+
+<pre><code><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Doesn't work
+</span>
+(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">lazy-chain-length</span>
+     (<span style="color: #8ae234;">letfn</span> [(chain [n]
+               (<span style="color: #729fcf;">lazy-seq</span>
+                (<span style="color: #729fcf;">cons</span> (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">odd?</span> n)
+                        (<span style="color: #729fcf;">+</span> 1 (<span style="color: #729fcf;">nth</span> lazy-chain-length (<span style="color: #729fcf;">dec</span> (<span style="color: #729fcf;">+</span> 1 (<span style="color: #729fcf;">*</span> 3 n)))))
+                        (<span style="color: #729fcf;">+</span> 1 (<span style="color: #729fcf;">nth</span> lazy-chain-length (<span style="color: #729fcf;">dec</span> (<span style="color: #729fcf;">/</span> n 2)))))
+                      (chain (<span style="color: #729fcf;">+</span> n 1)))))]
+       (chain 1)))
+
+(max-at (<span style="color: #729fcf;">take</span> 10000000 lazy-chain-length))</code></pre>
+
+<p>Why doesn’t this work? The basic problem is that this type of recursive definition, however beautiful, requires that you somehow use lazy values that will be found ‘in the future’ that haven’t been computed yet. Although it is fine for lazy-chain-length to define itself in terms of past values <code class="highlighter-rouge">(/ n  2)</code>, it has no way of knowing the values of ‘future’ collatz values <code class="highlighter-rouge">(+ 1 (* 3 n))</code>, so trying to define this causes Clojure to freak out when it sees this definition. (Special thanks to the fine folk at <a href="http://stackoverflow.com/questions/3011736/lazy-sequences-that-look-ahead-for-project-euler-problem-14">Stack Overflow for helping me understand this better</a>)</p>
+
+<p>Instead of using the lazy seq itself to store collatz sequence lengths, whate if we pushed the values into a hashmap? Hash maps in clojure are pretty fast, after all.</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">collatz-hashmap</span> [n cache]
+  (<span style="color: #8ae234;">if-let</span> [v (cache n)]
+    [v cache]
+    (<span style="color: #8ae234;">let</span> [[p cache] (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">odd?</span> n)
+                      (collatz-hashmap (<span style="color: #729fcf;">+</span> 1 (<span style="color: #729fcf;">*</span> 3 n)) cache)
+                      (collatz-hashmap (<span style="color: #729fcf;">/</span> n 2) cache))]
+      [(<span style="color: #729fcf;">inc</span> p) (<span style="color: #729fcf;">assoc</span> cache n (<span style="color: #729fcf;">inc</span> p))])))
+
+(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">lazy-collatz-hashmap</span>
+     (<span style="color: #729fcf;">map</span> first (<span style="color: #729fcf;">iterate</span> (<span style="color: #729fcf;">fn</span> [[v cache n]]
+                           (<span style="color: #729fcf;">concat</span> (collatz-hashmap n cache) [(<span style="color: #729fcf;">inc</span> n)]))
+                         [1 {1 1} 2])))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-14-hashmap</span> [num]
+  (max-at (<span style="color: #729fcf;">take</span> num lazy-collatz-hashmap))) 
+
+(<span style="color: #8ae234;">dotimes</span> [_ 5]
+  (<span style="color: #729fcf;">time</span> (euler-14-hashmap 1000000)))
+
+No message.
+  [Thrown class java.lang.StackOverflowError]</code></pre>
+
+<p>Oops! This recursive definition is recursing too deep for the small default stack size of the JVM on which Clojure is running. But before we rewrite that, what was the performance like?</p>
+
+<pre><code>(<span style="color: #8ae234;">dotimes</span> [_ 5]
+  (<span style="color: #729fcf;">time</span> (euler-14-hashmap 100000)))
+
+<span style="color: #Fd7f98;">"Elapsed time: 499.264841 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 24.243182 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 24.289533 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 24.200116 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 24.282115 msecs"</span>
+
+
+(<span style="color: #8ae234;">dotimes</span> [_ 5]
+  (<span style="color: #729fcf;">time</span> (euler-14-memoized 100000)))
+
+<span style="color: #Fd7f98;">"Elapsed time: 323.063032 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 62.479948 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 111.146193 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 55.228571 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 55.107326 msecs"</span></code></pre>
+
+<p>So hashmaps don’t seem to beat memoized functions, even the first time. But still, what if modify the code to keep from blowing the stack? Might it not become more advantageous for larger numbers of collatz sequence lengths?</p>
+
+<p>Instead of using recursion at the functional level, let’s just build our own ‘stack’ using a vector to store unknown values, and use recur to avoid using the JVM stack. Once a known/cached Collatz sequence
+length has been reached, we can then populate the map upwards and add a bunch of numbers all at once.</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">collatz-next</span> [n]
+  (<span style="color: #8ae234;">cond</span>
+    (<span style="color: #729fcf;">=</span> n 1) 1
+    (<span style="color: #729fcf;">odd?</span> n) (<span style="color: #729fcf;">+</span> 1 (<span style="color: #729fcf;">*</span> 3 n))
+    true (<span style="color: #729fcf;">/</span> n 2)))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">collatz-nonrecursing</span> [[_ cache xs]]
+  (<span style="color: #8ae234;">if-let</span> [v (cache (<span style="color: #729fcf;">last</span> xs))]
+    [(<span style="color: #729fcf;">+</span> v -1 (<span style="color: #729fcf;">count</span> xs))
+     (<span style="color: #729fcf;">reduce</span> #(<span style="color: #8ae234;">let</span> [[m p] %2] (<span style="color: #729fcf;">assoc</span> %1 m p))
+             cache
+             (<span style="color: #729fcf;">map</span> vector (<span style="color: #729fcf;">reverse</span> xs) (<span style="color: #729fcf;">range</span> v (<span style="color: #729fcf;">+</span> v (<span style="color: #729fcf;">count</span> xs)))))
+     [(<span style="color: #729fcf;">inc</span> (<span style="color: #729fcf;">first</span> xs))]]
+    (<span style="color: #8ae234;">recur</span> [0 cache (<span style="color: #729fcf;">conj</span> xs (collatz-next (<span style="color: #729fcf;">last</span> xs)))])))
+
+(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">lazy-collatz-nonrecursing</span>
+     (<span style="color: #729fcf;">map</span> first (<span style="color: #729fcf;">iterate</span> collatz-nonrecursing [1 {1 1} [2]])))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-14-nonrecursing</span> [num]
+  (max-at (<span style="color: #729fcf;">take</span> num lazy-collatz-nonrecursing)))
+
+(<span style="color: #8ae234;">dotimes</span> [_ 5]
+  (<span style="color: #729fcf;">time</span> (euler-14-nonrecursing 1000000)))
+
+<span style="color: #Fd7f98;">"Elapsed time: 21587.162081 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 268.052347 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 239.52824 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 240.095869 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 236.408247 msecs"</span></code></pre>
+
+<p>Good grief! That was a dismal failure! In fact, the above code causes a heap overflow on my other, less-powerful computer if I use an inefficient <code class="highlighter-rouge">max-at</code> function.</p>
+
+<p>My guess is that however beautiful list comprehensions are for letting one bundle together multiple return values and then later parse them out again, the memory penalty incurred can be prohibitive, as it was in this case.</p>
+
+<p>Giving up on the hashmap approach, for my final attempt, I decided that instead of trying to cache each and every part of the Collatz sequence tree structure, I would only cache the values <em>below</em> my current place of interest (as the memoization system does automatically). Because lookup time becomes an issue for lazy seqs (which are essentially just iterators with <code class="highlighter-rouge">nth</code> performance of O(n), not constant time), I needed to figure out a way to make lookups to earlier parts of the lazy seq be in constant time.</p>
+
+<p>Once again, <a href="http://stackoverflow.com/questions/3083535/clojure-lazy-sequences-that-are-vectors">Stack Overflow came to the rescue</a> and reminded me how I might create a lazy sequence that is also a vector, and so has constant time access with <code class="highlighter-rouge">nth</code>. Since is good practice to write smaller, easily-testable functions, I also partitioned my code a little more elegantly and added documentation strings. Here is the complete solution:</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">collatz-next</span> [n]
+  <span style="color: #Fd7f98;">"Returns the next number in a collatz sequence."</span>
+  (<span style="color: #8ae234;">cond</span>
+    (<span style="color: #729fcf;">=</span> n 1) 1
+    (<span style="color: #729fcf;">odd?</span> n) (<span style="color: #729fcf;">+</span> 1 (<span style="color: #729fcf;">*</span> 3 n))
+    true (<span style="color: #729fcf;">/</span> n 2)))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">collatz-seq</span> [n]
+  <span style="color: #Fd7f98;">"Returns a lazy list of numbers in a collatz sequence."</span>
+  (<span style="color: #729fcf;">iterate</span> collatz-next n))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">collatz-stack</span> [vc n]
+  <span style="color: #Fd7f98;">"Returns a lazy list of numbers in a collatz sequence that aren't in vector vc."</span>
+  (<span style="color: #8ae234;">let</span> [stack (<span style="color: #729fcf;">take-while</span> #(<span style="color: #729fcf;">not</span> (<span style="color: #8ae234;">and</span> (<span style="color: #729fcf;">&gt;</span> n %) (vc %))) (collatz-seq n))]
+    stack))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">collatz-value</span> [vc]
+  <span style="color: #Fd7f98;">"'Appends' the length of the collatz sequence for the last value.
+  Zero indexed... Ex: Given [0 1 2], returns 8."</span>
+  (<span style="color: #8ae234;">let</span> [n (<span style="color: #729fcf;">count</span> vc)
+        s (collatz-stack vc n)]
+    (<span style="color: #729fcf;">conj</span> vc (<span style="color: #729fcf;">+</span> (<span style="color: #729fcf;">count</span> s) (vc (collatz-next (<span style="color: #729fcf;">last</span> s)))))))
+
+(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">lazy-collatz-vec</span> (<span style="color: #729fcf;">iterate</span> collatz-value [0 1 2]))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-14-lazy-vec</span> [n]
+  (max-at (<span style="color: #729fcf;">nth</span> lazy-collatz-vec n)))
+
+(<span style="color: #8ae234;">dotimes</span> [_ 5]
+  (<span style="color: #729fcf;">time</span> (euler-14-lazy-vec 1000000)))
+
+<span style="color: #Fd7f98;">"Elapsed time: 5556.394195 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 117.392197 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 163.767481 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 107.376708 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 178.192841 msecs"</span></code></pre>
+
+<p>Success! Performance is mildly better than it was for the tight loop solution (<code class="highlighter-rouge">euler-14-loop</code>) and even the memoized solution if we take the first 1,000,000 entries. But what if we try for 10,000,000 entries? Shouldn’t the algorithm (and also memoization system) get better and better for larger numbers because the lengths of already-computed paths back to 1 will be relatively larger?</p>
+
+<pre><code>(<span style="color: #8ae234;">dotimes</span> [_ 5]
+  (<span style="color: #729fcf;">time</span> (euler-14-loop 10000000)))
+
+<span style="color: #Fd7f98;">"Elapsed time: 102569.50535 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 91814.976501 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 91668.209228 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 91615.01015 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 91621.117394 msecs"</span>
+
+(<span style="color: #8ae234;">dotimes</span> [_ 5]
+  (<span style="color: #729fcf;">time</span> (euler-14-memoized 10000000)))
+
+GC overhead limit exceeded
+ [Thrown class java.lang.OutOfMemoryError]
+
+(<span style="color: #8ae234;">dotimes</span> [_ 5]
+  (<span style="color: #729fcf;">time</span> (euler-14-lazy-vec 10000000)))
+
+GC overhead limit exceeded
+  [Thrown class java.lang.OutOfMemoryError]</code></pre>
+
+<p>In the immortal words of Homer Simpson, <em>“D’oh!”</em></p>
+
+<p>I guess the implementation overhead is just getting too big… Anybody see a way around this?</p>
+
+<p>Finally, what if we pulled out the Java hatchet and began hacking away using <code class="highlighter-rouge">(int-array)</code>, manually managing the memory and preallocating it, and ditching the ‘lazy’ method? Well, it felt really wrong to write imperative code in Clojure, but this worked:</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">collatz-stack-array</span> [ary n max]
+  <span style="color: #Fd7f98;">"Returns a lazy list of numbers in a collatz sequence that aren't in array ary."</span>
+  (<span style="color: #729fcf;">reverse</span> (<span style="color: #729fcf;">take-while</span> #(<span style="color: #729fcf;">not</span> (<span style="color: #8ae234;">and</span> (<span style="color: #729fcf;">&gt;</span> max %)
+                           (<span style="color: #729fcf;">not</span> (<span style="color: #729fcf;">==</span> 0 (<span style="color: #729fcf;">aget</span> ary (<span style="color: #729fcf;">int</span> %))))))
+                (collatz-seq n))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">stack-into-array</span> [ary max stack]
+  <span style="color: #Fd7f98;">"PERFORMS SIDE EFFECT ONLY!
+  Given an array and a list of elements not in the array, pushes their
+  values inside, if possible."</span>
+  (<span style="color: #8ae234;">let</span> [known (<span style="color: #729fcf;">int</span> (collatz-next (<span style="color: #729fcf;">first</span> stack)))]
+    (<span style="color: #729fcf;">aset-int</span> ary 0 (<span style="color: #729fcf;">aget</span> ary known)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Use zero index as temp variable
+</span>    (<span style="color: #8ae234;">dorun</span> (<span style="color: #729fcf;">map</span> #(<span style="color: #8ae234;">do</span>
+                   (<span style="color: #729fcf;">aset-int</span> ary 0 (<span style="color: #729fcf;">inc</span> (<span style="color: #729fcf;">aget</span> ary 0)))
+                   (<span style="color: #8ae234;">when</span> (<span style="color: #729fcf;">&gt;</span> max %)
+                     (<span style="color: #729fcf;">aset-int</span> ary % (<span style="color: #729fcf;">aget</span> ary 0))))
+                stack))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">collatz-array</span> [num]
+  <span style="color: #Fd7f98;">"Returns a java int array of the lengths of collatz sequences."</span>
+  (<span style="color: #8ae234;">let</span> [ary (<span style="color: #729fcf;">int-array</span> num 0)]
+    (<span style="color: #729fcf;">aset-int</span> ary 1 1)
+    (<span style="color: #8ae234;">loop</span> [i 2]
+      (<span style="color: #8ae234;">when</span> (zero? (<span style="color: #729fcf;">aget</span> ary i))
+        (stack-into-array ary num (collatz-stack-array ary i num)))
+      (<span style="color: #8ae234;">when</span> (<span style="color: #729fcf;">&lt;</span> (<span style="color: #729fcf;">inc</span> i) num)
+        (<span style="color: #8ae234;">recur</span> (<span style="color: #729fcf;">inc</span> i))))
+    ary))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-14-intarray</span> [num]
+  (<span style="color: #8ae234;">let</span> [ary (collatz-array num)]
+    (<span style="color: #729fcf;">areduce</span> ary i ret [0 0]
+             (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">&gt;</span> (<span style="color: #729fcf;">second</span> ret) (<span style="color: #729fcf;">aget</span> ary i))
+               ret
+               [i (<span style="color: #729fcf;">aget</span> ary i)]))))
+
+(<span style="color: #8ae234;">dotimes</span> [_ 5]
+  (<span style="color: #729fcf;">time</span> (euler-14-intarray 1000000)))
+<span style="color: #Fd7f98;">"Elapsed time: 2654.909547 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 2663.26126 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 2733.119015 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 2688.467888 msecs"</span>
+<span style="color: #Fd7f98;">"Elapsed time: 2738.851569 msecs"</span>
+
+(<span style="color: #729fcf;">time</span> (euler-14-intarray 10000000))
+<span style="color: #Fd7f98;">"Elapsed time: 28301.846968 msecs"</span></code></pre>
+
+<p>Note that the performance is now about 3-4x better than the original loop algorithm, and that it seems to scale to even larger problems (10,000,000 entries). I think there is still some java reflection occurring here that more type hinting could remove, so it seems plausible this could go much faster.</p>
+
+<p>Since I basically beat this problem to death with repetition, I didn’t find any insights from <a href="http://clojure-euler.wikispaces.com/Problem+014">looking at other people’s code</a>, so it’s time to summarize what we learned:</p>
+
+<ul>
+  <li>Trading memory for computation time doesn’t always work, especially using a technique like laziness with significant implementation overhead</li>
+  <li>Lazy vector creation is still an interesting technique for vectors smaller than a couple million elements.</li>
+  <li>Using mutable java arrays and side effects feels terribly dirty in Clojure, but is at least possible.</li>
+  <li>Automatic memoizations are pretty damn good, and trying to beat them without good reason is probably a premature optimization.</li>
+</ul>
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-13/" class="btn" title="Project Euler Problem 13">Previous</a>
+      
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-15/" class="btn" title="Project Euler Problem 15">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2017 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://ivarthorson.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://ivarthorson.github.io';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://ivarthorson.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://ivarthorson.github.io/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

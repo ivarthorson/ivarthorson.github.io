@@ -1,0 +1,256 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Project Euler Problem 82 &#8211; Art is Never Finished</title>
+<meta name="description" content="As I mentioned in the previous post (#81), we can use [A](http://en.wikipedia.org/wiki/A) to easily solve problem 82 as well.
+
+">
+<meta name="keywords" content="a* algorithm, search">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Project Euler Problem 82">
+<meta name="twitter:description" content="As I mentioned in the previous post (#81), we can use [A](http://en.wikipedia.org/wiki/A) to easily solve problem 82 as well.
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ivarthorson.github.io/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Euler Problem 82">
+<meta property="og:description" content="As I mentioned in the previous post (#81), we can use [A](http://en.wikipedia.org/wiki/A) to easily solve problem 82 as well.
+
+">
+<meta property="og:url" content="https://ivarthorson.github.io/project-euler/problem-82/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="https://ivarthorson.github.io/project-euler/problem-82/">
+<link href="https://ivarthorson.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://ivarthorson.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://ivarthorson.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://ivarthorson.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ivarthorson.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ivarthorson.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ivarthorson.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://ivarthorson.github.io/about/" >About</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="https://ivarthorson.github.io/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://ivarthorson.github.io/tags/#a* algorithm" title="Pages tagged a* algorithm">a* algorithm</a></li><li><a href="https://ivarthorson.github.io/tags/#search" title="Pages tagged search">search</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Project Euler Problem 82</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://ivarthorson.github.io/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2010-10-18T09:10:45-07:00"><i class="fa fa-calendar-o"></i> October 18, 2010</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>As I mentioned in the <a href="?p=660">previous post (#81)</a>, we can use [A<em>](http://en.wikipedia.org/wiki/A</em>) to easily solve <a href="http://projecteuler.net/index.php?section=problems&amp;id=82">problem 82</a> as well.</p>
+
+<p>One way to solve this problem is to perform the A* search from each element on the leftmost column, and then take the minimum length path amongst all these results.</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-82</span> []
+  (<span style="color: #8ae234;">let</span> [mat   (load-matrix <span style="color: #Fd7f98;">"/path/to/matrix.txt"</span>)
+        m     (<span style="color: #729fcf;">count</span> mat)
+        n     (<span style="color: #729fcf;">count</span> (<span style="color: #729fcf;">first</span> mat))
+        goal? (<span style="color: #729fcf;">fn</span> [e] (<span style="color: #729fcf;">=</span> (<span style="color: #729fcf;">second</span> e) n))
+        cost  (<span style="color: #729fcf;">memoize</span> (<span style="color: #729fcf;">fn</span> [[i j]] (<span style="color: #729fcf;">nth</span> (<span style="color: #729fcf;">nth</span> mat (<span style="color: #729fcf;">dec</span> i)) (<span style="color: #729fcf;">dec</span> j))))
+        est   (<span style="color: #729fcf;">memoize</span> (<span style="color: #729fcf;">fn</span> [[i j]] (<span style="color: #729fcf;">+</span> (<span style="color: #729fcf;">-</span> m i) (<span style="color: #729fcf;">-</span> n j))))
+        neigh (<span style="color: #729fcf;">memoize</span>
+               (<span style="color: #729fcf;">fn</span> [[i j]]
+                (<span style="color: #729fcf;">merge</span>
+                 (<span style="color: #8ae234;">when</span> (<span style="color: #729fcf;">&lt;</span> i m) {[(<span style="color: #729fcf;">inc</span> i) j] (cost [(<span style="color: #729fcf;">inc</span> i) j])})
+                 (<span style="color: #8ae234;">when</span> (<span style="color: #729fcf;">&lt;</span> j n) {[i (<span style="color: #729fcf;">inc</span> j)] (cost [i (<span style="color: #729fcf;">inc</span> j)])})
+                 (<span style="color: #8ae234;">when</span> (<span style="color: #729fcf;">&lt;</span> 1 i) {[(<span style="color: #729fcf;">dec</span> i) j] (cost [(<span style="color: #729fcf;">dec</span> i) j])}))))]
+    (<span style="color: #729fcf;">apply</span>
+     min
+     (<span style="color: #8ae234;">for</span> [i (<span style="color: #729fcf;">range</span> 1 (<span style="color: #729fcf;">inc</span> m))
+           start [[i 1]]
+           path  [(a*-search est neigh start goal?)]]
+       (<span style="color: #729fcf;">reduce</span> + (<span style="color: #729fcf;">map</span> cost path))))))
+
+
+(<span style="color: #729fcf;">time</span> (euler-82)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 8053.744512 msecs"
+</span></code></pre>
+
+<p>Note how we can memoize the functions passed to A* to improve the speed of A* searches slightly. We possibly could probably have come up with a faster solution by memoizing the collections internal to A<em>, but that would have meant exposing the details of the A</em> to the outside world, which I don’t think is advisable in this case.</p>
+
+<p>A better approach towards improving performance is to start thinking outside the box – or in this case, outside the grid. If we redefine the cost and neighbor functions to have a special ‘leftmost’ starting point that has all the elements in the first column as children, we can solve the problem in a single A* search. Let’s mark this new starting point with the coordinate [0 0], to mark that it is ‘off the grid’.</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-82-better</span> []
+  (<span style="color: #8ae234;">let</span> [mat   (load-matrix <span style="color: #Fd7f98;">"/path/to/matrix.txt"</span>)
+        m     (<span style="color: #729fcf;">count</span> mat)
+        n     (<span style="color: #729fcf;">count</span> (<span style="color: #729fcf;">first</span> mat))
+        start [0 0] <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">special node left of the whole matrix
+</span>        goal? (<span style="color: #729fcf;">fn</span> [e] (<span style="color: #729fcf;">=</span> (<span style="color: #729fcf;">second</span> e) n))
+        cost  (<span style="color: #729fcf;">fn</span> [[i j]]
+                (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">=</span> [i j] [0 0])
+                  0
+                  (<span style="color: #729fcf;">nth</span> (<span style="color: #729fcf;">nth</span> mat (<span style="color: #729fcf;">dec</span> i)) (<span style="color: #729fcf;">dec</span> j))))
+        est   (<span style="color: #729fcf;">fn</span> [[i j]] (<span style="color: #729fcf;">+</span> (<span style="color: #729fcf;">-</span> m i) (<span style="color: #729fcf;">-</span> n j)))
+        neigh (<span style="color: #729fcf;">fn</span> [[i j]]
+                (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">=</span> [i j] [0 0])
+                  (<span style="color: #729fcf;">map</span> (<span style="color: #729fcf;">fn</span> [i] [[i 1] (cost [i 1])]) (<span style="color: #729fcf;">range</span> 1 (<span style="color: #729fcf;">inc</span> m)))
+                  (<span style="color: #729fcf;">merge</span>
+                   (<span style="color: #8ae234;">when</span> (<span style="color: #729fcf;">&lt;</span> i m) {[(<span style="color: #729fcf;">inc</span> i) j] (cost [(<span style="color: #729fcf;">inc</span> i) j])})
+                   (<span style="color: #8ae234;">when</span> (<span style="color: #729fcf;">&lt;</span> j n) {[i (<span style="color: #729fcf;">inc</span> j)] (cost [i (<span style="color: #729fcf;">inc</span> j)])})
+                   (<span style="color: #8ae234;">when</span> (<span style="color: #729fcf;">&lt;</span> 1 i) {[(<span style="color: #729fcf;">dec</span> i) j] (cost [(<span style="color: #729fcf;">dec</span> i) j])}))))
+        path  (a*-search est neigh start goal?)]
+    (<span style="color: #729fcf;">reduce</span> + (<span style="color: #729fcf;">map</span> cost path))))
+
+(<span style="color: #729fcf;">time</span> (euler-82-better)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 244.770152 msecs"
+</span></code></pre>
+
+<p>This really shows the versatility of the A* search method.</p>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-81/" class="btn" title="Project Euler Problem 81">Previous</a>
+      
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-83/" class="btn" title="Project Euler Problem 83">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2017 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://ivarthorson.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://ivarthorson.github.io';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://ivarthorson.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://ivarthorson.github.io/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

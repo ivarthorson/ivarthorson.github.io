@@ -1,0 +1,241 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Project Euler Problem 49 &#8211; Art is Never Finished</title>
+<meta name="description" content="This problem was tricky. Although we get to reuse a significant amount of code for prime?, as-int, and choose-k, we still need to write two rather tricky functions to extract the special triples.
+
+">
+<meta name="keywords" content="permutations, primes">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Project Euler Problem 49">
+<meta name="twitter:description" content="This problem was tricky. Although we get to reuse a significant amount of code for prime?, as-int, and choose-k, we still need to write two rather tricky functions to extract the special triples.
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ivarthorson.github.io/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Euler Problem 49">
+<meta property="og:description" content="This problem was tricky. Although we get to reuse a significant amount of code for prime?, as-int, and choose-k, we still need to write two rather tricky functions to extract the special triples.
+
+">
+<meta property="og:url" content="https://ivarthorson.github.io/project-euler/problem-49/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="https://ivarthorson.github.io/project-euler/problem-49/">
+<link href="https://ivarthorson.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://ivarthorson.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://ivarthorson.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://ivarthorson.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ivarthorson.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ivarthorson.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ivarthorson.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://ivarthorson.github.io/about/" >About</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="https://ivarthorson.github.io/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://ivarthorson.github.io/tags/#permutations" title="Pages tagged permutations">permutations</a></li><li><a href="https://ivarthorson.github.io/tags/#primes" title="Pages tagged primes">primes</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Project Euler Problem 49</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://ivarthorson.github.io/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2010-08-05T07:53:25-07:00"><i class="fa fa-calendar-o"></i> August 05, 2010</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p><a href="http://projecteuler.net/index.php?section=problems&amp;id=49">This problem</a> was tricky. Although we get to reuse a significant amount of code for <code class="highlighter-rouge">prime?</code>, <code class="highlighter-rouge">as-int</code>, and <code class="highlighter-rouge">choose-k</code>, we still need to write two rather tricky functions to extract the special triples.</p>
+
+<p>The solution I wrote actually is more general than may be needed because I wasn’t specifically looking for differences of 3330.</p>
+
+<pre><code>(<span style="color: #729fcf;">use</span> '[clojure.contrib.combinatorics <span style="color: #729fcf;">:only</span> (permutations)]
+     '[clojure.contrib.lazy-seqs <span style="color: #729fcf;">:only</span> (primes)])
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">prime?</span> [n]
+  (<span style="color: #8ae234;">and</span> (<span style="color: #729fcf;">&lt;</span> 1 n)
+       (<span style="color: #729fcf;">not-any?</span> #(zero? (<span style="color: #729fcf;">rem</span> n %)) (<span style="color: #729fcf;">take-while</span> #(<span style="color: #729fcf;">&lt;=</span> (<span style="color: #729fcf;">*</span> % %) n) primes)))) 
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">as-int</span> [coll] (Integer/parseInt (<span style="color: #729fcf;">apply</span> str coll)))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">choose-k</span>
+  <span style="color: #888a85;">"Returns all possible unique groups of size k in coll."</span>
+  [coll k]
+  (<span style="color: #8ae234;">let</span> [n (<span style="color: #729fcf;">count</span> coll)]
+    (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">&lt;=</span> k 1)
+      (<span style="color: #729fcf;">map</span> vector coll)
+      (<span style="color: #729fcf;">reduce</span> into []
+              (<span style="color: #8ae234;">for</span> [i (<span style="color: #729fcf;">range</span> 1 (<span style="color: #729fcf;">inc</span> n))]
+                (<span style="color: #729fcf;">map</span> #(<span style="color: #729fcf;">into</span> [(<span style="color: #729fcf;">nth</span> coll (<span style="color: #729fcf;">dec</span> i))] %)
+                     (choose-k (<span style="color: #729fcf;">drop</span> i coll) (<span style="color: #729fcf;">dec</span> k))))))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">has-special-triple?</span> [coll]
+  (<span style="color: #8ae234;">let</span> [fs (frequencies (<span style="color: #729fcf;">map</span> (<span style="color: #729fcf;">fn</span> [[a b]] (<span style="color: #729fcf;">-</span> b a)) (choose-k coll 2)))]
+    (<span style="color: #729fcf;">first</span> (<span style="color: #8ae234;">for</span> [d (<span style="color: #729fcf;">filter</span> #(<span style="color: #729fcf;">=</span> 2 (fs %)) (<span style="color: #729fcf;">keys</span> fs))
+                 a coll
+                 <span style="color: #729fcf;">:when</span> (<span style="color: #729fcf;">some</span> #(<span style="color: #729fcf;">=</span> % (<span style="color: #729fcf;">+</span> a d)) coll)
+                 <span style="color: #729fcf;">:when</span> (<span style="color: #729fcf;">some</span> #(<span style="color: #729fcf;">=</span> % (<span style="color: #729fcf;">+</span> a d d)) coll)]
+             [a (<span style="color: #729fcf;">+</span> a d) (<span style="color: #729fcf;">+</span> a d d)]))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-49</span> []
+  (<span style="color: #8ae234;">let</span> [ps (<span style="color: #729fcf;">take-while</span> #(<span style="color: #729fcf;">&gt;</span> 10000 %) (<span style="color: #729fcf;">drop-while</span> #(<span style="color: #729fcf;">&gt;</span> 1000 %) primes ))
+        p2q (<span style="color: #729fcf;">fn</span> [p] (<span style="color: #729fcf;">filter</span> #(<span style="color: #8ae234;">and</span> (<span style="color: #729fcf;">&lt;=</span> 1000 %) (prime? %))
+                            (<span style="color: #729fcf;">map</span> as-int (<span style="color: #729fcf;">distinct</span> (permutations (<span style="color: #729fcf;">str</span> p))))))
+        qs (<span style="color: #729fcf;">distinct</span> (<span style="color: #729fcf;">map</span> #(<span style="color: #729fcf;">sort</span> (p2q %)) ps))]
+    (<span style="color: #729fcf;">remove</span> nil? (<span style="color: #729fcf;">map</span> has-special-triple? qs))))</code></pre>
+
+<p>Frankly, that may be one of the more incomprehensible things I have written so far. Here’s the breakdown: <code class="highlighter-rouge">has-special-triple?</code> checks to see that given a sorted list of numbers, there are three numbers that are spaced evenly apart. <code class="highlighter-rouge">euler-49</code> generates primes in the right range, makes lists of permutations of each prime, makes sure the permutations are prime and four digits long (because a 0 in the leading position counts as 3 digits), and then returns all groups that satisfy the <code class="highlighter-rouge">has-special-triple?</code> property.</p>
+
+<p>Got it? ;-)</p>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-48/" class="btn" title="Project Euler Problem 48">Previous</a>
+      
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-50/" class="btn" title="Project Euler Problem 50">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2017 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://ivarthorson.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://ivarthorson.github.io';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://ivarthorson.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://ivarthorson.github.io/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

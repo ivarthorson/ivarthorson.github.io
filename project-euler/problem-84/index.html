@@ -1,0 +1,276 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Project Euler Problem 84 &#8211; Art is Never Finished</title>
+<meta name="description" content="Problem 84 asks us to implement the classic game Monopoly and find the most-visited spaces on the board…if we used two 4-sided dice instead of 6-sided ones.
+
+">
+<meta name="keywords" content="monopoly, pmap">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Project Euler Problem 84">
+<meta name="twitter:description" content="Problem 84 asks us to implement the classic game Monopoly and find the most-visited spaces on the board…if we used two 4-sided dice instead of 6-sided ones.
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ivarthorson.github.io/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Euler Problem 84">
+<meta property="og:description" content="Problem 84 asks us to implement the classic game Monopoly and find the most-visited spaces on the board…if we used two 4-sided dice instead of 6-sided ones.
+
+">
+<meta property="og:url" content="https://ivarthorson.github.io/project-euler/problem-84/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="https://ivarthorson.github.io/project-euler/problem-84/">
+<link href="https://ivarthorson.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://ivarthorson.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://ivarthorson.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://ivarthorson.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ivarthorson.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ivarthorson.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ivarthorson.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://ivarthorson.github.io/about/" >About</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="https://ivarthorson.github.io/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://ivarthorson.github.io/tags/#monopoly" title="Pages tagged monopoly">monopoly</a></li><li><a href="https://ivarthorson.github.io/tags/#pmap" title="Pages tagged pmap">pmap</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Project Euler Problem 84</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://ivarthorson.github.io/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2010-10-19T05:29:12-07:00"><i class="fa fa-calendar-o"></i> October 19, 2010</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p><a href="http://projecteuler.net/index.php?section=problems&amp;id=84">Problem 84</a> asks us to implement the classic game <a href="http://en.wikipedia.org/wiki/Monopoly_%28game%29">Monopoly</a> and find the most-visited spaces on the board…if we used two 4-sided dice instead of 6-sided ones.</p>
+
+<p>Although it would probably be straightforward to compute probabilities directly using fractions, or indirectly approximate them with Hidden Markov Models, for now let’s just brute force it and use Clojure’s ability to run things in parallel.</p>
+
+<pre><code>(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">board</span> [<span style="color: #729fcf;">:GO</span>   <span style="color: #729fcf;">:A1</span> <span style="color: #729fcf;">:CC1</span> <span style="color: #729fcf;">:A2</span>  <span style="color: #729fcf;">:T1</span> <span style="color: #729fcf;">:R1</span> <span style="color: #729fcf;">:B1</span>  <span style="color: #729fcf;">:CH1</span> <span style="color: #729fcf;">:B2</span> <span style="color: #729fcf;">:B3</span>
+            <span style="color: #729fcf;">:JAIL</span> <span style="color: #729fcf;">:C1</span> <span style="color: #729fcf;">:U1</span>  <span style="color: #729fcf;">:C2</span>  <span style="color: #729fcf;">:C3</span> <span style="color: #729fcf;">:R2</span> <span style="color: #729fcf;">:D1</span>  <span style="color: #729fcf;">:CC2</span> <span style="color: #729fcf;">:D2</span> <span style="color: #729fcf;">:D3</span>
+            <span style="color: #729fcf;">:FP</span>   <span style="color: #729fcf;">:E1</span> <span style="color: #729fcf;">:CH2</span> <span style="color: #729fcf;">:E2</span>  <span style="color: #729fcf;">:E3</span> <span style="color: #729fcf;">:R3</span> <span style="color: #729fcf;">:F1</span>  <span style="color: #729fcf;">:F2</span>  <span style="color: #729fcf;">:U2</span> <span style="color: #729fcf;">:F3</span>
+            <span style="color: #729fcf;">:G2J</span>  <span style="color: #729fcf;">:G1</span> <span style="color: #729fcf;">:G2</span>  <span style="color: #729fcf;">:CC3</span> <span style="color: #729fcf;">:G3</span> <span style="color: #729fcf;">:R4</span> <span style="color: #729fcf;">:CH3</span> <span style="color: #729fcf;">:H1</span>  <span style="color: #729fcf;">:T2</span> <span style="color: #729fcf;">:H2</span>])
+
+(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">b2i</span> (zipmap board (<span style="color: #729fcf;">range</span>))) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Board symbols to integers
+</span>
+(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">i2b</span> (zipmap (<span style="color: #729fcf;">range</span>) board)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Integers to board symbols
+</span>
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">card-CC</span>
+  <span style="color: #888a85;">"Community Chest. Returns the number of the square to move to."</span>
+  [n]
+  (<span style="color: #8ae234;">let</span> [options (<span style="color: #729fcf;">concat</span> [(b2i <span style="color: #729fcf;">:GO</span>) (b2i <span style="color: #729fcf;">:JAIL</span>)] (<span style="color: #729fcf;">repeat</span> 14 n))]
+    (rand-nth options)))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">card-CH</span>
+  <span style="color: #888a85;">"Chance card. Returns the number of the square to move to."</span>
+  [n]
+  (<span style="color: #8ae234;">let</span> [options [<span style="color: #729fcf;">:X</span> <span style="color: #729fcf;">:X</span> <span style="color: #729fcf;">:X</span> <span style="color: #729fcf;">:X</span> <span style="color: #729fcf;">:X</span> <span style="color: #729fcf;">:X</span>
+                 <span style="color: #729fcf;">:GO</span> <span style="color: #729fcf;">:JAIL</span> <span style="color: #729fcf;">:C1</span> <span style="color: #729fcf;">:E3</span> <span style="color: #729fcf;">:H2</span> <span style="color: #729fcf;">:R1</span> <span style="color: #729fcf;">:NextR</span> <span style="color: #729fcf;">:NextR</span> <span style="color: #729fcf;">:NextU</span> <span style="color: #729fcf;">:Back3</span>]
+        event (rand-nth options)]
+    (<span style="color: #8ae234;">condp</span> = event 
+        <span style="color: #729fcf;">:X</span> n                                    <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Do nothing
+</span>        <span style="color: #729fcf;">:NextR</span> (<span style="color: #729fcf;">nth</span> (<span style="color: #729fcf;">map</span> b2i [<span style="color: #729fcf;">:R1</span> <span style="color: #729fcf;">:R2</span> <span style="color: #729fcf;">:R3</span> <span style="color: #729fcf;">:R4</span>]) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Next railroad
+</span>                    (<span style="color: #729fcf;">rem</span> (<span style="color: #729fcf;">quot</span> (<span style="color: #729fcf;">+</span> 5 n) 10) 4))
+        <span style="color: #729fcf;">:NextU</span> (<span style="color: #8ae234;">if</span> (<span style="color: #8ae234;">and</span> (<span style="color: #729fcf;">&gt;</span> n (b2i <span style="color: #729fcf;">:U1</span>)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Next Utility
+</span>                        (<span style="color: #729fcf;">&lt;</span> n (b2i <span style="color: #729fcf;">:U2</span>)))
+                 (b2i <span style="color: #729fcf;">:U2</span>)
+                 (b2i <span style="color: #729fcf;">:U1</span>))     
+        <span style="color: #729fcf;">:Back3</span> (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">=</span> (<span style="color: #729fcf;">-</span> n 3) (b2i <span style="color: #729fcf;">:CC3</span>))
+                 (card-CC (<span style="color: #729fcf;">-</span> n 3)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Sometimes you land on another CC
+</span>                 (<span style="color: #729fcf;">-</span> n 3))          <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">But mostly you don't
+</span>        (b2i event))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">dice-4</span> [] (<span style="color: #729fcf;">inc</span> (<span style="color: #729fcf;">rand-int</span> 4)))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">move</span> [[n doubles]]
+  (<span style="color: #8ae234;">let</span> [d1 (dice-4)
+        d2 (dice-4)
+        m (<span style="color: #8ae234;">if</span> (<span style="color: #8ae234;">and</span> (<span style="color: #729fcf;">=</span> d1 d2) (<span style="color: #729fcf;">=</span> 2 doubles))
+            (b2i <span style="color: #729fcf;">:JAIL</span>)
+            (<span style="color: #729fcf;">rem</span> (<span style="color: #729fcf;">+</span> n d1 d2) 40))]
+    [(<span style="color: #8ae234;">condp</span> = m
+         (b2i <span style="color: #729fcf;">:G2J</span>) (b2i <span style="color: #729fcf;">:JAIL</span>)
+         (b2i <span style="color: #729fcf;">:CC1</span>) (card-CC m)
+         (b2i <span style="color: #729fcf;">:CC2</span>) (card-CC m)
+         (b2i <span style="color: #729fcf;">:CC2</span>) (card-CC m)
+         (b2i <span style="color: #729fcf;">:CH1</span>) (card-CH m)
+         (b2i <span style="color: #729fcf;">:CH2</span>) (card-CH m)
+         (b2i <span style="color: #729fcf;">:CH3</span>) (card-CH m)
+         m)
+     (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">=</span> d1 d2)
+       (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">not</span> (<span style="color: #729fcf;">=</span> 2 doubles)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">reset if 3rd double in a row
+</span>         (<span style="color: #729fcf;">inc</span> doubles)
+         0)
+       0)]))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">compute-monopoly-freqs</span> []
+  (<span style="color: #8ae234;">let</span> [trials 1000000
+        games 10
+        sim (<span style="color: #729fcf;">fn</span> [trials]
+              (frequencies (<span style="color: #729fcf;">take</span> trials (<span style="color: #729fcf;">map</span> first (<span style="color: #729fcf;">iterate</span> move [0 0])))))
+        freqs (<span style="color: #729fcf;">apply</span> merge-with + (<span style="color: #729fcf;">pmap</span> sim (<span style="color: #729fcf;">repeat</span> games trials)))
+        ps (<span style="color: #729fcf;">map</span> (<span style="color: #729fcf;">fn</span> [[c v]]
+                  [(i2b c) (<span style="color: #729fcf;">double</span> (<span style="color: #729fcf;">*</span> 100 (<span style="color: #729fcf;">/</span> v trials games)))])
+                (<span style="color: #729fcf;">sort</span> freqs))]
+    (<span style="color: #729fcf;">map</span> #(b2i (<span style="color: #729fcf;">first</span> %)) (<span style="color: #729fcf;">take</span> 3 (<span style="color: #729fcf;">reverse</span> (<span style="color: #729fcf;">sort-by</span> second ps))))))
+
+(<span style="color: #729fcf;">time</span> (compute-monopoly-freqs)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 10217.921373 msecs"
+</span></code></pre>
+
+<p>With the work of 10,000,000 trials divided evenly across 10 threads and evaluated in parallel in roughly 10 seconds, this gives the correct answer on my machine. However, the probabilities that I compute for the 6-sided dice are slightly different from the ones given on the Project Euler website, so this implementation is probably slightly incorrect. Can you find the mistake?</p>
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-83/" class="btn" title="Project Euler Problem 83">Previous</a>
+      
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-85/" class="btn" title="Project Euler Problem 85">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2017 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://ivarthorson.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://ivarthorson.github.io';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://ivarthorson.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://ivarthorson.github.io/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Project Euler Problem 68 &#8211; Art is Never Finished</title>
+<meta name="description" content="Problem 68 was one of those strange problems where you start with 23 lines of code that take 77 seconds to run, and by the time you are done thinking about the problem, you end up with 6 lines of code that takes 0.1 milliseconds to complete.
+
+">
+<meta name="keywords" content="magic numbers, n-gon">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Project Euler Problem 68">
+<meta name="twitter:description" content="Problem 68 was one of those strange problems where you start with 23 lines of code that take 77 seconds to run, and by the time you are done thinking about the problem, you end up with 6 lines of code that takes 0.1 milliseconds to complete.
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ivarthorson.github.io/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Euler Problem 68">
+<meta property="og:description" content="Problem 68 was one of those strange problems where you start with 23 lines of code that take 77 seconds to run, and by the time you are done thinking about the problem, you end up with 6 lines of code that takes 0.1 milliseconds to complete.
+
+">
+<meta property="og:url" content="https://ivarthorson.github.io/project-euler/problem-68/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="https://ivarthorson.github.io/project-euler/problem-68/">
+<link href="https://ivarthorson.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://ivarthorson.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://ivarthorson.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://ivarthorson.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ivarthorson.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ivarthorson.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ivarthorson.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://ivarthorson.github.io/about/" >About</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="https://ivarthorson.github.io/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://ivarthorson.github.io/tags/#magic numbers" title="Pages tagged magic numbers">magic numbers</a></li><li><a href="https://ivarthorson.github.io/tags/#n-gon" title="Pages tagged n-gon">n-gon</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Project Euler Problem 68</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://ivarthorson.github.io/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2010-08-28T07:41:44-07:00"><i class="fa fa-calendar-o"></i> August 28, 2010</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p><a href="http://projecteuler.net/index.php?section=problems&amp;id=68">Problem 68</a> was one of those strange problems where you start with 23 lines of code that take 77 seconds to run, and by the time you are done thinking about the problem, you end up with 6 lines of code that takes 0.1 milliseconds to complete.</p>
+
+<p>Optimizing your understanding of a problem apparently can result in improvements of ~770,000 times better performance. I wonder what that says about vague problem definitions and engineering specifications…?</p>
+
+<p>It’s easier to explain this problem with a picture, so just <a href="http://projecteuler.net/index.php?section=problems&amp;id=68">go over to Project Euler and look at the problem </a>for a moment so you understand what I’m doing here.</p>
+
+<p>My first solution was the brute-force approach, which considered all 10!=3628800 possibilities. This is obviously the worst way to do it, but required absolutely no thought about the problem:</p>
+
+<pre><code>(<span style="color: #729fcf;">use</span> '[clojure.contrib.combinatorics <span style="color: #729fcf;">:only</span> (permutations)])
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">all-sums-same?</span> [colls]
+  (<span style="color: #729fcf;">apply</span> = (<span style="color: #729fcf;">map</span> #(<span style="color: #729fcf;">apply</span> + %) colls)))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">n-gon-triples</span> [n coll]
+  {<span style="color: #729fcf;">:pre</span> [(<span style="color: #729fcf;">=</span> (<span style="color: #729fcf;">*</span> 2 n) (<span style="color: #729fcf;">count</span> coll))]}
+  (<span style="color: #8ae234;">let</span> [outs (<span style="color: #729fcf;">take</span> n coll)
+        outmin (<span style="color: #729fcf;">apply</span> min outs)
+        outers (<span style="color: #729fcf;">take</span> n (<span style="color: #729fcf;">drop-while</span> #(<span style="color: #729fcf;">not</span> (<span style="color: #729fcf;">=</span> outmin %)) (<span style="color: #729fcf;">cycle</span> outs)))
+        inners (<span style="color: #729fcf;">drop</span> n coll)
+        inner-pairs (<span style="color: #729fcf;">take</span> n (<span style="color: #729fcf;">partition</span> 2 1 (<span style="color: #729fcf;">cycle</span> inners)))]
+    (<span style="color: #729fcf;">map</span> conj inner-pairs outers)))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-68</span> []
+  (<span style="color: #729fcf;">apply</span>
+   max
+   (<span style="color: #8ae234;">for</span> [p (permutations (<span style="color: #729fcf;">range</span> 1 (<span style="color: #729fcf;">inc</span> 10)))
+         t [(n-gon-triples 5 p)]
+         <span style="color: #729fcf;">:when</span> (all-sums-same? t)
+         num [(<span style="color: #729fcf;">bigint</span> (<span style="color: #729fcf;">apply</span> str (<span style="color: #729fcf;">mapcat</span> str (flatten t))))]
+         <span style="color: #729fcf;">:when</span> (<span style="color: #729fcf;">=</span> 16 (<span style="color: #729fcf;">count</span> (<span style="color: #729fcf;">str</span> num)))]
+     num)))
+
+ 
+(<span style="color: #729fcf;">time</span> (euler-68 5)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 77247.20763 msecs" 
+</span></code></pre>
+
+<p>Then I sighed and looked at the problem again, looking for hints as to how I might reduce the problem’s search space.</p>
+
+<p>Since we know that there are only 16 digits in the answer, we know the 10 must be in the outer ring. We also can safely assert that the largest possible output number would result in the inner ring of numbers should being comprised of the smaller numbers, and the outer ring should contain the larger numbers. Since we also know that the number will have to start with the lowest number in the outer ring, we can reduce the number of possibilities from 10! to only 5!+4!=144.</p>
+
+<p>The implementation using these two cribs looked like:</p>
+
+<pre><code>(<span style="color: #729fcf;">use</span> '[clojure.contrib.combinatorics <span style="color: #729fcf;">:only</span> (permutations)])
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">all-sums-same?</span> [colls]
+  (<span style="color: #729fcf;">apply</span> = (<span style="color: #729fcf;">map</span> #(<span style="color: #729fcf;">apply</span> + %) colls)))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-68-faster</span> []
+  (<span style="color: #729fcf;">apply</span>
+   max
+   (<span style="color: #8ae234;">for</span> [i (permutations (<span style="color: #729fcf;">range</span> 1 6))
+         o (<span style="color: #729fcf;">map</span> #(<span style="color: #729fcf;">concat</span> [6] %) (permutations (<span style="color: #729fcf;">range</span> 7 11))) 
+         t [(<span style="color: #729fcf;">map</span> conj (<span style="color: #729fcf;">take</span> 5 (<span style="color: #729fcf;">partition</span> 2 1 (<span style="color: #729fcf;">cycle</span> i))) o) ]
+         <span style="color: #729fcf;">:when</span> (all-sums-same? t)]
+     (<span style="color: #729fcf;">bigint</span> (<span style="color: #729fcf;">apply</span> str (<span style="color: #729fcf;">mapcat</span> str (flatten t)))))))
+
+(<span style="color: #729fcf;">time</span> (euler-68-faster)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 47.712967 msecs"
+</span></code></pre>
+
+<p>But wait! There is a reason this thing is called a ‘magic’ n-gon. We can use that magic number property to deduce essentially everything about the largest possible solution and compute it directly without bothering to compute any permutations at all!</p>
+
+<pre><code><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Observation:
+</span><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Inner ring must contain the smaller digits
+</span><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Outer ring must contain the larger digits
+</span>
+<span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">First Trick: Magic Number
+</span><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">The 'magic' number is equal to the sum of these 6 numbers divided by 2:
+</span><span style="color: #A8AaA5;">;;   </span><span style="color: #A8AaA5;">the biggest number in outer ring
+</span><span style="color: #A8AaA5;">;;   </span><span style="color: #A8AaA5;">the smallest number in outer ring
+</span><span style="color: #A8AaA5;">;;   </span><span style="color: #A8AaA5;">the two biggest number in inner ring
+</span><span style="color: #A8AaA5;">;;   </span><span style="color: #A8AaA5;">the two smallest numbers in inner ring
+</span>
+<span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Second Trick:
+</span><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Outside ring must have a pattern like [6 10 9 8 7] to be maximum. 
+</span><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">ie, lowest in outer ring, followed by remaining numbers in decreasing order.
+</span>
+<span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Third Trick:
+</span><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Start with the largest of the inner ring numbers.
+</span><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Going around the inner ring, the next number is (- magic prev-inner outer)
+</span>
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-68-magic</span> [n]
+  {<span style="color: #729fcf;">:pre</span> [(<span style="color: #729fcf;">odd?</span> n)]}
+  (<span style="color: #8ae234;">let</span> [magic (<span style="color: #729fcf;">/</span> (<span style="color: #729fcf;">+</span> 1 2 (<span style="color: #729fcf;">inc</span> n) (<span style="color: #729fcf;">*</span> 2 n) n (<span style="color: #729fcf;">dec</span> n)) 2) 
+        outers (<span style="color: #729fcf;">concat</span> [(<span style="color: #729fcf;">inc</span> n)] (<span style="color: #729fcf;">reverse</span> (<span style="color: #729fcf;">range</span> (<span style="color: #729fcf;">+</span> 2 n) (<span style="color: #729fcf;">inc</span> (<span style="color: #729fcf;">*</span> 2 n)))))
+        inners (<span style="color: #729fcf;">butlast</span> (reductions #(<span style="color: #729fcf;">-</span> magic %1 %2) n outers))]
+    (<span style="color: #729fcf;">apply</span> str (<span style="color: #729fcf;">mapcat</span> conj (<span style="color: #729fcf;">partition</span> 2 1 (<span style="color: #729fcf;">cycle</span> inners)) outers))))
+
+
+(euler-68-magic 3) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"432621513"
+</span>
+(<span style="color: #729fcf;">time</span> (euler-68-magic 5)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 0.132305 msecs"
+</span></code></pre>
+
+<p>Amazing how some reasoning results in us doing such little computation that we make something very nearly a million times faster than the first-try solution.</p>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-67/" class="btn" title="Project Euler Problem 67">Previous</a>
+      
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-69/" class="btn" title="Project Euler Problem 69">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2017 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://ivarthorson.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://ivarthorson.github.io';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://ivarthorson.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://ivarthorson.github.io/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

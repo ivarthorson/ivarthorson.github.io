@@ -1,0 +1,241 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Project Euler Problem 19 &#8211; Art is Never Finished</title>
+<meta name="description" content="Although using Conway’s Doomsday Algorithm is a fun party trick, I tend to hate calendar math. Worse, I hate Mondays too. So I guess this problem wasn’t written for me.
+
+">
+<meta name="keywords" content="calendars, i-hate-mondays">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Project Euler Problem 19">
+<meta name="twitter:description" content="Although using Conway’s Doomsday Algorithm is a fun party trick, I tend to hate calendar math. Worse, I hate Mondays too. So I guess this problem wasn’t written for me.
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ivarthorson.github.io/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Euler Problem 19">
+<meta property="og:description" content="Although using Conway’s Doomsday Algorithm is a fun party trick, I tend to hate calendar math. Worse, I hate Mondays too. So I guess this problem wasn’t written for me.
+
+">
+<meta property="og:url" content="https://ivarthorson.github.io/project-euler/problem-19/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="https://ivarthorson.github.io/project-euler/problem-19/">
+<link href="https://ivarthorson.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://ivarthorson.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://ivarthorson.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://ivarthorson.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ivarthorson.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ivarthorson.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ivarthorson.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://ivarthorson.github.io/about/" >About</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="https://ivarthorson.github.io/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://ivarthorson.github.io/tags/#calendars" title="Pages tagged calendars">calendars</a></li><li><a href="https://ivarthorson.github.io/tags/#i-hate-mondays" title="Pages tagged i-hate-mondays">i-hate-mondays</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Project Euler Problem 19</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://ivarthorson.github.io/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2010-06-28T07:04:26-07:00"><i class="fa fa-calendar-o"></i> June 28, 2010</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>Although using <a href="http://en.wikipedia.org/wiki/John_Horton_Conway">Conway’s</a> <a href="http://en.wikipedia.org/wiki/Doomsday_Algorithm">Doomsday Algorithm</a> is a fun party trick, I tend to hate calendar math. Worse, I hate Mondays too. So I guess this problem wasn’t written for me.</p>
+
+<p>Still, how would we solve Project Euler <a href="http://projecteuler.net/index.php?section=problems&amp;id=19">Problem 19</a> in Clojure? Two obvious choices present themselves:</p>
+
+<ol>
+  <li>Use a Java library that manipulates dates.</li>
+  <li>Write a quick function by hand.</li>
+</ol>
+
+<p>I chose option #2, although in retrospect #1 would have been a better idea.</p>
+
+<pre><code>(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">days-per-mo</span>      [31 28 31 30 31 30 31 31 30 31 30 31])
+(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">days-per-mo-leap</span> [31 29 31 30 31 30 31 31 30 31 30 31])
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">leap-year?</span> [y]
+  (<span style="color: #8ae234;">or</span> (zero? (<span style="color: #729fcf;">mod</span> y 400))
+      (<span style="color: #8ae234;">and</span> (zero? (<span style="color: #729fcf;">mod</span> y 4))
+           (<span style="color: #729fcf;">not</span> (zero? (<span style="color: #729fcf;">mod</span> y 100))))))
+
+(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">accum</span> [s]
+  <span style="color: #Fd7f98;">"Returns a sequence of the sums of elements up to each element in seq s. "</span>
+  (<span style="color: #8ae234;">loop</span> [e (<span style="color: #729fcf;">first</span> s)
+         r (<span style="color: #729fcf;">rest</span> s)
+         sums [0]]
+    (<span style="color: #8ae234;">if</span> (<span style="color: #729fcf;">nil?</span> e)
+      (<span style="color: #729fcf;">rest</span> sums)
+      (<span style="color: #8ae234;">recur</span> (<span style="color: #729fcf;">first</span> r) (<span style="color: #729fcf;">rest</span> r) (<span style="color: #729fcf;">conj</span> sums (<span style="color: #729fcf;">+</span> e (<span style="color: #729fcf;">last</span> sums)))))))
+
+<span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Any number with a mod 7 must be a monday, if we start on a monday.
+</span>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-19</span> []
+  (<span style="color: #729fcf;">count</span> (<span style="color: #729fcf;">filter</span> #(<span style="color: #729fcf;">=</span> 0 (<span style="color: #729fcf;">mod</span> % 7))
+                 (accum (<span style="color: #729fcf;">concat</span> [366] <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">First skip the year 1900
+</span>                                (<span style="color: #729fcf;">mapcat</span> #(<span style="color: #8ae234;">if</span> (leap-year? %)
+                                           days-per-mo-leap
+                                           days-per-mo)
+                                        (<span style="color: #729fcf;">range</span> 1901 2001)))))))
+
+(euler-19)</code></pre>
+
+<p>I am not actually certain that my hand-rolled solution is actually correct in the implementation (although it gave the correct answer), and prefer gnuvince’s solution posted on <a href="http://clojure-euler.wikispaces.com/Problem+019">clojure-euler</a> to my own.</p>
+
+<p>Can anybody think of a better way to write <code class="highlighter-rouge">accum</code>? It looks like a useful function for other problems.</p>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-18/" class="btn" title="Project Euler Problem 18">Previous</a>
+      
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-20/" class="btn" title="Project Euler Problem 20">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2017 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://ivarthorson.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://ivarthorson.github.io';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://ivarthorson.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://ivarthorson.github.io/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

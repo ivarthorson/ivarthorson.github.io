@@ -1,0 +1,243 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Project Euler Problem 8 &#8211; Art is Never Finished</title>
+<meta name="description" content="The definition of Problem 8  suggests some flexibility on how you treat the 1000-digit number: as a number or as a string. I decided that it would be easier to understand as the latter – using mod to extract digits seemed a little redundant and not really the point of the problem, which treats each digit as a distinct object. Why make things more complex than they need to be?
+
+">
+<meta name="keywords" content="digits, strings">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Project Euler Problem 8">
+<meta name="twitter:description" content="The definition of Problem 8  suggests some flexibility on how you treat the 1000-digit number: as a number or as a string. I decided that it would be easier to understand as the latter – using mod to extract digits seemed a little redundant and not really the point of the problem, which treats each digit as a distinct object. Why make things more complex than they need to be?
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ivarthorson.github.io/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Euler Problem 8">
+<meta property="og:description" content="The definition of Problem 8  suggests some flexibility on how you treat the 1000-digit number: as a number or as a string. I decided that it would be easier to understand as the latter – using mod to extract digits seemed a little redundant and not really the point of the problem, which treats each digit as a distinct object. Why make things more complex than they need to be?
+
+">
+<meta property="og:url" content="https://ivarthorson.github.io/project-euler/problem-08/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="https://ivarthorson.github.io/project-euler/problem-08/">
+<link href="https://ivarthorson.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://ivarthorson.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://ivarthorson.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://ivarthorson.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ivarthorson.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ivarthorson.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ivarthorson.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://ivarthorson.github.io/about/" >About</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="https://ivarthorson.github.io/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://ivarthorson.github.io/tags/#digits" title="Pages tagged digits">digits</a></li><li><a href="https://ivarthorson.github.io/tags/#strings" title="Pages tagged strings">strings</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Project Euler Problem 8</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://ivarthorson.github.io/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2010-06-07T07:12:20-07:00"><i class="fa fa-calendar-o"></i> June 07, 2010</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>The definition of <a href="http://projecteuler.net/index.php?section=problems&amp;id=8">Problem 8 </a> suggests some flexibility on how you treat the 1000-digit number: as a number or as a string. I decided that it would be easier to understand as the latter – using <code class="highlighter-rouge">mod</code> to extract digits seemed a little redundant and not really the point of the problem, which treats each digit as a distinct object. Why make things more complex than they need to be?</p>
+
+<p>Because performance clearly isn’t an issue for this type of problem, I chose a slightly verbose style to see how self-documenting I could make it.</p>
+
+<pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-8</span> [string]
+  <span style="color: #Fd7f98;">"Finds the greatest product of five consecutive digits in string."</span>
+  (<span style="color: #8ae234;">letfn</span> [(by-fives   [s] (<span style="color: #729fcf;">partition</span> 5 1 s))
+          (chars2ints [v] (<span style="color: #729fcf;">map</span> #(Integer/parseInt (<span style="color: #729fcf;">str</span> %)) v))
+          (multiply   [v] (<span style="color: #729fcf;">reduce</span> * v))
+          (max-of     [v] (<span style="color: #729fcf;">reduce</span> max v))]
+    (max-of (<span style="color: #729fcf;">map</span> multiply (<span style="color: #729fcf;">map</span> chars2ints (by-fives string))))))
+        
+(euler-8 (<span style="color: #729fcf;">concat</span> <span style="color: #Fd7f98;">"73167176531330624919225119674426574742355349194934"</span>
+                 <span style="color: #Fd7f98;">"96983520312774506326239578318016984801869478851843"</span>
+                 <span style="color: #Fd7f98;">"85861560789112949495459501737958331952853208805511"</span>
+                 <span style="color: #Fd7f98;">"12540698747158523863050715693290963295227443043557"</span>
+                 <span style="color: #Fd7f98;">"66896648950445244523161731856403098711121722383113"</span>
+                 <span style="color: #Fd7f98;">"62229893423380308135336276614282806444486645238749"</span>
+                 <span style="color: #Fd7f98;">"30358907296290491560440772390713810515859307960866"</span>
+                 <span style="color: #Fd7f98;">"70172427121883998797908792274921901699720888093776"</span>
+                 <span style="color: #Fd7f98;">"65727333001053367881220235421809751254540594752243"</span>
+                 <span style="color: #Fd7f98;">"52584907711670556013604839586446706324415722155397"</span>
+                 <span style="color: #Fd7f98;">"53697817977846174064955149290862569321978468622482"</span>
+                 <span style="color: #Fd7f98;">"83972241375657056057490261407972968652414535100474"</span>
+                 <span style="color: #Fd7f98;">"82166370484403199890008895243450658541227588666881"</span>
+                 <span style="color: #Fd7f98;">"16427171479924442928230863465674813919123162824586"</span>
+                 <span style="color: #Fd7f98;">"17866458359124566529476545682848912883142607690042"</span>
+                 <span style="color: #Fd7f98;">"24219022671055626321111109370544217506941658960408"</span>
+                 <span style="color: #Fd7f98;">"07198403850962455444362981230987879927244284909188"</span>
+                 <span style="color: #Fd7f98;">"84580156166097919133875499200524063689912560717606"</span>
+                 <span style="color: #Fd7f98;">"05886116467109405077541002256983155200055935729725"</span>
+                 <span style="color: #Fd7f98;">"71636269561882670428252483600823257530420752963450"</span>))</code></pre>
+
+<p>The choice of strings and concat to represent the 1000-digit number is just to help me display it properly on the internet; clearly it could be written without line breaks, as a vector, or in several other forms.</p>
+
+<p>Looking at <a href="http://clojure-euler.wikispaces.com/Problem+008">other people’s solutions</a>, I noticed that I was using the wrong function to convert characters to integers:</p>
+
+<pre><code><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Original
+</span>(chars2ints [v] (<span style="color: #729fcf;">map</span> #(Integer/parseInt (<span style="color: #729fcf;">str</span> %)) v))
+
+<span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Better
+</span>(chars2ints [v] (<span style="color: #729fcf;">map</span> #(Character/getNumericValue %) v))</code></pre>
+
+<p>That’s good enough for government work, as they say. I’m not interested in nitpicking this uninteresting problem any further.</p>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-07/" class="btn" title="Project Euler Problem 7">Previous</a>
+      
+      
+        <a href="https://ivarthorson.github.io/project-euler/problem-09/" class="btn" title="Project Euler Problem 9">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2017 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://ivarthorson.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://ivarthorson.github.io';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://ivarthorson.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://ivarthorson.github.io/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>
