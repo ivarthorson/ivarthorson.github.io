@@ -1,0 +1,666 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Introduction to Geometric Algebra, Part 1 &#8211; Art is Never Finished</title>
+<meta name="description" content="Geometric Algebra (GA) is one of those things that we should have all learned in high school because it would have made physics and mathematics in college so much easier.
+
+">
+<meta name="keywords" content="math, geometric algebra">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Introduction to Geometric Algebra, Part 1">
+<meta name="twitter:description" content="Geometric Algebra (GA) is one of those things that we should have all learned in high school because it would have made physics and mathematics in college so much easier.
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ivarthorson.github.io/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Introduction to Geometric Algebra, Part 1">
+<meta property="og:description" content="Geometric Algebra (GA) is one of those things that we should have all learned in high school because it would have made physics and mathematics in college so much easier.
+
+">
+<meta property="og:url" content="https://ivarthorson.github.io/blog/intro-to-geometric-algebra-1/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="https://ivarthorson.github.io/blog/intro-to-geometric-algebra-1/">
+<link href="https://ivarthorson.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://ivarthorson.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://ivarthorson.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://ivarthorson.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://ivarthorson.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://ivarthorson.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ivarthorson.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ivarthorson.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ivarthorson.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://ivarthorson.github.io/about/" >About</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="https://ivarthorson.github.io/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="https://ivarthorson.github.io/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://ivarthorson.github.io/tags/#math" title="Pages tagged math">math</a></li><li><a href="https://ivarthorson.github.io/tags/#geometric algebra" title="Pages tagged geometric algebra">geometric algebra</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Introduction to Geometric Algebra, Part 1</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://ivarthorson.github.io/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2017-07-12T00:00:00-07:00"><i class="fa fa-calendar-o"></i> July 12, 2017</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>Geometric Algebra (GA) is one of those things that we should have all learned in high school because it would have made physics and mathematics in college so much easier.</p>
+
+<p>The fact that we did not learn it in high school is probably because GA appears to only have been known by mathematicians studying <a href="https://www.wikipedia.org/wiki/clifford_algebra">Clifford Algebras</a>. Mathematicians may be 100 years ahead of everybody else in so many ways, but they are not always the best at communicating their subject to non-mathematicians. The physics community, at least, seems to have figured out that GA is useful, and since physicists are 20 years ahead of the rest of the sciences in the adoption of good tools and methods, it seems safe to predict that in the future engineers will start seeing GA in school in a couple of decades, or <a href="http://link-to-paper">even sooner</a>!</p>
+
+<p>Geometric Algebra could be taught in high school immediately after basic algebra. Not only is GA not particularly difficult to learn, it provides a unified perspective for several areas:</p>
+
+<ul>
+  <li>GA lets you <strong>easily perform 2D and 3D vector transformations</strong>. It is simpler to perform spatial rotations than using matrices, sines, and inverse trigonometric operations, and it generalizes to more dimensions in a straightforward way.</li>
+  <li>GA gives a <strong>clear geometric meaning to the imaginary number</strong> – or all 3 imaginary numbers, in the case of quaternions.</li>
+  <li>GA <strong>replaces div, grad, curl, with a single vector derivative</strong>. To an electrical engineer like myself, it is frankly <em>amazing</em> to see the four Maxwell Equations reduced into a single equation!</li>
+  <li>GA is <strong>coordinate-free</strong> and can let you make analytic conclusions without first choosing a basis</li>
+  <li>GA is a framework <strong>applicable to dozens of different fields</strong> of physics and engineering, including classical and quantum mechanics.</li>
+</ul>
+
+<p>While I am far from being an expert in Geometric Algebra, I wanted to write an accessible, bare-bones introduction to the subject so that people can follow my use of it in a future post on hyperbolic geometry. For this reason, this post will just focus on 2D operations, and perhaps in a later post I can talk about rotations in 3D space or 4D spacetime, differential equations, Maxwell’s Equations, and other applications.</p>
+
+<h1 id="preparation-basic-concepts">Preparation: Basic Concepts</h1>
+
+<p>Before introducing Geometric Algebra, I’m going to briefly review coordinate systems, basis vectors, and the inner and outer products. As an engineer and not a mathematician, I will focus on examples and developing intuition rather than rigor, entirely symbolic notation, or the capacity to generalize expressions. Checking correctness with a proof must follow the intuition that there is something there to prove!</p>
+
+<h2 id="concept-properties-of-algebras">Concept: Properties of Algebras</h2>
+
+<p>Most people have a vague idea what algebra is: it is a set of rules to add and multiply objects of different quantities, often represented in school using the variables <script type="math/tex">x</script> and <script type="math/tex">y</script>. The operations you perform usually satisfy the properties of being</p>
+<ul>
+  <li><strong>associative</strong>, meaning that you can reorder operations <script type="math/tex">(qr)s=q(rs)</script>; and</li>
+  <li><strong>distributive</strong>, meaning that you can expand like <script type="math/tex">q(r+s)=qr+qs</script>.</li>
+</ul>
+
+<p>The algebra you learned in school had one other property:</p>
+<ul>
+  <li><strong>commutative</strong> multiplication, meaning that you can reorder terms <script type="math/tex">qr = rq</script>.</li>
+</ul>
+
+<p>This is <strong>not so</strong> in Geometric Algebra and matrix algebras, in which the <em>ordering</em> of terms being multiplied matters and generally speaking <script type="math/tex">qr \ne rq</script>.</p>
+
+<p>If you are wondering why some operations are not commutative, consider where you would end up navigating if you start in a given orientation and:</p>
+
+<ul>
+  <li>Walk forward 100 paces (<script type="math/tex">q</script>) and then turn right (<script type="math/tex">r</script>); or</li>
+  <li>Turn right (<script type="math/tex">r</script>) and then walk forward 100 paces (<script type="math/tex">q</script>).</li>
+</ul>
+
+<p>Another example is to consider the commutivity of addition and subtraction: <script type="math/tex">4+3=3+4</script>, but does <script type="math/tex">4-3=3-4</script>?</p>
+
+<h2 id="concept-coordinate-system-and-references">Concept: Coordinate System and References</h2>
+
+<p>To introduce GA we need to define a coordinate system with two things:</p>
+
+<ol>
+  <li>A way to measure distance (hopefully evenly!)</li>
+  <li>Reference directions (hopefully independent!)</li>
+</ol>
+
+<p>Let us consider our options first. If we are drawing on a sheet of paper, we could measure distances using the number of marks passed on a grid. This grid could be:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><img src="coord-arb.png" alt="coord-arb" title="Curvilinear coordinates." /></td>
+      <td><strong>Arbitrary or Curvilinear coordinates</strong>. We <em>could</em> draw any bunch of curved lines unevenly over the page in a wavy grid as long as the lines parallel to each other did not intersect. This sounds crazy, but sometimes you need to account for some distortion in a space and this type of coordinate system can be very useful as a transformation. In most cases, however, it would be a poor choice for most problems because one unit of distance is not exactly “equal” to another unit elsewhere on the page.</td>
+    </tr>
+    <tr>
+      <td><img src="coord-polar.png" alt="coord-polar" title="Polar Coordinates." /></td>
+      <td><strong>Polar</strong>. We <em>could</em> use we could use an angle (from a reference direction) and a distance or angle from an origin to define where a point is, as is often done on spherical surfaces like the surface of the Earth. While useful in certain circumstances, but again suffer from the problem that distances at different areas on the page are not easily compared.</td>
+    </tr>
+    <tr>
+      <td><img src="coord-rectangular.png" alt="coord-rect" title="Rectangular Coordinates." /></td>
+      <td><strong>Rectangular Coordinates</strong>. Known as the familiar “XY” coordinate system for most people, we could (and will!) use a grid of straight, parallel lines to find the coordinates of a point. Most problems that are not on highly distorted surfaces are most simply considered in this way – and even on curved surfaces, if you “zoom in” far enough, most surfaces begin to look “locally flat” and begin to resemble straight lines.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Now that we are measuring distances evenly with a Cartesian grid, we need to choose a <strong>basis</strong>, which are essentially the directions that we reference. The choice of the directions is partly arbitrary, and partly not. For example, we can rotate the grid to be in any orientation and still get the same results. What other options do we have?</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><img src="coord-skew.png" alt="coord-skewed" title="Non-orthogonal-basis" /></td>
+      <td><strong>Non-orthogonal basis</strong>. We <em>could</em> choose any two directions to draw our parallel lines in, which would probably our grid skewed, but we would soon notice that moving along <script type="math/tex">x</script> also moves you along <script type="math/tex">y</script> in some important sense. This seems like a problem, so we must add another constraint!</td>
+    </tr>
+    <tr>
+      <td><img src="coord-rectangular.png" alt="coord-rectangular" title="Cartesian Coordinates" /></td>
+      <td><strong>Orthogonal</strong>. If we make the two vectors orthogonal (i.e. 90 degrees to each other) we can now move independently in each direction. But what if we accidentally spaced our parallel lines different distances apart along each axis? If we do not add a constraint that both reference directions be of the same magnitude, we might accidentally measure distances along X in units of meters and distances along Y in distances of feet.</td>
+    </tr>
+    <tr>
+      <td><img src="coord-cartesian.png" alt="coord-cartesian" title="Cartesian Coordinates" /></td>
+      <td><strong>Orthonormal</strong>. If your basis is orthogonal and are equal in magnitude (i.e. distances on each are measured in the same way), we call the basis “orthonormal”.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>One of the advantages of GA is that the exact choice of basis often does not matter – it could be rotated to any number of crazy angles or different scales – and that you can find relationships without choosing a basis at all.</p>
+
+<h2 id="concept-vectors">Concept: Vectors</h2>
+
+<p>Using our new coordinate space, let us now draw two example <strong>vectors</strong> <script type="math/tex">a</script> and <script type="math/tex">b</script>, which are mixtures of the basis directions <script type="math/tex">e_1</script> and <script type="math/tex">e_2</script>. We will use these same two vectors over and over again to keep the number of symbols low.</p>
+
+<p>Rather than than using matrices or vector notation, which would do more harm than good because they would obfuscate important quantities, we will instead use simple algebraic forms to express vectors. Let us define</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+ a & = & 2e_1 + 1e_2\\
+ b & = & 3e_1 + 4e_2 \end{eqnarray*} %]]></script>
+
+<p class="center"><img src="example-vectors.png" alt="example-vectors" title="Sample vectors a and b" /></p>
+
+<p>In plain english, the vector <script type="math/tex">a</script> means a direction that, for each three units you move along <script type="math/tex">e_1</script>, you must also move one unit along <script type="math/tex">e_2</script>. Note that we cannot “add” apples <script type="math/tex">e_1</script> and oranges <script type="math/tex">e_2</script>; the <script type="math/tex">+</script> symbol here means something like the word “and” for the terms with different basis vectors. We <em>can</em> reduce expressions with <script type="math/tex">e_1</script>, but not combine them with <script type="math/tex">e_2</script> in a way that is further reduced than this notation.</p>
+
+<h4 id="example-vector-addition">Example: Vector Addition</h4>
+
+<p>What is <script type="math/tex">a + b</script>?</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+ a + b & = & (2e_1 + 1e_2) + (3e_1 + 4e_2) \\
+       & = &  2e_1 + 3e_1 + 1e_2 + 4e_2  \\
+       & = & (2+3)e_1 + (1+4)e_2 \\
+       & = & 5e_1 + 5e_2 \end{eqnarray*} %]]></script>
+
+<h2 id="concept-vector-magnitude">Concept: Vector Magnitude</h2>
+
+<p>Since trigonometry is familiar to most people, we will define the <strong>magnitude</strong> of a vector <script type="math/tex">a=\alpha_1 e_1 + \alpha_2 e_2</script> in the same way as was used the Pythagorean Theorem.</p>
+
+<script type="math/tex; mode=display">\|a\| = \sqrt{\alpha_1^2 + \alpha_2^2}</script>
+
+<h4 id="example-vector-magnitudes">Example: Vector Magnitudes</h4>
+
+<p>What are the magnitudes of <script type="math/tex">a</script> and <script type="math/tex">b</script>?</p>
+
+<p class="center"><img src="vector-magnitude.png" alt="vector-magnitude" title="Euclidean magnitude." /></p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+ \|a\| & = & \sqrt{2^2 + 1^2} = \sqrt{5}\\
+ \|b\| & = & \sqrt{3^2 + 4^2} = \sqrt{25} = 5\end{eqnarray*} %]]></script>
+
+<h2 id="concept-projections-and-the-inner-product">Concept: Projections and the Inner Product</h2>
+
+<p>Let us ask a very simple question about these vectors:</p>
+
+<blockquote>
+  <p>If you move along <script type="math/tex">a</script>, how much do you also move along <script type="math/tex">b</script>?</p>
+</blockquote>
+
+<p>The answer to this question is given by the <strong>inner product</strong> (a.k.a. <strong>dot product</strong>). It is called the “inner” product because the answer is “inside” or “along” the vector to which you are projecting.</p>
+
+<p>Most people remember trigonometry pretty well, in which case the single most important thing to remember about the inner product is:</p>
+
+<script type="math/tex; mode=display">a\cdot b=\|a\|\|b\|\cos\theta</script>
+
+<p class="center"><img src="inner-product-and-magnitude.png" alt="inner-product-and-magnitude" title="The inner product is related to magnitude." /></p>
+
+<p>What can we discover about the consequences of this equation?</p>
+
+<ul>
+  <li>The inner product <em>must</em> be commutative (<script type="math/tex">a\cdot b = b \cdot a</script>), because the cosine function is <strong>symmetric</strong> (a.k.a “even”), which is the property that <script type="math/tex">\cos(\theta)=\cos(-\theta)</script>. All this means is that the value of <script type="math/tex">\cos(...)</script> will be the same whether we measure from <script type="math/tex">a</script> to <script type="math/tex">b</script>, which is <script type="math/tex">\cos(\theta)</script>, or from <script type="math/tex">b</script> to <script type="math/tex">a</script>, which is <script type="math/tex">\cos(-\theta)</script>.</li>
+</ul>
+
+<p class="center"><img src="cosine-fn.png" alt="cosine-fn" title="The cosine function is symmetric." /></p>
+
+<ul>
+  <li>
+    <p>If <script type="math/tex">\|a\|=1</script>, then <script type="math/tex">a \cdot a = 1</script> because there is zero angle between <script type="math/tex">a</script> and itself, and <script type="math/tex">\cos(0)=1</script>. We will use this property for basis vectors extensively, specifically that <script type="math/tex">e_1 \cdot e_1 = 1</script> and <script type="math/tex">e_2 \cdot e_2 = 1</script>.</p>
+  </li>
+  <li>
+    <p>Orthogonal things <em>must</em> have an inner product of zero, because if <script type="math/tex">\theta=\pm 90^\circ</script>, <script type="math/tex">\cos(\pm 90^\circ)=0</script>, and thus <script type="math/tex">a\cdot b=0</script>. This definitely applies to our basis vectors, where we see that <script type="math/tex">e_1 \cdot e_2 = e_2 \cdot e_1 = 0</script>.</p>
+  </li>
+  <li>
+    <p>The inner product <em>must</em> be related closely to magnitudes. It is easy to prove that <script type="math/tex">\|a\| = \sqrt{a \cdot a}</script>; can you see why? Geometrically, we could think of this definition of magnitude as being akin to “What do we get if we move in the direction of <script type="math/tex">a</script> by a number of units equal to the length of <script type="math/tex">a</script>? The magnitude of <script type="math/tex">a</script>.”</p>
+  </li>
+</ul>
+
+<p>It will also help to think the types of objects that enter and exit a “black box functional specification” of the inner product operation. The two “inputs” were vectors and the “output” was a scalar that measures the how much you move along one if you move along the other.</p>
+
+<h4 id="example-inner-product">Example: Inner Product</h4>
+
+<p>What is <script type="math/tex">a \cdot b</script> using the above values of <script type="math/tex">a</script> and <script type="math/tex">b</script>?</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+ a \cdot b & = & (2e_1 + 1e_2) \cdot (3e_1 + 4e_2) \\
+           & = & 2e_1\cdot 3e_1 + 2e_1\cdot 4e_2 + 1e_2\cdot 3e_1 + 1e_2 \cdot 4e_2  \\
+           & = & 6e_1\cdot e_1 + 8e_1\cdot e_2 + 3e_2\cdot e_1 + 4e_2 \cdot e_2  \\
+           & = & 6 (1) + 8 (0) + 3 (0) + 4 (1)  \\
+           & = & 10 \end{eqnarray*} %]]></script>
+
+<h1 id="concept-rotations-and-the-outer-product">Concept: Rotations and the Outer Product</h1>
+
+<p>Let us ask another very simple question about these vectors:</p>
+
+<blockquote>
+  <p>If you start pointed in the direction of <script type="math/tex">a</script>, how much do you need to rotate to point in the direction of <script type="math/tex">b</script>?</p>
+</blockquote>
+
+<p>The <strong>outer product</strong> (a.k.a. <strong>wedge product</strong>) is what gives us the answer to this question.</p>
+
+<p>As before, the easiest way to understand this is via trigonometry, in which case the most important fact is:</p>
+
+<script type="math/tex; mode=display">a\wedge b=\|a\|\|b\|\sin\theta</script>
+
+<p class="center"><img src="outer-product-and-sine2.png" alt="outer-product-and-sine2" title="The outer product is related to the sine. " /></p>
+
+<p>This equation has several important consequences:</p>
+
+<ul>
+  <li>The outer product is <em>not</em> commutative. In fact, the outer product is a kind of multiplication that is called <strong>anti-symmetric</strong>, which means that commuting the inputs flips the sign (<script type="math/tex">a\wedge b = - b \wedge a)</script>. This is fundamentally because <script type="math/tex">\sin()</script> is an odd function and <script type="math/tex">\sin(\theta)=-\sin(-\theta)</script>. There are also geometric reasons for rotations to not be commutative: if we start at <script type="math/tex">a</script>, we need to rotate counterclockwise to get to <script type="math/tex">b</script>, but we start at <script type="math/tex">b</script>, we need to rotate clockwise to get to <script type="math/tex">a</script>. The choice of which reference direction you measure from matters to the sign of the answer.</li>
+</ul>
+
+<p class="center"><img src="sine-fn.png" alt="sine-fn" title="The sine function is antisymmetric." /></p>
+
+<ul>
+  <li>The outer product is closely related to <strong>rotation</strong> by 90 degrees, because that is the point at which <script type="math/tex">\sin(\theta)</script> is maximized and minimized. This is <em>so important</em> that we will right now assign the symbol <script type="math/tex">R</script> to a 90 degree counterclockwise rotation. We can think of smaller or larger rotations as being <script type="math/tex">R</script> multiplied by some scalar to adjust “how big” the rotation is. Under this idea, a 45 degree counterclockwise rotation would be <script type="math/tex">0.5R</script>, and a 90 degree clockwise rotation would be <script type="math/tex">-R</script>.</li>
+</ul>
+
+<p class="center"><img src="bivectors.png" alt="bivectors" title="A bivector is often drawn as an arc." /> <img src="outer-product-half-rotation.png" alt="outer-product-half-rotation" title="Half a rotation." /></p>
+
+<ul>
+  <li>The outer product of two orthonormal vectors <em>must</em> be either <script type="math/tex">1R</script> or <script type="math/tex">-1R</script>. Why? Because if <script type="math/tex">\theta=\pm 90^\circ</script>, then <script type="math/tex">\sin(\pm 90^\circ)=\pm 1</script>. For the basis vectors, this means that <script type="math/tex">R = e_1 \wedge e_2</script> is a 90 degree counterclockwise rotation, and <script type="math/tex">-R = e_2 \wedge e_1</script> is a 90 degree clockwise rotation.</li>
+</ul>
+
+<p>Once again, it will help to consider the black box specification of the outer product operation. The two “inputs” were vectors and the “output” is a scaled amount of a 90 degree rotation <script type="math/tex">R</script>, which is neither a vector nor a scalar. What, exactly, is the type of this output object? After defining the geometric product, we will give it a better name.</p>
+
+<h4 id="example-outer-product">Example: Outer Product</h4>
+
+<p>What is <script type="math/tex">a \cdot b</script> using the above values of <script type="math/tex">a</script> and <script type="math/tex">b</script>?</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*} 
+ a \wedge b & = & (2e_1 + 1e_2) \wedge (3e_1 + 4e_2) \\
+            & = & 2e_1\wedge 3e_1 + 2e_1\wedge 4e_2 + 1e_2\wedge 3e_1 + 1e_2 \wedge 4e_2  \\
+            & = & 6e_1\wedge e_1 + 8e_1\wedge e_2 + 3e_2\wedge e_1 + 4e_2 \wedge e_2  \\
+            & = & 6 (0) + 8 (+R) + 3 (-R) + 4 (0)  \\
+            & = & 5R \end{eqnarray*} %]]></script>
+
+<h1 id="geometric-algebra">Geometric Algebra</h1>
+
+<p>With the preliminaries out of the way, we can now define the geometric product and actually start doing geometric algebra!</p>
+
+<h2 id="the-geometric-product">The Geometric Product</h2>
+
+<p>In the same way that we introduced the inner and outer products by asking a question, we will introduce the <strong>geometric product</strong> by asking a very general question:</p>
+
+<blockquote>
+  <p>How do you transform <script type="math/tex">a</script> into <script type="math/tex">b</script>?</p>
+</blockquote>
+
+<p>Or equivilently, in terms of what we already know,</p>
+
+<blockquote>
+  <p>How much do you need to rescale and rotate <script type="math/tex">a</script> so that it is equal to <script type="math/tex">b</script>?</p>
+</blockquote>
+
+<p>The intuition that we need both a rotation <em>and</em> a rescaling is key to understanding the geometric product. We will write the geometric product of <script type="math/tex">a</script> and <script type="math/tex">b</script> as <script type="math/tex">ab</script>, as we would write scalar multiplication of two variables in high school algebra. We can define the geometric product as:</p>
+
+<script type="math/tex; mode=display">ab = a \cdot b + a \wedge b</script>
+
+<p>But in some ways, this definition puts the cart before the horse! We can <em>discover</em> this equation if just try to multiply <script type="math/tex">a</script> and <script type="math/tex">b</script> together and be very careful about how we do so. Let us explore what happens when we try to compute <script type="math/tex">ab</script> using high school rules of algebra (sans commutative multiplication of nonscalars).</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+ ab & = & (2e_1 + 1e_2) (3e_1 + 4e_2)\\
+    & = & (2e_1)(3e_1) + (2e_1)(4e_2) + (1e_2)(3e_1) + (1e_2)(4e_2)\\
+    & = & 6 e_1 e_1 + 8 e_1 e_2 + 3 e_2 e_1 + 4 e_2 e_2\\
+ \end{eqnarray*} %]]></script>
+
+<p>Hmm. What should we do with the products of the unit vectors <script type="math/tex">e_1 e_1, e_1 e_2, e_2 e_1, e_2 e_2</script>? We can reason it out:</p>
+
+<ul>
+  <li>
+    <p><script type="math/tex">e_1 e_1</script> asks, “How do I transform <script type="math/tex">e_1</script> into <script type="math/tex">e_1</script>?”. The answer, of course, is that nothing needs to be done! We can express this by scaling by one, the identity object, and write that <script type="math/tex">e_1 e_1 = 1</script>. If we recall the properties of dot and wedge products for unit length vectors, <script type="math/tex">e_1\cdot e_1=1</script> and <script type="math/tex">e_1\wedge e_1=0</script>, then this assumption also agrees with our definition of the geometric product, <script type="math/tex">e_1e_1=e_1\cdot e_1 + e_1 \wedge e_1 = 1 + 0R = 1</script>. No rotation was needed.</p>
+  </li>
+  <li>
+    <p><script type="math/tex">e_2 e_2</script> must also equal 1, for the same reasons.</p>
+  </li>
+  <li>
+    <p><script type="math/tex">e_1 e_2</script> is asking how do I transform <script type="math/tex">e_1</script> into <script type="math/tex">e_2</script>? We know that our basis vectors are orthonormal, so this must equal a 90 degree clockwise rotation <script type="math/tex">R</script>. <script type="math/tex">e_1e_2=e_1\cdot e_2 + e_1 \wedge e_2 = 0 + 1R = R</script>, and no rescaling is needed.</p>
+  </li>
+  <li>
+    <p><script type="math/tex">e_2 e_1</script> must thus equal <script type="math/tex">-R</script>, using similar reasoning.</p>
+  </li>
+</ul>
+
+<p>We can now finish the simplification process.</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+ab & = & 6 e_1 e_1 + 8 e_1 e_2 + 3 e_2 e_1 + 4 e_2 e_2\\
+   & = & 6 (1) + 8(R) + 3 (-R) + 4 (1)\\
+   & = & 10 + 5R\\
+ \end{eqnarray*} %]]></script>
+
+<p>If you compare this results to what we found earlier (<script type="math/tex">a\cdot b=10</script> and <script type="math/tex">a\wedge b=5R</script>), we can indeed see that in this case <script type="math/tex">ab=a\cdot b + a\wedge b</script>. Now that you have the intuition, it would be a good time to prove this to yourself more generally for all <script type="math/tex">a,b</script>.</p>
+
+<p>Speaking of intuition, what does the result <script type="math/tex">ab=10+5R</script> really mean? Does it mean that we should scale vector <script type="math/tex">a</script> by 10 times and go 5 quarter turns counterclockwise to end up at <script type="math/tex">b</script>? That seems obviously incorrect! So our interpretation has led us slightly astray.</p>
+
+<p>We will correct this intuition of this just a moment, but now is a good time to introduce some simplying notation that will carry us beyond just two dimensions.</p>
+
+<h2 id="simplifying-geometric-products-of-basis-vectors">Simplifying Geometric Products of Basis Vectors</h2>
+
+<p>For brevity, if you have fewer than 10 dimensions, it is often convenient to combine the subscripts of basis vectors. That is, with this notational convention, <script type="math/tex">e_1 e_2 = e_{12}</script>, or <script type="math/tex">e_1 e_2 e_3 = e_{123}</script>.</p>
+
+<p>As for simplifying more complex geometric product expressions with orthonormal vectors, we have already learned the only two rules that we need to know:</p>
+
+<ol>
+  <li><script type="math/tex">e_i e_i = e_{ii} = 1</script>.</li>
+  <li><script type="math/tex">e_i e_j = e_{ij} = - e_{ji}</script>.</li>
+</ol>
+
+<p>That’s it! Let’s try an example to make sure this is completely obvious.</p>
+
+<h4 id="example-simplifying-geometric-products">Example: Simplifying Geometric Products</h4>
+
+<p>Simplify the quantity <script type="math/tex">e_2 e_3 e_2 e_1 e_3 e_2 e_2</script>.</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+e_2 e_3 e_2 e_1 e_3 e_2 e_2 & = & e_2 e_3 e_2 e_1 e_3 e_2 e_2\\
+                            & = & e_2 e_3 e_2 e_1 e_3 (1) \\
+                            & = & e_2 (-e_2 e_3) e_1 e_3\\
+                            & = & -(1) e_3 e_2 e_1 e_3 \\
+                            & = & -(1) e_3 e_2 e_1 e_3 \\  
+                            & = & - (- e_2 e_3) e_1 e_3 \\  
+                            & = & e_2 (- e_1 e_3) e_3 \\  
+                            & = & - e_2 e_1 (1) \\  
+                            & = & e_1 e_2 \\  
+                            & = & e_{12} \end{eqnarray*} %]]></script>
+
+<h2 id="blades-grades-and-bivectors">Blades, Grades and Bivectors</h2>
+
+<p>Let us make a table of the different types of objects we have seen up to this point, and add a new column called <strong>grade</strong> that more or less describes the dimensionality of the object.</p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Object (a.k.a. Blade )</th>
+      <th>Examples</th>
+      <th>Basis</th>
+      <th>Grade</th>
+      <th>Relates to</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Scalar</td>
+      <td>1,2,3,4,5…</td>
+      <td>1</td>
+      <td>0</td>
+      <td>Magnitude</td>
+    </tr>
+    <tr>
+      <td>Vector</td>
+      <td><script type="math/tex">a,b</script></td>
+      <td><script type="math/tex">e_1, e_2</script></td>
+      <td>1</td>
+      <td>Direction</td>
+    </tr>
+    <tr>
+      <td>Bivector / Rotation</td>
+      <td><script type="math/tex">5R</script></td>
+      <td><script type="math/tex">e_{12}</script></td>
+      <td>2</td>
+      <td>Rotation</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Common parlance is to call <script type="math/tex">e_{12}</script> a bivector, and when we get to 3D, <script type="math/tex">e_{123}</script> is the trivector.</p>
+
+<h2 id="the-meaning-of-geometric-products">The meaning of Geometric Products</h2>
+
+<p>Let us look one more time at the vectors <script type="math/tex">a</script> and <script type="math/tex">b</script>, but this time let us include all four of the basis vectors we have seen thus far: <script type="math/tex">1, e_1, e_2, e_{12}</script>.</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+ a & = & 0(1) + 2e_1 + 1e_2 + 0e_{12}\\
+ b & = & 0(1) + 3e_1 + 4e_2 + 0e_{12}\end{eqnarray*} %]]></script>
+
+<p>In general, we will call this new compound object a “Multivector”. Multivector <script type="math/tex">a</script> has four components:</p>
+<ul>
+  <li>An amount of “0” of a scalar quantity</li>
+  <li>An amount of “2” in direction <script type="math/tex">e_1</script></li>
+  <li>An amount of “1” in direction <script type="math/tex">e_2</script></li>
+  <li>An amount of “0” is the bivector (90 degree rotation) direction</li>
+</ul>
+
+<p>As we know by now, we cannot simplify this expression any further, because we cannot “add” apples and oranges and pears and bananas. All four objects are independent, different measurement units: the scalar values, the two basis values, and the bivector (<script type="math/tex">e_{12}</script>) value.</p>
+
+<p>The only thing left to do in this post is to explore a few examples.</p>
+
+<h4 id="example-on-the-order-of-multiplication-ab-vs-ba">Example: On the Order of Multiplication (<script type="math/tex">ab</script> vs <script type="math/tex">ba</script>)?</h4>
+
+<p>What is the relationship between <script type="math/tex">ab</script> and <script type="math/tex">ba</script>?</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+ba & = & (3e_{1}+4e_{2})(2e_{1}+1e_{2})\\
+ & = & 6e_{11}+3e_{12}+8e_{21}+4e_{22}\\
+ & = & 6+3e_{12}-8e_{12}+4\\
+ & = & 10-5e_{12}\\
+ & = & (ab)^{\dagger}
+\end{eqnarray*} %]]></script>
+
+<p>where <script type="math/tex">^{\dagger}</script> means the complex conjugate. In physical terms, this means rotating clockwise instead of counterclockwise, which is consistent with our understanding thus far.</p>
+
+<h4 id="example-how-do-we-move-from-a-to-b">Example: How do we move from <script type="math/tex">a</script> to <script type="math/tex">b</script>?</h4>
+
+<p>If <script type="math/tex">ab</script> represents a transformation from <script type="math/tex">a</script> to <script type="math/tex">b</script>, how do we show it? Keeping in mind that geometric product operations are not commutative, should we pre- or post- multiply <script type="math/tex">a</script> with <script type="math/tex">ab</script> to transform it into <script type="math/tex">b</script>?</p>
+
+<p>If we pre-multiply,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+aba & = & (ab)a\\
+ & = & (10+5e_{12})(2e_{1}+1e_{2})\\
+ & = & 20e_{1}+10e_{2}+10e_{121}+5e_{122}\\
+ & = & 20e_{1}+10e_{2}-10e_{2}+5e_{1}\\
+ & = & 25e_{1}
+\end{eqnarray*} %]]></script>
+
+<p>Which is not equal to <script type="math/tex">b</script>. Perhaps we should try post-multiplying?</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+aab & = & a(ab)\\
+ & = & (2e_{1}+1e_{2})(10+5e_{12})\\
+ & = & 20e_{1}+10e_{112}+10e_{2}+5e_{212}\\
+ & = & 20e_{1}+10e_{2}+10e_{2}-5e_{1}\\
+ & = & 15e_{1}+20e_{2}\\
+ & = & 5(3e_{1}+4e_{2})\\
+ & = & 5b
+\end{eqnarray*} %]]></script>
+
+<p>Aha! That is just <script type="math/tex">b</script> multiplied by a factor of 5. Where did that factor of 5 come from? Well, If we normalized <script type="math/tex">a</script> and <script type="math/tex">b</script> to have unit length (i.e. <script type="math/tex">\frac{a}{\|a\|}</script> and <script type="math/tex">\frac{b}{\|b\|}</script>), then the factor of 5 disappears. Now is a good time to grab a sheet of paper and a pen and prove that <script type="math/tex">aab=b</script> for unit length vectors, and then read on:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+r&=&\frac{a}{\|a\|}\frac{b}{\|b\|}\\
+&=&...\end{eqnarray*} %]]></script>
+
+<script type="math/tex; mode=display">\|r\|=1</script>
+
+<p>If you can see that <script type="math/tex">r</script> represents a pure rotation (a.k.a. a <strong>rotor</strong>), then the transform from <script type="math/tex">a</script> to <script type="math/tex">b</script> could be described as: “normalize <script type="math/tex">a</script>, rotate by <script type="math/tex">r</script>, and then scale by <script type="math/tex">\|b\|</script> to reach <script type="math/tex">b</script>. In math, this is quite simply several products written from left to right:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+a\frac{1}{\|a\|}r\|b\| & = & a\frac{1}{\|a\|}\frac{ab}{\|a\|\|b\|}\|b\|\\
+ & = & \frac{aab}{\|a\|^{2}}\\
+ & = & b
+\end{eqnarray*} %]]></script>
+
+<p>And we can see that the factor of 5 we saw earlier came from the fact that <script type="math/tex">\|a\|^2=5</script>. The true way to go from <script type="math/tex">a</script> to <script type="math/tex">b</script> is thus to multiply <script type="math/tex">a</script> by <script type="math/tex">\frac{ab}{\|a\|^2}</script>.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>For those with prior experience in engineering and physics, you have probably noticed by now that the bivector <script type="math/tex">e_{12}</script> is playing the role of the imaginary number <script type="math/tex">i=\sqrt{-1}</script>, and that this is all just complex mathematics in another form. However, you may agree after seeing the results in higher dimensions that it is perhaps more valid to say that complex mathematics is just a special case of geometric algebra!</p>
+
+<h1 id="references">References</h1>
+
+<p>I found the following papers useful while learning about Geometric Algebra. Ordering from easiest to hardest,</p>
+
+<ul>
+  <li><em>Geometric Algebra Primer</em>, by Jaap Suter.</li>
+  <li><em>Imaginary Numbers are not Real – the Geometric Algebra of Spacetime</em>, by Stephen Gull, Anthony Lasenby, and Chris Doran.</li>
+  <li><em>A Survey of Geometric Algebra and Geometric Calculus</em>, by Alan Macdonald.</li>
+  <li><em>Oersted Medal Lecture 2002: Reforming the Mathematical Language of Physics</em> by David Hestenes.</li>
+  <li><em>An Introduction to Geometric Algebra and Calculus</em>, by Alan Bromborsky.</li>
+  <li><em>Geometric Algebra</em>, by Eric Chisolm.</li>
+  <li><em>Spacetime Physics with Geometric Algebra 1</em>, by David Hestenes.</li>
+</ul>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="https://ivarthorson.github.io/blog/hyperbolic-geometry-and-special-relativity/" class="btn" title="Hyperbolic Geometry & Special Relativity">Previous</a>
+      
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2017 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://ivarthorson.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://ivarthorson.github.io';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://ivarthorson.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://ivarthorson.github.io/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

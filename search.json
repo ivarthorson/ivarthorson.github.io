@@ -2,6 +2,14 @@
 
   
     {
+      "title"			: "Introduction to Geometric Algebra, Part 1",
+      "link"			: "https://ivarthorson.github.io/blog/intro-to-geometric-algebra-1/",
+      "excerpt"		: "Geometric Algebra (GA) is one of those things that we should have all learned in high school because it would have made physics and mathematics in college so much easier."
+    }
+  
+
+  
+    ,{
       "title"			: "Hyperbolic Geometry & Special Relativity",
       "link"			: "https://ivarthorson.github.io/blog/hyperbolic-geometry-and-special-relativity/",
       "excerpt"		: "While studying An Introduction to Particle Physics on a recent flight to Japan – studying math that is way above my head is a nerdy hobby of mine – I came across a simple viewpoint on special relativity that really stunned me:"

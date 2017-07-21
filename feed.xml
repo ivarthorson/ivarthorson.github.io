@@ -1,4 +1,472 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://ivarthorson.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ivarthorson.github.io/" rel="alternate" type="text/html" /><updated>2017-07-11T18:09:06-07:00</updated><id>https://ivarthorson.github.io/</id><title type="html">Art is Never Finished</title><subtitle>...Only Abandoned. – Leonardo da Vinci</subtitle><entry><title type="html">Hyperbolic Geometry &amp;amp; Special Relativity</title><link href="https://ivarthorson.github.io/blog/hyperbolic-geometry-and-special-relativity/" rel="alternate" type="text/html" title="Hyperbolic Geometry &amp; Special Relativity" /><published>2017-06-02T00:00:00-07:00</published><updated>2017-06-02T00:00:00-07:00</updated><id>https://ivarthorson.github.io/blog/hyperbolic-geometry-and-special-relativity</id><content type="html" xml:base="https://ivarthorson.github.io/blog/hyperbolic-geometry-and-special-relativity/">&lt;p&gt;While studying &lt;a href=&quot;https://arxiv.org/abs/0810.3328&quot;&gt;An Introduction to Particle Physics&lt;/a&gt; on a recent flight to Japan – studying math that is way above my head is a nerdy hobby of mine – I came across a simple viewpoint on special relativity that really stunned me:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://ivarthorson.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ivarthorson.github.io/" rel="alternate" type="text/html" /><updated>2017-07-21T13:38:40-07:00</updated><id>https://ivarthorson.github.io/</id><title type="html">Art is Never Finished</title><subtitle>...Only Abandoned. – Leonardo da Vinci</subtitle><entry><title type="html">Introduction to Geometric Algebra, Part 1</title><link href="https://ivarthorson.github.io/blog/intro-to-geometric-algebra-1/" rel="alternate" type="text/html" title="Introduction to Geometric Algebra, Part 1" /><published>2017-07-12T00:00:00-07:00</published><updated>2017-07-12T00:00:00-07:00</updated><id>https://ivarthorson.github.io/blog/intro-to-geometric-algebra-1</id><content type="html" xml:base="https://ivarthorson.github.io/blog/intro-to-geometric-algebra-1/">&lt;p&gt;Geometric Algebra (GA) is one of those things that we should have all learned in high school because it would have made physics and mathematics in college so much easier.&lt;/p&gt;
+
+&lt;p&gt;The fact that we did not learn it in high school is probably because GA appears to only have been known by mathematicians studying &lt;a href=&quot;https://www.wikipedia.org/wiki/clifford_algebra&quot;&gt;Clifford Algebras&lt;/a&gt;. Mathematicians may be 100 years ahead of everybody else in so many ways, but they are not always the best at communicating their subject to non-mathematicians. The physics community, at least, seems to have figured out that GA is useful, and since physicists are 20 years ahead of the rest of the sciences in the adoption of good tools and methods, it seems safe to predict that in the future engineers will start seeing GA in school in a couple of decades, or &lt;a href=&quot;http://link-to-paper&quot;&gt;even sooner&lt;/a&gt;!&lt;/p&gt;
+
+&lt;p&gt;Geometric Algebra could be taught in high school immediately after basic algebra. Not only is GA not particularly difficult to learn, it provides a unified perspective for several areas:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;GA lets you &lt;strong&gt;easily perform 2D and 3D vector transformations&lt;/strong&gt;. It is simpler to perform spatial rotations than using matrices, sines, and inverse trigonometric operations, and it generalizes to more dimensions in a straightforward way.&lt;/li&gt;
+  &lt;li&gt;GA gives a &lt;strong&gt;clear geometric meaning to the imaginary number&lt;/strong&gt; – or all 3 imaginary numbers, in the case of quaternions.&lt;/li&gt;
+  &lt;li&gt;GA &lt;strong&gt;replaces div, grad, curl, with a single vector derivative&lt;/strong&gt;. To an electrical engineer like myself, it is frankly &lt;em&gt;amazing&lt;/em&gt; to see the four Maxwell Equations reduced into a single equation!&lt;/li&gt;
+  &lt;li&gt;GA is &lt;strong&gt;coordinate-free&lt;/strong&gt; and can let you make analytic conclusions without first choosing a basis&lt;/li&gt;
+  &lt;li&gt;GA is a framework &lt;strong&gt;applicable to dozens of different fields&lt;/strong&gt; of physics and engineering, including classical and quantum mechanics.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;While I am far from being an expert in Geometric Algebra, I wanted to write an accessible, bare-bones introduction to the subject so that people can follow my use of it in a future post on hyperbolic geometry. For this reason, this post will just focus on 2D operations, and perhaps in a later post I can talk about rotations in 3D space or 4D spacetime, differential equations, Maxwell’s Equations, and other applications.&lt;/p&gt;
+
+&lt;h1 id=&quot;preparation-basic-concepts&quot;&gt;Preparation: Basic Concepts&lt;/h1&gt;
+
+&lt;p&gt;Before introducing Geometric Algebra, I’m going to briefly review coordinate systems, basis vectors, and the inner and outer products. As an engineer and not a mathematician, I will focus on examples and developing intuition rather than rigor, entirely symbolic notation, or the capacity to generalize expressions. Checking correctness with a proof must follow the intuition that there is something there to prove!&lt;/p&gt;
+
+&lt;h2 id=&quot;concept-properties-of-algebras&quot;&gt;Concept: Properties of Algebras&lt;/h2&gt;
+
+&lt;p&gt;Most people have a vague idea what algebra is: it is a set of rules to add and multiply objects of different quantities, often represented in school using the variables &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;y&lt;/script&gt;. The operations you perform usually satisfy the properties of being&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;associative&lt;/strong&gt;, meaning that you can reorder operations &lt;script type=&quot;math/tex&quot;&gt;(qr)s=q(rs)&lt;/script&gt;; and&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;distributive&lt;/strong&gt;, meaning that you can expand like &lt;script type=&quot;math/tex&quot;&gt;q(r+s)=qr+qs&lt;/script&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The algebra you learned in school had one other property:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;commutative&lt;/strong&gt; multiplication, meaning that you can reorder terms &lt;script type=&quot;math/tex&quot;&gt;qr = rq&lt;/script&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This is &lt;strong&gt;not so&lt;/strong&gt; in Geometric Algebra and matrix algebras, in which the &lt;em&gt;ordering&lt;/em&gt; of terms being multiplied matters and generally speaking &lt;script type=&quot;math/tex&quot;&gt;qr \ne rq&lt;/script&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you are wondering why some operations are not commutative, consider where you would end up navigating if you start in a given orientation and:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Walk forward 100 paces (&lt;script type=&quot;math/tex&quot;&gt;q&lt;/script&gt;) and then turn right (&lt;script type=&quot;math/tex&quot;&gt;r&lt;/script&gt;); or&lt;/li&gt;
+  &lt;li&gt;Turn right (&lt;script type=&quot;math/tex&quot;&gt;r&lt;/script&gt;) and then walk forward 100 paces (&lt;script type=&quot;math/tex&quot;&gt;q&lt;/script&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Another example is to consider the commutivity of addition and subtraction: &lt;script type=&quot;math/tex&quot;&gt;4+3=3+4&lt;/script&gt;, but does &lt;script type=&quot;math/tex&quot;&gt;4-3=3-4&lt;/script&gt;?&lt;/p&gt;
+
+&lt;h2 id=&quot;concept-coordinate-system-and-references&quot;&gt;Concept: Coordinate System and References&lt;/h2&gt;
+
+&lt;p&gt;To introduce GA we need to define a coordinate system with two things:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;A way to measure distance (hopefully evenly!)&lt;/li&gt;
+  &lt;li&gt;Reference directions (hopefully independent!)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Let us consider our options first. If we are drawing on a sheet of paper, we could measure distances using the number of marks passed on a grid. This grid could be:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;coord-arb.png&quot; alt=&quot;coord-arb&quot; title=&quot;Curvilinear coordinates.&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Arbitrary or Curvilinear coordinates&lt;/strong&gt;. We &lt;em&gt;could&lt;/em&gt; draw any bunch of curved lines unevenly over the page in a wavy grid as long as the lines parallel to each other did not intersect. This sounds crazy, but sometimes you need to account for some distortion in a space and this type of coordinate system can be very useful as a transformation. In most cases, however, it would be a poor choice for most problems because one unit of distance is not exactly “equal” to another unit elsewhere on the page.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;coord-polar.png&quot; alt=&quot;coord-polar&quot; title=&quot;Polar Coordinates.&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Polar&lt;/strong&gt;. We &lt;em&gt;could&lt;/em&gt; use we could use an angle (from a reference direction) and a distance or angle from an origin to define where a point is, as is often done on spherical surfaces like the surface of the Earth. While useful in certain circumstances, but again suffer from the problem that distances at different areas on the page are not easily compared.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;coord-rectangular.png&quot; alt=&quot;coord-rect&quot; title=&quot;Rectangular Coordinates.&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Rectangular Coordinates&lt;/strong&gt;. Known as the familiar “XY” coordinate system for most people, we could (and will!) use a grid of straight, parallel lines to find the coordinates of a point. Most problems that are not on highly distorted surfaces are most simply considered in this way – and even on curved surfaces, if you “zoom in” far enough, most surfaces begin to look “locally flat” and begin to resemble straight lines.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Now that we are measuring distances evenly with a Cartesian grid, we need to choose a &lt;strong&gt;basis&lt;/strong&gt;, which are essentially the directions that we reference. The choice of the directions is partly arbitrary, and partly not. For example, we can rotate the grid to be in any orientation and still get the same results. What other options do we have?&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;coord-skew.png&quot; alt=&quot;coord-skewed&quot; title=&quot;Non-orthogonal-basis&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Non-orthogonal basis&lt;/strong&gt;. We &lt;em&gt;could&lt;/em&gt; choose any two directions to draw our parallel lines in, which would probably our grid skewed, but we would soon notice that moving along &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; also moves you along &lt;script type=&quot;math/tex&quot;&gt;y&lt;/script&gt; in some important sense. This seems like a problem, so we must add another constraint!&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;coord-rectangular.png&quot; alt=&quot;coord-rectangular&quot; title=&quot;Cartesian Coordinates&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Orthogonal&lt;/strong&gt;. If we make the two vectors orthogonal (i.e. 90 degrees to each other) we can now move independently in each direction. But what if we accidentally spaced our parallel lines different distances apart along each axis? If we do not add a constraint that both reference directions be of the same magnitude, we might accidentally measure distances along X in units of meters and distances along Y in distances of feet.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;coord-cartesian.png&quot; alt=&quot;coord-cartesian&quot; title=&quot;Cartesian Coordinates&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Orthonormal&lt;/strong&gt;. If your basis is orthogonal and are equal in magnitude (i.e. distances on each are measured in the same way), we call the basis “orthonormal”.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;One of the advantages of GA is that the exact choice of basis often does not matter – it could be rotated to any number of crazy angles or different scales – and that you can find relationships without choosing a basis at all.&lt;/p&gt;
+
+&lt;h2 id=&quot;concept-vectors&quot;&gt;Concept: Vectors&lt;/h2&gt;
+
+&lt;p&gt;Using our new coordinate space, let us now draw two example &lt;strong&gt;vectors&lt;/strong&gt; &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;, which are mixtures of the basis directions &lt;script type=&quot;math/tex&quot;&gt;e_1&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;e_2&lt;/script&gt;. We will use these same two vectors over and over again to keep the number of symbols low.&lt;/p&gt;
+
+&lt;p&gt;Rather than than using matrices or vector notation, which would do more harm than good because they would obfuscate important quantities, we will instead use simple algebraic forms to express vectors. Let us define&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{eqnarray*}
+ a &amp; = &amp; 2e_1 + 1e_2\\
+ b &amp; = &amp; 3e_1 + 4e_2 \end{eqnarray*} %]]&gt;&lt;/script&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;example-vectors.png&quot; alt=&quot;example-vectors&quot; title=&quot;Sample vectors a and b&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In plain english, the vector &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; means a direction that, for each three units you move along &lt;script type=&quot;math/tex&quot;&gt;e_1&lt;/script&gt;, you must also move one unit along &lt;script type=&quot;math/tex&quot;&gt;e_2&lt;/script&gt;. Note that we cannot “add” apples &lt;script type=&quot;math/tex&quot;&gt;e_1&lt;/script&gt; and oranges &lt;script type=&quot;math/tex&quot;&gt;e_2&lt;/script&gt;; the &lt;script type=&quot;math/tex&quot;&gt;+&lt;/script&gt; symbol here means something like the word “and” for the terms with different basis vectors. We &lt;em&gt;can&lt;/em&gt; reduce expressions with &lt;script type=&quot;math/tex&quot;&gt;e_1&lt;/script&gt;, but not combine them with &lt;script type=&quot;math/tex&quot;&gt;e_2&lt;/script&gt; in a way that is further reduced than this notation.&lt;/p&gt;
+
+&lt;h4 id=&quot;example-vector-addition&quot;&gt;Example: Vector Addition&lt;/h4&gt;
+
+&lt;p&gt;What is &lt;script type=&quot;math/tex&quot;&gt;a + b&lt;/script&gt;?&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{eqnarray*}
+ a + b &amp; = &amp; (2e_1 + 1e_2) + (3e_1 + 4e_2) \\
+       &amp; = &amp;  2e_1 + 3e_1 + 1e_2 + 4e_2  \\
+       &amp; = &amp; (2+3)e_1 + (1+4)e_2 \\
+       &amp; = &amp; 5e_1 + 5e_2 \end{eqnarray*} %]]&gt;&lt;/script&gt;
+
+&lt;h2 id=&quot;concept-vector-magnitude&quot;&gt;Concept: Vector Magnitude&lt;/h2&gt;
+
+&lt;p&gt;Since trigonometry is familiar to most people, we will define the &lt;strong&gt;magnitude&lt;/strong&gt; of a vector &lt;script type=&quot;math/tex&quot;&gt;a=\alpha_1 e_1 + \alpha_2 e_2&lt;/script&gt; in the same way as was used the Pythagorean Theorem.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\|a\| = \sqrt{\alpha_1^2 + \alpha_2^2}&lt;/script&gt;
+
+&lt;h4 id=&quot;example-vector-magnitudes&quot;&gt;Example: Vector Magnitudes&lt;/h4&gt;
+
+&lt;p&gt;What are the magnitudes of &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;?&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;vector-magnitude.png&quot; alt=&quot;vector-magnitude&quot; title=&quot;Euclidean magnitude.&quot; /&gt;&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{eqnarray*}
+ \|a\| &amp; = &amp; \sqrt{2^2 + 1^2} = \sqrt{5}\\
+ \|b\| &amp; = &amp; \sqrt{3^2 + 4^2} = \sqrt{25} = 5\end{eqnarray*} %]]&gt;&lt;/script&gt;
+
+&lt;h2 id=&quot;concept-projections-and-the-inner-product&quot;&gt;Concept: Projections and the Inner Product&lt;/h2&gt;
+
+&lt;p&gt;Let us ask a very simple question about these vectors:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;If you move along &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt;, how much do you also move along &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The answer to this question is given by the &lt;strong&gt;inner product&lt;/strong&gt; (a.k.a. &lt;strong&gt;dot product&lt;/strong&gt;). It is called the “inner” product because the answer is “inside” or “along” the vector to which you are projecting.&lt;/p&gt;
+
+&lt;p&gt;Most people remember trigonometry pretty well, in which case the single most important thing to remember about the inner product is:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;a\cdot b=\|a\|\|b\|\cos\theta&lt;/script&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;inner-product-and-magnitude.png&quot; alt=&quot;inner-product-and-magnitude&quot; title=&quot;The inner product is related to magnitude.&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;What can we discover about the consequences of this equation?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The inner product &lt;em&gt;must&lt;/em&gt; be commutative (&lt;script type=&quot;math/tex&quot;&gt;a\cdot b = b \cdot a&lt;/script&gt;), because the cosine function is &lt;strong&gt;symmetric&lt;/strong&gt; (a.k.a “even”), which is the property that &lt;script type=&quot;math/tex&quot;&gt;\cos(\theta)=\cos(-\theta)&lt;/script&gt;. All this means is that the value of &lt;script type=&quot;math/tex&quot;&gt;\cos(...)&lt;/script&gt; will be the same whether we measure from &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; to &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;, which is &lt;script type=&quot;math/tex&quot;&gt;\cos(\theta)&lt;/script&gt;, or from &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt; to &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt;, which is &lt;script type=&quot;math/tex&quot;&gt;\cos(-\theta)&lt;/script&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;cosine-fn.png&quot; alt=&quot;cosine-fn&quot; title=&quot;The cosine function is symmetric.&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;If &lt;script type=&quot;math/tex&quot;&gt;\|a\|=1&lt;/script&gt;, then &lt;script type=&quot;math/tex&quot;&gt;a \cdot a = 1&lt;/script&gt; because there is zero angle between &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; and itself, and &lt;script type=&quot;math/tex&quot;&gt;\cos(0)=1&lt;/script&gt;. We will use this property for basis vectors extensively, specifically that &lt;script type=&quot;math/tex&quot;&gt;e_1 \cdot e_1 = 1&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;e_2 \cdot e_2 = 1&lt;/script&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Orthogonal things &lt;em&gt;must&lt;/em&gt; have an inner product of zero, because if &lt;script type=&quot;math/tex&quot;&gt;\theta=\pm 90^\circ&lt;/script&gt;, &lt;script type=&quot;math/tex&quot;&gt;\cos(\pm 90^\circ)=0&lt;/script&gt;, and thus &lt;script type=&quot;math/tex&quot;&gt;a\cdot b=0&lt;/script&gt;. This definitely applies to our basis vectors, where we see that &lt;script type=&quot;math/tex&quot;&gt;e_1 \cdot e_2 = e_2 \cdot e_1 = 0&lt;/script&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The inner product &lt;em&gt;must&lt;/em&gt; be related closely to magnitudes. It is easy to prove that &lt;script type=&quot;math/tex&quot;&gt;\|a\| = \sqrt{a \cdot a}&lt;/script&gt;; can you see why? Geometrically, we could think of this definition of magnitude as being akin to “What do we get if we move in the direction of &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; by a number of units equal to the length of &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt;? The magnitude of &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt;.”&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It will also help to think the types of objects that enter and exit a “black box functional specification” of the inner product operation. The two “inputs” were vectors and the “output” was a scalar that measures the how much you move along one if you move along the other.&lt;/p&gt;
+
+&lt;h4 id=&quot;example-inner-product&quot;&gt;Example: Inner Product&lt;/h4&gt;
+
+&lt;p&gt;What is &lt;script type=&quot;math/tex&quot;&gt;a \cdot b&lt;/script&gt; using the above values of &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;?&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{eqnarray*}
+ a \cdot b &amp; = &amp; (2e_1 + 1e_2) \cdot (3e_1 + 4e_2) \\
+           &amp; = &amp; 2e_1\cdot 3e_1 + 2e_1\cdot 4e_2 + 1e_2\cdot 3e_1 + 1e_2 \cdot 4e_2  \\
+           &amp; = &amp; 6e_1\cdot e_1 + 8e_1\cdot e_2 + 3e_2\cdot e_1 + 4e_2 \cdot e_2  \\
+           &amp; = &amp; 6 (1) + 8 (0) + 3 (0) + 4 (1)  \\
+           &amp; = &amp; 10 \end{eqnarray*} %]]&gt;&lt;/script&gt;
+
+&lt;h1 id=&quot;concept-rotations-and-the-outer-product&quot;&gt;Concept: Rotations and the Outer Product&lt;/h1&gt;
+
+&lt;p&gt;Let us ask another very simple question about these vectors:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;If you start pointed in the direction of &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt;, how much do you need to rotate to point in the direction of &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The &lt;strong&gt;outer product&lt;/strong&gt; (a.k.a. &lt;strong&gt;wedge product&lt;/strong&gt;) is what gives us the answer to this question.&lt;/p&gt;
+
+&lt;p&gt;As before, the easiest way to understand this is via trigonometry, in which case the most important fact is:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;a\wedge b=\|a\|\|b\|\sin\theta&lt;/script&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;outer-product-and-sine2.png&quot; alt=&quot;outer-product-and-sine2&quot; title=&quot;The outer product is related to the sine. &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This equation has several important consequences:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The outer product is &lt;em&gt;not&lt;/em&gt; commutative. In fact, the outer product is a kind of multiplication that is called &lt;strong&gt;anti-symmetric&lt;/strong&gt;, which means that commuting the inputs flips the sign (&lt;script type=&quot;math/tex&quot;&gt;a\wedge b = - b \wedge a)&lt;/script&gt;. This is fundamentally because &lt;script type=&quot;math/tex&quot;&gt;\sin()&lt;/script&gt; is an odd function and &lt;script type=&quot;math/tex&quot;&gt;\sin(\theta)=-\sin(-\theta)&lt;/script&gt;. There are also geometric reasons for rotations to not be commutative: if we start at &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt;, we need to rotate counterclockwise to get to &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;, but we start at &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;, we need to rotate clockwise to get to &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt;. The choice of which reference direction you measure from matters to the sign of the answer.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;sine-fn.png&quot; alt=&quot;sine-fn&quot; title=&quot;The sine function is antisymmetric.&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The outer product is closely related to &lt;strong&gt;rotation&lt;/strong&gt; by 90 degrees, because that is the point at which &lt;script type=&quot;math/tex&quot;&gt;\sin(\theta)&lt;/script&gt; is maximized and minimized. This is &lt;em&gt;so important&lt;/em&gt; that we will right now assign the symbol &lt;script type=&quot;math/tex&quot;&gt;R&lt;/script&gt; to a 90 degree counterclockwise rotation. We can think of smaller or larger rotations as being &lt;script type=&quot;math/tex&quot;&gt;R&lt;/script&gt; multiplied by some scalar to adjust “how big” the rotation is. Under this idea, a 45 degree counterclockwise rotation would be &lt;script type=&quot;math/tex&quot;&gt;0.5R&lt;/script&gt;, and a 90 degree clockwise rotation would be &lt;script type=&quot;math/tex&quot;&gt;-R&lt;/script&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;bivectors.png&quot; alt=&quot;bivectors&quot; title=&quot;A bivector is often drawn as an arc.&quot; /&gt; &lt;img src=&quot;outer-product-half-rotation.png&quot; alt=&quot;outer-product-half-rotation&quot; title=&quot;Half a rotation.&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The outer product of two orthonormal vectors &lt;em&gt;must&lt;/em&gt; be either &lt;script type=&quot;math/tex&quot;&gt;1R&lt;/script&gt; or &lt;script type=&quot;math/tex&quot;&gt;-1R&lt;/script&gt;. Why? Because if &lt;script type=&quot;math/tex&quot;&gt;\theta=\pm 90^\circ&lt;/script&gt;, then &lt;script type=&quot;math/tex&quot;&gt;\sin(\pm 90^\circ)=\pm 1&lt;/script&gt;. For the basis vectors, this means that &lt;script type=&quot;math/tex&quot;&gt;R = e_1 \wedge e_2&lt;/script&gt; is a 90 degree counterclockwise rotation, and &lt;script type=&quot;math/tex&quot;&gt;-R = e_2 \wedge e_1&lt;/script&gt; is a 90 degree clockwise rotation.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Once again, it will help to consider the black box specification of the outer product operation. The two “inputs” were vectors and the “output” is a scaled amount of a 90 degree rotation &lt;script type=&quot;math/tex&quot;&gt;R&lt;/script&gt;, which is neither a vector nor a scalar. What, exactly, is the type of this output object? After defining the geometric product, we will give it a better name.&lt;/p&gt;
+
+&lt;h4 id=&quot;example-outer-product&quot;&gt;Example: Outer Product&lt;/h4&gt;
+
+&lt;p&gt;What is &lt;script type=&quot;math/tex&quot;&gt;a \cdot b&lt;/script&gt; using the above values of &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;?&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{eqnarray*} 
+ a \wedge b &amp; = &amp; (2e_1 + 1e_2) \wedge (3e_1 + 4e_2) \\
+            &amp; = &amp; 2e_1\wedge 3e_1 + 2e_1\wedge 4e_2 + 1e_2\wedge 3e_1 + 1e_2 \wedge 4e_2  \\
+            &amp; = &amp; 6e_1\wedge e_1 + 8e_1\wedge e_2 + 3e_2\wedge e_1 + 4e_2 \wedge e_2  \\
+            &amp; = &amp; 6 (0) + 8 (+R) + 3 (-R) + 4 (0)  \\
+            &amp; = &amp; 5R \end{eqnarray*} %]]&gt;&lt;/script&gt;
+
+&lt;h1 id=&quot;geometric-algebra&quot;&gt;Geometric Algebra&lt;/h1&gt;
+
+&lt;p&gt;With the preliminaries out of the way, we can now define the geometric product and actually start doing geometric algebra!&lt;/p&gt;
+
+&lt;h2 id=&quot;the-geometric-product&quot;&gt;The Geometric Product&lt;/h2&gt;
+
+&lt;p&gt;In the same way that we introduced the inner and outer products by asking a question, we will introduce the &lt;strong&gt;geometric product&lt;/strong&gt; by asking a very general question:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;How do you transform &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; into &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Or equivilently, in terms of what we already know,&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;How much do you need to rescale and rotate &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; so that it is equal to &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The intuition that we need both a rotation &lt;em&gt;and&lt;/em&gt; a rescaling is key to understanding the geometric product. We will write the geometric product of &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt; as &lt;script type=&quot;math/tex&quot;&gt;ab&lt;/script&gt;, as we would write scalar multiplication of two variables in high school algebra. We can define the geometric product as:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;ab = a \cdot b + a \wedge b&lt;/script&gt;
+
+&lt;p&gt;But in some ways, this definition puts the cart before the horse! We can &lt;em&gt;discover&lt;/em&gt; this equation if just try to multiply &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt; together and be very careful about how we do so. Let us explore what happens when we try to compute &lt;script type=&quot;math/tex&quot;&gt;ab&lt;/script&gt; using high school rules of algebra (sans commutative multiplication of nonscalars).&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{eqnarray*}
+ ab &amp; = &amp; (2e_1 + 1e_2) (3e_1 + 4e_2)\\
+    &amp; = &amp; (2e_1)(3e_1) + (2e_1)(4e_2) + (1e_2)(3e_1) + (1e_2)(4e_2)\\
+    &amp; = &amp; 6 e_1 e_1 + 8 e_1 e_2 + 3 e_2 e_1 + 4 e_2 e_2\\
+ \end{eqnarray*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;Hmm. What should we do with the products of the unit vectors &lt;script type=&quot;math/tex&quot;&gt;e_1 e_1, e_1 e_2, e_2 e_1, e_2 e_2&lt;/script&gt;? We can reason it out:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;e_1 e_1&lt;/script&gt; asks, “How do I transform &lt;script type=&quot;math/tex&quot;&gt;e_1&lt;/script&gt; into &lt;script type=&quot;math/tex&quot;&gt;e_1&lt;/script&gt;?”. The answer, of course, is that nothing needs to be done! We can express this by scaling by one, the identity object, and write that &lt;script type=&quot;math/tex&quot;&gt;e_1 e_1 = 1&lt;/script&gt;. If we recall the properties of dot and wedge products for unit length vectors, &lt;script type=&quot;math/tex&quot;&gt;e_1\cdot e_1=1&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;e_1\wedge e_1=0&lt;/script&gt;, then this assumption also agrees with our definition of the geometric product, &lt;script type=&quot;math/tex&quot;&gt;e_1e_1=e_1\cdot e_1 + e_1 \wedge e_1 = 1 + 0R = 1&lt;/script&gt;. No rotation was needed.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;e_2 e_2&lt;/script&gt; must also equal 1, for the same reasons.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;e_1 e_2&lt;/script&gt; is asking how do I transform &lt;script type=&quot;math/tex&quot;&gt;e_1&lt;/script&gt; into &lt;script type=&quot;math/tex&quot;&gt;e_2&lt;/script&gt;? We know that our basis vectors are orthonormal, so this must equal a 90 degree clockwise rotation &lt;script type=&quot;math/tex&quot;&gt;R&lt;/script&gt;. &lt;script type=&quot;math/tex&quot;&gt;e_1e_2=e_1\cdot e_2 + e_1 \wedge e_2 = 0 + 1R = R&lt;/script&gt;, and no rescaling is needed.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;e_2 e_1&lt;/script&gt; must thus equal &lt;script type=&quot;math/tex&quot;&gt;-R&lt;/script&gt;, using similar reasoning.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We can now finish the simplification process.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{eqnarray*}
+ab &amp; = &amp; 6 e_1 e_1 + 8 e_1 e_2 + 3 e_2 e_1 + 4 e_2 e_2\\
+   &amp; = &amp; 6 (1) + 8(R) + 3 (-R) + 4 (1)\\
+   &amp; = &amp; 10 + 5R\\
+ \end{eqnarray*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;If you compare this results to what we found earlier (&lt;script type=&quot;math/tex&quot;&gt;a\cdot b=10&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;a\wedge b=5R&lt;/script&gt;), we can indeed see that in this case &lt;script type=&quot;math/tex&quot;&gt;ab=a\cdot b + a\wedge b&lt;/script&gt;. Now that you have the intuition, it would be a good time to prove this to yourself more generally for all &lt;script type=&quot;math/tex&quot;&gt;a,b&lt;/script&gt;.&lt;/p&gt;
+
+&lt;p&gt;Speaking of intuition, what does the result &lt;script type=&quot;math/tex&quot;&gt;ab=10+5R&lt;/script&gt; really mean? Does it mean that we should scale vector &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; by 10 times and go 5 quarter turns counterclockwise to end up at &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;? That seems obviously incorrect! So our interpretation has led us slightly astray.&lt;/p&gt;
+
+&lt;p&gt;We will correct this intuition of this just a moment, but now is a good time to introduce some simplying notation that will carry us beyond just two dimensions.&lt;/p&gt;
+
+&lt;h2 id=&quot;simplifying-geometric-products-of-basis-vectors&quot;&gt;Simplifying Geometric Products of Basis Vectors&lt;/h2&gt;
+
+&lt;p&gt;For brevity, if you have fewer than 10 dimensions, it is often convenient to combine the subscripts of basis vectors. That is, with this notational convention, &lt;script type=&quot;math/tex&quot;&gt;e_1 e_2 = e_{12}&lt;/script&gt;, or &lt;script type=&quot;math/tex&quot;&gt;e_1 e_2 e_3 = e_{123}&lt;/script&gt;.&lt;/p&gt;
+
+&lt;p&gt;As for simplifying more complex geometric product expressions with orthonormal vectors, we have already learned the only two rules that we need to know:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;e_i e_i = e_{ii} = 1&lt;/script&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;e_i e_j = e_{ij} = - e_{ji}&lt;/script&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;That’s it! Let’s try an example to make sure this is completely obvious.&lt;/p&gt;
+
+&lt;h4 id=&quot;example-simplifying-geometric-products&quot;&gt;Example: Simplifying Geometric Products&lt;/h4&gt;
+
+&lt;p&gt;Simplify the quantity &lt;script type=&quot;math/tex&quot;&gt;e_2 e_3 e_2 e_1 e_3 e_2 e_2&lt;/script&gt;.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{eqnarray*}
+e_2 e_3 e_2 e_1 e_3 e_2 e_2 &amp; = &amp; e_2 e_3 e_2 e_1 e_3 e_2 e_2\\
+                            &amp; = &amp; e_2 e_3 e_2 e_1 e_3 (1) \\
+                            &amp; = &amp; e_2 (-e_2 e_3) e_1 e_3\\
+                            &amp; = &amp; -(1) e_3 e_2 e_1 e_3 \\
+                            &amp; = &amp; -(1) e_3 e_2 e_1 e_3 \\  
+                            &amp; = &amp; - (- e_2 e_3) e_1 e_3 \\  
+                            &amp; = &amp; e_2 (- e_1 e_3) e_3 \\  
+                            &amp; = &amp; - e_2 e_1 (1) \\  
+                            &amp; = &amp; e_1 e_2 \\  
+                            &amp; = &amp; e_{12} \end{eqnarray*} %]]&gt;&lt;/script&gt;
+
+&lt;h2 id=&quot;blades-grades-and-bivectors&quot;&gt;Blades, Grades and Bivectors&lt;/h2&gt;
+
+&lt;p&gt;Let us make a table of the different types of objects we have seen up to this point, and add a new column called &lt;strong&gt;grade&lt;/strong&gt; that more or less describes the dimensionality of the object.&lt;/p&gt;
+
+&lt;table class=&quot;table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Object (a.k.a. Blade )&lt;/th&gt;
+      &lt;th&gt;Examples&lt;/th&gt;
+      &lt;th&gt;Basis&lt;/th&gt;
+      &lt;th&gt;Grade&lt;/th&gt;
+      &lt;th&gt;Relates to&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Scalar&lt;/td&gt;
+      &lt;td&gt;1,2,3,4,5…&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;Magnitude&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Vector&lt;/td&gt;
+      &lt;td&gt;&lt;script type=&quot;math/tex&quot;&gt;a,b&lt;/script&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;script type=&quot;math/tex&quot;&gt;e_1, e_2&lt;/script&gt;&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Direction&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bivector / Rotation&lt;/td&gt;
+      &lt;td&gt;&lt;script type=&quot;math/tex&quot;&gt;5R&lt;/script&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;script type=&quot;math/tex&quot;&gt;e_{12}&lt;/script&gt;&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Rotation&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Common parlance is to call &lt;script type=&quot;math/tex&quot;&gt;e_{12}&lt;/script&gt; a bivector, and when we get to 3D, &lt;script type=&quot;math/tex&quot;&gt;e_{123}&lt;/script&gt; is the trivector.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-meaning-of-geometric-products&quot;&gt;The meaning of Geometric Products&lt;/h2&gt;
+
+&lt;p&gt;Let us look one more time at the vectors &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;, but this time let us include all four of the basis vectors we have seen thus far: &lt;script type=&quot;math/tex&quot;&gt;1, e_1, e_2, e_{12}&lt;/script&gt;.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{eqnarray*}
+ a &amp; = &amp; 0(1) + 2e_1 + 1e_2 + 0e_{12}\\
+ b &amp; = &amp; 0(1) + 3e_1 + 4e_2 + 0e_{12}\end{eqnarray*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;In general, we will call this new compound object a “Multivector”. Multivector &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; has four components:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;An amount of “0” of a scalar quantity&lt;/li&gt;
+  &lt;li&gt;An amount of “2” in direction &lt;script type=&quot;math/tex&quot;&gt;e_1&lt;/script&gt;&lt;/li&gt;
+  &lt;li&gt;An amount of “1” in direction &lt;script type=&quot;math/tex&quot;&gt;e_2&lt;/script&gt;&lt;/li&gt;
+  &lt;li&gt;An amount of “0” is the bivector (90 degree rotation) direction&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As we know by now, we cannot simplify this expression any further, because we cannot “add” apples and oranges and pears and bananas. All four objects are independent, different measurement units: the scalar values, the two basis values, and the bivector (&lt;script type=&quot;math/tex&quot;&gt;e_{12}&lt;/script&gt;) value.&lt;/p&gt;
+
+&lt;p&gt;The only thing left to do in this post is to explore a few examples.&lt;/p&gt;
+
+&lt;h4 id=&quot;example-on-the-order-of-multiplication-ab-vs-ba&quot;&gt;Example: On the Order of Multiplication (&lt;script type=&quot;math/tex&quot;&gt;ab&lt;/script&gt; vs &lt;script type=&quot;math/tex&quot;&gt;ba&lt;/script&gt;)?&lt;/h4&gt;
+
+&lt;p&gt;What is the relationship between &lt;script type=&quot;math/tex&quot;&gt;ab&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;ba&lt;/script&gt;?&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{eqnarray*}
+ba &amp; = &amp; (3e_{1}+4e_{2})(2e_{1}+1e_{2})\\
+ &amp; = &amp; 6e_{11}+3e_{12}+8e_{21}+4e_{22}\\
+ &amp; = &amp; 6+3e_{12}-8e_{12}+4\\
+ &amp; = &amp; 10-5e_{12}\\
+ &amp; = &amp; (ab)^{\dagger}
+\end{eqnarray*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;where &lt;script type=&quot;math/tex&quot;&gt;^{\dagger}&lt;/script&gt; means the complex conjugate. In physical terms, this means rotating clockwise instead of counterclockwise, which is consistent with our understanding thus far.&lt;/p&gt;
+
+&lt;h4 id=&quot;example-how-do-we-move-from-a-to-b&quot;&gt;Example: How do we move from &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; to &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;?&lt;/h4&gt;
+
+&lt;p&gt;If &lt;script type=&quot;math/tex&quot;&gt;ab&lt;/script&gt; represents a transformation from &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; to &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;, how do we show it? Keeping in mind that geometric product operations are not commutative, should we pre- or post- multiply &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; with &lt;script type=&quot;math/tex&quot;&gt;ab&lt;/script&gt; to transform it into &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;?&lt;/p&gt;
+
+&lt;p&gt;If we pre-multiply,&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{eqnarray*}
+aba &amp; = &amp; (ab)a\\
+ &amp; = &amp; (10+5e_{12})(2e_{1}+1e_{2})\\
+ &amp; = &amp; 20e_{1}+10e_{2}+10e_{121}+5e_{122}\\
+ &amp; = &amp; 20e_{1}+10e_{2}-10e_{2}+5e_{1}\\
+ &amp; = &amp; 25e_{1}
+\end{eqnarray*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;Which is not equal to &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;. Perhaps we should try post-multiplying?&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{eqnarray*}
+aab &amp; = &amp; a(ab)\\
+ &amp; = &amp; (2e_{1}+1e_{2})(10+5e_{12})\\
+ &amp; = &amp; 20e_{1}+10e_{112}+10e_{2}+5e_{212}\\
+ &amp; = &amp; 20e_{1}+10e_{2}+10e_{2}-5e_{1}\\
+ &amp; = &amp; 15e_{1}+20e_{2}\\
+ &amp; = &amp; 5(3e_{1}+4e_{2})\\
+ &amp; = &amp; 5b
+\end{eqnarray*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;Aha! That is just &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt; multiplied by a factor of 5. Where did that factor of 5 come from? Well, If we normalized &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt; to have unit length (i.e. &lt;script type=&quot;math/tex&quot;&gt;\frac{a}{\|a\|}&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\frac{b}{\|b\|}&lt;/script&gt;), then the factor of 5 disappears. Now is a good time to grab a sheet of paper and a pen and prove that &lt;script type=&quot;math/tex&quot;&gt;aab=b&lt;/script&gt; for unit length vectors, and then read on:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{eqnarray*}
+r&amp;=&amp;\frac{a}{\|a\|}\frac{b}{\|b\|}\\
+&amp;=&amp;...\end{eqnarray*} %]]&gt;&lt;/script&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\|r\|=1&lt;/script&gt;
+
+&lt;p&gt;If you can see that &lt;script type=&quot;math/tex&quot;&gt;r&lt;/script&gt; represents a pure rotation (a.k.a. a &lt;strong&gt;rotor&lt;/strong&gt;), then the transform from &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; to &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt; could be described as: “normalize &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt;, rotate by &lt;script type=&quot;math/tex&quot;&gt;r&lt;/script&gt;, and then scale by &lt;script type=&quot;math/tex&quot;&gt;\|b\|&lt;/script&gt; to reach &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;. In math, this is quite simply several products written from left to right:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{eqnarray*}
+a\frac{1}{\|a\|}r\|b\| &amp; = &amp; a\frac{1}{\|a\|}\frac{ab}{\|a\|\|b\|}\|b\|\\
+ &amp; = &amp; \frac{aab}{\|a\|^{2}}\\
+ &amp; = &amp; b
+\end{eqnarray*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;And we can see that the factor of 5 we saw earlier came from the fact that &lt;script type=&quot;math/tex&quot;&gt;\|a\|^2=5&lt;/script&gt;. The true way to go from &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; to &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt; is thus to multiply &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; by &lt;script type=&quot;math/tex&quot;&gt;\frac{ab}{\|a\|^2}&lt;/script&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;For those with prior experience in engineering and physics, you have probably noticed by now that the bivector &lt;script type=&quot;math/tex&quot;&gt;e_{12}&lt;/script&gt; is playing the role of the imaginary number &lt;script type=&quot;math/tex&quot;&gt;i=\sqrt{-1}&lt;/script&gt;, and that this is all just complex mathematics in another form. However, you may agree after seeing the results in higher dimensions that it is perhaps more valid to say that complex mathematics is just a special case of geometric algebra!&lt;/p&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+
+&lt;p&gt;I found the following papers useful while learning about Geometric Algebra. Ordering from easiest to hardest,&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;Geometric Algebra Primer&lt;/em&gt;, by Jaap Suter.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Imaginary Numbers are not Real – the Geometric Algebra of Spacetime&lt;/em&gt;, by Stephen Gull, Anthony Lasenby, and Chris Doran.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;A Survey of Geometric Algebra and Geometric Calculus&lt;/em&gt;, by Alan Macdonald.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Oersted Medal Lecture 2002: Reforming the Mathematical Language of Physics&lt;/em&gt; by David Hestenes.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;An Introduction to Geometric Algebra and Calculus&lt;/em&gt;, by Alan Bromborsky.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Geometric Algebra&lt;/em&gt;, by Eric Chisolm.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Spacetime Physics with Geometric Algebra 1&lt;/em&gt;, by David Hestenes.&lt;/li&gt;
+&lt;/ul&gt;</content><category term="math" /><category term="geometric algebra" /><summary type="html">Geometric Algebra (GA) is one of those things that we should have all learned in high school because it would have made physics and mathematics in college so much easier.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ivarthorson.github.io{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Hyperbolic Geometry &amp;amp; Special Relativity</title><link href="https://ivarthorson.github.io/blog/hyperbolic-geometry-and-special-relativity/" rel="alternate" type="text/html" title="Hyperbolic Geometry &amp; Special Relativity" /><published>2017-06-02T00:00:00-07:00</published><updated>2017-06-02T00:00:00-07:00</updated><id>https://ivarthorson.github.io/blog/hyperbolic-geometry-and-special-relativity</id><content type="html" xml:base="https://ivarthorson.github.io/blog/hyperbolic-geometry-and-special-relativity/">&lt;p&gt;While studying &lt;a href=&quot;https://arxiv.org/abs/0810.3328&quot;&gt;An Introduction to Particle Physics&lt;/a&gt; on a recent flight to Japan – studying math that is way above my head is a nerdy hobby of mine – I came across a simple viewpoint on special relativity that really stunned me:&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Consider a spatial rotation around, say, the z-axis (or, equivalently, mixing the x and y coordinates). Such a transformation is called an &lt;strong&gt;Euler Transformation&lt;/strong&gt;, and takes the form&lt;/p&gt;
@@ -344,76 +812,4 @@ z^{\prime} &amp; = &amp; z\end{eqnarray*} %]]&gt;&lt;/script&gt;
 (&lt;span style=&quot;color: #729fcf;&quot;&gt;time&lt;/span&gt; (euler-82-better)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;&quot;Elapsed time: 244.770152 msecs&quot;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;This really shows the versatility of the A* search method.&lt;/p&gt;</content><category term="project-euler" /><category term="a* algorithm" /><category term="search" /><summary type="html">As I mentioned in the previous post (#81), we can use [A](http://en.wikipedia.org/wiki/A) to easily solve problem 82 as well.</summary></entry><entry><title type="html">Project Euler Problem 81</title><link href="https://ivarthorson.github.io/project-euler/problem-81/" rel="alternate" type="text/html" title="Project Euler Problem 81" /><published>2010-10-18T06:05:41-07:00</published><updated>2010-10-18T06:05:41-07:00</updated><id>https://ivarthorson.github.io/project-euler/problem-81</id><content type="html" xml:base="https://ivarthorson.github.io/project-euler/problem-81/">&lt;p&gt;I’m actually a little proud of this one – this simple implementation of &lt;a href=&quot;http://en.wikipedia.org/wiki/A*&quot;&gt;A* search&lt;/a&gt; seems to be one of the prettier pieces of code I have written, and it was implemented abstractly enough to solve &lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=81&quot;&gt;problems 81&lt;/a&gt;, &lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=82&quot;&gt;82&lt;/a&gt;, and &lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=83&quot;&gt;83&lt;/a&gt; without changing the core algorithm.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=81&quot;&gt;Problem 81&lt;/a&gt; asks us to find the lowest-cost path through a matrix. While the algorithm from &lt;a href=&quot;?p=223&quot;&gt;problem 18&lt;/a&gt; or &lt;a href=&quot;?p=567&quot;&gt;67&lt;/a&gt; might work here, it wouldn’t work for problem 83, and I wanted to kill all three of these problems in one fell swoop. [A&lt;em&gt;](http://en.wikipedia.org/wiki/A&lt;/em&gt;) was the ax that I used.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;Thanks to cgrande for making me aware of priority-map
-&lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;http://clj-me.cgrand.net/2010/09/04/a-in-clojure/
-&lt;/span&gt;
-(&lt;span style=&quot;color: #729fcf;&quot;&gt;use&lt;/span&gt; '[clojure.contrib.duck-streams &lt;span style=&quot;color: #729fcf;&quot;&gt;:only&lt;/span&gt; (read-lines)]
-     '[clojure.contrib.priority-map &lt;span style=&quot;color: #729fcf;&quot;&gt;:only&lt;/span&gt; [priority-map]])
-
-(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;load-matrix&lt;/span&gt; [file]
-  (&lt;span style=&quot;color: #729fcf;&quot;&gt;vec&lt;/span&gt;
-   (&lt;span style=&quot;color: #8ae234;&quot;&gt;for&lt;/span&gt; [l (read-lines file)]
-     (&lt;span style=&quot;color: #8ae234;&quot;&gt;-&amp;gt;&amp;gt;&lt;/span&gt; (partition-by #(&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; % \,) l)
-          (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; #(&lt;span style=&quot;color: #729fcf;&quot;&gt;apply&lt;/span&gt; str %))
-          (&lt;span style=&quot;color: #729fcf;&quot;&gt;filter&lt;/span&gt; #(&lt;span style=&quot;color: #729fcf;&quot;&gt;not&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #Fd7f98;&quot;&gt;&quot;,&quot;&lt;/span&gt; %)))
-          (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; #(Integer/parseInt %))
-          vec))))
-
-(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;a*-search&lt;/span&gt;
-  &lt;span style=&quot;color: #888a85;&quot;&gt;&quot;Performs an a* search over the data using heuristic est-cost.
-  
-  ARGUMENTS:
-    est-cost(e)  The estimate of the cost to the goal.
-    neighbors(e) Returns map of neighbors at i,j and their costs
-    start        The element at which to start
-    goal?(e)     Function that checks if the goal has been reached.
-
-  RETURNS: 
-    The list of elements in the optimal path. &quot;&lt;/span&gt;
-  [est-cost neighbors start goal?]
-  (&lt;span style=&quot;color: #8ae234;&quot;&gt;loop&lt;/span&gt; [open   (priority-map start [0 nil])
-         closed {}]
-    (&lt;span style=&quot;color: #8ae234;&quot;&gt;let&lt;/span&gt; [[e [s p]] (&lt;span style=&quot;color: #729fcf;&quot;&gt;first&lt;/span&gt; open)]
-      (&lt;span style=&quot;color: #8ae234;&quot;&gt;cond&lt;/span&gt;
-       (&lt;span style=&quot;color: #729fcf;&quot;&gt;nil?&lt;/span&gt; e)  &lt;span style=&quot;color: #Fd7f98;&quot;&gt;&quot;Path not found! No more elements to try!&quot;&lt;/span&gt;
-       (goal? e) (&lt;span style=&quot;color: #8ae234;&quot;&gt;-&amp;gt;&amp;gt;&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;conj&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;iterate&lt;/span&gt; #(&lt;span style=&quot;color: #729fcf;&quot;&gt;second&lt;/span&gt; (closed %)) p) e)
-                      (&lt;span style=&quot;color: #729fcf;&quot;&gt;take-while&lt;/span&gt; #(&lt;span style=&quot;color: #729fcf;&quot;&gt;not&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;nil?&lt;/span&gt; %)))
-                      reverse)
-       &lt;span style=&quot;color: #729fcf;&quot;&gt;:else&lt;/span&gt; (&lt;span style=&quot;color: #8ae234;&quot;&gt;recur&lt;/span&gt;
-              (&lt;span style=&quot;color: #729fcf;&quot;&gt;merge-with&lt;/span&gt; #(&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;first&lt;/span&gt; %1) (&lt;span style=&quot;color: #729fcf;&quot;&gt;first&lt;/span&gt; %2)) %1 %2)
-                          (&lt;span style=&quot;color: #729fcf;&quot;&gt;dissoc&lt;/span&gt; open e)
-                          (&lt;span style=&quot;color: #729fcf;&quot;&gt;into&lt;/span&gt; {} (&lt;span style=&quot;color: #8ae234;&quot;&gt;for&lt;/span&gt; [[n ns] (neighbors e)
-                                         &lt;span style=&quot;color: #729fcf;&quot;&gt;:when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;not&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;get&lt;/span&gt; closed n))]
-                                     [n [(&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; ns s (est-cost n)) e]])))
-              (&lt;span style=&quot;color: #729fcf;&quot;&gt;assoc&lt;/span&gt; closed e [s p]))))))
-
-(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;euler-81&lt;/span&gt; []
-  (&lt;span style=&quot;color: #8ae234;&quot;&gt;let&lt;/span&gt; [mat   (load-matrix &lt;span style=&quot;color: #Fd7f98;&quot;&gt;&quot;/zzz/work/matrix.txt&quot;&lt;/span&gt;)
-        m     (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; mat)
-        n     (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;first&lt;/span&gt; mat))
-        cost  (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]] (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; mat (&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; i)) (&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; j)))
-        start [1 1]
-        goal  [m n]
-        goal? (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [e] (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; e goal))
-        est   (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]] (&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; m i) (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; n j)))
-        neigh (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]]
-                (&lt;span style=&quot;color: #729fcf;&quot;&gt;merge&lt;/span&gt;
-                 (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; i m) {[(&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; i) j] (cost [(&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; i) j])})
-                 (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; j n) {[i (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; j)] (cost [i (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; j)])})))
-        path  (a*-search est neigh start goal?)]
-    (&lt;span style=&quot;color: #729fcf;&quot;&gt;reduce&lt;/span&gt; + (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; cost path))))
-
-(&lt;span style=&quot;color: #729fcf;&quot;&gt;time&lt;/span&gt; (euler-81)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;&quot;Elapsed time: 153.287587 msecs&quot;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;It was really, really tempting to keep the map from elements-&amp;gt;parents separate from the map of elements-&amp;gt;score, so that the children could simply be merged with (merge-with min A B) instead of the more complicated expression above, but in the end that required simultaneously processing two maps based on the contents of one map, and felt even more awkward than the above solution.&lt;/p&gt;
-
-&lt;p&gt;In the future, it would be interesting to modify the A* search to be concurrent – by searching the nth lowest-scoring candidates simultaneously, we could perhaps achieve some significant search speed improvement, especially for problems like this one where the heuristic information is very weak.&lt;/p&gt;
-
-&lt;p&gt;Also, this problem in fact very nearly reduces to &lt;a href=&quot;http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm&quot;&gt;Dijkstra’s algorithm&lt;/a&gt; because the admissible heuristic estimated-cost-to-goal function improves efficiency so little in this case.&lt;/p&gt;
-
-&lt;p&gt;It may also be interesting to compare this a* search function to &lt;a href=&quot;http://clj-me.cgrand.net/2010/09/04/a-in-clojure/&quot;&gt;that of cgrande’s&lt;/a&gt;.&lt;/p&gt;</content><category term="project-euler" /><category term="a* algorithm" /><category term="dijkstra's algorithm" /><category term="search" /><summary type="html">I’m actually a little proud of this one – this simple implementation of A* search seems to be one of the prettier pieces of code I have written, and it was implemented abstractly enough to solve problems 81, 82, and 83 without changing the core algorithm.</summary></entry></feed>
+&lt;p&gt;This really shows the versatility of the A* search method.&lt;/p&gt;</content><category term="project-euler" /><category term="a* algorithm" /><category term="search" /><summary type="html">As I mentioned in the previous post (#81), we can use [A](http://en.wikipedia.org/wiki/A) to easily solve problem 82 as well.</summary></entry></feed>
