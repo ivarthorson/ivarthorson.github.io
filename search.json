@@ -3,7 +3,7 @@
   
     {
       "title"			: "Introduction to Geometric Algebra, Part 1",
-      "link"			: "https://ivarthorson.github.io/blog/intro-to-geometric-algebra-1/",
+      "link"			: "/blog/intro-to-geometric-algebra-1/",
       "excerpt"		: "Geometric Algebra (GA) is one of those things that we should have all learned in high school because it would have made physics and mathematics in college so much easier."
     }
   
@@ -11,7 +11,7 @@
   
     ,{
       "title"			: "Hyperbolic Geometry & Special Relativity",
-      "link"			: "https://ivarthorson.github.io/blog/hyperbolic-geometry-and-special-relativity/",
+      "link"			: "/blog/hyperbolic-geometry-and-special-relativity/",
       "excerpt"		: "While studying An Introduction to Particle Physics on a recent flight to Japan – studying math that is way above my head is a nerdy hobby of mine – I came across a simple viewpoint on special relativity that really stunned me:"
     }
   
@@ -19,7 +19,7 @@
   
     ,{
       "title"			: "Reviving the Dead...Content",
-      "link"			: "https://ivarthorson.github.io/blog/reviving-the-dead/",
+      "link"			: "/blog/reviving-the-dead/",
       "excerpt"		: "From 2003 until 2016, I had a personal website at roboloco.net. It lasted until last year, when I finally grew tired of upgrading applications, keeping comments free of spam, and the servers secure from hackers and the occasional website defacement. Thank you, GitHub, for providing this terrible sysadmin a free place to store this content, and one that requires no regular maintanance!"
     }
   
@@ -27,7 +27,7 @@
   
     ,{
       "title"			: "Project Euler Problem 89",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-89/",
+      "link"			: "/project-euler/problem-89/",
       "excerpt"		: "Problem 89 was kind of fun: we needed to convert some sloppily written roman-numerals into their more efficient, minimal representations."
     }
   
@@ -35,7 +35,7 @@
   
     ,{
       "title"			: "Project Euler Problem 87",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-87/",
+      "link"			: "/project-euler/problem-87/",
       "excerpt"		: "Problem 87 asks us to find how many numbers below 50 million that can be expressed as the sum of a prime square, cube, and fourth power."
     }
   
@@ -43,7 +43,7 @@
   
     ,{
       "title"			: "Project Euler Problem 86",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-86/",
+      "link"			: "/project-euler/problem-86/",
       "excerpt"		: "Despite it’s relative simplicity, I wasted hours on problem 86. One important thing that I learned is:"
     }
   
@@ -51,7 +51,7 @@
   
     ,{
       "title"			: "Project Euler Problem 85",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-85/",
+      "link"			: "/project-euler/problem-85/",
       "excerpt"		: "Problem 85 asks us to find the number of rectangles that can be drawn in a grid of size m by n."
     }
   
@@ -59,7 +59,7 @@
   
     ,{
       "title"			: "Project Euler Problem 84",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-84/",
+      "link"			: "/project-euler/problem-84/",
       "excerpt"		: "Problem 84 asks us to implement the classic game Monopoly and find the most-visited spaces on the board…if we used two 4-sided dice instead of 6-sided ones."
     }
   
@@ -67,7 +67,7 @@
   
     ,{
       "title"			: "Project Euler Problem 83",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-83/",
+      "link"			: "/project-euler/problem-83/",
       "excerpt"		: "Problem 83 can be solved with A* exactly like the we did in problem 81. The only code that needs to be changed is the neighbors function neigh and the estimated cost-to-goal function est. Everything else can be reused from problem 81.(defn euler-83 []  (let [mat   (load-matrix &quot;/zzz/work/matrix.txt&quot;)        m     (count mat)        n     (count (first mat))        cost  (fn [[i j]] (nth (nth mat (dec i)) (dec j)))        start [1 1]        goal  [m n]        goal? (fn [e] (= e goal))        est   (fn [[i j]] 0)        neigh (fn [[i j]]                (merge                 (when (&lt; i m) {[(inc i) j] (cost [(inc i) j])})                 (when (&lt; j n) {[i (inc j)] (cost [i (inc j)])})                 (when (&lt; 1 i) {[(dec i) j] (cost [(dec i) j])})                 (when (&lt; 1 j) {[i (dec j)] (cost [i (dec j)])})))        path  (a*-search est neigh start goal?)]    (reduce + (map cost path))))"
     }
   
@@ -75,7 +75,7 @@
   
     ,{
       "title"			: "Project Euler Problem 82",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-82/",
+      "link"			: "/project-euler/problem-82/",
       "excerpt"		: "As I mentioned in the previous post (#81), we can use [A](http://en.wikipedia.org/wiki/A) to easily solve problem 82 as well."
     }
   
@@ -83,7 +83,7 @@
   
     ,{
       "title"			: "Project Euler Problem 81",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-81/",
+      "link"			: "/project-euler/problem-81/",
       "excerpt"		: "I’m actually a little proud of this one – this simple implementation of A* search seems to be one of the prettier pieces of code I have written, and it was implemented abstractly enough to solve problems 81, 82, and 83 without changing the core algorithm."
     }
   
@@ -91,7 +91,7 @@
   
     ,{
       "title"			: "Project Euler Problem 80",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-80/",
+      "link"			: "/project-euler/problem-80/",
       "excerpt"		: "It took us until the 80th problem to find one, but we finally found an ugly wart in Clojure 1.2: big square roots. At the time of writing, it does not properly accommodate bigdec numbers. Look at this ugly behavior:(expt 12 34)       ;; 4922235242952026704037113243122008064 ... a bignum.(expt 12 (/ 34))   ;; 1.0758225047262997                    ... a double!(with-precision 100 (expt 12 (/ 34))) ;;  1.0758225047262997... still a double!"
     }
   
@@ -99,7 +99,7 @@
   
     ,{
       "title"			: "Project Euler Problem 79",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-79/",
+      "link"			: "/project-euler/problem-79/",
       "excerpt"		: "Problem 79 asks us to crack a primitive security ‘feature’ asked by some (hypothetical) banks. Given 50 successful login attempts using an ordered subset of the digits from a passcode, we need to find what the original passcode was."
     }
   
@@ -107,7 +107,7 @@
   
     ,{
       "title"			: "Project Euler Problem 78",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-78/",
+      "link"			: "/project-euler/problem-78/",
       "excerpt"		: "Problem 78 is the third and final of the integer partitioning problems, but because of the rather large number of possibilities it was rather more difficult."
     }
   
@@ -115,7 +115,7 @@
   
     ,{
       "title"			: "Project Euler Problem 77",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-77/",
+      "link"			: "/project-euler/problem-77/",
       "excerpt"		: "Problem 77 tests our ability to write correct, reusable code because problems 76, 77, and 78 all use roughly the same algorithm and ask for integer partitions of a particular number. This time, the partitioning must be done using only prime numbers."
     }
   
@@ -123,7 +123,7 @@
   
     ,{
       "title"			: "Project Euler Problem 76",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-76/",
+      "link"			: "/project-euler/problem-76/",
       "excerpt"		: "Often the hardest part about Project Euler is to discover what page of wikipedia to read for the mathematical theory behind the problem. In the case of problem 76, we need to do some reading on Integer Partitions.;; A renamed function from Problem 31(defn integer-sums [c v]  (let [f (first c)]    (if (= f 1) 1      (reduce + (for [n (range 0 (inc (quot v f)))]                  (integer-sums (rest c) (- v (* n f))))))))"
     }
   
@@ -131,7 +131,7 @@
   
     ,{
       "title"			: "Project Euler Problem 75",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-75/",
+      "link"			: "/project-euler/problem-75/",
       "excerpt"		: "Once again, to solve Problem 75 our first stop should be Wikipedia’s page on Pythagorean Triples."
     }
   
@@ -139,7 +139,7 @@
   
     ,{
       "title"			: "Project Euler Problem 74",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-74/",
+      "link"			: "/project-euler/problem-74/",
       "excerpt"		: "Problem 74 concentrates yet again on factorials, sums of digits, and chains of computation. To be honest, I am pretty sick of this type of problem, so here is my inelegant brute force solution.(def factorial-char (zipmap &quot;0123456789&quot;                            (conj (reductions * (iterate inc 1)) 1)))"
     }
   
@@ -147,7 +147,7 @@
   
     ,{
       "title"			: "Project Euler Problem 73",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-73/",
+      "link"			: "/project-euler/problem-73/",
       "excerpt"		: "Project Euler Problem 73 continues the sequence of problems related to Farey Sequences. This time, we are asked to find the number of proper fractions between 1/3 and 1/2 with denominators less than 12,000."
     }
   
@@ -155,7 +155,7 @@
   
     ,{
       "title"			: "Project Euler Problem 72",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-72/",
+      "link"			: "/project-euler/problem-72/",
       "excerpt"		: "My solution to Project Euler Problem 72 is rather simple. We are asked to find the length of a Farey Sequence for all fractions with denominators less than one million."
     }
   
@@ -163,7 +163,7 @@
   
     ,{
       "title"			: "Project Euler Problem 71",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-71/",
+      "link"			: "/project-euler/problem-71/",
       "excerpt"		: "Problem 71 asks us to find a proper fraction just slightly less than 3/7, with a denominator less than one million."
     }
   
@@ -171,7 +171,7 @@
   
     ,{
       "title"			: "Project Euler Problem 70",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-70/",
+      "link"			: "/project-euler/problem-70/",
       "excerpt"		: "Problem 70 was another problem that is nearly impossible to accomplish without spending time to understanding the math. A brute force approach will be far to computationally expensive to work, although it took me a few tries to discover this."
     }
   
@@ -179,7 +179,7 @@
   
     ,{
       "title"			: "Project Euler Problem 69",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-69/",
+      "link"			: "/project-euler/problem-69/",
       "excerpt"		: "After a long and wonderful three week vacation (and another week of just getting back into the flow), it’s time to return to the daily little bit of practice to stay sharp. Let’s get started!"
     }
   
@@ -187,7 +187,7 @@
   
     ,{
       "title"			: "Project Euler Problem 68",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-68/",
+      "link"			: "/project-euler/problem-68/",
       "excerpt"		: "Problem 68 was one of those strange problems where you start with 23 lines of code that take 77 seconds to run, and by the time you are done thinking about the problem, you end up with 6 lines of code that takes 0.1 milliseconds to complete."
     }
   
@@ -195,7 +195,7 @@
   
     ,{
       "title"			: "Project Euler Problem 67",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-67/",
+      "link"			: "/project-euler/problem-67/",
       "excerpt"		: "Problem 67 is just a harder version of problem 18."
     }
   
@@ -203,7 +203,7 @@
   
     ,{
       "title"			: "Project Euler Problem 66",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-66/",
+      "link"			: "/project-euler/problem-66/",
       "excerpt"		: "Problem 66 asks us to find integer solutions of a quadratic Diophantine equation."
     }
   
@@ -211,7 +211,7 @@
   
     ,{
       "title"			: "Project Euler Problem 65",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-65/",
+      "link"			: "/project-euler/problem-65/",
       "excerpt"		: "Problem 65 continues our exploration of continued fractions, although this time a different property is the focus: the ability to generate rational fractions that converge on better and better approximations to the number e."
     }
   
@@ -219,7 +219,7 @@
   
     ,{
       "title"			: "Project Euler Problem 64",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-64/",
+      "link"			: "/project-euler/problem-64/",
       "excerpt"		: "I don’t know how I managed to avoid learning about the properties of continued fractions in school; I can only blame the textbook authors for not including the material. Continued fractions are really quite remarkable; have you ever wondered why some rational fractions (e.g. 1/3) take infinitely many decimals to represent (0.3333…), while other fractions (e.g. 1/4) have a finite representation (0.25)? Or why if you represent these fractions in a different base (e.g. hexadecimal) then they may take a different finite or even infinite number of digits to represent?"
     }
   
@@ -227,7 +227,7 @@
   
     ,{
       "title"			: "Project Euler Problem 63",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-63/",
+      "link"			: "/project-euler/problem-63/",
       "excerpt"		: "Problem 63 asks “How many n-digit positive integers exist which are also an nth power?”"
     }
   
@@ -235,7 +235,7 @@
   
     ,{
       "title"			: "Project Euler Problem 62",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-62/",
+      "link"			: "/project-euler/problem-62/",
       "excerpt"		: "Problem 62 asks us to find the smallest cube which, when permuted, can form 4 other cubes."
     }
   
@@ -243,7 +243,7 @@
   
     ,{
       "title"			: "Project Euler Problem 61",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-61/",
+      "link"			: "/project-euler/problem-61/",
       "excerpt"		: "Problem 61 is yet another digit manipulation problem. This time, we have to find a set of six numbers that overlap in a cyclic fashion, and each number must be from a different one of six sets (triangular through octagonal number sets). The numbers are all 4 digits long and two digits overlap cyclically at each step."
     }
   
@@ -251,7 +251,7 @@
   
     ,{
       "title"			: "Project Euler Problem 60",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-60/",
+      "link"			: "/project-euler/problem-60/",
       "excerpt"		: "This was challenging! Problem 60 asks us to find the sum of five primes, any pair of which must – when concatenated in any order – form another prime."
     }
   
@@ -259,7 +259,7 @@
   
     ,{
       "title"			: "Project Euler Problem 59",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-59/",
+      "link"			: "/project-euler/problem-59/",
       "excerpt"		: "Another fun one! Problem 59 reminds me of those long-past days when I was a young boy, heavily armed with water pistols and secure in my friend’s tree house, trying to develop secret alphabets and substitutions ciphers to keep our secret documents out of the hands of our evil sisters, who generally had no interest in what we were writing anyway."
     }
   
@@ -267,7 +267,7 @@
   
     ,{
       "title"			: "Project Euler Problem 58",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-58/",
+      "link"			: "/project-euler/problem-58/",
       "excerpt"		: "I figuratively stubbed my toe on problem 58, engineering a rather complex solution when a simple loop would have sufficed."
     }
   
@@ -275,7 +275,7 @@
   
     ,{
       "title"			: "Project Euler Problem 57",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-57/",
+      "link"			: "/project-euler/problem-57/",
       "excerpt"		: "Project Euler Problem 57 was a little too easy, not even taking 15 minutes to write and test. Even then, I spent the majority of my time staring at the recursive form of the expansion of sqrt(2) until I saw how to write it as an infinite sequence. (A pen and paper may help you figure it out.)(def sqrt2-approx (iterate #(/ (+ (numerator %) (* 2 (denominator %)))                               (+ (numerator %) (denominator %)))                           (/ 3 2)))"
     }
   
@@ -283,7 +283,7 @@
   
     ,{
       "title"			: "Project Euler Problem 56",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-56/",
+      "link"			: "/project-euler/problem-56/",
       "excerpt"		: "This was definitely too easy. Problem 56 once again demonstrates how simple it is to play with bignums and strings.(use &#39;[clojure.contrib.math :only (expt)])"
     }
   
@@ -291,7 +291,7 @@
   
     ,{
       "title"			: "Project Euler Problem 55",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-55/",
+      "link"			: "/project-euler/problem-55/",
       "excerpt"		: "For problem 55, we need to count the number of Lychrel numbers below ten thousand. I almost tagged this as too-easy, but I spent about 20 minutes figuring out why my four line solution wasn’t correct (hint: you shouldn’t check if the Lychrel number itself is palendromic).(defn palindromic? [n]  (= (seq (str n)) (reverse (str n))))"
     }
   
@@ -299,7 +299,7 @@
   
     ,{
       "title"			: "Project Euler Problem 54",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-54/",
+      "link"			: "/project-euler/problem-54/",
       "excerpt"		: "Poker! In order to solve problem 54, we need to basically model a poker hand and compute the strength of it relative to another hand."
     }
   
@@ -307,7 +307,7 @@
   
     ,{
       "title"			: "Project Euler Problem 53",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-53/",
+      "link"			: "/project-euler/problem-53/",
       "excerpt"		: "Problem 53 asks us a very basic fact about the number of combinations that can be generated when starting with n objects and removing r of them."
     }
   
@@ -315,7 +315,7 @@
   
     ,{
       "title"			: "Project Euler Problem 52",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-52/",
+      "link"			: "/project-euler/problem-52/",
       "excerpt"		: "Problem 52 was too easy, so I took the time to use it’s simplicity and study how lazy sequences are chunked, and how they are grouped when apply‘d."
     }
   
@@ -323,7 +323,7 @@
   
     ,{
       "title"			: "Project Euler Problem 51",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-51/",
+      "link"			: "/project-euler/problem-51/",
       "excerpt"		: "Problem 51 asks us to find a tricky class of prime numbers generated by replacing certain digits of a pattern with the same digit."
     }
   
@@ -331,7 +331,7 @@
   
     ,{
       "title"			: "Project Euler Problem 50",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-50/",
+      "link"			: "/project-euler/problem-50/",
       "excerpt"		: "Finally, we made it to the 50th problem! In fact, if this were an old-school Japanese RPG, I’m pretty sure we would be hearing some victory music playing about now…"
     }
   
@@ -339,7 +339,7 @@
   
     ,{
       "title"			: "Project Euler Problem 49",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-49/",
+      "link"			: "/project-euler/problem-49/",
       "excerpt"		: "This problem was tricky. Although we get to reuse a significant amount of code for prime?, as-int, and choose-k, we still need to write two rather tricky functions to extract the special triples."
     }
   
@@ -347,7 +347,7 @@
   
     ,{
       "title"			: "Project Euler Problem 48",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-48/",
+      "link"			: "/project-euler/problem-48/",
       "excerpt"		: "Another one that is too easy in clojure. Problem 48 wants us to find the sum of 1^1 + 2^2 + … + 1000^1000. With Clojure’s built-in bignum support, this is a cinch:(use &#39;[clojure.contrib.math :only (expt)])"
     }
   
@@ -355,7 +355,7 @@
   
     ,{
       "title"			: "Project Euler Problem 47",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-47/",
+      "link"			: "/project-euler/problem-47/",
       "excerpt"		: "Problem 47 is a rather strange computation, because the author of the problem wanted us to bundle together multiples of a prime factor, which I found a little unusual because it means considering a prime number to an exponent as “prime”, which isn’t strictly true. Unfortunately, this additional constraint on the problem meant that rather directly use prime-factors-of from problem 12, the prime factors needed little ‘tweak’ to use the largest multiplicity possible for each prime."
     }
   
@@ -363,7 +363,7 @@
   
     ,{
       "title"			: "Project Euler Problem 46",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-46/",
+      "link"			: "/project-euler/problem-46/",
       "excerpt"		: "Problem 46 asks us to find the smallest composite number that can’t be written as a prime number plus twice a square."
     }
   
@@ -371,7 +371,7 @@
   
     ,{
       "title"			: "Project Euler Problem 45",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-45-2/",
+      "link"			: "/project-euler/problem-45-2/",
       "excerpt"		: "With the tricks we learned in the last problem, solving problem 45 was a snap.(def triangle-nums (map #(bit-shift-right (* % (dec %)) 1) (iterate inc 2)))"
     }
   
@@ -379,7 +379,7 @@
   
     ,{
       "title"			: "Project Euler Problem 44",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-44/",
+      "link"			: "/project-euler/problem-44/",
       "excerpt"		: "Problem 44 asks us to find the smallest distance between two pentagonal numbers that produce another pentagonal number when added to or subtracted from each other."
     }
   
@@ -387,7 +387,7 @@
   
     ,{
       "title"			: "Project Euler Problem 43",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-43/",
+      "link"			: "/project-euler/problem-43/",
       "excerpt"		: "More pandigital problem madness for problem 43. Honestly, I think the guys at Project Euler were running out of ideas or something."
     }
   
@@ -395,7 +395,7 @@
   
     ,{
       "title"			: "Project Euler Problem 42",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-42/",
+      "link"			: "/project-euler/problem-42/",
       "excerpt"		: "For our 42nd problem in Project Euler, we need to find how many words have wordscores that are also triangle numbers. Triangle numbers are generated by the equation 1/2 * n * (n-1)."
     }
   
@@ -403,7 +403,7 @@
   
     ,{
       "title"			: "Project Euler Problem 41",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-41/",
+      "link"			: "/project-euler/problem-41/",
       "excerpt"		: "Problem 41 is yet another variation on the theme of pandigitality and primality. If nothing else, it is teaching me how to reuse my own code…;; from euler-32(defn all-unique? [digits]  (let [unique (distinct digits)]    (= (count unique) (count digits))))"
     }
   
@@ -411,7 +411,7 @@
   
     ,{
       "title"			: "Project Euler Problem 40",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-40/",
+      "link"			: "/project-euler/problem-40/",
       "excerpt"		: "This one was too easy to brute force.(defn euler-40 []  (let [d (apply concat (map str (iterate inc 0)))]    (reduce * (map #(Character/getNumericValue (nth d %))                   [1 10 100 1000 10000 100000 1000000]))))"
     }
   
@@ -419,7 +419,7 @@
   
     ,{
       "title"			: "Project Euler Problem 39",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-39/",
+      "link"			: "/project-euler/problem-39/",
       "excerpt"		: "I found this one to be rather interesting, but maybe I just had a lot of coffee this morning and am in an especially good mood. Problem 39 asks us to find the number n &lt; 1000 for which there are the most number of right triangles with integer sides and a perimeter of n."
     }
   
@@ -427,7 +427,7 @@
   
     ,{
       "title"			: "Project Euler Problem 38",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-38/",
+      "link"			: "/project-euler/problem-38/",
       "excerpt"		: "Problem 38 is essentially just a variation on old themes: find a particular concatenated number that is pandigital when multiplied by the numbers 1, 2, …n.  You may note the similarity of the code to problem 32. Without going into detail, here is the solution:"
     }
   
@@ -435,7 +435,7 @@
   
     ,{
       "title"			: "Project Euler Problem 37",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-37/",
+      "link"			: "/project-euler/problem-37/",
       "excerpt"		: "One thing I learned during the course of completing problem 37 is that I have been using the wrong definition of prime? in previous problems. Technically, the number 1 is not in fact prime, yet the old definition of prime? would treat it as if it were."
     }
   
@@ -443,7 +443,7 @@
   
     ,{
       "title"			: "Project Euler Problem 36",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-36/",
+      "link"			: "/project-euler/problem-36/",
       "excerpt"		: "For problem 36, we need to find numbers that are palendromic in both base 2 and base 10. Thankfully, this is very simple to accomplish if we use the Java libraries to create the binary representations and also reuse a single function we wrote back in problem 4."
     }
   
@@ -451,7 +451,7 @@
   
     ,{
       "title"			: "Project Euler Problem 35",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-35/",
+      "link"			: "/project-euler/problem-35/",
       "excerpt"		: "For problem 35, we need to compute how many circular primes there are below 1,000,000. Circular primes are numbers for which all rotations of a number are also primes, like (197-&gt;971-&gt;719)."
     }
   
@@ -459,7 +459,7 @@
   
     ,{
       "title"			: "Project Euler Problem 34",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-34/",
+      "link"			: "/project-euler/problem-34/",
       "excerpt"		: "Ahh, finally a chance to use something I learned shortly after learning it! Problem 34 felt really similar to Problem #30, and the solution even looks similar.(defn factorial [n] (reduce * (range 2 (inc n))))"
     }
   
@@ -467,7 +467,7 @@
   
     ,{
       "title"			: "Project Euler Problem 33",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-33/",
+      "link"			: "/project-euler/problem-33/",
       "excerpt"		: "Project Euler Problem 33 asks us to find a particular pattern of fraction which satisfies several characteristics:"
     }
   
@@ -475,7 +475,7 @@
   
     ,{
       "title"			: "Project Euler Problem 32",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-32/",
+      "link"			: "/project-euler/problem-32/",
       "excerpt"		: "Project Euler Problem 32 asks us to once again find numbers that are pandigital from 1 to 9. This time, the digits of the numbers are taken from the equation (a*b=c), ignoring the * and = symbols.;; Only two possible patterns of multiplications that produce 9 digits;; 1. A 1 digit number times a 4 digit number can be 4 digits long.;; 2. A 2 digit number times a 3 digit number can be 4 digits long. (defn as-digits [num]  (map #(Character/getNumericValue %) (str num)))"
     }
   
@@ -483,7 +483,7 @@
   
     ,{
       "title"			: "Project Euler Problem 31",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-31/",
+      "link"			: "/project-euler/problem-31/",
       "excerpt"		: "Project Euler Problem 31 asks us to find the number of possible English coin combinations that add up to £2."
     }
   
@@ -491,7 +491,7 @@
   
     ,{
       "title"			: "Project Euler Problem 30",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-30/",
+      "link"			: "/project-euler/problem-30/",
       "excerpt"		: "Problem 30 was another very short problem. We just need to find the sum of all numbers that are equal to the sum of the fifth powers of their digits. The only real hard part is to decide at what point we should stop searching. I just arbitrarily picked 1,000,000, and wrote the following.(use &#39;[clojure.contrib.math :only (expt)])"
     }
   
@@ -499,7 +499,7 @@
   
     ,{
       "title"			: "Project Euler Problem 29",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-29/",
+      "link"			: "/project-euler/problem-29/",
       "excerpt"		: "Problem 29 was trivial. It asks us for the number of distinct values generated by the expression a^b, where a and b are between 2 and 100, inclusive."
     }
   
@@ -507,7 +507,7 @@
   
     ,{
       "title"			: "Project Euler Problem 28",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-28/",
+      "link"			: "/project-euler/problem-28/",
       "excerpt"		: "Problem 28 asks us to find the sums of the diagonals in a square matrix of numbers created by spiraling outward from the number 1 in a clockwise direction."
     }
   
@@ -515,7 +515,7 @@
   
     ,{
       "title"			: "Project Euler Problem 27",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-27/",
+      "link"			: "/project-euler/problem-27/",
       "excerpt"		: "Project Euler Problem 27 asks us to find the coefficients of a formula that will produce as many prime numbers as possible for consecutive integer values that are inputs."
     }
   
@@ -523,7 +523,7 @@
   
     ,{
       "title"			: "Project Euler Problem 26",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-26/",
+      "link"			: "/project-euler/problem-26/",
       "excerpt"		: "Project Euler Problem 26 asks us to find number d where 1/d gives the longest recurring cycle of digits. Obviously, since some numbers (such as 1/3) repeat forever when written in decimal form, a lazy solution that takes digits one by one is a good idea here."
     }
   
@@ -531,7 +531,7 @@
   
     ,{
       "title"			: "Project Euler Problem 25",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-25/",
+      "link"			: "/project-euler/problem-25/",
       "excerpt"		: "Problem 25 asks us to find the index of the first Fibonacci number to have more than 1000 digits. Here’s my first solution, which boils down to making a single, human-readable line at the end.(def fibonacci (map first (iterate (fn [[a b]] (vector b (+ a b))) [1 1])))"
     }
   
@@ -539,7 +539,7 @@
   
     ,{
       "title"			: "Project Euler Problem 24",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-24/",
+      "link"			: "/project-euler/problem-24/",
       "excerpt"		: "Project Euler Problem 24 asks us to find the millionth lexicographic permutation of the numbers 1 through 9. As near as I can tell, “lexicographic” means “in dictionary order”, or simply “sorted”."
     }
   
@@ -547,7 +547,7 @@
   
     ,{
       "title"			: "Project Euler Problem 23",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-23/",
+      "link"			: "/project-euler/problem-23/",
       "excerpt"		: "Trying to solve this problem the naive way quickly led me into computational problems…(defn proper-divisors [n]  &quot;Returns a list of the proper divisors of n.&quot;  (filter #(zero? (mod n %)) (range 1 (+ 1 (/ n 2)))))"
     }
   
@@ -555,7 +555,7 @@
   
     ,{
       "title"			: "Project Euler Problem 22",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-22/",
+      "link"			: "/project-euler/problem-22/",
       "excerpt"		: "Project Euler Problem 22 gives us our first opportunity to use regular expressions. It’s amazing how a single re-seq basically takes care of extracting data from the file format."
     }
   
@@ -563,7 +563,7 @@
   
     ,{
       "title"			: "Project Euler Problem 21",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-21/",
+      "link"			: "/project-euler/problem-21/",
       "excerpt"		: "Project Euler Problem 21 asked us to find the sum of all pairs of amicable numbers under 10000. My initial solution was relatively straightforward:"
     }
   
@@ -571,7 +571,7 @@
   
     ,{
       "title"			: "Project Euler Problem 20",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-20/",
+      "link"			: "/project-euler/problem-20/",
       "excerpt"		: "Problem 20 turned out to be yet another ridiculously simple problem for Clojure. Here’s how to sum the digits in 100 factorial:(defn factorial  [n] (reduce * (range 2 (inc n))))(defn sum-digits [s] (reduce + (map #(Integer/parseInt (str %)) s)))(defn euler-20   []  (sum-digits (str (factorial 100))))"
     }
   
@@ -579,7 +579,7 @@
   
     ,{
       "title"			: "Project Euler Problem 19",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-19/",
+      "link"			: "/project-euler/problem-19/",
       "excerpt"		: "Although using Conway’s Doomsday Algorithm is a fun party trick, I tend to hate calendar math. Worse, I hate Mondays too. So I guess this problem wasn’t written for me."
     }
   
@@ -587,7 +587,7 @@
   
     ,{
       "title"			: "Project Euler Problem 18",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-18/",
+      "link"			: "/project-euler/problem-18/",
       "excerpt"		: "Project Euler Problem 18 looked harder than it was. At first, I thought some sort of sophisticated heuristic approach would be needed to keep track of the lowest-cost paths as it incrementally searched through the tree, using some basic graph theory."
     }
   
@@ -595,7 +595,7 @@
   
     ,{
       "title"			: "Project Euler Problem 17",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-17/",
+      "link"			: "/project-euler/problem-17/",
       "excerpt"		: "For Project Euler Problem 17, I fell back to a more C-style pattern (almost like a big case statement). This is admittedly not the most beautiful solution, but I am comfortable with that as the problem itself doesn’t hide any particular mathematical elegance.(defn tens [n s sub]  (if (zero? (mod n 10))    s    (apply str (concat s &quot;-&quot;(verbally (- n sub))))))"
     }
   
@@ -603,7 +603,7 @@
   
     ,{
       "title"			: "Project Euler Problem 16",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-16/",
+      "link"			: "/project-euler/problem-16/",
       "excerpt"		: "This problem doesn’t even deserve an explanation and could easily be made a one-liner. Really, computing 2^1000 is just too easy.(defn euler-16 []  (let [s (str (reduce * (repeat 1000 2)))        v (map #(Integer/parseInt (str %)) s)]  (reduce + v)))"
     }
   
@@ -611,7 +611,7 @@
   
     ,{
       "title"			: "Project Euler Problem 15",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-15/",
+      "link"			: "/project-euler/problem-15/",
       "excerpt"		: "I remembered the answer to this this one from school…probably because my statistics professor was extremely attractive and somehow her words lodged themselves especially deeply in my young mind."
     }
   
@@ -619,7 +619,7 @@
   
     ,{
       "title"			: "Project Euler Problem 14",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-14/",
+      "link"			: "/project-euler/problem-14/",
       "excerpt"		: "This problem was rather fun to solve. The Collatz sequence is a rather simple pattern that is as-yet mathematically unproven to converge, at least according to wikipedia."
     }
   
@@ -627,7 +627,7 @@
   
     ,{
       "title"			: "Project Euler Problem 13",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-13/",
+      "link"			: "/project-euler/problem-13/",
       "excerpt"		: "Problem 13 was ridiculously easy. Once again I forgo any numerical trickery, preferring to convert back and forth between strings and large numbers in a casual and easy-to-understand manner:(defn euler-13 [nums]  (apply str (take 10 (str (reduce + nums)))))"
     }
   
@@ -635,7 +635,7 @@
   
     ,{
       "title"			: "Project Euler Problem 12",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-12/",
+      "link"			: "/project-euler/problem-12/",
       "excerpt"		: "Project Euler problem 12 was the hardest so far, despite it’s simplicity. I started of course with a brute force approach, since it is quick to write:"
     }
   
@@ -643,7 +643,7 @@
   
     ,{
       "title"			: "Project Euler Problem 11",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-11/",
+      "link"			: "/project-euler/problem-11/",
       "excerpt"		: "Looking back, I think I misinterpreted this problem but accidentally get the right answer anyway."
     }
   
@@ -651,7 +651,7 @@
   
     ,{
       "title"			: "Project Euler Problem 10",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-10/",
+      "link"			: "/project-euler/problem-10/",
       "excerpt"		: "All that work we did back in problem 7 really paid off for this problem. If we use the lazy prime generating functions we defined earlier, problem 10 has become a one-liner."
     }
   
@@ -659,7 +659,7 @@
   
     ,{
       "title"			: "Project Euler Problem 9",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-09/",
+      "link"			: "/project-euler/problem-09/",
       "excerpt"		: "Brute force! Side effects! Square roots!? What have I done?! Functional Puritans out there, you may want to shield your children’s eyes!"
     }
   
@@ -667,7 +667,7 @@
   
     ,{
       "title"			: "Project Euler Problem 8",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-08/",
+      "link"			: "/project-euler/problem-08/",
       "excerpt"		: "The definition of Problem 8  suggests some flexibility on how you treat the 1000-digit number: as a number or as a string. I decided that it would be easier to understand as the latter – using mod to extract digits seemed a little redundant and not really the point of the problem, which treats each digit as a distinct object. Why make things more complex than they need to be?"
     }
   
@@ -675,7 +675,7 @@
   
     ,{
       "title"			: "Project Euler Problem 7",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-07/",
+      "link"			: "/project-euler/problem-07/",
       "excerpt"		: "The seventh euler problem requires us to compute the 10001st prime number. To make this problem a bit harder, I decided that the function which will generate prime numbers must be lazy, or at least appear so to the consumer."
     }
   
@@ -683,7 +683,7 @@
   
     ,{
       "title"			: "Project Euler Problem 6",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-06/",
+      "link"			: "/project-euler/problem-06/",
       "excerpt"		: "Not much to say about this problem. Everyone’s solution seemed similar to my own, with some minor stylistic variation.(def natural-numbers (iterate inc 1))"
     }
   
@@ -691,7 +691,7 @@
   
     ,{
       "title"			: "Project Euler Problem 5",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-05/",
+      "link"			: "/project-euler/problem-05/",
       "excerpt"		: "Here’s the link to the problem description. My first try at the problem resulted in a slow but working implementation.(defn multiple-of-all? [n factors]  (every? #(zero? (rem n %)) factors))"
     }
   
@@ -699,7 +699,7 @@
   
     ,{
       "title"			: "Project Euler Problem 4",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-04/",
+      "link"			: "/project-euler/problem-04/",
       "excerpt"		: "As usual, we begin with a  link to the problem."
     }
   
@@ -707,7 +707,7 @@
   
     ,{
       "title"			: "Project Euler Problem 3",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-03/",
+      "link"			: "/project-euler/problem-03/",
       "excerpt"		: "First, the obligatory link to the problem description."
     }
   
@@ -715,7 +715,7 @@
   
     ,{
       "title"			: "Project Euler Problem 2",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-02/",
+      "link"			: "/project-euler/problem-02/",
       "excerpt"		: "For reference, here is the description of Project Euler Problem #2."
     }
   
@@ -723,7 +723,7 @@
   
     ,{
       "title"			: "Project Euler Problem 1",
-      "link"			: "https://ivarthorson.github.io/project-euler/problem-01/",
+      "link"			: "/project-euler/problem-01/",
       "excerpt"		: "As part of my efforts to learn Clojure, I am starting to work through the Project Euler a little bit each day to sharpen my programming skills without the pressure of having to get any real work done. I’ll post my notes here as I go along for everyone to enjoy, critique, or just laugh at."
     }
   
@@ -742,20 +742,20 @@
 
   
     ,{
-      "title"			: "Project Euler First 100 Problems",
-      "link"			: "https://ivarthorson.github.io/project-euler/",
-      "excerpt"		: ""
+      "title"			: "About",
+      "link"			: "/about/",
+      "excerpt"		: "About Me"
     }
-  
-
   
 
   
     ,{
-      "title"			: "About",
-      "link"			: "https://ivarthorson.github.io/about/",
-      "excerpt"		: "About Me"
+      "title"			: "Project Euler First 100 Problems",
+      "link"			: "/project-euler/",
+      "excerpt"		: ""
     }
+  
+
   
 
   
