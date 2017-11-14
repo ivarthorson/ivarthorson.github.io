@@ -123,6 +123,8 @@
 
 <ul class="post-list">
 
+  <li><article><a href="/blog/pentakis-dodecahedron-dome/">The Reinforced Pentakis Dodecahedron Dome <span class="entry-date"><time datetime="2017-11-05T00:00:00-07:00">November 05, 2017</time></span> <span class="excerpt">For your amusement, I would like to present a reinforced version of a geodesic dome that is many times stronger than conventional geodesic domes. It is essentially two concentric domes, one nested inside the other, connected entirely by tetrahedra in a way that both strengthens the dome and provides space for insulation. Compared to single-layer geodesic structures, this new structure uses about 2-3x more materials, but it is so much stronger that it is startling.</span></a></article></li>
+
   <li><article><a href="/blog/intro-to-geometric-algebra-1/">Introduction to Geometric Algebra, Part 1 <span class="entry-date"><time datetime="2017-07-12T00:00:00-07:00">July 12, 2017</time></span> <span class="excerpt">Geometric Algebra (GA) is one of those things that we should have all learned in high school because it would have made physics and mathematics in college so much easier.</span></a></article></li>
 
   <li><article><a href="/blog/hyperbolic-geometry-and-special-relativity/">Hyperbolic Geometry & Special Relativity <span class="entry-date"><time datetime="2017-06-02T00:00:00-07:00">June 02, 2017</time></span> <span class="excerpt">While studying An Introduction to Particle Physics on a recent flight to Japan – studying math that is way above my head is a nerdy hobby of mine – I came across a simple viewpoint on special relativity that really stunned me:</span></a></article></li>
@@ -140,8 +142,6 @@
   <li><article><a href="/project-euler/problem-84/">Project Euler Problem 84 <span class="entry-date"><time datetime="2010-10-19T05:29:12-07:00">October 19, 2010</time></span> <span class="excerpt">Problem 84 asks us to implement the classic game Monopoly and find the most-visited spaces on the board…if we used two 4-sided dice instead of 6-sided ones.</span></a></article></li>
 
   <li><article><a href="/project-euler/problem-83/">Project Euler Problem 83 <span class="entry-date"><time datetime="2010-10-18T09:23:14-07:00">October 18, 2010</time></span> <span class="excerpt">Problem 83 can be solved with A* exactly like the we did in problem 81. The only code that needs to be changed is the neighbors function neigh and the estimated cost-to-goal function est. Everything else can be reused from problem 81.(defn euler-83 []  (let [mat   (load-matrix &quot;/zzz/work/matrix.txt&quot;)        m     (count mat)        n     (count (first mat))        cost  (fn [[i j]] (nth (nth mat (dec i)) (dec j)))        start [1 1]        goal  [m n]        goal? (fn [e] (= e goal))        est   (fn [[i j]] 0)        neigh (fn [[i j]]                (merge                 (when (&lt; i m) {[(inc i) j] (cost [(inc i) j])})                 (when (&lt; j n) {[i (inc j)] (cost [i (inc j)])})                 (when (&lt; 1 i) {[(dec i) j] (cost [(dec i) j])})                 (when (&lt; 1 j) {[i (dec j)] (cost [i (dec j)])})))        path  (a*-search est neigh start goal?)]    (reduce + (map cost path))))</span></a></article></li>
-
-  <li><article><a href="/project-euler/problem-82/">Project Euler Problem 82 <span class="entry-date"><time datetime="2010-10-18T09:10:45-07:00">October 18, 2010</time></span> <span class="excerpt">As I mentioned in the previous post (#81), we can use [A](http://en.wikipedia.org/wiki/A) to easily solve problem 82 as well.</span></a></article></li>
 
 </ul>
 

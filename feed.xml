@@ -1,4 +1,236 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2017-08-02T15:38:59-07:00</updated><id>/</id><title type="html">Art is Never Finished</title><subtitle>...Only Abandoned. – Leonardo da Vinci</subtitle><entry><title type="html">Introduction to Geometric Algebra, Part 1</title><link href="/blog/intro-to-geometric-algebra-1/" rel="alternate" type="text/html" title="Introduction to Geometric Algebra, Part 1" /><published>2017-07-12T00:00:00-07:00</published><updated>2017-07-12T00:00:00-07:00</updated><id>/blog/intro-to-geometric-algebra-1</id><content type="html" xml:base="/blog/intro-to-geometric-algebra-1/">&lt;p&gt;Geometric Algebra (GA) is one of those things that we should have all learned in high school because it would have made physics and mathematics in college so much easier.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2017-11-13T22:55:10-08:00</updated><id>/</id><title type="html">Art is Never Finished</title><subtitle>...Only Abandoned. – Leonardo da Vinci</subtitle><entry><title type="html">The Reinforced Pentakis Dodecahedron Dome</title><link href="/blog/pentakis-dodecahedron-dome/" rel="alternate" type="text/html" title="The Reinforced Pentakis Dodecahedron Dome" /><published>2017-11-05T00:00:00-07:00</published><updated>2017-11-05T00:00:00-07:00</updated><id>/blog/pentakis-dodecahedron-dome</id><content type="html" xml:base="/blog/pentakis-dodecahedron-dome/">&lt;p&gt;For your amusement, I would like to present a reinforced version of a geodesic dome that is many times stronger than conventional geodesic domes. It is essentially two concentric domes, one nested inside the other, connected entirely by tetrahedra in a way that both strengthens the dome and provides space for insulation. Compared to single-layer geodesic structures, this new structure uses about 2-3x more materials, but it is so much stronger that it is startling.&lt;/p&gt;
+
+&lt;p&gt;The internal structure is very regular, as a paper model shows:&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;pentakis_dome_bottom.jpg&quot; alt=&quot;pentakis_dome_bottom&quot; title=&quot;A paper reinforced Pentakis Dodecahedron dome mockup, viewed from the bottom to show the internal structure. &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The outside shape is the top 3/4ths of a 60-sided pentakis dodecahedron:&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;pentakis_dome_top.jpg&quot; alt=&quot;pentakis_dome_top&quot; title=&quot;An external view of a paper mockup of the Reinforced Pentakis Dodecahedron Dome&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This dome is constructed from the surfaces the &lt;a href=&quot;http://en.wikipedia.org/wiki/icosahedron&quot;&gt;Icosahedron&lt;/a&gt;, the &lt;a href=&quot;http://en.wikipedia.org/wiki/Triakis_icosahedron&quot;&gt;Triakis Icosahedron&lt;/a&gt; and a &lt;a href=&quot;http://en.wikipedia.org/wiki/Pentakis_dodecahedron&quot;&gt;Pentakis Dodecahedron&lt;/a&gt;. Those terms sounds like a mouthful, but their meanings are fairly simple:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;triakis-subdivision.png&quot; alt=&quot;triakis subdivision&quot; title=&quot;Triakis subdivision&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Triakis&lt;/strong&gt;: For each original triangular face of the polyhedra, add a new midpoint on the triangle and form three new triangular faces. (In 3D, this midpoint should have same radius as the other vertices.)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;icosahedron-dice.jpg&quot; alt=&quot;icosahedron dice&quot; title=&quot;Icosahedron&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Icosahedron&lt;/strong&gt;: The 20-sided platonic solid formed by connecting 5 equilateral triangles at every vertex.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;pentakis-subdivision.png&quot; alt=&quot;pentakis subdivision&quot; title=&quot;Pentakis subdivision&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Pentakis&lt;/strong&gt;: The same as “tri-akis”, but for pentagonal faces, thus making five new triangles.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;dodecahedron-dice.jpg&quot; alt=&quot;dodecahedron dice&quot; title=&quot;Dodecahedron&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Dodecahedron&lt;/strong&gt;: The 12-sided platonic solid formed by connecting 3 regular pentagons at every vertex.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;I envision connecting these surfaces along their edges, rather than at the vertices. There are a few advantages to constructing a dome in this way:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;It is fairly simple: there are only three different triangle shapes that need to be cut out.&lt;/li&gt;
+  &lt;li&gt;Every edge is part of at least one tetrahedron, making it incredibly strong and rigid.&lt;/li&gt;
+  &lt;li&gt;The tetrahedra form trapped spaces between an ‘inner’ dome surface and an ‘outer’ dome surface. This space may be useful as a type of crawlspace for insulation, wiring, or ventilation.&lt;/li&gt;
+  &lt;li&gt;Even if the dome is not connected to the ground, it is rigid and self-supporting. This is unlike most other geodesic domes, which require strong connections between foundations and the rest of the structure or they fold or collapse.&lt;/li&gt;
+  &lt;li&gt;As with other domes, the edges can be made first as a skeleton and then the faces attached later, or the faces can be flat and connected with a suitable edge-connection method. In the latter case, a larger structure could be made entirely out of plywood, stamped metal, glass, or perhaps ceramic tile.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In the rest of this article, I will next briefly review &lt;a href=&quot;#geodesic_construction&quot;&gt;how other geodesic domes are made&lt;/a&gt;, discuss &lt;a href=&quot;#geodesic_advantages&quot;&gt;their advantages&lt;/a&gt;, then talk about &lt;a href=&quot;#geodesic_disadvantages&quot;&gt;the problems I encountered in them while making paper models&lt;/a&gt;, and then &lt;a href=&quot;#pentakis_construction&quot;&gt;how to make this new dome structure&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&quot;geodesic_construction&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;background-geodesic-dome-construction&quot;&gt;Background: Geodesic Dome Construction&lt;/h2&gt;
+
+&lt;p&gt;What &lt;strong&gt;is&lt;/strong&gt; a geodesic dome, anyway? How do you decide the sizes of all those little triangles? Although they initially may appear very mysterious, geodesic structures are actually formed from very simple patterns.&lt;/p&gt;
+
+&lt;p&gt;Most domes are created from regular platonic polyhedra. What are those? Well, if you have ever played &lt;a href=&quot;http://dnd.wizards.com&quot;&gt;games&lt;/a&gt; with 4-, 6-, 8-, 12-, and 20-sided%20die)-sided dice, you have seen all the platonic polyhedra. If you have not, it may be a fun exercise to cut out paper triangles, squares, and pentagons, and try to rediscover the shapes yourself. The five platonic solids are the only polyhedra with these two properties:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Every edge has the same length&lt;/li&gt;
+  &lt;li&gt;Every face is the same polygon&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Typically, people making geodesic domes choose a tetrahedron (4-sides), octahedron (8-sides), or icosahedron (20-sides), because these polehedra may be formed using, respectively, 3, 4, or 5 equilateral triangles connected together at each vertex.&lt;/p&gt;
+
+&lt;p&gt;For geodesic domes, the icosahedron is by far the most popular choice of a starting shape because it is already closer to a sphere than the other platonic solids.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;icosahedron.png&quot; alt=&quot;icosahedron&quot; title=&quot;An icosahedron. &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The next step is to divide the edges of each triangle into &lt;script type=&quot;math/tex&quot;&gt;v&lt;/script&gt; smaller pieces, and then form smaller triangles connecting the new midpoints. In general, the &lt;script type=&quot;math/tex&quot;&gt;v&lt;/script&gt;th level subdivision is made by breaking each edge of the triangle into &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; pieces:&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;subdivisions.png&quot; alt=&quot;subdivided triangles&quot; title=&quot;Subdivided triangles&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;For the rest of this examlpe, we will use the 2&lt;script type=&quot;math/tex&quot;&gt;v&lt;/script&gt; subdivision. So let’s draw a 2&lt;script type=&quot;math/tex&quot;&gt;v&lt;/script&gt; subdivided icosahedron:&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;icosahedron-subdivided-2v.png&quot; alt=&quot;subdivided triangles&quot; title=&quot;An icosahedron with its edges divided in 2, thus producing 4 new triangles.&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The last step is “push out” the new midpoints of any new vertices so that they also lie on the surface of the sphere defined by the original polyhedron. As the points are pushed out, their spherical angles must not change (azimuth and inclination angles, or longitude and latitude if you prefer).&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;icosahedral-2v-sphere.png&quot; alt=&quot;geodesic 1v, 2v, 3v&quot; title=&quot;A sphere formed by pushing the new vertices out to the same radius as the other vertices.&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Mathematically, this last operation is simply the constraint that every vertex &lt;script type=&quot;math/tex&quot;&gt;(x_i, y_i, z_i)&lt;/script&gt; be the same distance &lt;script type=&quot;math/tex&quot;&gt;d&lt;/script&gt; from the center of the polyhedron:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;d = \sqrt{x_i^2 + y_i^2 + z_i^2}&lt;/script&gt;
+
+&lt;p&gt;Working out the analytic solutions for the lengths of the triangles in the &lt;script type=&quot;math/tex&quot;&gt;v&lt;/script&gt;th subdivision of various polyhedra is within the abilities of many high school students, and perhaps even a few gifted middle school students, but it does take some patience and persistence. Thankfully, there are &lt;a href=&quot;http://www.dirkbertels.net/computing/pentaDome_files/pentaDome_070206.pdf&quot;&gt;many&lt;/a&gt;… &lt;a href=&quot;http://www.geometer.org/mathcircles/geodesic.pdf&quot;&gt;good&lt;/a&gt;… &lt;a href=&quot;http://www.salsburg.com/geod/geodesicmath.pdf&quot;&gt;examples&lt;/a&gt; to start from if you are curious about calculating the coordinates.&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&quot;geodesic_advantages&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;advantages-of-domes&quot;&gt;Advantages of Domes&lt;/h2&gt;
+
+&lt;p&gt;Geodesic domes are attractive structures in part because they are so simple – there are only 2 different triangle shapes needed for the 2v and 3v designs. When I helped organize the &lt;a href=&quot;http://portland.sciencehackday.org&quot;&gt;2017 Portland Science Hack Day&lt;/a&gt;, one of our kid zone activities was to assemble a geodesic dome out of cardboard. We used a 40W laser cutter to quickly cut the cardboard (25 of the 18x18x24” boxes from HomeDepot is plenty, costing $36.50 in total), and stuck it together the edges with tape remarkably quickly:&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;shd-dome.jpg&quot; alt=&quot;Science Hack Day Dome&quot; title=&quot;The Portland 2017 Science Hack Day kid zone 2v geodesic dome.&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Some people even build entire homes this way. Advocates of geodesic dome homes tout the design as being one of the strongest, most material-efficient types of structure possible, and most engineers who look at one will immediately be able to give several reasons why this is true:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Of all possible shapes, a sphere has the highest ratio of volume to surface area. All other things being equal, this means that there will be fewer materials used to construct a home with a certain volume. There will also be relatively less energy lost through the surface, so it will be cheaper to heat or cool.&lt;/li&gt;
+  &lt;li&gt;Spheres are &lt;a href=&quot;https://en.wikipedia.org/wiki/Gridshell&quot;&gt;doubly-curved surfaces&lt;/a&gt;, which are generally more rigid than &lt;a href=&quot;https://en.wikipedia.org/wiki/Developable_surface&quot;&gt;singly curved surfaces&lt;/a&gt; like cylinders that can crush or kink. You may have noticed how the rounded bottom of an aluminum can is much stronger than the sides, even though the metal is the same thickness.&lt;/li&gt;
+  &lt;li&gt;Geodesic domes are constructed from many small triangles. Triangles cannot pivot or bend at the joints, unlike squares or other polygons, and are thus one of the strongest shapes in engineering. One glance at the &lt;a href=&quot;http://en.wikipedia.org/wiki/truss&quot;&gt;truss structures&lt;/a&gt; used in cranes, planes, and spacecraft are all based on the concept of “triangularizing” a structure to make it as rigid and strong as possible.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a name=&quot;geodesic_disadvantages&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;weakpoints-of-geodesic-domes&quot;&gt;Weakpoints of Geodesic Domes&lt;/h2&gt;
+
+&lt;p&gt;One big surprise that the paper geodesic dome models revealed to me was how the strength of the geodesic dome absolutely depends on it being connected at the base where the geodesic dome touches the ground. Although a completed sphere is quite strong, a dome has very little strength unless its edges are securely anchored to the ground!&lt;/p&gt;
+
+&lt;p&gt;It’s hard to show in photos, but the paper geodesic dome I made appears to support itself when sitting on the table, but it quite floppy and easily curls up into strange shapes if the base edge is not taped down.&lt;/p&gt;
+
+&lt;table class=&quot;center&quot;&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;geodesic_dome.jpg&quot; alt=&quot;geodesic_dome.jpg&quot; title=&quot;A geodesic dome unconnected to the ground...&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&quot;geodesic_squashed.jpg&quot; alt=&quot;geodesic_squashed&quot; title=&quot;...is quite floppy!&quot; /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Now, a dome with more thickness (such as one made with 2x4’s or pipe) would be stronger, but its strength still depends on being fixed to the ground.&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&quot;pentakis_construction&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;constructing-the-pentakis-dodecahedron&quot;&gt;Constructing the Pentakis Dodecahedron&lt;/h2&gt;
+
+&lt;p&gt;One of the fastest ways for me to develop intuition for structures that are too complicated to visualize is to build small mock-ups. I have always liked arts and crafts, so I printed out some templates of various shapes on thick card stock paper, and taped the edges together with scotch tape. If you have an hour to spare, I encourage you to unleash your inner elementary school student, grab your scissors (and maybe a drink and a podcast too!), and try making one of these yourself.&lt;/p&gt;
+
+&lt;p&gt;Here’s how to make it:&lt;/p&gt;
+
+&lt;p&gt;First, print out six copies of the &lt;a href=&quot;reinforced-pentakis-dodecahedron.pdf&quot;&gt;PDF of this design&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Next, cut out the triangular tetrahedra. Optionally, you may also use a knife to cut out the insides of the triangles, if you want to be able to see the internal structure.&lt;/p&gt;
+
+&lt;p&gt;Then, fold the sides up and tape them together to form tetrahedra:&lt;/p&gt;
+
+&lt;table class=&quot;center&quot;&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;pentakis_construction_step0.jpg&quot; alt=&quot;pentakis-step-1&quot; title=&quot;Step 0.&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&quot;pentakis_construction_step1.jpg&quot; alt=&quot;pentakis-step-1&quot; title=&quot;Step 1.&quot; /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;When you have five tetrahedra, tape them together along their edges. This creates one quarter of a triakis icosahedron.&lt;/p&gt;
+
+&lt;table class=&quot;center&quot;&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;pentakis_construction_step2.jpg&quot; alt=&quot;pentakis-step-1&quot; title=&quot;Step 2.&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&quot;pentakis_construction_step3.jpg&quot; alt=&quot;pentakis-step-1&quot; title=&quot;Step 3.&quot; /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Finally, cover the surface with the smaller pentakis triangles.&lt;/p&gt;
+
+&lt;table class=&quot;center&quot;&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;pentakis_construction_step4.jpg&quot; alt=&quot;pentakis-step-1&quot; title=&quot;Step 4.&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&quot;pentakis_construction_step5.jpg&quot; alt=&quot;pentakis-step-1&quot; title=&quot;Step 5.&quot; /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Repeat, adding more tetrahedra and skin surfaces in this way until you have a dome.&lt;/p&gt;
+
+&lt;p&gt;While you are cutting out paper, you may also want to compare the relative strength of this with other common shapes::&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.korthalsaltes.com/model.php?name_en=icosahedron&quot;&gt;Paper template for an icosahedron&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.korthalsaltes.com/model.php?name_en=dodecahedron&quot;&gt;Paper template for a dodecahedron&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.discovere.org/sites/default/files/Dome%20Home_0.pdf&quot;&gt;Paper template for a 2v geodesic dome&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://mathworld.wolfram.com/pdf/PentakisDodecahedron.pdf&quot;&gt;Paper template for a pentakis dodecahedron&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you want to make new triangles and create your own rescaled version of the reinforced pentakis dodecahedron, the magic numbers for a dome of radius &lt;script type=&quot;math/tex&quot;&gt;r&lt;/script&gt; are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The icosahedron’s equilateral triangles have three edges of length &lt;script type=&quot;math/tex&quot;&gt;l_1 = 1.05 r&lt;/script&gt;&lt;/li&gt;
+  &lt;li&gt;The triakis icoceles triangles have one edge of length &lt;script type=&quot;math/tex&quot;&gt;l_1&lt;/script&gt; and two edges of length &lt;script type=&quot;math/tex&quot;&gt;l_2 = l_1 *&lt;/script&gt;&lt;/li&gt;
+  &lt;li&gt;The pentakis icoceles triangles have one edge of length &lt;script type=&quot;math/tex&quot;&gt;l_2&lt;/script&gt; and two edges of length &lt;script type=&quot;math/tex&quot;&gt;l_3= l_2 *&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;a-note-on-duality&quot;&gt;A note on Duality&lt;/h2&gt;
+
+&lt;p&gt;It’s fun to look at the mathematics of these polyhedra as well. Basically, this dome is constructed by starting with an icosahedron, adding tetrahedra to the outside, and then add pentagons to the new points defined by this, and then scaling all the radii carefully. Here is an early model whose vertices’ radii are not all equal:&lt;/p&gt;
+
+&lt;table class=&quot;center&quot;&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;icosahedron.jpg&quot; alt=&quot;icosahedron&quot; title=&quot;A paper Icosahedron&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&quot;icosahedron_stellated.jpg&quot; alt=&quot;icosahedron_stellated&quot; title=&quot;A paper great stellated icosahedron&quot; /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;The above tetrahedra that I taped to the outside of the icosahedron are very big, creating a &lt;a href=&quot;http://en.wikipedia.org/wiki/Great_stellated_dodecahedron&quot;&gt;great stellated icosahedron&lt;/a&gt; instead of a triakis icosahedron. If you were to connect the tips of these tetrahedra, they would define 12 new pentagonal surfaces, because the “dual” of the icosahedron is the dodecahedron.&lt;/p&gt;
+
+&lt;p&gt;Duality expresses a mathematical symmetry that appears in many different disciplines, and while a full post on duality is out of scope of this article, the core thing to realize is that in this example of duality, the number of sides and vertices switch:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Icosahedron: 12 vertices, 20 (triangular) sides&lt;/li&gt;
+  &lt;li&gt;Dodecahedron: 12 (pentagonal) sides, 20 vertices&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And also the number of faces and the sides of each face switch:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Icosahedron: 3-sided faces, 5 faces connecting at each vertex&lt;/li&gt;
+  &lt;li&gt;Dodecahedron: 5-sided faces, 3 faces connecting at each vertex&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It is a happy coincedence that if we reduce their height to make a “triakis icosahedron”, in which the points of the tetrahedra are made to have a radius equal to the other points on the icosahedron, then the convex hull of those vertices defines a pentakis dodecahedron. It is pretty neat that all of the vertices are still at a constant radius.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;Most of us would rather live in a beautiful home than one with efficient geometry, so perhaps it is not a surprise that geodesic designs are not very popular and take a backseat to traditional construction techniques. Personally, I find domes to be so ugly that they are actually kind of cute, but I understand that they might not pass muster with the local homeowners association.&lt;/p&gt;
+
+&lt;p&gt;Aesthetics aside, dome construction is probably best reserved for extremely harsh environments: cold-weather shelters, underground structures, or perhaps spacecraft. If the spaces between the icosahedron and pentakis dodecahedron were sealed airtight, they could also act as insulation, floatation chambers, or – for extraterrestrial homes – as airlocks that protect the inner chamber.&lt;/p&gt;
+
+&lt;p&gt;It is a big world out there, and because it is unlikely that I am the first person to think along these lines before, please &lt;a href=&quot;mailto:drrobot-at-gmail.com&quot;&gt;let me know&lt;/a&gt; of other examples of this structure and other more developed implementations. I would be really curious to see pictures of real structures implementing this shape.&lt;/p&gt;
+
+&lt;h2 id=&quot;future-directions&quot;&gt;Future Directions&lt;/h2&gt;
+
+&lt;p&gt;As with any thought experiment, this little game raised more questions than it answered:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Are there other shapes that may also be connected such that every edge is part of a tetrahedron? Is this possible with every triangularized shape and its dual?&lt;/li&gt;
+  &lt;li&gt;How does one further subdivide the triangles of this structure to make it more spherical, as was done with the 2v, 3v, and higher-order geodesic domes, while keeping every edge part of at least one tetrahedron?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There are fun engineering topics that would also be worth figuring out for this structure:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Could this be made self-inflating structure by filling the tetrahedral cells with compressed air or expanding foam?&lt;/li&gt;
+  &lt;li&gt;Could this be made entirely out of ceramic tile or glass, connected at the edges in a manner that avoids stress concentrations?&lt;/li&gt;
+  &lt;li&gt;Would this be strong enough under certain conditions to be buried underground as an earth-sheltered home?&lt;/li&gt;
+  &lt;li&gt;How could the corners and edges of this structure be safely and cheaply sealed against water intrusion?&lt;/li&gt;
+&lt;/ul&gt;</content><category term="math" /><category term="geometry" /><category term="architecture" /><summary type="html">For your amusement, I would like to present a reinforced version of a geodesic dome that is many times stronger than conventional geodesic domes. It is essentially two concentric domes, one nested inside the other, connected entirely by tetrahedra in a way that both strengthens the dome and provides space for insulation. Compared to single-layer geodesic structures, this new structure uses about 2-3x more materials, but it is so much stronger that it is startling.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Introduction to Geometric Algebra, Part 1</title><link href="/blog/intro-to-geometric-algebra-1/" rel="alternate" type="text/html" title="Introduction to Geometric Algebra, Part 1" /><published>2017-07-12T00:00:00-07:00</published><updated>2017-07-12T00:00:00-07:00</updated><id>/blog/intro-to-geometric-algebra-1</id><content type="html" xml:base="/blog/intro-to-geometric-algebra-1/">&lt;p&gt;Geometric Algebra (GA) is one of those things that we should have all learned in high school because it would have made physics and mathematics in college so much easier.&lt;/p&gt;
 
 &lt;p&gt;The fact that we did not learn it in high school is probably because GA appears to only have been known by mathematicians studying &lt;a href=&quot;https://www.wikipedia.org/wiki/clifford_algebra&quot;&gt;Clifford Algebras&lt;/a&gt;. Mathematicians may be 100 years ahead of everybody else in so many ways, but they are not always the best at communicating their subject to non-mathematicians. The physics community, at least, seems to have figured out that GA is useful, and since physicists are 20 years ahead of the rest of the sciences in the adoption of good tools and methods, it seems safe to predict that in the future engineers will start seeing GA in school in a couple of decades, or &lt;a href=&quot;http://link-to-paper&quot;&gt;even sooner&lt;/a&gt;!&lt;/p&gt;
 
@@ -756,60 +988,4 @@ z^{\prime} &amp; = &amp; z\end{eqnarray*} %]]&gt;&lt;/script&gt;
                  (when (&amp;lt; 1 i) {[(dec i) j] (cost [(dec i) j])})
                  (when (&amp;lt; 1 j) {[i (dec j)] (cost [i (dec j)])})))
         path  (a*-search est neigh start goal?)]
-    (reduce + (map cost path))))</summary></entry><entry><title type="html">Project Euler Problem 82</title><link href="/project-euler/problem-82/" rel="alternate" type="text/html" title="Project Euler Problem 82" /><published>2010-10-18T09:10:45-07:00</published><updated>2010-10-18T09:10:45-07:00</updated><id>/project-euler/problem-82</id><content type="html" xml:base="/project-euler/problem-82/">&lt;p&gt;As I mentioned in the &lt;a href=&quot;?p=660&quot;&gt;previous post (#81)&lt;/a&gt;, we can use [A&lt;em&gt;](http://en.wikipedia.org/wiki/A&lt;/em&gt;) to easily solve &lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=82&quot;&gt;problem 82&lt;/a&gt; as well.&lt;/p&gt;
-
-&lt;p&gt;One way to solve this problem is to perform the A* search from each element on the leftmost column, and then take the minimum length path amongst all these results.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;euler-82&lt;/span&gt; []
-  (&lt;span style=&quot;color: #8ae234;&quot;&gt;let&lt;/span&gt; [mat   (load-matrix &lt;span style=&quot;color: #Fd7f98;&quot;&gt;&quot;/path/to/matrix.txt&quot;&lt;/span&gt;)
-        m     (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; mat)
-        n     (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;first&lt;/span&gt; mat))
-        goal? (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [e] (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;second&lt;/span&gt; e) n))
-        cost  (&lt;span style=&quot;color: #729fcf;&quot;&gt;memoize&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]] (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; mat (&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; i)) (&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; j))))
-        est   (&lt;span style=&quot;color: #729fcf;&quot;&gt;memoize&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]] (&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; m i) (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; n j))))
-        neigh (&lt;span style=&quot;color: #729fcf;&quot;&gt;memoize&lt;/span&gt;
-               (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]]
-                (&lt;span style=&quot;color: #729fcf;&quot;&gt;merge&lt;/span&gt;
-                 (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; i m) {[(&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; i) j] (cost [(&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; i) j])})
-                 (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; j n) {[i (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; j)] (cost [i (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; j)])})
-                 (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; 1 i) {[(&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; i) j] (cost [(&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; i) j])}))))]
-    (&lt;span style=&quot;color: #729fcf;&quot;&gt;apply&lt;/span&gt;
-     min
-     (&lt;span style=&quot;color: #8ae234;&quot;&gt;for&lt;/span&gt; [i (&lt;span style=&quot;color: #729fcf;&quot;&gt;range&lt;/span&gt; 1 (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; m))
-           start [[i 1]]
-           path  [(a*-search est neigh start goal?)]]
-       (&lt;span style=&quot;color: #729fcf;&quot;&gt;reduce&lt;/span&gt; + (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; cost path))))))
-
-
-(&lt;span style=&quot;color: #729fcf;&quot;&gt;time&lt;/span&gt; (euler-82)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;&quot;Elapsed time: 8053.744512 msecs&quot;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Note how we can memoize the functions passed to A* to improve the speed of A* searches slightly. We possibly could probably have come up with a faster solution by memoizing the collections internal to A&lt;em&gt;, but that would have meant exposing the details of the A&lt;/em&gt; to the outside world, which I don’t think is advisable in this case.&lt;/p&gt;
-
-&lt;p&gt;A better approach towards improving performance is to start thinking outside the box – or in this case, outside the grid. If we redefine the cost and neighbor functions to have a special ‘leftmost’ starting point that has all the elements in the first column as children, we can solve the problem in a single A* search. Let’s mark this new starting point with the coordinate [0 0], to mark that it is ‘off the grid’.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;euler-82-better&lt;/span&gt; []
-  (&lt;span style=&quot;color: #8ae234;&quot;&gt;let&lt;/span&gt; [mat   (load-matrix &lt;span style=&quot;color: #Fd7f98;&quot;&gt;&quot;/path/to/matrix.txt&quot;&lt;/span&gt;)
-        m     (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; mat)
-        n     (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;first&lt;/span&gt; mat))
-        start [0 0] &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;special node left of the whole matrix
-&lt;/span&gt;        goal? (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [e] (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;second&lt;/span&gt; e) n))
-        cost  (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]]
-                (&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; [i j] [0 0])
-                  0
-                  (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; mat (&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; i)) (&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; j))))
-        est   (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]] (&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; m i) (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; n j)))
-        neigh (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]]
-                (&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; [i j] [0 0])
-                  (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [i] [[i 1] (cost [i 1])]) (&lt;span style=&quot;color: #729fcf;&quot;&gt;range&lt;/span&gt; 1 (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; m)))
-                  (&lt;span style=&quot;color: #729fcf;&quot;&gt;merge&lt;/span&gt;
-                   (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; i m) {[(&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; i) j] (cost [(&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; i) j])})
-                   (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; j n) {[i (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; j)] (cost [i (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; j)])})
-                   (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; 1 i) {[(&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; i) j] (cost [(&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; i) j])}))))
-        path  (a*-search est neigh start goal?)]
-    (&lt;span style=&quot;color: #729fcf;&quot;&gt;reduce&lt;/span&gt; + (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; cost path))))
-
-(&lt;span style=&quot;color: #729fcf;&quot;&gt;time&lt;/span&gt; (euler-82-better)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;&quot;Elapsed time: 244.770152 msecs&quot;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This really shows the versatility of the A* search method.&lt;/p&gt;</content><category term="project-euler" /><category term="a* algorithm" /><category term="search" /><summary type="html">As I mentioned in the previous post (#81), we can use [A](http://en.wikipedia.org/wiki/A) to easily solve problem 82 as well.</summary></entry></feed>
+    (reduce + (map cost path))))</summary></entry></feed>
