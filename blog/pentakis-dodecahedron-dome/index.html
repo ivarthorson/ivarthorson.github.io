@@ -178,7 +178,7 @@
   </tbody>
 </table>
 
-<p>I envision connecting these surfaces along their edges, rather than at the vertices. There are a few advantages to constructing a dome in this way:</p>
+<p>There are a few advantages to constructing a dome of this type:</p>
 
 <ol>
   <li>It is fairly simple: there are only three different triangle shapes that need to be cut out.</li>
@@ -216,7 +216,7 @@
 
 <p class="center"><img src="icosahedron-subdivided-2v.png" alt="subdivided triangles" title="An icosahedron with its edges divided in 2, thus producing 4 new triangles." /></p>
 
-<p>The last step is “push out” the new midpoints of any new vertices so that they also lie on the surface of the sphere defined by the original polyhedron. As the points are pushed out, their spherical angles must not change (azimuth and inclination angles, or longitude and latitude if you prefer).</p>
+<p>The last step is “push out” the newly created vertices so that they also lie on the surface of the sphere defined by the original polyhedron. As the points are pushed out, their angular coordinates (i.e. latitude and longitude) on the surface of the sphere must not change.</p>
 
 <p class="center"><img src="icosahedral-2v-sphere.png" alt="geodesic 1v, 2v, 3v" title="A sphere formed by pushing the new vertices out to the same radius as the other vertices." /></p>
 
@@ -257,7 +257,7 @@
   </tbody>
 </table>
 
-<p>Now, a dome with more thickness (such as one made with 2x4’s or pipe) would be stronger, but its strength still depends on being fixed to the ground.</p>
+<p>Although a dome constructed with thick members like wood or metal might appear self-supporting, this is not mathematically true, and failure to connect the foundation of the dome will result in only a fraction of the true strength being developed.</p>
 
 <p><a name="pentakis_construction"></a></p>
 <h2 id="constructing-the-pentakis-dodecahedron">Constructing the Pentakis Dodecahedron</h2>
@@ -303,9 +303,9 @@
   </tbody>
 </table>
 
-<p>Repeat, adding more tetrahedra and skin surfaces in this way until you have a dome.</p>
+<p>Repeat this process to the edges of the small dome you just created, adding more tetrahedra and skin surfaces in this way until you have 3/4ths of a complete sphere.</p>
 
-<p>While you are cutting out paper, you may also want to compare the relative strength of this with other common shapes::</p>
+<p>While you are cutting out paper, you may also want to compare the relative strength of this with other common shapes:</p>
 
 <ul>
   <li><a href="http://www.korthalsaltes.com/model.php?name_en=icosahedron">Paper template for an icosahedron</a></li>
@@ -314,13 +314,19 @@
   <li><a href="http://mathworld.wolfram.com/pdf/PentakisDodecahedron.pdf">Paper template for a pentakis dodecahedron</a></li>
 </ul>
 
-<p>If you want to make new triangles and create your own rescaled version of the reinforced pentakis dodecahedron, the magic numbers for a dome of radius <script type="math/tex">r</script> are:</p>
+<p>If you want to make new triangles and create your own reinforced pentakis dodecahedron of arbitrary size, the magic numbers for a dome of radius <script type="math/tex">r</script> are:</p>
 
 <ul>
   <li>The icosahedron’s equilateral triangles have three edges of length <script type="math/tex">l_1 = 1.0514622 r</script></li>
   <li>The triakis icosahedron’s icoceles triangles have one edge of length <script type="math/tex">l_1</script> and two edges of length <script type="math/tex">l_2 = 0.66500310 r</script></li>
   <li>The pentakis dodecahedron’s icoceles triangles have one edge of length <script type="math/tex">l_2</script> and two edges of length <script type="math/tex">l_3 = 1.12732203 l_2</script></li>
 </ul>
+
+<p>If you would like to estimate the amount of flat material that you will need, you will find <a href="https://en.wikipedia.org/wiki/Heron%27s_formula">Heron’s Formula</a> useful:</p>
+
+<script type="math/tex; mode=display">A = \sqrt{s(s-a)(s-b)(s-c)}</script>
+
+<p>where <script type="math/tex">A</script> is the area of a triangle, <script type="math/tex">s=\frac{1}{2}(a+b+c)</script> is half of the perimeter of the triangle, and <script type="math/tex">a,b,c</script> are the lengths of the sides of the triangle.</p>
 
 <h2 id="a-note-on-duality">A note on Duality</h2>
 
@@ -351,9 +357,9 @@
   <li>Dodecahedron: 5-sided faces, 3 faces connecting at each vertex</li>
 </ul>
 
-<p>It is a happy coincedence that if we reduce their height to make a “triakis icosahedron”, in which the points of the tetrahedra are made to have a radius equal to the other points on the icosahedron, then the convex hull of those vertices defines a pentakis dodecahedron. It is pretty neat that all of the vertices are still at a constant radius.</p>
+<p>If we reduce the radius of the tips of the great stellated icosahedron, the shape becomes a “triakis icosahedron”, in which all vertices have equal radii. By happy coincidence, the convex hull of those vertices defines a pentakis dodecahedron. It is pretty neat that all of the vertices are still at a constant radius.</p>
 
-<h1 id="conclusion">Conclusion</h1>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>Most of us would rather live in a beautiful home than one with efficient geometry, so perhaps it is not a surprise that geodesic designs are not very popular and take a backseat to traditional construction techniques. Personally, I find domes to be so ugly that they are actually kind of cute, but I understand that they might not pass muster with the local homeowners association.</p>
 
@@ -373,10 +379,10 @@
 <p>There are fun engineering topics that would also be worth figuring out for this structure:</p>
 
 <ul>
-  <li>Could this be made self-inflating structure by filling the tetrahedral cells with compressed air or expanding foam?</li>
-  <li>Could this be made entirely out of ceramic tile or glass, connected at the edges in a manner that avoids stress concentrations?</li>
-  <li>Would this be strong enough under certain conditions to be buried underground as an earth-sheltered home?</li>
-  <li>How could the corners and edges of this structure be safely and cheaply sealed against water intrusion?</li>
+  <li>If this were made of fabric instead of rigid materials, could this be made a self-inflating structure by filling the tetrahedral cells with compressed air or expanding foam?</li>
+  <li>Could this be made entirely out of ceramic tile or glass, connected at the edges in a manner that avoids stress concentrations? Where are the stresses in each trianglular member?</li>
+  <li>Would this be strong enough to be buried underground as an earth-sheltered home? On earth…or mars?</li>
+  <li>How could the corners and edges of this structure be safely and cheaply sealed against water intrusion? How could condensation be removed from the inside?</li>
 </ul>
 
         
