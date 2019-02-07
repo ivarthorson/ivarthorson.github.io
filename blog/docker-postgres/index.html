@@ -1,0 +1,295 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Connecting a Clojure REPL to a PostgreSQL Docker Container &#8211; Art is Never Finished</title>
+<meta name="description" content="In this tutorial, we’ll launch Postgres (a.k.a. PostgreSQL) in a Docker container, create a Postgres database, and connect to it from a Clojure REPL. Postgres is a great open source SQL database with a long history, and is a good choice for many small-to-medium scale projects.
+
+">
+<meta name="keywords" content="clojure, docker, devops">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Connecting a Clojure REPL to a PostgreSQL Docker Container">
+<meta name="twitter:description" content="In this tutorial, we’ll launch Postgres (a.k.a. PostgreSQL) in a Docker container, create a Postgres database, and connect to it from a Clojure REPL. Postgres is a great open source SQL database with a long history, and is a good choice for many small-to-medium scale projects.
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Connecting a Clojure REPL to a PostgreSQL Docker Container">
+<meta property="og:description" content="In this tutorial, we’ll launch Postgres (a.k.a. PostgreSQL) in a Docker container, create a Postgres database, and connect to it from a Clojure REPL. Postgres is a great open source SQL database with a long history, and is a good choice for many small-to-medium scale projects.
+
+">
+<meta property="og:url" content="/blog/docker-postgres/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="/blog/docker-postgres/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="/about/" >About</a></li>
+		  
+		    
+		    <li><a href="/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="/tags/#clojure" title="Pages tagged clojure">clojure</a></li><li><a href="/tags/#docker" title="Pages tagged docker">docker</a></li><li><a href="/tags/#devops" title="Pages tagged devops">devops</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Connecting a Clojure REPL to a PostgreSQL Docker Container</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2019-01-24T00:00:00-08:00"><i class="fa fa-calendar-o"></i> January 24, 2019</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>In this tutorial, we’ll launch Postgres (a.k.a. PostgreSQL) in a Docker container, create a Postgres database, and connect to it from a Clojure REPL. Postgres is a great open source SQL database with a long history, and is a good choice for many small-to-medium scale projects.</p>
+
+<p>First, we need to download the official Postgres image, named <code class="highlighter-rouge">postgres</code>, create a new container, and start the image running in that container. Remember, in the parlance of Docker, “images” are the recipe and “containers” are the cake(s) made from that recipe. By default, Docker containers can make connections to the outside world, but the outside world cannot connect to containers. So we need to “publish” a port that has been exposed in the Docker image.</p>
+
+<p>Downloading the docker image, instantiating it, setting a password, and publishing a port can all be done in a single command:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>docker run  --name my-postgres-container --env POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 --detach postgres
+</code></pre>
+</div>
+
+<p>where</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>-p 5432:5432 Publish port 5432 in the container as 5432 on localhost, so you can connect
+-name        Gives a name to this container
+-env    Environment variable(s)
+-detach Disconnect terminal
+</code></pre>
+</div>
+
+<p>An important note, as I mentioned in the article on <a href="../clojure-apps-in-docker">using Docker to deploy Clojure apps</a>, is that the <code class="highlighter-rouge">docker run</code> command <em>creates</em> a new container – it “bakes a new cake”. If you want to launch a container you have already baked, you’ll use the <code class="highlighter-rouge">docker start</code> command instead, as we’ll see below.</p>
+
+<p>You can check that the Docker container is running with</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>docker container ls
+</code></pre>
+</div>
+
+<p>or more succinctly</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>docker ps
+</code></pre>
+</div>
+
+<p>Next, let’s use another Docker trick to create a second <code class="highlighter-rouge">postgres</code> cake, this time running the <code class="highlighter-rouge">psql</code> command, and <code class="highlighter-rouge">link</code> it to the other container. We want this container to be deleted when we close it (<code class="highlighter-rouge">--rm</code>), and to be linked to the <code class="highlighter-rouge">my-postgres-container</code> so that it can access the server we just started. It is interesting that we can use <code class="highlighter-rouge">psql</code> without having it installed on our local machine; we’re using the command that is inside a container!</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>docker run -it --rm --link my-postgres-container:postgres postgres psql -h postgres -U postgres
+</code></pre>
+</div>
+
+<p>In that terminal, let’s now create a test database:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>CREATE DATABASE testdb;
+</code></pre>
+</div>
+
+<p>You may now hit control-d to quit the terminal if you want to close it. In my case, I often leave it open for debugging.</p>
+
+<p>Now spin a up a Clojure REPL, and run the following commands, one at a time, and note the output of each.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>(ns mytest (:require [clojure.java.jdbc :as sql]))
+
+(def db-spec {:dbtype "postgresql" :dbname "testdb" :user "postgres" :password "mysecretpassword"})
+
+(sql/query db-spec ["SELECT 3*5 AS result"])
+
+(sql/db-do-commands db-spec (sql/create-table-ddl :testing [[:data :text]]))
+
+(sql/insert! db-spec :testing {:data "hahaha"})
+
+(sql/insert! db-spec :testing {:data "lol"})
+
+(sql/query db-spec ["SELECT * FROM testing"])
+</code></pre>
+</div>
+
+<p>Now it’s time to develop that app to your heart’s content.</p>
+
+<p>When you are done with your app, you can stop your container with:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>docker container stop my-postgres-container
+</code></pre>
+</div>
+
+<p>At later times, you can restart the container, and use its state, with:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>docker container start my-postgres-container
+</code></pre>
+</div>
+
+<p>You can delete the stopped container with:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>docker container rm my-postgres-container
+</code></pre>
+</div>
+
+<p>Note that if you want a second container for postgres – say, for a different project – you could make a second container called “my-postgres-container2” using the <code class="highlighter-rouge">docker run</code> command near the top of this. Make as many containers as you need, and start and stop them as required.</p>
+
+<p>Keeping the database in the container is fine during first steps and testing, but as your database gets bigger, you will want to use <a href="https://docs.docker.com/storage/volumes/">Docker Volumes</a> to be able to upgrade the Postgres version separately from the data itself.</p>
+
+<h1 id="references">References</h1>
+
+<ul>
+  <li><a href="http://clojure-doc.org/articles/ecosystem/java_jdbc/home.html">The Clojure JDBC docs</a> were a helpful starting point for learning how to use JDBC.</li>
+  <li><a href="http://clojure-doc.org/articles/ecosystem/java_jdbc/using_sql.html">The Clojure JDBC SQL page</a> is also very good.</li>
+  <li><a href="https://docs.docker.com/get-started/">The Docker Getting Started Guide</a>. Docker documentation is detailed and helpful. The getting started guide is decent, but not as example-heavy and in-depth as I would have wanted.</li>
+  <li><a href="https://docs.docker.com/v17.09/engine/userguide/networking/default_network/binding/">Docker Documentation on Binding Container Ports to the Host</a>. This has a critical quote that helped me on a related problem: “By default Docker containers can make connections to the outside world, but the outside world cannot connect to containers.” Even though I had exposed the ports in docker images with “EXPOSE”, they were not actually be reachable from the host unless you launch the container with <code class="highlighter-rouge">docker run -P ...</code> or <code class="highlighter-rouge">docker run -p 5432:5432</code>. Kind of a gotcha for newbies, I feel.</li>
+</ul>
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="/blog/clojure-apps-in-docker/" class="btn" title="Packaging and Running Clojure Apps Locally with Docker">Previous</a>
+      
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2019 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = '';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

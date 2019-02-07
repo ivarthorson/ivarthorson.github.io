@@ -1,0 +1,644 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Layered Tetrahedral Geometric Structures &#8211; Art is Never Finished</title>
+<meta name="description" content="This article describes another iteration of the dome-like structure that I discussed a few months ago. I still don’t have a good vocabulary for describing why I think these things are neat, except to say that I somehow find it relaxing to work on toy engineering problems once or twice a month. I guess de gustibus non est disputandum – “there’s no accounting for (bad) taste!”
+
+">
+<meta name="keywords" content="math, geometry, architecture">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Layered Tetrahedral Geometric Structures">
+<meta name="twitter:description" content="This article describes another iteration of the dome-like structure that I discussed a few months ago. I still don’t have a good vocabulary for describing why I think these things are neat, except to say that I somehow find it relaxing to work on toy engineering problems once or twice a month. I guess de gustibus non est disputandum – “there’s no accounting for (bad) taste!”
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Layered Tetrahedral Geometric Structures">
+<meta property="og:description" content="This article describes another iteration of the dome-like structure that I discussed a few months ago. I still don’t have a good vocabulary for describing why I think these things are neat, except to say that I somehow find it relaxing to work on toy engineering problems once or twice a month. I guess de gustibus non est disputandum – “there’s no accounting for (bad) taste!”
+
+">
+<meta property="og:url" content="/blog/layered-dual-geometric-structures/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="/blog/layered-dual-geometric-structures/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="/about/" >About</a></li>
+		  
+		    
+		    <li><a href="/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="/tags/#math" title="Pages tagged math">math</a></li><li><a href="/tags/#geometry" title="Pages tagged geometry">geometry</a></li><li><a href="/tags/#architecture" title="Pages tagged architecture">architecture</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Layered Tetrahedral Geometric Structures</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2018-02-25T00:00:00-08:00"><i class="fa fa-calendar-o"></i> February 25, 2018</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>This article describes another iteration of the dome-like structure that I <a href="../pentakis-dodecahedron-dome">discussed a few months ago</a>. I still don’t have a good vocabulary for describing why I think these things are neat, except to say that I somehow find it relaxing to work on toy engineering problems once or twice a month. I guess <em>de gustibus non est disputandum</em> – “there’s no accounting for (bad) taste!”</p>
+
+<p>Lately, I have been playing around with simple structures that are subject to some unusual but not pointless constraints. Here are the ones I played with for this design:</p>
+
+<ol>
+  <li>
+    <p>How lightweight could you make a building? All other things being equal, lighter implies fewer materials, lower cost, and less ecological impact. To make something light, you must use what little material there is in a structurally strong fashion.</p>
+  </li>
+  <li>
+    <p>How simple could the constituent pieces of the structure be? Could they be made of a few simple shapes, repeated over and over? By re-using the same shape over and over again, production becomes more efficient because a miniature economy of scale is created.</p>
+  </li>
+  <li>
+    <p>Could you make temporary housing that could be flat-packed into the bed of a truck? This might be useful when you want something stronger and warmer than a tent, but less permanent than a house.</p>
+  </li>
+</ol>
+
+<p>On to the structure itself!</p>
+
+<p class="center"><img src="pentakis_dome_bottom.jpg" alt="pentakis_dome_bottom" title="A paper reinforced Pentakis Dodecahedron dome mockup, viewed from the bottom to show the internal structure. " /></p>
+
+<h1 id="background">Background</h1>
+
+<p>Previously, when I was working on the <a href="../pentakis-dodecahedron-dome">reinforced pentakis dodecahedron dome</a> toy concept, I mostly just followed the engineering tradition of using triangles and tetrahedra to create light and strong truss structures. I did not spend time deeply studying what the list of possible starting polyhedra were, and at the end of the project there was one thing in my mind that was not really resolved:</p>
+
+<blockquote>
+  <p>Are there other shapes that are closely-related to the pentakis dodecahedron, but that are simpler to construct or have more desirable properties? How many possible shapes could there be, and how would I know that I have found them all?</p>
+</blockquote>
+
+<p>Previously, I started with the icosahedron and then connected it to a triakis icosahedron and pentakis dodecahedron without really understanding from whence these solids come, or what properties they have. I hope to rectify that error in this post, and summarize the limited understanding of the subject that I have gained.</p>
+
+<h1 id="platonic-catalan-and-archimedian-solids">Platonic, Catalan, and Archimedian Solids</h1>
+
+<p><a href="../pentakis-dodecahedron-dome">Last time</a>, I briefly discussed the 5 platonic solids, which you may remember are the same shapes as dice:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Platonic Solid</th>
+      <th>Vertex Figure</th>
+      <th>Face</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="platonic/Tetrahedron.gif" alt="Tetrahedron" title="Tetrahedron" /></td>
+      <td>Tetrahedron</td>
+      <td>3.3.3</td>
+      <td>Triangle</td>
+    </tr>
+    <tr>
+      <td><img src="platonic/Hexahedron.gif" alt="Hexahedron" title="Hexahedron" /></td>
+      <td>Cube</td>
+      <td>4.4.4</td>
+      <td>Square</td>
+    </tr>
+    <tr>
+      <td><img src="platonic/Octahedron.gif" alt="Octahedron" title="Octahedron" /></td>
+      <td>Octahedron</td>
+      <td>3.3.3.3</td>
+      <td>Triangle</td>
+    </tr>
+    <tr>
+      <td><img src="platonic/Dodecahedron.gif" alt="Dodecahedron" title="Dodecahedron" /></td>
+      <td>Dodecahedron</td>
+      <td>5.5.5</td>
+      <td>Pentagon</td>
+    </tr>
+    <tr>
+      <td><img src="platonic/Icosahedron.gif" alt="Icosahedron" title="Icosahedron" /></td>
+      <td>Icosahedron</td>
+      <td>3.3.3.3.3</td>
+      <td>Triangle</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>What’s a <em>vertex figure</em>, I hear you ask? It is a way to unambiguously define regular polyhedra. If you pick any vertex on the regular polyhedra, and then count the number of sides on each face that touches that vertex, moving in a clockwise or counterclockwise fashion, you will get a sequence of numbers that we call the vertex figure. For example, each corner of the cube touches three squares, so we can call it 4.4.4. We are going to use vertex figures to help us keep track of complicated shapes rather than memorize scores of names.</p>
+
+<p>There is another advantage to using vertex figures: they are unambigious. In fact, you can use vertex figures to <a href="todo-japan-link">find shapes described by nerds in other countries</a>, even if you don’t speak their language, because the language of math is universal.</p>
+
+<p>You may remember that Platonic solids have several important properties:</p>
+
+<ol>
+  <li>Every edge is the same length.</li>
+  <li>Every face has the same number of sides.</li>
+  <li>Every face is a regular polygon. (e.g. a square is regular, but a parallelogram is not)</li>
+  <li>Every vertex lies on the surface of a sphere.</li>
+</ol>
+
+<p>These constraints are so restrictive that there are only five solids that meet all the criteria. But what would happen if we removed one or more of those constraints? As it turns out, by relaxating the constraints we can create two new families of solids: the <strong>Archimedian solids</strong> and the <strong>Catalan solids</strong>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>All Edge</th>
+      <th>All Faces</th>
+      <th> </th>
+      <th>Vertices on</th>
+    </tr>
+    <tr>
+      <th> </th>
+      <th>Lengths Equal?</th>
+      <th>Same?</th>
+      <th>Quantity</th>
+      <th>Sphere?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Platonic</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>5</td>
+      <td>Always</td>
+    </tr>
+    <tr>
+      <td>Archimedian</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>13</td>
+      <td>Not always</td>
+    </tr>
+    <tr>
+      <td>Catalan</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>13</td>
+      <td>Not always</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>We’ll now go into more details on each of those families of solids. As a spoiler to all you nerds out there, Archimedian and Catalan solids are mathematically dual to each other, meaning that for each Catalan solid with X faces and Y vertices, there will be an Archimedian solid with Y faces and X vertices.</p>
+
+<h1 id="archimedian-solids">Archimedian Solids</h1>
+
+<p>First enumerated by the greek mathematician Archimedes, <strong>the Archimedian solids are the set of polyhedra in which all edges are the same length</strong>. If you are gluing together equal-length matchsticks, there are only 13 possible shapes that you can make:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Archimedian Solid</th>
+      <th>Vertex Fig</th>
+      <th>Symmetry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="archimedian/3.6.6.truncatedtetrahedron.gif" alt="3.6.6.truncatedtetrahedron" title="3.6.6.truncatedtetrahedron.gif" /></td>
+      <td>Truncated tetrahedron</td>
+      <td>3.6.6</td>
+      <td>Td</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td><img src="archimedian/3.4.3.4.cuboctahedron.gif" alt="3.4.3.4.cuboctahedron" title="3.4.3.4.cuboctahedron.gif" /></td>
+      <td>Cuboctahedron</td>
+      <td>3.4.3.4</td>
+      <td>Oh</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Truncated Cube</td>
+      <td>3.8.8</td>
+      <td>Oh</td>
+    </tr>
+    <tr>
+      <td><img src="archimedian/4.6.6.truncatedoctahedron.gif" alt="4.6.6.truncatedoctahedron" title="4.6.6.truncatedoctahedron.gif" /></td>
+      <td>Truncated Octahedron</td>
+      <td>4.6.6</td>
+      <td>Oh</td>
+    </tr>
+    <tr>
+      <td><img src="archimedian/3.4.4.4.rhombicuboctahedron.gif" alt="3.4.4.4.rhombicuboctahedron" title="3.4.4.4.rhombicuboctahedron.gif" /></td>
+      <td>Rhombicuboctahedron</td>
+      <td>3.4.4.4</td>
+      <td>Oh</td>
+    </tr>
+    <tr>
+      <td><img src="archimedian/4.6.8.truncatedcuboctahedron.gif" alt="4.6.8.truncatedcuboctahedron" title="4.6.8.truncatedcuboctahedron.gif" /></td>
+      <td>Truncated Cuboctahedron</td>
+      <td>4.6.8</td>
+      <td>Oh</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td><img src="archimedian/3.3.3.4.nubhexahedroncw.gif" alt="3.3.3.4.nubhexahedroncw" title="3.3.3.4 - Snub Hexahedron" /> or <img src="archimedian/3.3.3.4.snubhexahedronccw.gif" alt="3.3.3.4.snubhexahedronccw" title="3.3.3.4.snubhexahedronccw.gif" /></td>
+      <td>Snub cube</td>
+      <td>3.3.3.4</td>
+      <td>O (Chiral)</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td><img src="archimedian/3.5.3.5.icosidodecahedron.gif" alt="3.5.3.5.icosidodecahedron" title="3.5.3.5.icosidodecahedron.gif" /></td>
+      <td>Icosidodecahedron</td>
+      <td>3.5.3.5</td>
+      <td>Ih</td>
+    </tr>
+    <tr>
+      <td><img src="archimedian/3.10.10.truncateddodecahedron.gif" alt="3.10.10.truncateddodecahedron" title="3.10.10 - Truncated dodecahedron" /></td>
+      <td>Truncated Docedahedron</td>
+      <td>3.10.10</td>
+      <td>Ih</td>
+    </tr>
+    <tr>
+      <td><img src="archimedian/5.6.6.truncatedicosahedron.gif" alt="5.6.6.truncatedicosahedron" title="5.6.6.truncatedicosahedron.gif" /></td>
+      <td>Truncated Icosahedron</td>
+      <td>5.6.6</td>
+      <td>Ih</td>
+    </tr>
+    <tr>
+      <td><img src="archimedian/3.4.5.4.rhombicosidodecahedron.gif" alt="3.4.5.4.rhombicosidodecahedron" title="3.4.5.4.rhombicosidodecahedron.gif" /></td>
+      <td>Rhombicosidodecahedron</td>
+      <td>3.4.5.4</td>
+      <td>Ih</td>
+    </tr>
+    <tr>
+      <td><img src="archimedian/4.6.10.truncatedicosidodecahedron.gif" alt="4.6.10.truncatedicosidodecahedron" title="4.6.10.truncatedicosidodecahedron.gif" /></td>
+      <td>Truncated Icosidodecahedron</td>
+      <td>4.6.10</td>
+      <td>Ih</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td><img src="archimedian/3.3.3.5.snubdodecahedroncw.gif" alt="3.3.3.5.snubdodecahedroncw" title="3.3.3.5.snubdodecahedroncw.gif" /> or <img src="archimedian/3.5.5.snubdodecahedronccw.gif" alt="3.5.5.snubdodecahedronccw" title="3.5.5.snubdodecahedronccw.gif" /></td>
+      <td>Snub Dodecahedron</td>
+      <td>3.3.3.5</td>
+      <td>I (Chiral)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If that table scares and confuses you, you aren’t the only one – I found this all very bewildering at first! What the heck do all of these weird names mean? Truncated? Rhombi-? Snub? Why is there a combination of a cube and octahedron called a cuboctahedron? How do the icosahedron and dodecahedron combine to make a icosidodecahedron? Also, what is a point symmetry group?</p>
+
+<p>It’s real easy to “lose the forest for the trees” here, so please feel free to NOT learn the names of these things – some of these polyhedra even have multiple names, which can make studying them terribly confusing. In fact, I’m going to totally ignore defining the truncation, rombi, and snub operations, because I think that it might not be best to start by describing them in terms of transformations. Instead, a beginner should start with a description of the most obvious <em>symmetries</em> that they have, and also on the unambiguous vertex figure definitions.</p>
+
+<p>To me, <strong>the important thing to note about polyhedral symmetries is that our 3D universe appears to force polyhedra into just a few symmetry groups</strong>. The broadest grouping would be shapes like cubes/octahedra (of which the tetrahedral symmetry can probably be considered a special case), and shapes like dodecahedra/icosahedra. The point symmetry group, roughly speaking, refers to the ways in which you may rotate a polyhedra into a position such that it looks the same as when you started.</p>
+
+<h1 id="catalan-solids">Catalan Solids</h1>
+
+<p>Catalan solids, named for the Belgian mathematician Eugene Catalan, were originally described in 1865. Think about that for a moment – despite Archimedes having discovered important polyhedral shapes in ancient times and despite the fact that the Catalan solids are closely related set of shapes, the Catalan solids went formally unrecognized for nearly two millenia! It makes you wonder what other important facts of mathematics lie adjacent to our existing knowledge, but simply have not been discovered yet.</p>
+
+<p>Catalan solids relax a different constraint than the Archemidean solids. Catalan solids do <em>not</em> have edges that are all the same length. Instead, they <em>do</em> have faces that are all the same shape. There are 13 of these as well:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Face Polygon</th>
+      <th>Symmetry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Triakis Tetrahedron</td>
+      <td>Isosceles V3.6.6</td>
+      <td>Td</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>Rhombic Dodecahedron</td>
+      <td>Rhombus V3.4.3.4</td>
+      <td>Oh</td>
+    </tr>
+    <tr>
+      <td>Triakis Octahedron</td>
+      <td>Isosceles V3.8.8</td>
+      <td>Oh</td>
+    </tr>
+    <tr>
+      <td>Tetrakis Hexahedron</td>
+      <td>Isosceles V4.6.6</td>
+      <td>Oh</td>
+    </tr>
+    <tr>
+      <td>Deltoidal Icositetrahedron</td>
+      <td>Kite V3.4.4.4</td>
+      <td>Oh</td>
+    </tr>
+    <tr>
+      <td>Disdyakis Dodecahedron</td>
+      <td>Scalene V4.6.8</td>
+      <td>Oh</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>Pentagonal Icositetrahedron</td>
+      <td>Pentagon V3.3.3.3.4</td>
+      <td>O</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>Rhombic Triacontahedron</td>
+      <td>Rhombus V3.5.3.5</td>
+      <td>Ih</td>
+    </tr>
+    <tr>
+      <td>Triakis Icosahedron</td>
+      <td>Isosceles V3.10.10</td>
+      <td>Ih</td>
+    </tr>
+    <tr>
+      <td>Pentakis Dodecahedron</td>
+      <td>Isosceles V5.6.6</td>
+      <td>Ih</td>
+    </tr>
+    <tr>
+      <td>Deltoidal Hexecontahedron</td>
+      <td>Kite V3.4.5.4</td>
+      <td>Ih</td>
+    </tr>
+    <tr>
+      <td>Disdyakis Tricontahedron</td>
+      <td>Scalene V4.6.10</td>
+      <td>Ih</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>Pentagonal Hexecontahedron</td>
+      <td>Pentagon V3.3.3.3.5</td>
+      <td>I</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>What does a Face Polygon mean? Well, this time we take each face, and working our way around the vertices of the face, we count the number of polygons touching that point. TODO: Is that right?</p>
+
+<h1 id="catalan-and-archimedian-dualities">Catalan and Archimedian Dualities</h1>
+
+<p>Now it’s time to see the shapes</p>
+
+<h1 id="simple-engineering">Simple Engineering</h1>
+
+<p>Now it’s time to play some simple engineering games. We’ll assume that we are making things out of flat surfaces (which are easy to cut out of paper) and sticks bound at the corners somehow. What kind of structures would be easiest to make?</p>
+
+<ol>
+  <li>
+    <p>If we are trying to make a watertight structure, the simplest possible outer skin would be a structure made from the same shape repeated over and over again – a Catalan solid. Catalan solids have a desirable property that every face is the same, which is very convenient when trying to make a hard-shelled physical structure because then all of the external pieces can follow the same template.</p>
+  </li>
+  <li>
+    <p>For an internal supporting structure, the simplest possible thing would be a structure made of sticks that are all the same length – an Archimedian solid. Archimedian solids would be very desirable if were making a scaffold out of equal-length sticks, so I suppose if you were making supports for a tent these would be the solids to use.</p>
+  </li>
+</ol>
+
+<p>If we want a structure that is self-supporting, it should also be constructed purely from tetrahedra. This is a bit tricky, as not all Archimedian solids could be reinforced in this way (TODO: is that true?)</p>
+
+<h2 id="archimedian-corner-connectors">Archimedian Corner connectors</h2>
+
+<ul>
+  <li>NONE! Just angle the pieces at the corners and connect them to each other</li>
+  <li>Rope or zipties thru holes NEAR the ends</li>
+  <li>Sphere or cylinder with threaded holes</li>
+  <li>Hollow cylinder with L shaped metal</li>
+  <li>Stacked flat overlapping metal ends</li>
+  <li>Starplates</li>
+  <li>Appropriate Polygon blocks with dovetails (and dovetails in the links too)</li>
+</ul>
+
+<h2 id="catalan-edge-connectors">Catalan Edge Connectors</h2>
+
+<p>Connecting the edges of long boards is pretty easy:</p>
+
+<ul>
+  <li>None! Just overlap edges at an angle?</li>
+  <li>Duct tape, cloth, plastic sheet, metal flashing, or even wooden boards with a dado cut in it.</li>
+  <li>Staples, nails, screws, rivets, or glue.</li>
+</ul>
+
+<h1 id="engineering-considerations">Engineering Considerations</h1>
+
+<p>Last time, there were a few engineering considerations that bugged me from the reinforced pentakis dodecahedron dome.</p>
+
+<ol>
+  <li>What do I do about the 20 points where there is no double-layer of insulation? (The original vertices of the icosahedron)</li>
+  <li>How do I control the thickness of the reinforcement? It seems to take a lot of volume internally to add these reinforcements.</li>
+  <li>How could something with 10 polygons coming together at a single point ever be waterproofed?</li>
+  <li>How do I put non-load-bearing windows or doors in it without breaking the regularity?</li>
+</ol>
+
+<p>So the engineering wish list became:</p>
+
+<ol>
+  <li>Made of flat cut-outs, with as few unique shapes as possible</li>
+  <li>Use only edge connections</li>
+  <li>No more than 3 polygons should touching the same point (for waterproofing)</li>
+  <li>Have space for windows</li>
+  <li>Have a true layer of insulation everywhere around the dome</li>
+  <li>Be as round as possible</li>
+  <li>Tolerate damage well</li>
+</ol>
+
+<h1 id="draft-1---fewest-shapes">Draft 1 - Fewest Shapes</h1>
+
+<h1 id="draft-2---efficient-use-of-building-material">Draft 2 - Efficient Use of Building Material</h1>
+
+<p>At this point, I felt the concept was becoming workable, and I tried to get a little more practical. If I were actually going to build a super strong greenhouse or something, the shapes should be buildable from standard materials with as little waste as possible.</p>
+
+<p>That means that I need to make the pieces tile standard 4’x8’ plywood sheets that we have in the US.</p>
+
+<p>So I resized the insulation layer to make the pieces fit. Weirdly, this means about HALF of the volume of the house is insulation!</p>
+
+<p>Cost? About 1.5 grand in plywood for a 400 sq ft hut. Plus edge aluminum, which is an unknown quantity right now.</p>
+
+<h1 id="draft-3---deluxe-version-3d-printed">Draft 3 - Deluxe Version, 3D Printed.</h1>
+
+<ul>
+  <li>Curved surfaces</li>
+  <li>Diaphragm or rose-petal shutters on windows</li>
+</ul>
+
+<h1 id="types-of-symmetries">Types of symmetries</h1>
+
+<p>Some nice things:</p>
+
+<ul>
+  <li>Pentagonal shape makes you able to see any distant point in 360 degrees from at least 2 windows</li>
+  <li>Tons of space for insulation.</li>
+  <li>
+    <p>Self supporting; you can replace any 1 piece indpendently</p>
+  </li>
+  <li>Overlapping tetrahedra are indeed enormously strong</li>
+  <li>Edge-connection of flat faces is pretty easy with tape, at least compared to corners</li>
+</ul>
+
+<p>But, importantly, I felt that</p>
+
+<p>TO DO ITEMS:</p>
+<ol>
+  <li>Photo of the structure</li>
+  <li>Grep for TODOs and fix links</li>
+  <li>Get all 13 gifs from Wikipedi</li>
+</ol>
+
+<p>gifsicle –resize-fit 150x150</p>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="/blog/pentakis-dodecahedron-dome/" class="btn" title="The Reinforced Pentakis Dodecahedron Dome">Previous</a>
+      
+      
+        <a href="/blog/clojure-apps-in-docker/" class="btn" title="Packaging and Running Clojure Apps Locally with Docker">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2019 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = '';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

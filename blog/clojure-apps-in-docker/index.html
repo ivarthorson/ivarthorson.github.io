@@ -1,0 +1,303 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Packaging and Running Clojure Apps Locally with Docker &#8211; Art is Never Finished</title>
+<meta name="description" content="This is just a simple tutorial on how to package and deploy a Clojure application to a Docker file, which can then be deployed locally, on a server, or in the cloud.
+
+">
+<meta name="keywords" content="clojure, docker, devops">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Packaging and Running Clojure Apps Locally with Docker">
+<meta name="twitter:description" content="This is just a simple tutorial on how to package and deploy a Clojure application to a Docker file, which can then be deployed locally, on a server, or in the cloud.
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Packaging and Running Clojure Apps Locally with Docker">
+<meta property="og:description" content="This is just a simple tutorial on how to package and deploy a Clojure application to a Docker file, which can then be deployed locally, on a server, or in the cloud.
+
+">
+<meta property="og:url" content="/blog/clojure-apps-in-docker/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="/blog/clojure-apps-in-docker/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="/about/" >About</a></li>
+		  
+		    
+		    <li><a href="/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="/tags/#clojure" title="Pages tagged clojure">clojure</a></li><li><a href="/tags/#docker" title="Pages tagged docker">docker</a></li><li><a href="/tags/#devops" title="Pages tagged devops">devops</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Packaging and Running Clojure Apps Locally with Docker</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2019-01-23T00:00:00-08:00"><i class="fa fa-calendar-o"></i> January 23, 2019</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>This is just a simple tutorial on how to package and deploy a Clojure application to a Docker file, which can then be deployed locally, on a server, or in the cloud.</p>
+
+<p>We are going to follow a pretty classic pattern in Clojure:</p>
+
+<ol>
+  <li><em>DEVELOP</em>. In this case, we’ll use <code class="highlighter-rouge">lein repl</code> and emacs (cider). For a mixed Clojure/Clojurescript app, <code class="highlighter-rouge">lein figwheel</code>.</li>
+  <li><em>BUILD UBERJAR</em>. Very simply, <code class="highlighter-rouge">lein uberjar</code> is all we need to do to package all java dependencies and app resources into a single file.</li>
+  <li><em>BUILD DOCKER IMAGE</em>. Because the uberjar does most of the work for us, we just need a Java JRE and the uberjar.</li>
+  <li><em>DEPLOY</em>. If you are running your own a production system, Kubernetes would be a good choice here. Amazon, Google, Microsoft all have their own container services as well.</li>
+</ol>
+
+<h2 id="develop">Develop</h2>
+
+<p>It’s probably not the latest and greatest way of making a front end and back end, but I find for many of my small apps <a href="https://reagent-project.github.io/">Reagent</a> for the front end and <a href="https://github.com/ring-clojure">Ring</a> for the back end are enough. Creating a project is simple:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>lein new reagent myapp +cider
+cd myapp
+git init
+</code></pre>
+</div>
+
+<p>And then you just develop like normal until you are happy with the way your app works. The only slightly tricky thing to remember when rolling up an app that you will put in a Docker container is that your web server should be configured to listen on 0.0.0.0 (which means to listen on all interfaces). Typically you just add <code class="highlighter-rouge">:host "0.0.0.0"</code> as an argument to whatever webserver you are starting, <code class="highlighter-rouge">jetty</code> in this case.</p>
+
+<h2 id="build-the-uberjar">Build the UberJar</h2>
+
+<p><code class="highlighter-rouge">lein</code> makes packaging up a web server, front end, and assets all together extremely easy:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>lein uberjar
+</code></pre>
+</div>
+
+<p>The JAR file will appear in the <code class="highlighter-rouge">target/</code> directory.  If you need to control the name of the output uberjar, adjust the <code class="highlighter-rouge">:uberjar-name</code> key in your <code class="highlighter-rouge">project.clj</code>.</p>
+
+<h2 id="build-docker-image">Build Docker Image</h2>
+
+<p>The steps for building a Docker image are stored in a special file called <code class="highlighter-rouge">Dockerfile</code>, which I typically place in the root directory of my project repo. Since all the assets are already stored in the uberjar, the contents of <code class="highlighter-rouge">Dockerfile</code> are simple:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># Use https://hub.docker.com/_/oracle-serverjre-8
+FROM java:8-alpine
+
+# Make a directory
+RUN mkdir -p /app
+WORKDIR /app
+
+# Copy only the target jar over
+COPY app-standalone.jar .
+
+# Open the port
+EXPOSE 3000
+
+# Run the JAR
+CMD java -jar app-standalone.jar
+</code></pre>
+</div>
+
+<p>During the build process, Docker needs a “context” directory that contains all of the files needed to build the image. Since we have already packaged assets in the JAR, and compiled the source code into bytecode, we do not need to copy the source over in the build process. We can let the Docker build process use the “target” directory only. This can speed up the Docker build, and saves space because it is not copying resources twiec. The only downside is that it means we have to explicitly specify the Dockerfile to use explicitly, and explicitly specify the directory to use as the “context” directory. Run this from the root of the project directory:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>docker build --tag myapp -f Dockerfile target
+</code></pre>
+</div>
+
+<p>And that’s it!</p>
+
+<h2 id="deploy-locally-to-test">Deploy Locally to Test</h2>
+
+<p>If your app has no state (and it shouldn’t, if you are making a <a href="https://12factor.net">12-factor app</a>, you can now create a new container from your docker image, passing it whatever environment varibales you need, and exposing internal port 3000 to external port 3000:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>docker run --name my-app-container --env MY_ENV_VAR=some_value -p 3000:3000 -rm myapp
+</code></pre>
+</div>
+
+<p>Check to see that it is running:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>docker containers ls
+</code></pre>
+</div>
+
+<p>or more concisely,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>docker ps
+</code></pre>
+</div>
+
+<p>I still find it slightly misleading that <code class="highlighter-rouge">run</code> actually means “create and start a container” in the language of Docker-ese. Stopping the container will not delete it in general, and that often means containers accumulating silently in the background. Hence the <code class="highlighter-rouge">-rm</code> flag, which tells Docker to delete the container when it is done.</p>
+
+<p>If you don’t want the container to delete itself when done, omit the <code class="highlighter-rouge">-rm</code> option, and maybe consider instead the <code class="highlighter-rouge">--detach</code> option so you get your shell back. If you aren’t building a new container regularly and the container is lying around, starting and stopping the named container is as simple as you would expect:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>docker container start my-app-container
+docker container stop my-app-container
+</code></pre>
+</div>
+
+<h2 id="resources-and-interesting-reading">Resources and Interesting Reading</h2>
+
+<ol>
+  <li><a href="https://blog.jessfraz.com/post/docker-containers-on-the-desktop/">https://blog.jessfraz.com/post/docker-containers-on-the-desktop/</a></li>
+  <li><a href="https://docs.docker.com/get-started/">https://docs.docker.com/get-started/</a></li>
+  <li><a href="https://kubernetes.io/docs/getting-started-guides/ubuntu/installation/">https://kubernetes.io/docs/getting-started-guides/ubuntu/installation/</a></li>
+  <li><a href="https://marketplace.automic.com/details/clojure-official-docker-image">https://marketplace.automic.com/details/clojure-official-docker-image</a></li>
+  <li><a href="https://medium.com/@mprokopov/deployment-of-clojure-app-to-production-with-docker-9dbffeac6ef5">https://medium.com/@mprokopov/deployment-of-clojure-app-to-production-with-docker-9dbffeac6ef5</a></li>
+  <li><a href="https://medium.com/@divyum/building-a-simple-http-server-in-clojure-part-iii-dockerizing-clojure-application-1f53a6a90af2">https://medium.com/@divyum/building-a-simple-http-server-in-clojure-part-iii-dockerizing-clojure-application-1f53a6a90af2</a></li>
+  <li><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/">https://docs.docker.com/develop/develop-images/dockerfile_best-practices/</a></li>
+  <li><a href="https://devcenter.heroku.com/articles/clojure-web-application">https://devcenter.heroku.com/articles/clojure-web-application</a></li>
+</ol>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="/blog/layered-dual-geometric-structures/" class="btn" title="Layered Tetrahedral Geometric Structures">Previous</a>
+      
+      
+        <a href="/blog/docker-postgres/" class="btn" title="Connecting a Clojure REPL to a PostgreSQL Docker Container">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2019 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = '';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

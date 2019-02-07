@@ -1,4 +1,647 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2017-11-14T09:49:10-08:00</updated><id>/</id><title type="html">Art is Never Finished</title><subtitle>...Only Abandoned. – Leonardo da Vinci</subtitle><entry><title type="html">The Reinforced Pentakis Dodecahedron Dome</title><link href="/blog/pentakis-dodecahedron-dome/" rel="alternate" type="text/html" title="The Reinforced Pentakis Dodecahedron Dome" /><published>2017-11-05T00:00:00-07:00</published><updated>2017-11-05T00:00:00-07:00</updated><id>/blog/pentakis-dodecahedron-dome</id><content type="html" xml:base="/blog/pentakis-dodecahedron-dome/">&lt;p&gt;For your amusement, I would like to present a reinforced version of a geodesic dome that is many times stronger than conventional geodesic domes. It is essentially two concentric domes, one nested inside the other, connected entirely by tetrahedra in a way that both strengthens the dome and provides space for insulation. Compared to single-layer geodesic structures, this new structure uses about 2-3x more materials, but it is so much stronger that it is startling.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-02-06T20:44:43-08:00</updated><id>/</id><title type="html">Art is Never Finished</title><subtitle>...Only Abandoned. – Leonardo da Vinci</subtitle><entry><title type="html">Connecting a Clojure REPL to a PostgreSQL Docker Container</title><link href="/blog/docker-postgres/" rel="alternate" type="text/html" title="Connecting a Clojure REPL to a PostgreSQL Docker Container" /><published>2019-01-24T00:00:00-08:00</published><updated>2019-01-24T00:00:00-08:00</updated><id>/blog/docker-postgres</id><content type="html" xml:base="/blog/docker-postgres/">&lt;p&gt;In this tutorial, we’ll launch Postgres (a.k.a. PostgreSQL) in a Docker container, create a Postgres database, and connect to it from a Clojure REPL. Postgres is a great open source SQL database with a long history, and is a good choice for many small-to-medium scale projects.&lt;/p&gt;
+
+&lt;p&gt;First, we need to download the official Postgres image, named &lt;code class=&quot;highlighter-rouge&quot;&gt;postgres&lt;/code&gt;, create a new container, and start the image running in that container. Remember, in the parlance of Docker, “images” are the recipe and “containers” are the cake(s) made from that recipe. By default, Docker containers can make connections to the outside world, but the outside world cannot connect to containers. So we need to “publish” a port that has been exposed in the Docker image.&lt;/p&gt;
+
+&lt;p&gt;Downloading the docker image, instantiating it, setting a password, and publishing a port can all be done in a single command:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run  --name my-postgres-container --env POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 --detach postgres
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;where&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-p 5432:5432 Publish port 5432 in the container as 5432 on localhost, so you can connect
+-name        Gives a name to this container
+-env    Environment variable(s)
+-detach Disconnect terminal
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;An important note, as I mentioned in the article on &lt;a href=&quot;../clojure-apps-in-docker&quot;&gt;using Docker to deploy Clojure apps&lt;/a&gt;, is that the &lt;code class=&quot;highlighter-rouge&quot;&gt;docker run&lt;/code&gt; command &lt;em&gt;creates&lt;/em&gt; a new container – it “bakes a new cake”. If you want to launch a container you have already baked, you’ll use the &lt;code class=&quot;highlighter-rouge&quot;&gt;docker start&lt;/code&gt; command instead, as we’ll see below.&lt;/p&gt;
+
+&lt;p&gt;You can check that the Docker container is running with&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker container ls
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;or more succinctly&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker ps
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Next, let’s use another Docker trick to create a second &lt;code class=&quot;highlighter-rouge&quot;&gt;postgres&lt;/code&gt; cake, this time running the &lt;code class=&quot;highlighter-rouge&quot;&gt;psql&lt;/code&gt; command, and &lt;code class=&quot;highlighter-rouge&quot;&gt;link&lt;/code&gt; it to the other container. We want this container to be deleted when we close it (&lt;code class=&quot;highlighter-rouge&quot;&gt;--rm&lt;/code&gt;), and to be linked to the &lt;code class=&quot;highlighter-rouge&quot;&gt;my-postgres-container&lt;/code&gt; so that it can access the server we just started. It is interesting that we can use &lt;code class=&quot;highlighter-rouge&quot;&gt;psql&lt;/code&gt; without having it installed on our local machine; we’re using the command that is inside a container!&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run -it --rm --link my-postgres-container:postgres postgres psql -h postgres -U postgres
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In that terminal, let’s now create a test database:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CREATE DATABASE testdb;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You may now hit control-d to quit the terminal if you want to close it. In my case, I often leave it open for debugging.&lt;/p&gt;
+
+&lt;p&gt;Now spin a up a Clojure REPL, and run the following commands, one at a time, and note the output of each.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(ns mytest (:require [clojure.java.jdbc :as sql]))
+
+(def db-spec {:dbtype &quot;postgresql&quot; :dbname &quot;testdb&quot; :user &quot;postgres&quot; :password &quot;mysecretpassword&quot;})
+
+(sql/query db-spec [&quot;SELECT 3*5 AS result&quot;])
+
+(sql/db-do-commands db-spec (sql/create-table-ddl :testing [[:data :text]]))
+
+(sql/insert! db-spec :testing {:data &quot;hahaha&quot;})
+
+(sql/insert! db-spec :testing {:data &quot;lol&quot;})
+
+(sql/query db-spec [&quot;SELECT * FROM testing&quot;])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now it’s time to develop that app to your heart’s content.&lt;/p&gt;
+
+&lt;p&gt;When you are done with your app, you can stop your container with:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker container stop my-postgres-container
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;At later times, you can restart the container, and use its state, with:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker container start my-postgres-container
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You can delete the stopped container with:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker container rm my-postgres-container
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Note that if you want a second container for postgres – say, for a different project – you could make a second container called “my-postgres-container2” using the &lt;code class=&quot;highlighter-rouge&quot;&gt;docker run&lt;/code&gt; command near the top of this. Make as many containers as you need, and start and stop them as required.&lt;/p&gt;
+
+&lt;p&gt;Keeping the database in the container is fine during first steps and testing, but as your database gets bigger, you will want to use &lt;a href=&quot;https://docs.docker.com/storage/volumes/&quot;&gt;Docker Volumes&lt;/a&gt; to be able to upgrade the Postgres version separately from the data itself.&lt;/p&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://clojure-doc.org/articles/ecosystem/java_jdbc/home.html&quot;&gt;The Clojure JDBC docs&lt;/a&gt; were a helpful starting point for learning how to use JDBC.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://clojure-doc.org/articles/ecosystem/java_jdbc/using_sql.html&quot;&gt;The Clojure JDBC SQL page&lt;/a&gt; is also very good.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.docker.com/get-started/&quot;&gt;The Docker Getting Started Guide&lt;/a&gt;. Docker documentation is detailed and helpful. The getting started guide is decent, but not as example-heavy and in-depth as I would have wanted.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.docker.com/v17.09/engine/userguide/networking/default_network/binding/&quot;&gt;Docker Documentation on Binding Container Ports to the Host&lt;/a&gt;. This has a critical quote that helped me on a related problem: “By default Docker containers can make connections to the outside world, but the outside world cannot connect to containers.” Even though I had exposed the ports in docker images with “EXPOSE”, they were not actually be reachable from the host unless you launch the container with &lt;code class=&quot;highlighter-rouge&quot;&gt;docker run -P ...&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;docker run -p 5432:5432&lt;/code&gt;. Kind of a gotcha for newbies, I feel.&lt;/li&gt;
+&lt;/ul&gt;</content><category term="clojure" /><category term="docker" /><category term="devops" /><summary type="html">In this tutorial, we’ll launch Postgres (a.k.a. PostgreSQL) in a Docker container, create a Postgres database, and connect to it from a Clojure REPL. Postgres is a great open source SQL database with a long history, and is a good choice for many small-to-medium scale projects.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Packaging and Running Clojure Apps Locally with Docker</title><link href="/blog/clojure-apps-in-docker/" rel="alternate" type="text/html" title="Packaging and Running Clojure Apps Locally with Docker" /><published>2019-01-23T00:00:00-08:00</published><updated>2019-01-23T00:00:00-08:00</updated><id>/blog/clojure-apps-in-docker</id><content type="html" xml:base="/blog/clojure-apps-in-docker/">&lt;p&gt;This is just a simple tutorial on how to package and deploy a Clojure application to a Docker file, which can then be deployed locally, on a server, or in the cloud.&lt;/p&gt;
+
+&lt;p&gt;We are going to follow a pretty classic pattern in Clojure:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;em&gt;DEVELOP&lt;/em&gt;. In this case, we’ll use &lt;code class=&quot;highlighter-rouge&quot;&gt;lein repl&lt;/code&gt; and emacs (cider). For a mixed Clojure/Clojurescript app, &lt;code class=&quot;highlighter-rouge&quot;&gt;lein figwheel&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;BUILD UBERJAR&lt;/em&gt;. Very simply, &lt;code class=&quot;highlighter-rouge&quot;&gt;lein uberjar&lt;/code&gt; is all we need to do to package all java dependencies and app resources into a single file.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;BUILD DOCKER IMAGE&lt;/em&gt;. Because the uberjar does most of the work for us, we just need a Java JRE and the uberjar.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;DEPLOY&lt;/em&gt;. If you are running your own a production system, Kubernetes would be a good choice here. Amazon, Google, Microsoft all have their own container services as well.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;develop&quot;&gt;Develop&lt;/h2&gt;
+
+&lt;p&gt;It’s probably not the latest and greatest way of making a front end and back end, but I find for many of my small apps &lt;a href=&quot;https://reagent-project.github.io/&quot;&gt;Reagent&lt;/a&gt; for the front end and &lt;a href=&quot;https://github.com/ring-clojure&quot;&gt;Ring&lt;/a&gt; for the back end are enough. Creating a project is simple:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;lein new reagent myapp +cider
+cd myapp
+git init
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;And then you just develop like normal until you are happy with the way your app works. The only slightly tricky thing to remember when rolling up an app that you will put in a Docker container is that your web server should be configured to listen on 0.0.0.0 (which means to listen on all interfaces). Typically you just add &lt;code class=&quot;highlighter-rouge&quot;&gt;:host &quot;0.0.0.0&quot;&lt;/code&gt; as an argument to whatever webserver you are starting, &lt;code class=&quot;highlighter-rouge&quot;&gt;jetty&lt;/code&gt; in this case.&lt;/p&gt;
+
+&lt;h2 id=&quot;build-the-uberjar&quot;&gt;Build the UberJar&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;lein&lt;/code&gt; makes packaging up a web server, front end, and assets all together extremely easy:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;lein uberjar
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The JAR file will appear in the &lt;code class=&quot;highlighter-rouge&quot;&gt;target/&lt;/code&gt; directory.  If you need to control the name of the output uberjar, adjust the &lt;code class=&quot;highlighter-rouge&quot;&gt;:uberjar-name&lt;/code&gt; key in your &lt;code class=&quot;highlighter-rouge&quot;&gt;project.clj&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;build-docker-image&quot;&gt;Build Docker Image&lt;/h2&gt;
+
+&lt;p&gt;The steps for building a Docker image are stored in a special file called &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt;, which I typically place in the root directory of my project repo. Since all the assets are already stored in the uberjar, the contents of &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; are simple:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Use https://hub.docker.com/_/oracle-serverjre-8
+FROM java:8-alpine
+
+# Make a directory
+RUN mkdir -p /app
+WORKDIR /app
+
+# Copy only the target jar over
+COPY app-standalone.jar .
+
+# Open the port
+EXPOSE 3000
+
+# Run the JAR
+CMD java -jar app-standalone.jar
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;During the build process, Docker needs a “context” directory that contains all of the files needed to build the image. Since we have already packaged assets in the JAR, and compiled the source code into bytecode, we do not need to copy the source over in the build process. We can let the Docker build process use the “target” directory only. This can speed up the Docker build, and saves space because it is not copying resources twiec. The only downside is that it means we have to explicitly specify the Dockerfile to use explicitly, and explicitly specify the directory to use as the “context” directory. Run this from the root of the project directory:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker build --tag myapp -f Dockerfile target
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;And that’s it!&lt;/p&gt;
+
+&lt;h2 id=&quot;deploy-locally-to-test&quot;&gt;Deploy Locally to Test&lt;/h2&gt;
+
+&lt;p&gt;If your app has no state (and it shouldn’t, if you are making a &lt;a href=&quot;https://12factor.net&quot;&gt;12-factor app&lt;/a&gt;, you can now create a new container from your docker image, passing it whatever environment varibales you need, and exposing internal port 3000 to external port 3000:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run --name my-app-container --env MY_ENV_VAR=some_value -p 3000:3000 -rm myapp
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Check to see that it is running:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker containers ls
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;or more concisely,&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker ps
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I still find it slightly misleading that &lt;code class=&quot;highlighter-rouge&quot;&gt;run&lt;/code&gt; actually means “create and start a container” in the language of Docker-ese. Stopping the container will not delete it in general, and that often means containers accumulating silently in the background. Hence the &lt;code class=&quot;highlighter-rouge&quot;&gt;-rm&lt;/code&gt; flag, which tells Docker to delete the container when it is done.&lt;/p&gt;
+
+&lt;p&gt;If you don’t want the container to delete itself when done, omit the &lt;code class=&quot;highlighter-rouge&quot;&gt;-rm&lt;/code&gt; option, and maybe consider instead the &lt;code class=&quot;highlighter-rouge&quot;&gt;--detach&lt;/code&gt; option so you get your shell back. If you aren’t building a new container regularly and the container is lying around, starting and stopping the named container is as simple as you would expect:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker container start my-app-container
+docker container stop my-app-container
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;resources-and-interesting-reading&quot;&gt;Resources and Interesting Reading&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.jessfraz.com/post/docker-containers-on-the-desktop/&quot;&gt;https://blog.jessfraz.com/post/docker-containers-on-the-desktop/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.docker.com/get-started/&quot;&gt;https://docs.docker.com/get-started/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/getting-started-guides/ubuntu/installation/&quot;&gt;https://kubernetes.io/docs/getting-started-guides/ubuntu/installation/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://marketplace.automic.com/details/clojure-official-docker-image&quot;&gt;https://marketplace.automic.com/details/clojure-official-docker-image&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/@mprokopov/deployment-of-clojure-app-to-production-with-docker-9dbffeac6ef5&quot;&gt;https://medium.com/@mprokopov/deployment-of-clojure-app-to-production-with-docker-9dbffeac6ef5&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/@divyum/building-a-simple-http-server-in-clojure-part-iii-dockerizing-clojure-application-1f53a6a90af2&quot;&gt;https://medium.com/@divyum/building-a-simple-http-server-in-clojure-part-iii-dockerizing-clojure-application-1f53a6a90af2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.docker.com/develop/develop-images/dockerfile_best-practices/&quot;&gt;https://docs.docker.com/develop/develop-images/dockerfile_best-practices/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://devcenter.heroku.com/articles/clojure-web-application&quot;&gt;https://devcenter.heroku.com/articles/clojure-web-application&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="clojure" /><category term="docker" /><category term="devops" /><summary type="html">This is just a simple tutorial on how to package and deploy a Clojure application to a Docker file, which can then be deployed locally, on a server, or in the cloud.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Layered Tetrahedral Geometric Structures</title><link href="/blog/layered-dual-geometric-structures/" rel="alternate" type="text/html" title="Layered Tetrahedral Geometric Structures" /><published>2018-02-25T00:00:00-08:00</published><updated>2018-02-25T00:00:00-08:00</updated><id>/blog/layered-dual-geometric-structures</id><content type="html" xml:base="/blog/layered-dual-geometric-structures/">&lt;p&gt;This article describes another iteration of the dome-like structure that I &lt;a href=&quot;../pentakis-dodecahedron-dome&quot;&gt;discussed a few months ago&lt;/a&gt;. I still don’t have a good vocabulary for describing why I think these things are neat, except to say that I somehow find it relaxing to work on toy engineering problems once or twice a month. I guess &lt;em&gt;de gustibus non est disputandum&lt;/em&gt; – “there’s no accounting for (bad) taste!”&lt;/p&gt;
+
+&lt;p&gt;Lately, I have been playing around with simple structures that are subject to some unusual but not pointless constraints. Here are the ones I played with for this design:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;How lightweight could you make a building? All other things being equal, lighter implies fewer materials, lower cost, and less ecological impact. To make something light, you must use what little material there is in a structurally strong fashion.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;How simple could the constituent pieces of the structure be? Could they be made of a few simple shapes, repeated over and over? By re-using the same shape over and over again, production becomes more efficient because a miniature economy of scale is created.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Could you make temporary housing that could be flat-packed into the bed of a truck? This might be useful when you want something stronger and warmer than a tent, but less permanent than a house.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;On to the structure itself!&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;pentakis_dome_bottom.jpg&quot; alt=&quot;pentakis_dome_bottom&quot; title=&quot;A paper reinforced Pentakis Dodecahedron dome mockup, viewed from the bottom to show the internal structure. &quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;background&quot;&gt;Background&lt;/h1&gt;
+
+&lt;p&gt;Previously, when I was working on the &lt;a href=&quot;../pentakis-dodecahedron-dome&quot;&gt;reinforced pentakis dodecahedron dome&lt;/a&gt; toy concept, I mostly just followed the engineering tradition of using triangles and tetrahedra to create light and strong truss structures. I did not spend time deeply studying what the list of possible starting polyhedra were, and at the end of the project there was one thing in my mind that was not really resolved:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Are there other shapes that are closely-related to the pentakis dodecahedron, but that are simpler to construct or have more desirable properties? How many possible shapes could there be, and how would I know that I have found them all?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Previously, I started with the icosahedron and then connected it to a triakis icosahedron and pentakis dodecahedron without really understanding from whence these solids come, or what properties they have. I hope to rectify that error in this post, and summarize the limited understanding of the subject that I have gained.&lt;/p&gt;
+
+&lt;h1 id=&quot;platonic-catalan-and-archimedian-solids&quot;&gt;Platonic, Catalan, and Archimedian Solids&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;../pentakis-dodecahedron-dome&quot;&gt;Last time&lt;/a&gt;, I briefly discussed the 5 platonic solids, which you may remember are the same shapes as dice:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;Platonic Solid&lt;/th&gt;
+      &lt;th&gt;Vertex Figure&lt;/th&gt;
+      &lt;th&gt;Face&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;platonic/Tetrahedron.gif&quot; alt=&quot;Tetrahedron&quot; title=&quot;Tetrahedron&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;Tetrahedron&lt;/td&gt;
+      &lt;td&gt;3.3.3&lt;/td&gt;
+      &lt;td&gt;Triangle&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;platonic/Hexahedron.gif&quot; alt=&quot;Hexahedron&quot; title=&quot;Hexahedron&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;Cube&lt;/td&gt;
+      &lt;td&gt;4.4.4&lt;/td&gt;
+      &lt;td&gt;Square&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;platonic/Octahedron.gif&quot; alt=&quot;Octahedron&quot; title=&quot;Octahedron&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;Octahedron&lt;/td&gt;
+      &lt;td&gt;3.3.3.3&lt;/td&gt;
+      &lt;td&gt;Triangle&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;platonic/Dodecahedron.gif&quot; alt=&quot;Dodecahedron&quot; title=&quot;Dodecahedron&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;Dodecahedron&lt;/td&gt;
+      &lt;td&gt;5.5.5&lt;/td&gt;
+      &lt;td&gt;Pentagon&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;platonic/Icosahedron.gif&quot; alt=&quot;Icosahedron&quot; title=&quot;Icosahedron&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;Icosahedron&lt;/td&gt;
+      &lt;td&gt;3.3.3.3.3&lt;/td&gt;
+      &lt;td&gt;Triangle&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;What’s a &lt;em&gt;vertex figure&lt;/em&gt;, I hear you ask? It is a way to unambiguously define regular polyhedra. If you pick any vertex on the regular polyhedra, and then count the number of sides on each face that touches that vertex, moving in a clockwise or counterclockwise fashion, you will get a sequence of numbers that we call the vertex figure. For example, each corner of the cube touches three squares, so we can call it 4.4.4. We are going to use vertex figures to help us keep track of complicated shapes rather than memorize scores of names.&lt;/p&gt;
+
+&lt;p&gt;There is another advantage to using vertex figures: they are unambigious. In fact, you can use vertex figures to &lt;a href=&quot;todo-japan-link&quot;&gt;find shapes described by nerds in other countries&lt;/a&gt;, even if you don’t speak their language, because the language of math is universal.&lt;/p&gt;
+
+&lt;p&gt;You may remember that Platonic solids have several important properties:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Every edge is the same length.&lt;/li&gt;
+  &lt;li&gt;Every face has the same number of sides.&lt;/li&gt;
+  &lt;li&gt;Every face is a regular polygon. (e.g. a square is regular, but a parallelogram is not)&lt;/li&gt;
+  &lt;li&gt;Every vertex lies on the surface of a sphere.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;These constraints are so restrictive that there are only five solids that meet all the criteria. But what would happen if we removed one or more of those constraints? As it turns out, by relaxating the constraints we can create two new families of solids: the &lt;strong&gt;Archimedian solids&lt;/strong&gt; and the &lt;strong&gt;Catalan solids&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;All Edge&lt;/th&gt;
+      &lt;th&gt;All Faces&lt;/th&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;Vertices on&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;Lengths Equal?&lt;/th&gt;
+      &lt;th&gt;Same?&lt;/th&gt;
+      &lt;th&gt;Quantity&lt;/th&gt;
+      &lt;th&gt;Sphere?&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Platonic&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;Always&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Archimedian&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;13&lt;/td&gt;
+      &lt;td&gt;Not always&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Catalan&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;13&lt;/td&gt;
+      &lt;td&gt;Not always&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;We’ll now go into more details on each of those families of solids. As a spoiler to all you nerds out there, Archimedian and Catalan solids are mathematically dual to each other, meaning that for each Catalan solid with X faces and Y vertices, there will be an Archimedian solid with Y faces and X vertices.&lt;/p&gt;
+
+&lt;h1 id=&quot;archimedian-solids&quot;&gt;Archimedian Solids&lt;/h1&gt;
+
+&lt;p&gt;First enumerated by the greek mathematician Archimedes, &lt;strong&gt;the Archimedian solids are the set of polyhedra in which all edges are the same length&lt;/strong&gt;. If you are gluing together equal-length matchsticks, there are only 13 possible shapes that you can make:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;Archimedian Solid&lt;/th&gt;
+      &lt;th&gt;Vertex Fig&lt;/th&gt;
+      &lt;th&gt;Symmetry&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;archimedian/3.6.6.truncatedtetrahedron.gif&quot; alt=&quot;3.6.6.truncatedtetrahedron&quot; title=&quot;3.6.6.truncatedtetrahedron.gif&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;Truncated tetrahedron&lt;/td&gt;
+      &lt;td&gt;3.6.6&lt;/td&gt;
+      &lt;td&gt;Td&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;archimedian/3.4.3.4.cuboctahedron.gif&quot; alt=&quot;3.4.3.4.cuboctahedron&quot; title=&quot;3.4.3.4.cuboctahedron.gif&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;Cuboctahedron&lt;/td&gt;
+      &lt;td&gt;3.4.3.4&lt;/td&gt;
+      &lt;td&gt;Oh&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Truncated Cube&lt;/td&gt;
+      &lt;td&gt;3.8.8&lt;/td&gt;
+      &lt;td&gt;Oh&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;archimedian/4.6.6.truncatedoctahedron.gif&quot; alt=&quot;4.6.6.truncatedoctahedron&quot; title=&quot;4.6.6.truncatedoctahedron.gif&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;Truncated Octahedron&lt;/td&gt;
+      &lt;td&gt;4.6.6&lt;/td&gt;
+      &lt;td&gt;Oh&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;archimedian/3.4.4.4.rhombicuboctahedron.gif&quot; alt=&quot;3.4.4.4.rhombicuboctahedron&quot; title=&quot;3.4.4.4.rhombicuboctahedron.gif&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;Rhombicuboctahedron&lt;/td&gt;
+      &lt;td&gt;3.4.4.4&lt;/td&gt;
+      &lt;td&gt;Oh&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;archimedian/4.6.8.truncatedcuboctahedron.gif&quot; alt=&quot;4.6.8.truncatedcuboctahedron&quot; title=&quot;4.6.8.truncatedcuboctahedron.gif&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;Truncated Cuboctahedron&lt;/td&gt;
+      &lt;td&gt;4.6.8&lt;/td&gt;
+      &lt;td&gt;Oh&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;archimedian/3.3.3.4.nubhexahedroncw.gif&quot; alt=&quot;3.3.3.4.nubhexahedroncw&quot; title=&quot;3.3.3.4 - Snub Hexahedron&quot; /&gt; or &lt;img src=&quot;archimedian/3.3.3.4.snubhexahedronccw.gif&quot; alt=&quot;3.3.3.4.snubhexahedronccw&quot; title=&quot;3.3.3.4.snubhexahedronccw.gif&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;Snub cube&lt;/td&gt;
+      &lt;td&gt;3.3.3.4&lt;/td&gt;
+      &lt;td&gt;O (Chiral)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;archimedian/3.5.3.5.icosidodecahedron.gif&quot; alt=&quot;3.5.3.5.icosidodecahedron&quot; title=&quot;3.5.3.5.icosidodecahedron.gif&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;Icosidodecahedron&lt;/td&gt;
+      &lt;td&gt;3.5.3.5&lt;/td&gt;
+      &lt;td&gt;Ih&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;archimedian/3.10.10.truncateddodecahedron.gif&quot; alt=&quot;3.10.10.truncateddodecahedron&quot; title=&quot;3.10.10 - Truncated dodecahedron&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;Truncated Docedahedron&lt;/td&gt;
+      &lt;td&gt;3.10.10&lt;/td&gt;
+      &lt;td&gt;Ih&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;archimedian/5.6.6.truncatedicosahedron.gif&quot; alt=&quot;5.6.6.truncatedicosahedron&quot; title=&quot;5.6.6.truncatedicosahedron.gif&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;Truncated Icosahedron&lt;/td&gt;
+      &lt;td&gt;5.6.6&lt;/td&gt;
+      &lt;td&gt;Ih&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;archimedian/3.4.5.4.rhombicosidodecahedron.gif&quot; alt=&quot;3.4.5.4.rhombicosidodecahedron&quot; title=&quot;3.4.5.4.rhombicosidodecahedron.gif&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;Rhombicosidodecahedron&lt;/td&gt;
+      &lt;td&gt;3.4.5.4&lt;/td&gt;
+      &lt;td&gt;Ih&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;archimedian/4.6.10.truncatedicosidodecahedron.gif&quot; alt=&quot;4.6.10.truncatedicosidodecahedron&quot; title=&quot;4.6.10.truncatedicosidodecahedron.gif&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;Truncated Icosidodecahedron&lt;/td&gt;
+      &lt;td&gt;4.6.10&lt;/td&gt;
+      &lt;td&gt;Ih&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;archimedian/3.3.3.5.snubdodecahedroncw.gif&quot; alt=&quot;3.3.3.5.snubdodecahedroncw&quot; title=&quot;3.3.3.5.snubdodecahedroncw.gif&quot; /&gt; or &lt;img src=&quot;archimedian/3.5.5.snubdodecahedronccw.gif&quot; alt=&quot;3.5.5.snubdodecahedronccw&quot; title=&quot;3.5.5.snubdodecahedronccw.gif&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;Snub Dodecahedron&lt;/td&gt;
+      &lt;td&gt;3.3.3.5&lt;/td&gt;
+      &lt;td&gt;I (Chiral)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;If that table scares and confuses you, you aren’t the only one – I found this all very bewildering at first! What the heck do all of these weird names mean? Truncated? Rhombi-? Snub? Why is there a combination of a cube and octahedron called a cuboctahedron? How do the icosahedron and dodecahedron combine to make a icosidodecahedron? Also, what is a point symmetry group?&lt;/p&gt;
+
+&lt;p&gt;It’s real easy to “lose the forest for the trees” here, so please feel free to NOT learn the names of these things – some of these polyhedra even have multiple names, which can make studying them terribly confusing. In fact, I’m going to totally ignore defining the truncation, rombi, and snub operations, because I think that it might not be best to start by describing them in terms of transformations. Instead, a beginner should start with a description of the most obvious &lt;em&gt;symmetries&lt;/em&gt; that they have, and also on the unambiguous vertex figure definitions.&lt;/p&gt;
+
+&lt;p&gt;To me, &lt;strong&gt;the important thing to note about polyhedral symmetries is that our 3D universe appears to force polyhedra into just a few symmetry groups&lt;/strong&gt;. The broadest grouping would be shapes like cubes/octahedra (of which the tetrahedral symmetry can probably be considered a special case), and shapes like dodecahedra/icosahedra. The point symmetry group, roughly speaking, refers to the ways in which you may rotate a polyhedra into a position such that it looks the same as when you started.&lt;/p&gt;
+
+&lt;h1 id=&quot;catalan-solids&quot;&gt;Catalan Solids&lt;/h1&gt;
+
+&lt;p&gt;Catalan solids, named for the Belgian mathematician Eugene Catalan, were originally described in 1865. Think about that for a moment – despite Archimedes having discovered important polyhedral shapes in ancient times and despite the fact that the Catalan solids are closely related set of shapes, the Catalan solids went formally unrecognized for nearly two millenia! It makes you wonder what other important facts of mathematics lie adjacent to our existing knowledge, but simply have not been discovered yet.&lt;/p&gt;
+
+&lt;p&gt;Catalan solids relax a different constraint than the Archemidean solids. Catalan solids do &lt;em&gt;not&lt;/em&gt; have edges that are all the same length. Instead, they &lt;em&gt;do&lt;/em&gt; have faces that are all the same shape. There are 13 of these as well:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;Face Polygon&lt;/th&gt;
+      &lt;th&gt;Symmetry&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Triakis Tetrahedron&lt;/td&gt;
+      &lt;td&gt;Isosceles V3.6.6&lt;/td&gt;
+      &lt;td&gt;Td&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Rhombic Dodecahedron&lt;/td&gt;
+      &lt;td&gt;Rhombus V3.4.3.4&lt;/td&gt;
+      &lt;td&gt;Oh&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Triakis Octahedron&lt;/td&gt;
+      &lt;td&gt;Isosceles V3.8.8&lt;/td&gt;
+      &lt;td&gt;Oh&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Tetrakis Hexahedron&lt;/td&gt;
+      &lt;td&gt;Isosceles V4.6.6&lt;/td&gt;
+      &lt;td&gt;Oh&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Deltoidal Icositetrahedron&lt;/td&gt;
+      &lt;td&gt;Kite V3.4.4.4&lt;/td&gt;
+      &lt;td&gt;Oh&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Disdyakis Dodecahedron&lt;/td&gt;
+      &lt;td&gt;Scalene V4.6.8&lt;/td&gt;
+      &lt;td&gt;Oh&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Pentagonal Icositetrahedron&lt;/td&gt;
+      &lt;td&gt;Pentagon V3.3.3.3.4&lt;/td&gt;
+      &lt;td&gt;O&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Rhombic Triacontahedron&lt;/td&gt;
+      &lt;td&gt;Rhombus V3.5.3.5&lt;/td&gt;
+      &lt;td&gt;Ih&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Triakis Icosahedron&lt;/td&gt;
+      &lt;td&gt;Isosceles V3.10.10&lt;/td&gt;
+      &lt;td&gt;Ih&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Pentakis Dodecahedron&lt;/td&gt;
+      &lt;td&gt;Isosceles V5.6.6&lt;/td&gt;
+      &lt;td&gt;Ih&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Deltoidal Hexecontahedron&lt;/td&gt;
+      &lt;td&gt;Kite V3.4.5.4&lt;/td&gt;
+      &lt;td&gt;Ih&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Disdyakis Tricontahedron&lt;/td&gt;
+      &lt;td&gt;Scalene V4.6.10&lt;/td&gt;
+      &lt;td&gt;Ih&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Pentagonal Hexecontahedron&lt;/td&gt;
+      &lt;td&gt;Pentagon V3.3.3.3.5&lt;/td&gt;
+      &lt;td&gt;I&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;What does a Face Polygon mean? Well, this time we take each face, and working our way around the vertices of the face, we count the number of polygons touching that point. TODO: Is that right?&lt;/p&gt;
+
+&lt;h1 id=&quot;catalan-and-archimedian-dualities&quot;&gt;Catalan and Archimedian Dualities&lt;/h1&gt;
+
+&lt;p&gt;Now it’s time to see the shapes&lt;/p&gt;
+
+&lt;h1 id=&quot;simple-engineering&quot;&gt;Simple Engineering&lt;/h1&gt;
+
+&lt;p&gt;Now it’s time to play some simple engineering games. We’ll assume that we are making things out of flat surfaces (which are easy to cut out of paper) and sticks bound at the corners somehow. What kind of structures would be easiest to make?&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;If we are trying to make a watertight structure, the simplest possible outer skin would be a structure made from the same shape repeated over and over again – a Catalan solid. Catalan solids have a desirable property that every face is the same, which is very convenient when trying to make a hard-shelled physical structure because then all of the external pieces can follow the same template.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;For an internal supporting structure, the simplest possible thing would be a structure made of sticks that are all the same length – an Archimedian solid. Archimedian solids would be very desirable if were making a scaffold out of equal-length sticks, so I suppose if you were making supports for a tent these would be the solids to use.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;If we want a structure that is self-supporting, it should also be constructed purely from tetrahedra. This is a bit tricky, as not all Archimedian solids could be reinforced in this way (TODO: is that true?)&lt;/p&gt;
+
+&lt;h2 id=&quot;archimedian-corner-connectors&quot;&gt;Archimedian Corner connectors&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;NONE! Just angle the pieces at the corners and connect them to each other&lt;/li&gt;
+  &lt;li&gt;Rope or zipties thru holes NEAR the ends&lt;/li&gt;
+  &lt;li&gt;Sphere or cylinder with threaded holes&lt;/li&gt;
+  &lt;li&gt;Hollow cylinder with L shaped metal&lt;/li&gt;
+  &lt;li&gt;Stacked flat overlapping metal ends&lt;/li&gt;
+  &lt;li&gt;Starplates&lt;/li&gt;
+  &lt;li&gt;Appropriate Polygon blocks with dovetails (and dovetails in the links too)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;catalan-edge-connectors&quot;&gt;Catalan Edge Connectors&lt;/h2&gt;
+
+&lt;p&gt;Connecting the edges of long boards is pretty easy:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;None! Just overlap edges at an angle?&lt;/li&gt;
+  &lt;li&gt;Duct tape, cloth, plastic sheet, metal flashing, or even wooden boards with a dado cut in it.&lt;/li&gt;
+  &lt;li&gt;Staples, nails, screws, rivets, or glue.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;engineering-considerations&quot;&gt;Engineering Considerations&lt;/h1&gt;
+
+&lt;p&gt;Last time, there were a few engineering considerations that bugged me from the reinforced pentakis dodecahedron dome.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;What do I do about the 20 points where there is no double-layer of insulation? (The original vertices of the icosahedron)&lt;/li&gt;
+  &lt;li&gt;How do I control the thickness of the reinforcement? It seems to take a lot of volume internally to add these reinforcements.&lt;/li&gt;
+  &lt;li&gt;How could something with 10 polygons coming together at a single point ever be waterproofed?&lt;/li&gt;
+  &lt;li&gt;How do I put non-load-bearing windows or doors in it without breaking the regularity?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;So the engineering wish list became:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Made of flat cut-outs, with as few unique shapes as possible&lt;/li&gt;
+  &lt;li&gt;Use only edge connections&lt;/li&gt;
+  &lt;li&gt;No more than 3 polygons should touching the same point (for waterproofing)&lt;/li&gt;
+  &lt;li&gt;Have space for windows&lt;/li&gt;
+  &lt;li&gt;Have a true layer of insulation everywhere around the dome&lt;/li&gt;
+  &lt;li&gt;Be as round as possible&lt;/li&gt;
+  &lt;li&gt;Tolerate damage well&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;draft-1---fewest-shapes&quot;&gt;Draft 1 - Fewest Shapes&lt;/h1&gt;
+
+&lt;h1 id=&quot;draft-2---efficient-use-of-building-material&quot;&gt;Draft 2 - Efficient Use of Building Material&lt;/h1&gt;
+
+&lt;p&gt;At this point, I felt the concept was becoming workable, and I tried to get a little more practical. If I were actually going to build a super strong greenhouse or something, the shapes should be buildable from standard materials with as little waste as possible.&lt;/p&gt;
+
+&lt;p&gt;That means that I need to make the pieces tile standard 4’x8’ plywood sheets that we have in the US.&lt;/p&gt;
+
+&lt;p&gt;So I resized the insulation layer to make the pieces fit. Weirdly, this means about HALF of the volume of the house is insulation!&lt;/p&gt;
+
+&lt;p&gt;Cost? About 1.5 grand in plywood for a 400 sq ft hut. Plus edge aluminum, which is an unknown quantity right now.&lt;/p&gt;
+
+&lt;h1 id=&quot;draft-3---deluxe-version-3d-printed&quot;&gt;Draft 3 - Deluxe Version, 3D Printed.&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Curved surfaces&lt;/li&gt;
+  &lt;li&gt;Diaphragm or rose-petal shutters on windows&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;types-of-symmetries&quot;&gt;Types of symmetries&lt;/h1&gt;
+
+&lt;p&gt;Some nice things:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Pentagonal shape makes you able to see any distant point in 360 degrees from at least 2 windows&lt;/li&gt;
+  &lt;li&gt;Tons of space for insulation.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Self supporting; you can replace any 1 piece indpendently&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Overlapping tetrahedra are indeed enormously strong&lt;/li&gt;
+  &lt;li&gt;Edge-connection of flat faces is pretty easy with tape, at least compared to corners&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;But, importantly, I felt that&lt;/p&gt;
+
+&lt;p&gt;TO DO ITEMS:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Photo of the structure&lt;/li&gt;
+  &lt;li&gt;Grep for TODOs and fix links&lt;/li&gt;
+  &lt;li&gt;Get all 13 gifs from Wikipedi&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;gifsicle –resize-fit 150x150&lt;/p&gt;</content><category term="math" /><category term="geometry" /><category term="architecture" /><summary type="html">This article describes another iteration of the dome-like structure that I discussed a few months ago. I still don’t have a good vocabulary for describing why I think these things are neat, except to say that I somehow find it relaxing to work on toy engineering problems once or twice a month. I guess de gustibus non est disputandum – “there’s no accounting for (bad) taste!”</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">The Reinforced Pentakis Dodecahedron Dome</title><link href="/blog/pentakis-dodecahedron-dome/" rel="alternate" type="text/html" title="The Reinforced Pentakis Dodecahedron Dome" /><published>2017-11-05T00:00:00-07:00</published><updated>2017-11-05T00:00:00-07:00</updated><id>/blog/pentakis-dodecahedron-dome</id><content type="html" xml:base="/blog/pentakis-dodecahedron-dome/">&lt;p&gt;For your amusement, I would like to present a reinforced version of a geodesic dome that is many times stronger than conventional geodesic domes. It is essentially two concentric domes, one nested inside the other, connected entirely by tetrahedra in a way that both strengthens the dome and provides space for insulation. Compared to single-layer geodesic structures, this new structure uses about 2-3x more materials, but it is so much stronger that it is startling.&lt;/p&gt;
 
 &lt;p&gt;The internal structure is very regular, as a paper model shows:&lt;/p&gt;
 
@@ -849,149 +1492,4 @@ z^{\prime} &amp; = &amp; z\end{eqnarray*} %]]&gt;&lt;/script&gt;
   (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;take-while&lt;/span&gt; #(&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;gt;&lt;/span&gt; L %) (reductions + (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; cuboids (&lt;span style=&quot;color: #729fcf;&quot;&gt;range&lt;/span&gt;))))))
 
 (&lt;span style=&quot;color: #729fcf;&quot;&gt;time&lt;/span&gt; (euler-86 1000000)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;&quot;Elapsed time: 3872.220781 msecs&quot;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content><category term="project-euler" /><category term="incremental" /><category term="Pythagorean triplets" /><category term="spider-fly" /><summary type="html">Despite it’s relative simplicity, I wasted hours on problem 86. One important thing that I learned is:</summary></entry><entry><title type="html">Project Euler Problem 85</title><link href="/project-euler/problem-85/" rel="alternate" type="text/html" title="Project Euler Problem 85" /><published>2010-10-19T05:47:08-07:00</published><updated>2010-10-19T05:47:08-07:00</updated><id>/project-euler/problem-85</id><content type="html" xml:base="/project-euler/problem-85/">&lt;p&gt;&lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=85&quot;&gt;Problem 85&lt;/a&gt; asks us to find the number of rectangles that can be drawn in a grid of size m by n.&lt;/p&gt;
-
-&lt;p&gt;It may help to work out the answer to a few of the grids until you see the pattern: the number of rectangles is equal to the product of two summations.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;(&lt;span style=&quot;color: #8ae234;&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;sums&lt;/span&gt; (reductions + (&lt;span style=&quot;color: #729fcf;&quot;&gt;range&lt;/span&gt;)))
-
-(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;num-rects&lt;/span&gt; [m n] (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; sums m) (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; sums n)))
-
-(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;smallest-second&lt;/span&gt; [coll]
-  (&lt;span style=&quot;color: #729fcf;&quot;&gt;reduce&lt;/span&gt; #(&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;second&lt;/span&gt; %1) (&lt;span style=&quot;color: #729fcf;&quot;&gt;second&lt;/span&gt; %2)) %1 %2) coll))
-
-(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;euler-85&lt;/span&gt; [goal]
-  (&lt;span style=&quot;color: #729fcf;&quot;&gt;first&lt;/span&gt;
-   (smallest-second
-    (&lt;span style=&quot;color: #8ae234;&quot;&gt;for&lt;/span&gt; [i (&lt;span style=&quot;color: #729fcf;&quot;&gt;take-while&lt;/span&gt; #(&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; (num-rects % 1) goal) (&lt;span style=&quot;color: #729fcf;&quot;&gt;rest&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;range&lt;/span&gt;)))
-          j (&lt;span style=&quot;color: #729fcf;&quot;&gt;take-while&lt;/span&gt; #(&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; 0 (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; goal (num-rects i %))) (&lt;span style=&quot;color: #729fcf;&quot;&gt;rest&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;range&lt;/span&gt;)))]
-      [(&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; i j) (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; goal (num-rects i j))]))))
-
-(&lt;span style=&quot;color: #729fcf;&quot;&gt;time&lt;/span&gt; (euler-85 2000000)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;&quot;Elapsed time: 1607.372755 msecs&quot;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Of course the above is straightforward, but we might as well remember the &lt;a href=&quot;http://en.wikipedia.org/wiki/Carl_Friedrich_Gauss#Early_years_.281777.E2.80.931798.29&quot;&gt; story of Gauss as a young boy&lt;/a&gt; and use an analytic solution for &lt;code class=&quot;highlighter-rouge&quot;&gt;num-rects&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;num-rects&lt;/span&gt; [m n]
-  (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;/&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; m m) m) 2)
-     (&lt;span style=&quot;color: #729fcf;&quot;&gt;/&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; n n) n) 2)))
-
-(&lt;span style=&quot;color: #729fcf;&quot;&gt;time&lt;/span&gt; (euler-85 2000000)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;&quot;Elapsed time: 45.927094 msecs&quot;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I’m somewhat surprised that is so much faster – I would have thought that caching the values in the lazy list would have been only slightly slower, but it seems that my intuition was incorrect. The evils of premature optimization appears again.&lt;/p&gt;</content><category term="project-euler" /><category term="grids" /><category term="summation" /><summary type="html">Problem 85 asks us to find the number of rectangles that can be drawn in a grid of size m by n.</summary></entry><entry><title type="html">Project Euler Problem 84</title><link href="/project-euler/problem-84/" rel="alternate" type="text/html" title="Project Euler Problem 84" /><published>2010-10-19T05:29:12-07:00</published><updated>2010-10-19T05:29:12-07:00</updated><id>/project-euler/problem-84</id><content type="html" xml:base="/project-euler/problem-84/">&lt;p&gt;&lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=84&quot;&gt;Problem 84&lt;/a&gt; asks us to implement the classic game &lt;a href=&quot;http://en.wikipedia.org/wiki/Monopoly_%28game%29&quot;&gt;Monopoly&lt;/a&gt; and find the most-visited spaces on the board…if we used two 4-sided dice instead of 6-sided ones.&lt;/p&gt;
-
-&lt;p&gt;Although it would probably be straightforward to compute probabilities directly using fractions, or indirectly approximate them with Hidden Markov Models, for now let’s just brute force it and use Clojure’s ability to run things in parallel.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;(&lt;span style=&quot;color: #8ae234;&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;board&lt;/span&gt; [&lt;span style=&quot;color: #729fcf;&quot;&gt;:GO&lt;/span&gt;   &lt;span style=&quot;color: #729fcf;&quot;&gt;:A1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:CC1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:A2&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:T1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:R1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:B1&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:CH1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:B2&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:B3&lt;/span&gt;
-            &lt;span style=&quot;color: #729fcf;&quot;&gt;:JAIL&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:C1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:U1&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:C2&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:C3&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:R2&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:D1&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:CC2&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:D2&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:D3&lt;/span&gt;
-            &lt;span style=&quot;color: #729fcf;&quot;&gt;:FP&lt;/span&gt;   &lt;span style=&quot;color: #729fcf;&quot;&gt;:E1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:CH2&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:E2&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:E3&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:R3&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:F1&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:F2&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:U2&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:F3&lt;/span&gt;
-            &lt;span style=&quot;color: #729fcf;&quot;&gt;:G2J&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:G1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:G2&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:CC3&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:G3&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:R4&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:CH3&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:H1&lt;/span&gt;  &lt;span style=&quot;color: #729fcf;&quot;&gt;:T2&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:H2&lt;/span&gt;])
-
-(&lt;span style=&quot;color: #8ae234;&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;b2i&lt;/span&gt; (zipmap board (&lt;span style=&quot;color: #729fcf;&quot;&gt;range&lt;/span&gt;))) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;Board symbols to integers
-&lt;/span&gt;
-(&lt;span style=&quot;color: #8ae234;&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;i2b&lt;/span&gt; (zipmap (&lt;span style=&quot;color: #729fcf;&quot;&gt;range&lt;/span&gt;) board)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;Integers to board symbols
-&lt;/span&gt;
-(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;card-CC&lt;/span&gt;
-  &lt;span style=&quot;color: #888a85;&quot;&gt;&quot;Community Chest. Returns the number of the square to move to.&quot;&lt;/span&gt;
-  [n]
-  (&lt;span style=&quot;color: #8ae234;&quot;&gt;let&lt;/span&gt; [options (&lt;span style=&quot;color: #729fcf;&quot;&gt;concat&lt;/span&gt; [(b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:GO&lt;/span&gt;) (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:JAIL&lt;/span&gt;)] (&lt;span style=&quot;color: #729fcf;&quot;&gt;repeat&lt;/span&gt; 14 n))]
-    (rand-nth options)))
-
-(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;card-CH&lt;/span&gt;
-  &lt;span style=&quot;color: #888a85;&quot;&gt;&quot;Chance card. Returns the number of the square to move to.&quot;&lt;/span&gt;
-  [n]
-  (&lt;span style=&quot;color: #8ae234;&quot;&gt;let&lt;/span&gt; [options [&lt;span style=&quot;color: #729fcf;&quot;&gt;:X&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:X&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:X&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:X&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:X&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:X&lt;/span&gt;
-                 &lt;span style=&quot;color: #729fcf;&quot;&gt;:GO&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:JAIL&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:C1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:E3&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:H2&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:R1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:NextR&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:NextR&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:NextU&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:Back3&lt;/span&gt;]
-        event (rand-nth options)]
-    (&lt;span style=&quot;color: #8ae234;&quot;&gt;condp&lt;/span&gt; = event 
-        &lt;span style=&quot;color: #729fcf;&quot;&gt;:X&lt;/span&gt; n                                    &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;Do nothing
-&lt;/span&gt;        &lt;span style=&quot;color: #729fcf;&quot;&gt;:NextR&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; b2i [&lt;span style=&quot;color: #729fcf;&quot;&gt;:R1&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:R2&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:R3&lt;/span&gt; &lt;span style=&quot;color: #729fcf;&quot;&gt;:R4&lt;/span&gt;]) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;Next railroad
-&lt;/span&gt;                    (&lt;span style=&quot;color: #729fcf;&quot;&gt;rem&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;quot&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; 5 n) 10) 4))
-        &lt;span style=&quot;color: #729fcf;&quot;&gt;:NextU&lt;/span&gt; (&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #8ae234;&quot;&gt;and&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;gt;&lt;/span&gt; n (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:U1&lt;/span&gt;)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;Next Utility
-&lt;/span&gt;                        (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; n (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:U2&lt;/span&gt;)))
-                 (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:U2&lt;/span&gt;)
-                 (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:U1&lt;/span&gt;))     
-        &lt;span style=&quot;color: #729fcf;&quot;&gt;:Back3&lt;/span&gt; (&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; n 3) (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:CC3&lt;/span&gt;))
-                 (card-CC (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; n 3)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;Sometimes you land on another CC
-&lt;/span&gt;                 (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; n 3))          &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;But mostly you don't
-&lt;/span&gt;        (b2i event))))
-
-(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;dice-4&lt;/span&gt; [] (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;rand-int&lt;/span&gt; 4)))
-
-(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;move&lt;/span&gt; [[n doubles]]
-  (&lt;span style=&quot;color: #8ae234;&quot;&gt;let&lt;/span&gt; [d1 (dice-4)
-        d2 (dice-4)
-        m (&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #8ae234;&quot;&gt;and&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; d1 d2) (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; 2 doubles))
-            (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:JAIL&lt;/span&gt;)
-            (&lt;span style=&quot;color: #729fcf;&quot;&gt;rem&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; n d1 d2) 40))]
-    [(&lt;span style=&quot;color: #8ae234;&quot;&gt;condp&lt;/span&gt; = m
-         (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:G2J&lt;/span&gt;) (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:JAIL&lt;/span&gt;)
-         (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:CC1&lt;/span&gt;) (card-CC m)
-         (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:CC2&lt;/span&gt;) (card-CC m)
-         (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:CC2&lt;/span&gt;) (card-CC m)
-         (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:CH1&lt;/span&gt;) (card-CH m)
-         (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:CH2&lt;/span&gt;) (card-CH m)
-         (b2i &lt;span style=&quot;color: #729fcf;&quot;&gt;:CH3&lt;/span&gt;) (card-CH m)
-         m)
-     (&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; d1 d2)
-       (&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;not&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; 2 doubles)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;reset if 3rd double in a row
-&lt;/span&gt;         (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; doubles)
-         0)
-       0)]))
-
-(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;compute-monopoly-freqs&lt;/span&gt; []
-  (&lt;span style=&quot;color: #8ae234;&quot;&gt;let&lt;/span&gt; [trials 1000000
-        games 10
-        sim (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [trials]
-              (frequencies (&lt;span style=&quot;color: #729fcf;&quot;&gt;take&lt;/span&gt; trials (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; first (&lt;span style=&quot;color: #729fcf;&quot;&gt;iterate&lt;/span&gt; move [0 0])))))
-        freqs (&lt;span style=&quot;color: #729fcf;&quot;&gt;apply&lt;/span&gt; merge-with + (&lt;span style=&quot;color: #729fcf;&quot;&gt;pmap&lt;/span&gt; sim (&lt;span style=&quot;color: #729fcf;&quot;&gt;repeat&lt;/span&gt; games trials)))
-        ps (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[c v]]
-                  [(i2b c) (&lt;span style=&quot;color: #729fcf;&quot;&gt;double&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; 100 (&lt;span style=&quot;color: #729fcf;&quot;&gt;/&lt;/span&gt; v trials games)))])
-                (&lt;span style=&quot;color: #729fcf;&quot;&gt;sort&lt;/span&gt; freqs))]
-    (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; #(b2i (&lt;span style=&quot;color: #729fcf;&quot;&gt;first&lt;/span&gt; %)) (&lt;span style=&quot;color: #729fcf;&quot;&gt;take&lt;/span&gt; 3 (&lt;span style=&quot;color: #729fcf;&quot;&gt;reverse&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;sort-by&lt;/span&gt; second ps))))))
-
-(&lt;span style=&quot;color: #729fcf;&quot;&gt;time&lt;/span&gt; (compute-monopoly-freqs)) &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;&quot;Elapsed time: 10217.921373 msecs&quot;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;With the work of 10,000,000 trials divided evenly across 10 threads and evaluated in parallel in roughly 10 seconds, this gives the correct answer on my machine. However, the probabilities that I compute for the 6-sided dice are slightly different from the ones given on the Project Euler website, so this implementation is probably slightly incorrect. Can you find the mistake?&lt;/p&gt;</content><category term="project-euler" /><category term="monopoly" /><category term="pmap" /><summary type="html">Problem 84 asks us to implement the classic game Monopoly and find the most-visited spaces on the board…if we used two 4-sided dice instead of 6-sided ones.</summary></entry><entry><title type="html">Project Euler Problem 83</title><link href="/project-euler/problem-83/" rel="alternate" type="text/html" title="Project Euler Problem 83" /><published>2010-10-18T09:23:14-07:00</published><updated>2010-10-18T09:23:14-07:00</updated><id>/project-euler/problem-83</id><content type="html" xml:base="/project-euler/problem-83/">&lt;p&gt;&lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=83&quot;&gt;Problem 83&lt;/a&gt; can be solved with A* exactly like the we did in &lt;a href=&quot;?p=660&quot;&gt;problem 81&lt;/a&gt;. The only code that needs to be changed is the neighbors function &lt;code class=&quot;highlighter-rouge&quot;&gt;neigh&lt;/code&gt; and the estimated cost-to-goal function &lt;code class=&quot;highlighter-rouge&quot;&gt;est&lt;/code&gt;. Everything else can be reused from problem 81.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;euler-83&lt;/span&gt; []
-  (&lt;span style=&quot;color: #8ae234;&quot;&gt;let&lt;/span&gt; [mat   (load-matrix &lt;span style=&quot;color: #Fd7f98;&quot;&gt;&quot;/zzz/work/matrix.txt&quot;&lt;/span&gt;)
-        m     (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; mat)
-        n     (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;first&lt;/span&gt; mat))
-        cost  (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]] (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;nth&lt;/span&gt; mat (&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; i)) (&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; j)))
-        start [1 1]
-        goal  [m n]
-        goal? (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [e] (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; e goal))
-        est   (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]] 0)
-        neigh (&lt;span style=&quot;color: #729fcf;&quot;&gt;fn&lt;/span&gt; [[i j]]
-                (&lt;span style=&quot;color: #729fcf;&quot;&gt;merge&lt;/span&gt;
-                 (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; i m) {[(&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; i) j] (cost [(&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; i) j])})
-                 (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; j n) {[i (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; j)] (cost [i (&lt;span style=&quot;color: #729fcf;&quot;&gt;inc&lt;/span&gt; j)])})
-                 (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; 1 i) {[(&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; i) j] (cost [(&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; i) j])})
-                 (&lt;span style=&quot;color: #8ae234;&quot;&gt;when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; 1 j) {[i (&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; j)] (cost [i (&lt;span style=&quot;color: #729fcf;&quot;&gt;dec&lt;/span&gt; j)])})))
-        path  (a*-search est neigh start goal?)]
-    (&lt;span style=&quot;color: #729fcf;&quot;&gt;reduce&lt;/span&gt; + (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; cost path))))
-
-(&lt;span style=&quot;color: #729fcf;&quot;&gt;time&lt;/span&gt; (euler-83))&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;With &lt;code class=&quot;highlighter-rouge&quot;&gt;est&lt;/code&gt; set to always return zero, the A* search becomes effectively a memory-hungry version of &lt;a href=&quot;http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm&quot;&gt;Dijkstra’s Algorithm&lt;/a&gt;.&lt;/p&gt;</content><category term="project-euler" /><category term="a* algorithm" /><category term="dijkstra's algorithm" /><category term="search" /><summary type="html">Problem 83 can be solved with A* exactly like the we did in problem 81. The only code that needs to be changed is the neighbors function neigh and the estimated cost-to-goal function est. Everything else can be reused from problem 81.
-
-(defn euler-83 []
-  (let [mat   (load-matrix &quot;/zzz/work/matrix.txt&quot;)
-        m     (count mat)
-        n     (count (first mat))
-        cost  (fn [[i j]] (nth (nth mat (dec i)) (dec j)))
-        start [1 1]
-        goal  [m n]
-        goal? (fn [e] (= e goal))
-        est   (fn [[i j]] 0)
-        neigh (fn [[i j]]
-                (merge
-                 (when (&amp;lt; i m) {[(inc i) j] (cost [(inc i) j])})
-                 (when (&amp;lt; j n) {[i (inc j)] (cost [i (inc j)])})
-                 (when (&amp;lt; 1 i) {[(dec i) j] (cost [(dec i) j])})
-                 (when (&amp;lt; 1 j) {[i (dec j)] (cost [i (dec j)])})))
-        path  (a*-search est neigh start goal?)]
-    (reduce + (map cost path))))</summary></entry></feed>
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content><category term="project-euler" /><category term="incremental" /><category term="Pythagorean triplets" /><category term="spider-fly" /><summary type="html">Despite it’s relative simplicity, I wasted hours on problem 86. One important thing that I learned is:</summary></entry></feed>
