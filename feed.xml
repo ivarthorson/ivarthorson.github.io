@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-02-06T20:44:43-08:00</updated><id>/</id><title type="html">Art is Never Finished</title><subtitle>...Only Abandoned. – Leonardo da Vinci</subtitle><entry><title type="html">Connecting a Clojure REPL to a PostgreSQL Docker Container</title><link href="/blog/docker-postgres/" rel="alternate" type="text/html" title="Connecting a Clojure REPL to a PostgreSQL Docker Container" /><published>2019-01-24T00:00:00-08:00</published><updated>2019-01-24T00:00:00-08:00</updated><id>/blog/docker-postgres</id><content type="html" xml:base="/blog/docker-postgres/">&lt;p&gt;In this tutorial, we’ll launch Postgres (a.k.a. PostgreSQL) in a Docker container, create a Postgres database, and connect to it from a Clojure REPL. Postgres is a great open source SQL database with a long history, and is a good choice for many small-to-medium scale projects.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-02-10T17:42:06-08:00</updated><id>/</id><title type="html">Art is Never Finished</title><subtitle>...Only Abandoned. – Leonardo da Vinci</subtitle><entry><title type="html">Connecting a Clojure REPL to a PostgreSQL Docker Container</title><link href="/blog/docker-postgres/" rel="alternate" type="text/html" title="Connecting a Clojure REPL to a PostgreSQL Docker Container" /><published>2019-01-24T00:00:00-08:00</published><updated>2019-01-24T00:00:00-08:00</updated><id>/blog/docker-postgres</id><content type="html" xml:base="/blog/docker-postgres/">&lt;p&gt;In this tutorial, we’ll launch Postgres (a.k.a. PostgreSQL) in a Docker container, create a Postgres database, and connect to it from a Clojure REPL. Postgres is a great open source SQL database with a long history, and is a good choice for many small-to-medium scale projects.&lt;/p&gt;
 
 &lt;p&gt;First, we need to download the official Postgres image, named &lt;code class=&quot;highlighter-rouge&quot;&gt;postgres&lt;/code&gt;, create a new container, and start the image running in that container. Remember, in the parlance of Docker, “images” are the recipe and “containers” are the cake(s) made from that recipe. By default, Docker containers can make connections to the outside world, but the outside world cannot connect to containers. So we need to “publish” a port that has been exposed in the Docker image.&lt;/p&gt;
 
@@ -213,9 +213,9 @@ docker container stop my-app-container
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;On to the structure itself!&lt;/p&gt;
+&lt;p&gt;On to the structure itself! A teaser:&lt;/p&gt;
 
-&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;pentakis_dome_bottom.jpg&quot; alt=&quot;pentakis_dome_bottom&quot; title=&quot;A paper reinforced Pentakis Dodecahedron dome mockup, viewed from the bottom to show the internal structure. &quot; /&gt;&lt;/p&gt;
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;layered-dual-poly-09.jpg&quot; alt=&quot;layered-dual-poly-09&quot; title=&quot;The external pentagular skin, mostly covered.&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;background&quot;&gt;Background&lt;/h1&gt;
 
@@ -225,13 +225,13 @@ docker container stop my-app-container
   &lt;p&gt;Are there other shapes that are closely-related to the pentakis dodecahedron, but that are simpler to construct or have more desirable properties? How many possible shapes could there be, and how would I know that I have found them all?&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Previously, I started with the icosahedron and then connected it to a triakis icosahedron and pentakis dodecahedron without really understanding from whence these solids come, or what properties they have. I hope to rectify that error in this post, and summarize the limited understanding of the subject that I have gained.&lt;/p&gt;
+&lt;p&gt;Previously, I started with the icosahedron and then connected it to a triakis icosahedron and pentakis dodecahedron without really understanding from whence these solids come, or what properties they have. Let’s go a little further this time into understanding the properties of regular polyhedra.&lt;/p&gt;
 
 &lt;h1 id=&quot;platonic-catalan-and-archimedian-solids&quot;&gt;Platonic, Catalan, and Archimedian Solids&lt;/h1&gt;
 
 &lt;p&gt;&lt;a href=&quot;../pentakis-dodecahedron-dome&quot;&gt;Last time&lt;/a&gt;, I briefly discussed the 5 platonic solids, which you may remember are the same shapes as dice:&lt;/p&gt;
 
-&lt;table&gt;
+&lt;table class=&quot;center&quot;&gt;
   &lt;thead&gt;
     &lt;tr&gt;
       &lt;th&gt; &lt;/th&gt;
@@ -276,20 +276,20 @@ docker container stop my-app-container
 
 &lt;p&gt;What’s a &lt;em&gt;vertex figure&lt;/em&gt;, I hear you ask? It is a way to unambiguously define regular polyhedra. If you pick any vertex on the regular polyhedra, and then count the number of sides on each face that touches that vertex, moving in a clockwise or counterclockwise fashion, you will get a sequence of numbers that we call the vertex figure. For example, each corner of the cube touches three squares, so we can call it 4.4.4. We are going to use vertex figures to help us keep track of complicated shapes rather than memorize scores of names.&lt;/p&gt;
 
-&lt;p&gt;There is another advantage to using vertex figures: they are unambigious. In fact, you can use vertex figures to &lt;a href=&quot;todo-japan-link&quot;&gt;find shapes described by nerds in other countries&lt;/a&gt;, even if you don’t speak their language, because the language of math is universal.&lt;/p&gt;
+&lt;p&gt;There is another advantage to using vertex figures: they are unambigious. In fact, you can use vertex figures to find shapes described by nerds in other countries, even if you don’t speak their language, because the language of math is universal.&lt;/p&gt;
 
 &lt;p&gt;You may remember that Platonic solids have several important properties:&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Every edge is the same length.&lt;/li&gt;
   &lt;li&gt;Every face has the same number of sides.&lt;/li&gt;
-  &lt;li&gt;Every face is a regular polygon. (e.g. a square is regular, but a parallelogram is not)&lt;/li&gt;
+  &lt;li&gt;Every face’s interior angles are the equal&lt;/li&gt;
   &lt;li&gt;Every vertex lies on the surface of a sphere.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;These constraints are so restrictive that there are only five solids that meet all the criteria. But what would happen if we removed one or more of those constraints? As it turns out, by relaxating the constraints we can create two new families of solids: the &lt;strong&gt;Archimedian solids&lt;/strong&gt; and the &lt;strong&gt;Catalan solids&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;These constraints are so restrictive that there are only five solids that meet all the criteria. But what would happen if we removed one or more of those constraints? As it turns out, by relaxing the constraints we can create two new families of solids: the &lt;strong&gt;Archimedian solids&lt;/strong&gt; and the &lt;strong&gt;Catalan solids&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;table&gt;
+&lt;table class=&quot;center&quot;&gt;
   &lt;thead&gt;
     &lt;tr&gt;
       &lt;th&gt; &lt;/th&gt;
@@ -335,9 +335,9 @@ docker container stop my-app-container
 
 &lt;h1 id=&quot;archimedian-solids&quot;&gt;Archimedian Solids&lt;/h1&gt;
 
-&lt;p&gt;First enumerated by the greek mathematician Archimedes, &lt;strong&gt;the Archimedian solids are the set of polyhedra in which all edges are the same length&lt;/strong&gt;. If you are gluing together equal-length matchsticks, there are only 13 possible shapes that you can make:&lt;/p&gt;
+&lt;p&gt;First described by the greek mathematician Archimedes, &lt;strong&gt;the Archimedian solids are the set of polyhedra in which all edges are the same length&lt;/strong&gt;. If you are gluing together equal-length matchsticks, there are only 13 possible shapes (or 15, if you count the chiral variants as different) that you can make:&lt;/p&gt;
 
-&lt;table&gt;
+&lt;table class=&quot;center&quot;&gt;
   &lt;thead&gt;
     &lt;tr&gt;
       &lt;th&gt; &lt;/th&gt;
@@ -362,7 +362,7 @@ docker container stop my-app-container
       &lt;td&gt;Oh&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;img src=&quot;archimedian/3.8.8.truncatedhexahedron.gif&quot; alt=&quot;3.8.8.truncatedhexahedron&quot; title=&quot;3.8.8.truncatedhexahedron.gif&quot; /&gt;&lt;/td&gt;
       &lt;td&gt;Truncated Cube&lt;/td&gt;
       &lt;td&gt;3.8.8&lt;/td&gt;
       &lt;td&gt;Oh&lt;/td&gt;
@@ -388,9 +388,9 @@ docker container stop my-app-container
   &lt;/tbody&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td&gt;&lt;img src=&quot;archimedian/3.3.3.4.nubhexahedroncw.gif&quot; alt=&quot;3.3.3.4.nubhexahedroncw&quot; title=&quot;3.3.3.4 - Snub Hexahedron&quot; /&gt; or &lt;img src=&quot;archimedian/3.3.3.4.snubhexahedronccw.gif&quot; alt=&quot;3.3.3.4.snubhexahedronccw&quot; title=&quot;3.3.3.4.snubhexahedronccw.gif&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&quot;archimedian/3.3.3.4.nubhexahedroncw.gif&quot; alt=&quot;3.3.3.4.nubhexahedroncw&quot; title=&quot;3.3.3.3.4 - Snub Hexahedron&quot; /&gt;or&lt;img src=&quot;archimedian/3.3.3.4.snubhexahedronccw.gif&quot; alt=&quot;3.3.3.4.snubhexahedronccw&quot; title=&quot;3.3.3.4.snubhexahedronccw.gif&quot; /&gt;&lt;/td&gt;
       &lt;td&gt;Snub cube&lt;/td&gt;
-      &lt;td&gt;3.3.3.4&lt;/td&gt;
+      &lt;td&gt;3.3.3.3.4&lt;/td&gt;
       &lt;td&gt;O (Chiral)&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
@@ -428,9 +428,9 @@ docker container stop my-app-container
   &lt;/tbody&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td&gt;&lt;img src=&quot;archimedian/3.3.3.5.snubdodecahedroncw.gif&quot; alt=&quot;3.3.3.5.snubdodecahedroncw&quot; title=&quot;3.3.3.5.snubdodecahedroncw.gif&quot; /&gt; or &lt;img src=&quot;archimedian/3.5.5.snubdodecahedronccw.gif&quot; alt=&quot;3.5.5.snubdodecahedronccw&quot; title=&quot;3.5.5.snubdodecahedronccw.gif&quot; /&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&quot;archimedian/3.3.3.5.snubdodecahedroncw.gif&quot; alt=&quot;3.3.3.5.snubdodecahedroncw&quot; title=&quot;3.3.3.5.snubdodecahedroncw.gif&quot; /&gt;or&lt;img src=&quot;archimedian/3.5.5.snubdodecahedronccw.gif&quot; alt=&quot;3.5.5.snubdodecahedronccw&quot; title=&quot;3.5.5.snubdodecahedronccw.gif&quot; /&gt;&lt;/td&gt;
       &lt;td&gt;Snub Dodecahedron&lt;/td&gt;
-      &lt;td&gt;3.3.3.5&lt;/td&gt;
+      &lt;td&gt;3.3.3.3.5&lt;/td&gt;
       &lt;td&gt;I (Chiral)&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
@@ -438,210 +438,204 @@ docker container stop my-app-container
 
 &lt;p&gt;If that table scares and confuses you, you aren’t the only one – I found this all very bewildering at first! What the heck do all of these weird names mean? Truncated? Rhombi-? Snub? Why is there a combination of a cube and octahedron called a cuboctahedron? How do the icosahedron and dodecahedron combine to make a icosidodecahedron? Also, what is a point symmetry group?&lt;/p&gt;
 
-&lt;p&gt;It’s real easy to “lose the forest for the trees” here, so please feel free to NOT learn the names of these things – some of these polyhedra even have multiple names, which can make studying them terribly confusing. In fact, I’m going to totally ignore defining the truncation, rombi, and snub operations, because I think that it might not be best to start by describing them in terms of transformations. Instead, a beginner should start with a description of the most obvious &lt;em&gt;symmetries&lt;/em&gt; that they have, and also on the unambiguous vertex figure definitions.&lt;/p&gt;
+&lt;p&gt;It’s real easy to “lose the forest for the trees” here, so please feel free to NOT learn the names of these things – some of these polyhedra even have multiple names, which can make studying them terribly confusing. In fact, I’m going to totally ignore defining the truncation, rombi, and snub operations, because I am suspicious of starting by describing them in terms of transformations. Instead, I like to focus on observing the most obvious &lt;em&gt;symmetries&lt;/em&gt; that they have, and focus on learning the unambiguous vertex figure definitions.&lt;/p&gt;
 
-&lt;p&gt;To me, &lt;strong&gt;the important thing to note about polyhedral symmetries is that our 3D universe appears to force polyhedra into just a few symmetry groups&lt;/strong&gt;. The broadest grouping would be shapes like cubes/octahedra (of which the tetrahedral symmetry can probably be considered a special case), and shapes like dodecahedra/icosahedra. The point symmetry group, roughly speaking, refers to the ways in which you may rotate a polyhedra into a position such that it looks the same as when you started.&lt;/p&gt;
+&lt;p&gt;To me, &lt;strong&gt;the important thing to note about polyhedral symmetries is that our 3D universe appears to force polyhedra into just very few point symmetry groups&lt;/strong&gt;. If we are a little hand-wavy and ignore the special case of “chiral” polyhedra for now, we can say there are just two symmetries here:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Shapes like cubes/octahedra (of which the tetrahedral symmetry can probably be considered a special case);&lt;/li&gt;
+  &lt;li&gt;Shapes like dodecahedra/icosahedra.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The point symmetry group, roughly speaking, refers to the ways in which you may rotate a polyhedra into a position such that its vertex points look the same as when you started.&lt;/p&gt;
 
 &lt;h1 id=&quot;catalan-solids&quot;&gt;Catalan Solids&lt;/h1&gt;
 
-&lt;p&gt;Catalan solids, named for the Belgian mathematician Eugene Catalan, were originally described in 1865. Think about that for a moment – despite Archimedes having discovered important polyhedral shapes in ancient times and despite the fact that the Catalan solids are closely related set of shapes, the Catalan solids went formally unrecognized for nearly two millenia! It makes you wonder what other important facts of mathematics lie adjacent to our existing knowledge, but simply have not been discovered yet.&lt;/p&gt;
+&lt;p&gt;Catalan solids, named for the Belgian mathematician &lt;a href=&quot;https://en.wikipedia.org/wiki/Eug%C3%A8ne_Charles_Catalan&quot;&gt;Eugene Catalan&lt;/a&gt;, were originally described in 1865. Think about that for a moment – despite Archimedes having discovered important polyhedral shapes in ancient times and despite the fact that the Catalan solids are an incredibly closely related set of shapes, the Catalan solids went formally unrecognized or undiscovered for two millenia. It makes you wonder what other important facts of mathematics lie adjacent to our existing knowledge, but simply have not been discovered yet.&lt;/p&gt;
 
-&lt;p&gt;Catalan solids relax a different constraint than the Archemidean solids. Catalan solids do &lt;em&gt;not&lt;/em&gt; have edges that are all the same length. Instead, they &lt;em&gt;do&lt;/em&gt; have faces that are all the same shape. There are 13 of these as well:&lt;/p&gt;
+&lt;p&gt;Catalan solids relax a different constraint than the Archemidean solids. Catalan solids do &lt;em&gt;not&lt;/em&gt; have edges that are all the same length. Instead, they &lt;em&gt;do&lt;/em&gt; have faces that are all the same shape. There are 13 (or 15) of these as well:&lt;/p&gt;
 
-&lt;table&gt;
+&lt;table class=&quot;center&quot;&gt;
   &lt;thead&gt;
     &lt;tr&gt;
       &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;Catalan Solid&lt;/th&gt;
       &lt;th&gt;Face Polygon&lt;/th&gt;
       &lt;th&gt;Symmetry&lt;/th&gt;
     &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;catalan/v3.6.6.triakistetrahedron.gif&quot; alt=&quot;v3.6.6.triakistetrahedron&quot; title=&quot;v3.6.6.triakistetrahedron.gif&quot; /&gt;&lt;/td&gt;
       &lt;td&gt;Triakis Tetrahedron&lt;/td&gt;
-      &lt;td&gt;Isosceles V3.6.6&lt;/td&gt;
+      &lt;td&gt;Isosceles&lt;br /&gt; V3.6.6&lt;/td&gt;
       &lt;td&gt;Td&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;catalan/v3.4.3.4.rhombicdodecahedron.gif&quot; alt=&quot;v3.4.3.4.rhombicdodecahedron&quot; title=&quot;v3.4.3.4.rhombicdodecahedron.gif&quot; /&gt;&lt;/td&gt;
       &lt;td&gt;Rhombic Dodecahedron&lt;/td&gt;
-      &lt;td&gt;Rhombus V3.4.3.4&lt;/td&gt;
+      &lt;td&gt;Rhombus&lt;br /&gt; V3.4.3.4&lt;/td&gt;
       &lt;td&gt;Oh&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;catalan/v3.8.8.triakisoctahedron.gif&quot; alt=&quot;v3.8.8.triakisoctahedron&quot; title=&quot;v3.8.8.triakisoctahedron.gif&quot; /&gt;&lt;/td&gt;
       &lt;td&gt;Triakis Octahedron&lt;/td&gt;
-      &lt;td&gt;Isosceles V3.8.8&lt;/td&gt;
+      &lt;td&gt;Isosceles&lt;br /&gt; V3.8.8&lt;/td&gt;
       &lt;td&gt;Oh&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;catalan/v4.6.6.tetrakishexahedron.gif&quot; alt=&quot;v4.6.6.tetrakishexahedron&quot; title=&quot;v4.6.6.tetrakishexahedron.gif&quot; /&gt;&lt;/td&gt;
       &lt;td&gt;Tetrakis Hexahedron&lt;/td&gt;
-      &lt;td&gt;Isosceles V4.6.6&lt;/td&gt;
+      &lt;td&gt;Isosceles&lt;br /&gt; V4.6.6&lt;/td&gt;
       &lt;td&gt;Oh&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;catalan/v3.4.4.4.deltoidalicositetrahedron.gif&quot; alt=&quot;v3.4.4.4.deltoidalicositetrahedron&quot; title=&quot;v3.4.4.4.deltoidalicositetrahedron.gif&quot; /&gt;&lt;/td&gt;
       &lt;td&gt;Deltoidal Icositetrahedron&lt;/td&gt;
-      &lt;td&gt;Kite V3.4.4.4&lt;/td&gt;
+      &lt;td&gt;Kite&lt;br /&gt; V3.4.4.4&lt;/td&gt;
       &lt;td&gt;Oh&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;catalan/v4.6.8.disdyakisdodecahedron.gif&quot; alt=&quot;v4.6.8.disdyakisdodecahedron&quot; title=&quot;v4.6.8.disdyakisdodecahedron.gif&quot; /&gt;&lt;/td&gt;
       &lt;td&gt;Disdyakis Dodecahedron&lt;/td&gt;
-      &lt;td&gt;Scalene V4.6.8&lt;/td&gt;
+      &lt;td&gt;Scalene&lt;br /&gt; V4.6.8&lt;/td&gt;
       &lt;td&gt;Oh&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;catalan/v3.3.3.3.4.pentagonalicositetrahedron-ccw.gif&quot; alt=&quot;v3.3.3.3.4.pentagonalicositetrahedron-ccw&quot; title=&quot;v3.3.3.3.4.pentagonalicositetrahedron-ccw.gif&quot; /&gt;or&lt;img src=&quot;catalan/v3.3.3.3.4.pentagonalicositetrahedron-cw.gif&quot; alt=&quot;v3.3.3.3.4.pentagonalicositetrahedron-cw&quot; title=&quot;v3.3.3.3.4.pentagonalicositetrahedron-cw.gif&quot; /&gt;&lt;/td&gt;
       &lt;td&gt;Pentagonal Icositetrahedron&lt;/td&gt;
-      &lt;td&gt;Pentagon V3.3.3.3.4&lt;/td&gt;
+      &lt;td&gt;Pentagon&lt;br /&gt; V3.3.3.3.4&lt;/td&gt;
       &lt;td&gt;O&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;catalan/v3.5.3.5.rhombictricontahedron.gif&quot; alt=&quot;v3.5.3.5.rhombictricontahedron&quot; title=&quot;v3.5.3.5.rhombictricontahedron.gif&quot; /&gt;&lt;/td&gt;
       &lt;td&gt;Rhombic Triacontahedron&lt;/td&gt;
-      &lt;td&gt;Rhombus V3.5.3.5&lt;/td&gt;
+      &lt;td&gt;Rhombus&lt;br /&gt; V3.5.3.5&lt;/td&gt;
       &lt;td&gt;Ih&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;catalan/v3.10.10.triakisicosahedron.gif&quot; alt=&quot;v3.10.10.triakisicosahedron&quot; title=&quot;v3.10.10.triakisicosahedron.gif&quot; /&gt;&lt;/td&gt;
       &lt;td&gt;Triakis Icosahedron&lt;/td&gt;
-      &lt;td&gt;Isosceles V3.10.10&lt;/td&gt;
+      &lt;td&gt;Isosceles&lt;br /&gt; V3.10.10&lt;/td&gt;
       &lt;td&gt;Ih&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;catalan/v5.6.6.pentakisdodecahedron.gif&quot; alt=&quot;v5.6.6.pentakisdodecahedron&quot; title=&quot;v5.6.6.pentakisdodecahedron.gif&quot; /&gt;&lt;/td&gt;
       &lt;td&gt;Pentakis Dodecahedron&lt;/td&gt;
-      &lt;td&gt;Isosceles V5.6.6&lt;/td&gt;
+      &lt;td&gt;Isosceles&lt;br /&gt; V5.6.6&lt;/td&gt;
       &lt;td&gt;Ih&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;catalan/v3.4.5.4.deltoidalhexecontahedron.gif&quot; alt=&quot;v3.4.5.4.deltoidalhexecontahedron&quot; title=&quot;v3.4.5.4.deltoidalhexecontahedron.gif&quot; /&gt;&lt;/td&gt;
       &lt;td&gt;Deltoidal Hexecontahedron&lt;/td&gt;
-      &lt;td&gt;Kite V3.4.5.4&lt;/td&gt;
+      &lt;td&gt;Kite&lt;br /&gt; V3.4.5.4&lt;/td&gt;
       &lt;td&gt;Ih&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;catalan/v4.6.10.disdyakistricontahedron.gif&quot; alt=&quot;v4.6.10.disdyakistricontahedron&quot; title=&quot;v4.6.10.disdyakistricontahedron.gif&quot; /&gt;&lt;/td&gt;
       &lt;td&gt;Disdyakis Tricontahedron&lt;/td&gt;
-      &lt;td&gt;Scalene V4.6.10&lt;/td&gt;
+      &lt;td&gt;Scalene&lt;br /&gt; V4.6.10&lt;/td&gt;
       &lt;td&gt;Ih&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
+      &lt;td&gt;&lt;img src=&quot;catalan/v3.3.3.3.5.pentagonalhexecontahedron-ccw.gif&quot; alt=&quot;v3.3.3.3.5.pentagonalhexecontahedron-ccw&quot; title=&quot;v3.3.3.3.5.pentagonalhexecontahedron-ccw.gif&quot; /&gt;or&lt;img src=&quot;catalan/v3.3.3.3.5.pentagonalhexecontahedron-cw.gif&quot; alt=&quot;v3.3.3.3.5.pentagonalhexecontahedron-cw&quot; title=&quot;v3.3.3.3.5.pentagonalhexecontahedron-cw.gif&quot; /&gt;&lt;/td&gt;
       &lt;td&gt;Pentagonal Hexecontahedron&lt;/td&gt;
-      &lt;td&gt;Pentagon V3.3.3.3.5&lt;/td&gt;
+      &lt;td&gt;Pentagon&lt;br /&gt; V3.3.3.3.5&lt;/td&gt;
       &lt;td&gt;I&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;What does a Face Polygon mean? Well, this time we take each face, and working our way around the vertices of the face, we count the number of polygons touching that point. TODO: Is that right?&lt;/p&gt;
+&lt;p&gt;What do the Face Polygon numbers mean that start with a “V”? Well, for the Archimedian solids, we picked a corner and counted the number of sides of each face touching that corner. For the Catalan solids, we take a face, and work our way around the verticies and count the number of polygons touching that point.&lt;/p&gt;
 
-&lt;h1 id=&quot;catalan-and-archimedian-dualities&quot;&gt;Catalan and Archimedian Dualities&lt;/h1&gt;
+&lt;h1 id=&quot;engineering-with-catalan-and-archimedian-solids&quot;&gt;Engineering with Catalan and Archimedian Solids&lt;/h1&gt;
 
-&lt;p&gt;Now it’s time to see the shapes&lt;/p&gt;
+&lt;p&gt;How does all this relate to &lt;a href=&quot;../pentakis-dodecahedron-dome&quot;&gt;what I tried before&lt;/a&gt;? Well, in the Pentakis Dodecahedron concept, the internal structure was an icosahedron to which a bunch of tetrahedra were added, and this formed new convex hull which turned out to be a Pentakis Dodecahedron, a Catalan solid. In other words, we started with a platonic solid (icosahedron, or 3.3.3.3.3), took its dual to get another platonic solid (dodecahedron, 5.5.5), and then connected all the vertices together to form a catalan solid (V5.6.6). This happened to form very strong tetrahedra throughout the structure.&lt;/p&gt;
 
-&lt;h1 id=&quot;simple-engineering&quot;&gt;Simple Engineering&lt;/h1&gt;
+&lt;p&gt;But now let’s revisit that important question:&lt;/p&gt;
 
-&lt;p&gt;Now it’s time to play some simple engineering games. We’ll assume that we are making things out of flat surfaces (which are easy to cut out of paper) and sticks bound at the corners somehow. What kind of structures would be easiest to make?&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Were there other pairs of shapes we could have used to make a self-supporting dome entirely from tetrahedra, instead of the Icosahedron and Dodecahedron?&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;If we are trying to make a watertight structure, the simplest possible outer skin would be a structure made from the same shape repeated over and over again – a Catalan solid. Catalan solids have a desirable property that every face is the same, which is very convenient when trying to make a hard-shelled physical structure because then all of the external pieces can follow the same template.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;For an internal supporting structure, the simplest possible thing would be a structure made of sticks that are all the same length – an Archimedian solid. Archimedian solids would be very desirable if were making a scaffold out of equal-length sticks, so I suppose if you were making supports for a tent these would be the solids to use.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;The answer appears to be yes – one could begin with any Archimedian or Catalan solid, find its dual, and then connect all verticies together to make a dual-layer structure. It’s not necessarily guaranteed (i.e. I haven’t tried to prove it yet!) that the resulting structure be entirely made of tetrahedra, so it might not be as rigid as the Pentakis Dodecahedron dome, but it would definitely be a dual-layer structure.&lt;/p&gt;
 
-&lt;p&gt;If we want a structure that is self-supporting, it should also be constructed purely from tetrahedra. This is a bit tricky, as not all Archimedian solids could be reinforced in this way (TODO: is that true?)&lt;/p&gt;
+&lt;p&gt;At first pass, there would seem to be many reasons to choose an Archimedian solid for an internal structure, since all the edges would be the same length. If you were making this out of 2x4’s or dowels, they would all be the same length. And we might want to choose a Catalan solid for the exterior skin, so that all the exterior pieces would be the same shape and size. We also have some flexibility on the sizing of the internal polyhedron and external polyhedron, to provide more or less insulation between the inside and outside of the structure.&lt;/p&gt;
 
-&lt;h2 id=&quot;archimedian-corner-connectors&quot;&gt;Archimedian Corner connectors&lt;/h2&gt;
+&lt;p&gt;There are other considerations as well. For sealing edges or corners to form a waterproof skin, we’d like it if most of our external corners have only 3 polyhedra coming together at a point. This would exclude shapes like the Triakis Icosahedron (V3.10.10), that have many points at which 10 polygons come together.&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;NONE! Just angle the pieces at the corners and connect them to each other&lt;/li&gt;
-  &lt;li&gt;Rope or zipties thru holes NEAR the ends&lt;/li&gt;
-  &lt;li&gt;Sphere or cylinder with threaded holes&lt;/li&gt;
-  &lt;li&gt;Hollow cylinder with L shaped metal&lt;/li&gt;
-  &lt;li&gt;Stacked flat overlapping metal ends&lt;/li&gt;
-  &lt;li&gt;Starplates&lt;/li&gt;
-  &lt;li&gt;Appropriate Polygon blocks with dovetails (and dovetails in the links too)&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Let’s now work through an example of one of the thirtneen dual double-layered domes that you can make, knowing about Catalan and Archimedian solids.&lt;/p&gt;
 
-&lt;h2 id=&quot;catalan-edge-connectors&quot;&gt;Catalan Edge Connectors&lt;/h2&gt;
+&lt;h2 id=&quot;example-33335-and-v33335&quot;&gt;Example: 3.3.3.3.5 and V3.3.3.3.5&lt;/h2&gt;
 
-&lt;p&gt;Connecting the edges of long boards is pretty easy:&lt;/p&gt;
+&lt;p&gt;Let’s combine the Snub Dodecahedron (Archimedian Solid 3.3.3.3.5) to its dual, the Pentagonal Hexacontahedron (Catalan Solid V3.3.3.3.5). We start by making simple regular tetrahedra:&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;None! Just overlap edges at an angle?&lt;/li&gt;
-  &lt;li&gt;Duct tape, cloth, plastic sheet, metal flashing, or even wooden boards with a dado cut in it.&lt;/li&gt;
-  &lt;li&gt;Staples, nails, screws, rivets, or glue.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;layered-dual-poly-01.jpg&quot; alt=&quot;layered-dual-poly-01&quot; title=&quot;A single tetrahedron.&quot; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;engineering-considerations&quot;&gt;Engineering Considerations&lt;/h1&gt;
+&lt;p&gt;Then connect them in pairs…&lt;/p&gt;
 
-&lt;p&gt;Last time, there were a few engineering considerations that bugged me from the reinforced pentakis dodecahedron dome.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;layered-dual-poly-02.jpg&quot; alt=&quot;layered-dual-poly-02&quot; title=&quot;Two tetrahedra, connected along one edge.&quot; /&gt;&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;What do I do about the 20 points where there is no double-layer of insulation? (The original vertices of the icosahedron)&lt;/li&gt;
-  &lt;li&gt;How do I control the thickness of the reinforcement? It seems to take a lot of volume internally to add these reinforcements.&lt;/li&gt;
-  &lt;li&gt;How could something with 10 polygons coming together at a single point ever be waterproofed?&lt;/li&gt;
-  &lt;li&gt;How do I put non-load-bearing windows or doors in it without breaking the regularity?&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;And proceed adding on tetrahedron after tetrahedron until the inside forms the triangular faces of the Snub Dodecahedron:&lt;/p&gt;
 
-&lt;p&gt;So the engineering wish list became:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;layered-dual-poly-04.jpg&quot; alt=&quot;layered-dual-poly-04&quot; title=&quot;The inside should begin to form a snub dodecahedron&quot; /&gt;&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;Made of flat cut-outs, with as few unique shapes as possible&lt;/li&gt;
-  &lt;li&gt;Use only edge connections&lt;/li&gt;
-  &lt;li&gt;No more than 3 polygons should touching the same point (for waterproofing)&lt;/li&gt;
-  &lt;li&gt;Have space for windows&lt;/li&gt;
-  &lt;li&gt;Have a true layer of insulation everywhere around the dome&lt;/li&gt;
-  &lt;li&gt;Be as round as possible&lt;/li&gt;
-  &lt;li&gt;Tolerate damage well&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&quot;layered-dual-poly-03.jpg&quot; alt=&quot;layered-dual-poly-03&quot; title=&quot;The outside looks like a spiky dodecahedron.&quot; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;draft-1---fewest-shapes&quot;&gt;Draft 1 - Fewest Shapes&lt;/h1&gt;
+&lt;p&gt;At this point, the outside should look like a bunch of tetrahedral spikes, but the whole structure will still be quite floppy. We now add other icosceles triangles to hold the spike tips a fixed distance from one another. Two of the edges of these icoseles triangles will be the same lengths as the tetrahedra edges, but one edge will be longer, being equal to the outside pentagons’ (from the Pentagonal Hexacontahedron) base edge.&lt;/p&gt;
 
-&lt;h1 id=&quot;draft-2---efficient-use-of-building-material&quot;&gt;Draft 2 - Efficient Use of Building Material&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;layered-dual-poly-05.jpg&quot; alt=&quot;layered-dual-poly-05&quot; title=&quot;Exterior view of supporting structure.&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;At this point, I felt the concept was becoming workable, and I tried to get a little more practical. If I were actually going to build a super strong greenhouse or something, the shapes should be buildable from standard materials with as little waste as possible.&lt;/p&gt;
+&lt;p&gt;The resulting structure should now be fairly rigid and self-supporting, and look like this from the inside:&lt;/p&gt;
 
-&lt;p&gt;That means that I need to make the pieces tile standard 4’x8’ plywood sheets that we have in the US.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;layered-dual-poly-06.jpg&quot; alt=&quot;layered-dual-poly-06&quot; title=&quot;Inside view of supporting structure.&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;So I resized the insulation layer to make the pieces fit. Weirdly, this means about HALF of the volume of the house is insulation!&lt;/p&gt;
+&lt;p&gt;The penultimate step is to connect the pentagons into five-piece petals:&lt;/p&gt;
 
-&lt;p&gt;Cost? About 1.5 grand in plywood for a 400 sq ft hut. Plus edge aluminum, which is an unknown quantity right now.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;layered-dual-poly-07.jpg&quot; alt=&quot;layered-dual-poly-07&quot; title=&quot;Bottom view of petals&quot; /&gt;
+&lt;img src=&quot;layered-dual-poly-08.jpg&quot; alt=&quot;layered-dual-poly-08&quot; title=&quot;Top view of petals&quot; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;draft-3---deluxe-version-3d-printed&quot;&gt;Draft 3 - Deluxe Version, 3D Printed.&lt;/h1&gt;
+&lt;p&gt;And finally, cover the top of the supporting structure with these petals:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;layered-dual-poly-09.jpg&quot; alt=&quot;layered-dual-poly-09&quot; title=&quot;One pentagonal petal left&quot; /&gt;
+&lt;img src=&quot;layered-dual-poly-10.jpg&quot; alt=&quot;layered-dual-poly-10&quot; title=&quot;The completed structure.&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;And the inside looks like this:
+&lt;img src=&quot;layered-dual-poly-11.jpg&quot; alt=&quot;layered-dual-poly-11&quot; title=&quot;Internal view&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;paper-cut-outs-and-mathematics&quot;&gt;Paper Cut Outs and Mathematics&lt;/h2&gt;
+
+&lt;p&gt;If you are making this out of paper yourself, the following template will be helpful:&lt;/p&gt;
+
+&lt;p&gt;TODO&lt;/p&gt;
+
+&lt;p&gt;The critical measurements are:&lt;/p&gt;
+
+&lt;p&gt;TODO&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;So there you have it: a self-supporting, extremely rigid structure in which all the internal structural edges are the same length, and in which all the external polygons are the same. More generally, it seems like you could apply this technique to make a dozen other structures with similar qualities.&lt;/p&gt;
+
+&lt;p&gt;This 3.3.3.3.5 design does have a few nice qualities about it, though:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Curved surfaces&lt;/li&gt;
-  &lt;li&gt;Diaphragm or rose-petal shutters on windows&lt;/li&gt;
+  &lt;li&gt;The pentagonal gaps in the internal structure make excellent places for doors or windows.&lt;/li&gt;
+  &lt;li&gt;The pentagonal floorplan enables one to see any distant point from at least 2 windows.&lt;/li&gt;
+  &lt;li&gt;If you are willing to make the tetrahedral spikes shorter, you can reduce the volume of insulation needed.&lt;/li&gt;
+  &lt;li&gt;Everything is self supporting, and any one piece can be replaced as the structure stands.&lt;/li&gt;
+  &lt;li&gt;It is made of overlapping tetrahedra that form a strong and resilient structure.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&quot;types-of-symmetries&quot;&gt;Types of symmetries&lt;/h1&gt;
-
-&lt;p&gt;Some nice things:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Pentagonal shape makes you able to see any distant point in 360 degrees from at least 2 windows&lt;/li&gt;
-  &lt;li&gt;Tons of space for insulation.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Self supporting; you can replace any 1 piece indpendently&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Overlapping tetrahedra are indeed enormously strong&lt;/li&gt;
-  &lt;li&gt;Edge-connection of flat faces is pretty easy with tape, at least compared to corners&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;But, importantly, I felt that&lt;/p&gt;
-
-&lt;p&gt;TO DO ITEMS:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;Photo of the structure&lt;/li&gt;
-  &lt;li&gt;Grep for TODOs and fix links&lt;/li&gt;
-  &lt;li&gt;Get all 13 gifs from Wikipedi&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;gifsicle –resize-fit 150x150&lt;/p&gt;</content><category term="math" /><category term="geometry" /><category term="architecture" /><summary type="html">This article describes another iteration of the dome-like structure that I discussed a few months ago. I still don’t have a good vocabulary for describing why I think these things are neat, except to say that I somehow find it relaxing to work on toy engineering problems once or twice a month. I guess de gustibus non est disputandum – “there’s no accounting for (bad) taste!”</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">The Reinforced Pentakis Dodecahedron Dome</title><link href="/blog/pentakis-dodecahedron-dome/" rel="alternate" type="text/html" title="The Reinforced Pentakis Dodecahedron Dome" /><published>2017-11-05T00:00:00-07:00</published><updated>2017-11-05T00:00:00-07:00</updated><id>/blog/pentakis-dodecahedron-dome</id><content type="html" xml:base="/blog/pentakis-dodecahedron-dome/">&lt;p&gt;For your amusement, I would like to present a reinforced version of a geodesic dome that is many times stronger than conventional geodesic domes. It is essentially two concentric domes, one nested inside the other, connected entirely by tetrahedra in a way that both strengthens the dome and provides space for insulation. Compared to single-layer geodesic structures, this new structure uses about 2-3x more materials, but it is so much stronger that it is startling.&lt;/p&gt;
+&lt;p&gt;I hope you enjoyed this little excursion in geometry and origami with me!&lt;/p&gt;</content><category term="math" /><category term="geometry" /><category term="architecture" /><summary type="html">This article describes another iteration of the dome-like structure that I discussed a few months ago. I still don’t have a good vocabulary for describing why I think these things are neat, except to say that I somehow find it relaxing to work on toy engineering problems once or twice a month. I guess de gustibus non est disputandum – “there’s no accounting for (bad) taste!”</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">The Reinforced Pentakis Dodecahedron Dome</title><link href="/blog/pentakis-dodecahedron-dome/" rel="alternate" type="text/html" title="The Reinforced Pentakis Dodecahedron Dome" /><published>2017-11-05T00:00:00-07:00</published><updated>2017-11-05T00:00:00-07:00</updated><id>/blog/pentakis-dodecahedron-dome</id><content type="html" xml:base="/blog/pentakis-dodecahedron-dome/">&lt;p&gt;For your amusement, I would like to present a reinforced version of a geodesic dome that is many times stronger than conventional geodesic domes. It is essentially two concentric domes, one nested inside the other, connected entirely by tetrahedra in a way that both strengthens the dome and provides space for insulation. Compared to single-layer geodesic structures, this new structure uses about 2-3x more materials, but it is so much stronger that it is startling.&lt;/p&gt;
 
 &lt;p&gt;The internal structure is very regular, as a paper model shows:&lt;/p&gt;
 
