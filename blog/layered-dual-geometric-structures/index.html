@@ -559,19 +559,70 @@
 <p>And the inside looks like this:
 <img src="layered-dual-poly-11.jpg" alt="layered-dual-poly-11" title="Internal view" /></p>
 
-<h2 id="paper-cut-outs-and-mathematics">Paper Cut Outs and Mathematics</h2>
+<h2 id="paper-cut-outs-and-sizing-mathematics">Paper Cut Outs and Sizing Mathematics</h2>
 
-<p>If you are making this out of paper yourself, the following template will be helpful:</p>
+<p>To make a fully spherical dual-layer polyhedron from paper, you will need to make triangles of 3 sizes, and also some irregular pentagons:</p>
 
-<p>TODO</p>
+<ul>
+  <li>80 of <script type="math/tex">(a,a,a)</script> triangles that will form the interior snub dodecahedron (3.3.3.5)</li>
+  <li>240 of <script type="math/tex">(a,b,b)</script> triangles that will form the tetrahedral spikes on the outside of the snub dodecahedron</li>
+  <li>160 of <script type="math/tex">(b,b,c)</script> triangles that will hold the tetrahedral spikes together</li>
+  <li>60 of <script type="math/tex">(c,c,c,d,d)</script> pentagons to form the exterior pentagonal hexacontahedron (V3.3.3.3.5)</li>
+</ul>
 
-<p>The critical measurements are:</p>
+<h3 id="equilateral-triangles-aaa">Equilateral Triangles (a,a,a)</h3>
 
-<p>TODO</p>
+<p>You can choose <script type="math/tex">a</script> however you want; this determines the interior size of the dome. The inner diameter <script type="math/tex">d_i</script> of the dome is:</p>
+
+<script type="math/tex; mode=display">d_i \\approx 4.07974 a</script>
+
+<p>I made these by cutting out long strips of paper <script type="math/tex">\frac{sqrt{3}/2}a</script> wide, marking out a tick every <script type="math/tex">a</script> on one edge of the paper, and <script type="math/tex">\frac{1}{2}a, \frac{3}{2}a, \frac{5}{2}a, ...</script> on the other edge, and then connecting the points to form equilateral triangles.</p>
+
+<h3 id="icoseles-triangles-abb">Icoseles Triangles (a,b,b)</h3>
+
+<p>You can also choose <script type="math/tex">b</script> to be any size you wish, provided that <script type="math/tex">2b >= a</script> so that triangles with edge lengths <script type="math/tex">(a,b,b)</script> exist. The larger <script type="math/tex">b</script> is, the larger the distance between the inner polythedron and outer polyhedron.</p>
+
+<p>Since we usually start with square paper, I find that cutting out little squares with edge lengths of <script type="math/tex">(a,a,a,a)</script> and then cutting along the two diagonals is a fast way to make four triangles. In this case,</p>
+
+<script type="math/tex; mode=display">b = \frac{\sqrt{2}}{2} a \approx 0.707107 a</script>
+
+<h3 id="icosceles-triangles-bbc">Icosceles Triangles (b,b,c)</h3>
+
+<p>The value of <script type="math/tex">c</script> is constrained by the values of <script type="math/tex">a</script> and <script type="math/tex">b</script>. Rather than dive into all the math, we’ll just use some pre-derived approximations to simplify our expressions.</p>
+
+<p>We start by <a href="http://dmccooey.com/polyhedra/RsnubDodecahedron.html">looking up the triangle center radius radius</a> of the snub dodecahedron’s triangles:</p>
+
+<script type="math/tex; mode=display">r_{snub tri} \approx 2.0770896597432085994 a</script>
+
+<p>To this, we add the height of the tetrahedral spikes <script type="math/tex">h_{tet}</script> to get the radius of the pentagonal hexacontahedron <script type="math/tex">r_{pent}</script>, which are easily derived from the pythogorean theorem and our knowledge that the inradius of a equilateral triangle <script type="math/tex">(a,a,a)</script> is <script type="math/tex">\frac{\sqrt{3}}{3}a</script>:</p>
+
+<script type="math/tex; mode=display">h_{tet} = \sqrt{b^2 - (\frac{\sqrt{3}}{3}a)^2}</script>
+
+<script type="math/tex; mode=display">r_{pent vertexes} == r_{snub tri} + h_{tet}</script>
+
+<p>Then once again, we <a href="http://dmccooey.com/polyhedra/LpentagonalHexecontahedron.html">look up the radius of the 3-vertexes of a pentagonal hexecontahedron’s pentagons</a>.</p>
+
+<script type="math/tex; mode=display">r_{pent tri} \approx 2.1172098986276657420 a</script>
+
+<p>Therefore the edge lengths are</p>
+
+<p>It’s important to note that not all of the pentagonal hexecontahedron’s points are the same distance from its center; the 12 vertexes where 5 edges come together are actually about 10% farther out than the 80 vertexes where 3 edges come together.</p>
+
+<p>Once again, the fastest way to make these is to cut out a strip of paper of width <script type="math/tex">h</script>, and use the same trick that we did when making the <script type="math/tex">(a,a,a)</script> equilateral triangles. That is, mark off regular distances of <script type="math/tex">c</script>, offset by <script type="math/tex">\frac{1}{2}c</script> on the other side, connect the dots diagonally, and cut out the resulting triangles.</p>
+
+<h3 id="pentagons-c-c-c-d-d">Pentagons (c, c, c, d, d)</h3>
+
+<p>Finding <script type="math/tex">d</script> from <script type="math/tex">c</script> is easy if you <a href="https://en.wikipedia.org/wiki/Pentagonal_hexecontahedron">look on wikipedia</a> to find the ratio of edge lengths:</p>
+
+<script type="math/tex; mode=display">d \approx 1.7498525667362 c</script>
+
+<p>When laying out the pentagon, don’t forget that the angle between the two <script type="math/tex">d</script> sides is about 67.45351 degrees, and use appropriate symmetry.</p>
+
+<p>I don’t have any rules of thumb on cutting out those pentagons, sorry! Just make a template and get to work, I guess.</p>
 
 <h2 id="conclusion">Conclusion</h2>
 
-<p>So there you have it: a self-supporting, extremely rigid structure in which all the internal structural edges are the same length, and in which all the external polygons are the same. More generally, it seems like you could apply this technique to make a dozen other structures with similar qualities.</p>
+<p>So there you have it: a self-supporting, extremely rigid structure in which all the internal structural edges are the same length, and in which all the external polygons are the same. More generally, it appears you could apply this technique to make a dozen other dual-layer structures made of Catalan and Archimedian solids.</p>
 
 <p>This 3.3.3.3.5 design does have a few nice qualities about it, though:</p>
 
@@ -583,7 +634,7 @@
   <li>It is made of overlapping tetrahedra that form a strong and resilient structure.</li>
 </ul>
 
-<p>I hope you enjoyed this little excursion in geometry and origami with me!</p>
+<p>I hope you enjoyed this little excursion in geometry and origami with me.</p>
 
         
       </div><!-- /.entry-content -->

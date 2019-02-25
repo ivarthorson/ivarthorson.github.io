@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-02-10T17:42:06-08:00</updated><id>/</id><title type="html">Art is Never Finished</title><subtitle>...Only Abandoned. – Leonardo da Vinci</subtitle><entry><title type="html">Connecting a Clojure REPL to a PostgreSQL Docker Container</title><link href="/blog/docker-postgres/" rel="alternate" type="text/html" title="Connecting a Clojure REPL to a PostgreSQL Docker Container" /><published>2019-01-24T00:00:00-08:00</published><updated>2019-01-24T00:00:00-08:00</updated><id>/blog/docker-postgres</id><content type="html" xml:base="/blog/docker-postgres/">&lt;p&gt;In this tutorial, we’ll launch Postgres (a.k.a. PostgreSQL) in a Docker container, create a Postgres database, and connect to it from a Clojure REPL. Postgres is a great open source SQL database with a long history, and is a good choice for many small-to-medium scale projects.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-02-24T21:01:09-08:00</updated><id>/</id><title type="html">Art is Never Finished</title><subtitle>...Only Abandoned. – Leonardo da Vinci</subtitle><entry><title type="html">Connecting a Clojure REPL to a PostgreSQL Docker Container</title><link href="/blog/docker-postgres/" rel="alternate" type="text/html" title="Connecting a Clojure REPL to a PostgreSQL Docker Container" /><published>2019-01-24T00:00:00-08:00</published><updated>2019-01-24T00:00:00-08:00</updated><id>/blog/docker-postgres</id><content type="html" xml:base="/blog/docker-postgres/">&lt;p&gt;In this tutorial, we’ll launch Postgres (a.k.a. PostgreSQL) in a Docker container, create a Postgres database, and connect to it from a Clojure REPL. Postgres is a great open source SQL database with a long history, and is a good choice for many small-to-medium scale projects.&lt;/p&gt;
 
 &lt;p&gt;First, we need to download the official Postgres image, named &lt;code class=&quot;highlighter-rouge&quot;&gt;postgres&lt;/code&gt;, create a new container, and start the image running in that container. Remember, in the parlance of Docker, “images” are the recipe and “containers” are the cake(s) made from that recipe. By default, Docker containers can make connections to the outside world, but the outside world cannot connect to containers. So we need to “publish” a port that has been exposed in the Docker image.&lt;/p&gt;
 
@@ -611,19 +611,70 @@ docker container stop my-app-container
 &lt;p&gt;And the inside looks like this:
 &lt;img src=&quot;layered-dual-poly-11.jpg&quot; alt=&quot;layered-dual-poly-11&quot; title=&quot;Internal view&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;paper-cut-outs-and-mathematics&quot;&gt;Paper Cut Outs and Mathematics&lt;/h2&gt;
+&lt;h2 id=&quot;paper-cut-outs-and-sizing-mathematics&quot;&gt;Paper Cut Outs and Sizing Mathematics&lt;/h2&gt;
 
-&lt;p&gt;If you are making this out of paper yourself, the following template will be helpful:&lt;/p&gt;
+&lt;p&gt;To make a fully spherical dual-layer polyhedron from paper, you will need to make triangles of 3 sizes, and also some irregular pentagons:&lt;/p&gt;
 
-&lt;p&gt;TODO&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;80 of &lt;script type=&quot;math/tex&quot;&gt;(a,a,a)&lt;/script&gt; triangles that will form the interior snub dodecahedron (3.3.3.5)&lt;/li&gt;
+  &lt;li&gt;240 of &lt;script type=&quot;math/tex&quot;&gt;(a,b,b)&lt;/script&gt; triangles that will form the tetrahedral spikes on the outside of the snub dodecahedron&lt;/li&gt;
+  &lt;li&gt;160 of &lt;script type=&quot;math/tex&quot;&gt;(b,b,c)&lt;/script&gt; triangles that will hold the tetrahedral spikes together&lt;/li&gt;
+  &lt;li&gt;60 of &lt;script type=&quot;math/tex&quot;&gt;(c,c,c,d,d)&lt;/script&gt; pentagons to form the exterior pentagonal hexacontahedron (V3.3.3.3.5)&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;The critical measurements are:&lt;/p&gt;
+&lt;h3 id=&quot;equilateral-triangles-aaa&quot;&gt;Equilateral Triangles (a,a,a)&lt;/h3&gt;
 
-&lt;p&gt;TODO&lt;/p&gt;
+&lt;p&gt;You can choose &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; however you want; this determines the interior size of the dome. The inner diameter &lt;script type=&quot;math/tex&quot;&gt;d_i&lt;/script&gt; of the dome is:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;d_i \\approx 4.07974 a&lt;/script&gt;
+
+&lt;p&gt;I made these by cutting out long strips of paper &lt;script type=&quot;math/tex&quot;&gt;\frac{sqrt{3}/2}a&lt;/script&gt; wide, marking out a tick every &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; on one edge of the paper, and &lt;script type=&quot;math/tex&quot;&gt;\frac{1}{2}a, \frac{3}{2}a, \frac{5}{2}a, ...&lt;/script&gt; on the other edge, and then connecting the points to form equilateral triangles.&lt;/p&gt;
+
+&lt;h3 id=&quot;icoseles-triangles-abb&quot;&gt;Icoseles Triangles (a,b,b)&lt;/h3&gt;
+
+&lt;p&gt;You can also choose &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt; to be any size you wish, provided that &lt;script type=&quot;math/tex&quot;&gt;2b &gt;= a&lt;/script&gt; so that triangles with edge lengths &lt;script type=&quot;math/tex&quot;&gt;(a,b,b)&lt;/script&gt; exist. The larger &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt; is, the larger the distance between the inner polythedron and outer polyhedron.&lt;/p&gt;
+
+&lt;p&gt;Since we usually start with square paper, I find that cutting out little squares with edge lengths of &lt;script type=&quot;math/tex&quot;&gt;(a,a,a,a)&lt;/script&gt; and then cutting along the two diagonals is a fast way to make four triangles. In this case,&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;b = \frac{\sqrt{2}}{2} a \approx 0.707107 a&lt;/script&gt;
+
+&lt;h3 id=&quot;icosceles-triangles-bbc&quot;&gt;Icosceles Triangles (b,b,c)&lt;/h3&gt;
+
+&lt;p&gt;The value of &lt;script type=&quot;math/tex&quot;&gt;c&lt;/script&gt; is constrained by the values of &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;. Rather than dive into all the math, we’ll just use some pre-derived approximations to simplify our expressions.&lt;/p&gt;
+
+&lt;p&gt;We start by &lt;a href=&quot;http://dmccooey.com/polyhedra/RsnubDodecahedron.html&quot;&gt;looking up the triangle center radius radius&lt;/a&gt; of the snub dodecahedron’s triangles:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;r_{snub tri} \approx 2.0770896597432085994 a&lt;/script&gt;
+
+&lt;p&gt;To this, we add the height of the tetrahedral spikes &lt;script type=&quot;math/tex&quot;&gt;h_{tet}&lt;/script&gt; to get the radius of the pentagonal hexacontahedron &lt;script type=&quot;math/tex&quot;&gt;r_{pent}&lt;/script&gt;, which are easily derived from the pythogorean theorem and our knowledge that the inradius of a equilateral triangle &lt;script type=&quot;math/tex&quot;&gt;(a,a,a)&lt;/script&gt; is &lt;script type=&quot;math/tex&quot;&gt;\frac{\sqrt{3}}{3}a&lt;/script&gt;:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;h_{tet} = \sqrt{b^2 - (\frac{\sqrt{3}}{3}a)^2}&lt;/script&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;r_{pent vertexes} == r_{snub tri} + h_{tet}&lt;/script&gt;
+
+&lt;p&gt;Then once again, we &lt;a href=&quot;http://dmccooey.com/polyhedra/LpentagonalHexecontahedron.html&quot;&gt;look up the radius of the 3-vertexes of a pentagonal hexecontahedron’s pentagons&lt;/a&gt;.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;r_{pent tri} \approx 2.1172098986276657420 a&lt;/script&gt;
+
+&lt;p&gt;Therefore the edge lengths are&lt;/p&gt;
+
+&lt;p&gt;It’s important to note that not all of the pentagonal hexecontahedron’s points are the same distance from its center; the 12 vertexes where 5 edges come together are actually about 10% farther out than the 80 vertexes where 3 edges come together.&lt;/p&gt;
+
+&lt;p&gt;Once again, the fastest way to make these is to cut out a strip of paper of width &lt;script type=&quot;math/tex&quot;&gt;h&lt;/script&gt;, and use the same trick that we did when making the &lt;script type=&quot;math/tex&quot;&gt;(a,a,a)&lt;/script&gt; equilateral triangles. That is, mark off regular distances of &lt;script type=&quot;math/tex&quot;&gt;c&lt;/script&gt;, offset by &lt;script type=&quot;math/tex&quot;&gt;\frac{1}{2}c&lt;/script&gt; on the other side, connect the dots diagonally, and cut out the resulting triangles.&lt;/p&gt;
+
+&lt;h3 id=&quot;pentagons-c-c-c-d-d&quot;&gt;Pentagons (c, c, c, d, d)&lt;/h3&gt;
+
+&lt;p&gt;Finding &lt;script type=&quot;math/tex&quot;&gt;d&lt;/script&gt; from &lt;script type=&quot;math/tex&quot;&gt;c&lt;/script&gt; is easy if you &lt;a href=&quot;https://en.wikipedia.org/wiki/Pentagonal_hexecontahedron&quot;&gt;look on wikipedia&lt;/a&gt; to find the ratio of edge lengths:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;d \approx 1.7498525667362 c&lt;/script&gt;
+
+&lt;p&gt;When laying out the pentagon, don’t forget that the angle between the two &lt;script type=&quot;math/tex&quot;&gt;d&lt;/script&gt; sides is about 67.45351 degrees, and use appropriate symmetry.&lt;/p&gt;
+
+&lt;p&gt;I don’t have any rules of thumb on cutting out those pentagons, sorry! Just make a template and get to work, I guess.&lt;/p&gt;
 
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
 
-&lt;p&gt;So there you have it: a self-supporting, extremely rigid structure in which all the internal structural edges are the same length, and in which all the external polygons are the same. More generally, it seems like you could apply this technique to make a dozen other structures with similar qualities.&lt;/p&gt;
+&lt;p&gt;So there you have it: a self-supporting, extremely rigid structure in which all the internal structural edges are the same length, and in which all the external polygons are the same. More generally, it appears you could apply this technique to make a dozen other dual-layer structures made of Catalan and Archimedian solids.&lt;/p&gt;
 
 &lt;p&gt;This 3.3.3.3.5 design does have a few nice qualities about it, though:&lt;/p&gt;
 
@@ -635,7 +686,7 @@ docker container stop my-app-container
   &lt;li&gt;It is made of overlapping tetrahedra that form a strong and resilient structure.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;I hope you enjoyed this little excursion in geometry and origami with me!&lt;/p&gt;</content><category term="math" /><category term="geometry" /><category term="architecture" /><summary type="html">This article describes another iteration of the dome-like structure that I discussed a few months ago. I still don’t have a good vocabulary for describing why I think these things are neat, except to say that I somehow find it relaxing to work on toy engineering problems once or twice a month. I guess de gustibus non est disputandum – “there’s no accounting for (bad) taste!”</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">The Reinforced Pentakis Dodecahedron Dome</title><link href="/blog/pentakis-dodecahedron-dome/" rel="alternate" type="text/html" title="The Reinforced Pentakis Dodecahedron Dome" /><published>2017-11-05T00:00:00-07:00</published><updated>2017-11-05T00:00:00-07:00</updated><id>/blog/pentakis-dodecahedron-dome</id><content type="html" xml:base="/blog/pentakis-dodecahedron-dome/">&lt;p&gt;For your amusement, I would like to present a reinforced version of a geodesic dome that is many times stronger than conventional geodesic domes. It is essentially two concentric domes, one nested inside the other, connected entirely by tetrahedra in a way that both strengthens the dome and provides space for insulation. Compared to single-layer geodesic structures, this new structure uses about 2-3x more materials, but it is so much stronger that it is startling.&lt;/p&gt;
+&lt;p&gt;I hope you enjoyed this little excursion in geometry and origami with me.&lt;/p&gt;</content><category term="math" /><category term="geometry" /><category term="architecture" /><summary type="html">This article describes another iteration of the dome-like structure that I discussed a few months ago. I still don’t have a good vocabulary for describing why I think these things are neat, except to say that I somehow find it relaxing to work on toy engineering problems once or twice a month. I guess de gustibus non est disputandum – “there’s no accounting for (bad) taste!”</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">The Reinforced Pentakis Dodecahedron Dome</title><link href="/blog/pentakis-dodecahedron-dome/" rel="alternate" type="text/html" title="The Reinforced Pentakis Dodecahedron Dome" /><published>2017-11-05T00:00:00-07:00</published><updated>2017-11-05T00:00:00-07:00</updated><id>/blog/pentakis-dodecahedron-dome</id><content type="html" xml:base="/blog/pentakis-dodecahedron-dome/">&lt;p&gt;For your amusement, I would like to present a reinforced version of a geodesic dome that is many times stronger than conventional geodesic domes. It is essentially two concentric domes, one nested inside the other, connected entirely by tetrahedra in a way that both strengthens the dome and provides space for insulation. Compared to single-layer geodesic structures, this new structure uses about 2-3x more materials, but it is so much stronger that it is startling.&lt;/p&gt;
 
 &lt;p&gt;The internal structure is very regular, as a paper model shows:&lt;/p&gt;
 
