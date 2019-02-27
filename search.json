@@ -2,6 +2,14 @@
 
   
     {
+      "title"			: "Composite Robot Construction",
+      "link"			: "/blog/composite-robot-construction/",
+      "excerpt"		: "This article describes the progress of a fiber-reinforced polymer monopod robot that I built over a period of about 30 days. My hope is that seeing some of the successes and failures I encountered will help you build your own composite robots. Foam and fiberglass are very versatile materials that are just as accessible to garage-level workshops as they are to research institutions, as I hope you will see."
+    }
+  
+
+  
+    ,{
       "title"			: "Connecting a Clojure REPL to a PostgreSQL Docker Container",
       "link"			: "/blog/docker-postgres/",
       "excerpt"		: "In this tutorial, we’ll launch Postgres (a.k.a. PostgreSQL) in a Docker container, create a Postgres database, and connect to it from a Clojure REPL. Postgres is a great open source SQL database with a long history, and is a good choice for many small-to-medium scale projects."
@@ -767,12 +775,6 @@
   
 
   
-
-  
-
-  
-
-  
     ,{
       "title"			: "About",
       "link"			: "/about/",
@@ -781,13 +783,19 @@
   
 
   
+
+  
+
+  
+
+  
+
+  
     ,{
       "title"			: "Project Euler First 100 Problems",
       "link"			: "/project-euler/",
       "excerpt"		: ""
     }
-  
-
   
 
   

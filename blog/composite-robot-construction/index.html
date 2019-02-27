@@ -1,0 +1,757 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Composite Robot Construction &#8211; Art is Never Finished</title>
+<meta name="description" content="This article describes the progress of a fiber-reinforced polymer monopod robot that I built over a period of about 30 days. My hope is that seeing some of the successes and failures I encountered will help you build your own composite robots. Foam and fiberglass are very versatile materials that are just as accessible to garage-level workshops as they are to research institutions, as I hope you will see.
+
+">
+<meta name="keywords" content="robot, robotics, composites, fiberglass, carbon fiber, jimi">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Composite Robot Construction">
+<meta name="twitter:description" content="This article describes the progress of a fiber-reinforced polymer monopod robot that I built over a period of about 30 days. My hope is that seeing some of the successes and failures I encountered will help you build your own composite robots. Foam and fiberglass are very versatile materials that are just as accessible to garage-level workshops as they are to research institutions, as I hope you will see.
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Composite Robot Construction">
+<meta property="og:description" content="This article describes the progress of a fiber-reinforced polymer monopod robot that I built over a period of about 30 days. My hope is that seeing some of the successes and failures I encountered will help you build your own composite robots. Foam and fiberglass are very versatile materials that are just as accessible to garage-level workshops as they are to research institutions, as I hope you will see.
+
+">
+<meta property="og:url" content="/blog/composite-robot-construction/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="/blog/composite-robot-construction/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="/about/" >About</a></li>
+		  
+		    
+		    <li><a href="/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="/tags/#robot" title="Pages tagged robot">robot</a></li><li><a href="/tags/#robotics" title="Pages tagged robotics">robotics</a></li><li><a href="/tags/#composites" title="Pages tagged composites">composites</a></li><li><a href="/tags/#fiberglass" title="Pages tagged fiberglass">fiberglass</a></li><li><a href="/tags/#carbon fiber" title="Pages tagged carbon fiber">carbon fiber</a></li><li><a href="/tags/#jimi" title="Pages tagged jimi">jimi</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Composite Robot Construction</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2019-02-26T00:00:00-08:00"><i class="fa fa-calendar-o"></i> February 26, 2019</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>This article describes the progress of a fiber-reinforced polymer monopod robot that I built over a period of about 30 days. My hope is that seeing some of the successes and failures I encountered will help you build your own composite robots. Foam and fiberglass are very versatile materials that are just as accessible to garage-level workshops as they are to research institutions, as I hope you will see.</p>
+
+<p>If this article interests you, perhaps look at the <a href="../../about/frp-seminar-slides.pdf">FRP tutorial slides I made</a>, or watch the <a href="https://youtu.be/x9cK6zSe-NQ">tutorial video</a>.</p>
+
+<h2 id="project-background">Project Background</h2>
+
+<p>I built a robot for my Ph.D. thesis while working at a research institution in Italy, the <a href="https://iit.it">Istituto Italiano di Technologia</a>. Italy is an absolutely lovely place to live – people are healthy, their eyes usually excude a great understanding of human compassion, the food is reliably delicious, and the weather is amazing. But every culture has it weakpoints, and it is probably fair to say that Italians are not well known for their planning and organization. So maybe it will not surprise you that, like so many other projects in Italy, my thesis robot was constructed in a rush and at the last minute.</p>
+
+<p>Due to some miscommunications, bureaucratic delays, and funding hiccups, I did not even have the parts that I needed until <em>after</em> the end of my thesis research period. By way of background, beginning a Ph.D. in Europe usually implies you to have gotten a Masters degree first, so the durations are shorter than in the USA. In Italy, to prevent the abuse of vulnerable and underpaid Ph.D. students, there is even a legal limit to a Ph.D.’s duration, which is a period of about three to three and a half years, followed by a three to six month period of writing the thesis. In my case, after working for three years on compliant actuation, delays meant that the construction of my robot actually began in the final three-month period allocated for us students to write our theses, so I was in a real hurry to build, code, and write as fast as my fingers could possibly type!</p>
+
+<p>The point of building the robot was to try to design a mechanical structure with mechanical dynamics that would naturally be very close to actual hopping motions, even without any control effort applied. Using electric motors in a hopping robot is difficult, as they have a fairly low power-to-weight ratio. I tried to solve the problem by designing custom actuators with transmissions built to match the simulated mechanical dynamics of a 3-link hopping robot. This meant big springs, and a mechanism for stretching them elastically.</p>
+
+<h2 id="actuator-background">Actuator Background</h2>
+
+<p>Some but not all of the actuator parts arrived in December 2011, all shiny and new:</p>
+
+<p class="center"><img src="2011-12-13_Canon_EOS_REBEL_T1i_IMG_9896_0a51120.jpg" alt="2011-12-13_Canon_EOS_REBEL_T1i_IMG_9896_0a51120" title="The actuator parts laid out on a table, before assembly." /></p>
+
+<p>I’m not going to go into how the actuator works – see my <a href="../../about/thorson-phd-defense.pdf">thesis slides</a> for that. The overview of the idea is that a center gear is driven by a differential, and as the gear rolls around the interior of the ring gear, it pulls on a bar that compresses the large spring. This can store a large amount of energy for a short time, and means the rotor needs to move less during hopping motions, so you can use a less powerful motor when hopping.</p>
+
+<p class="center"><img src="2011-12-13_Canon_EOS_REBEL_T1i_IMG_9975_03176b2.jpg" alt="2011-12-13_Canon_EOS_REBEL_T1i_IMG_9975_03176b2" title="The guts of the mechanism." /></p>
+
+<p class="center"><img src="2011-12-16_Canon_EOS_REBEL_T1i_IMG_09990_fcb25ff.jpg" alt="2011-12-16_Canon_EOS_REBEL_T1i_IMG_09990_fcb25ff" title="The whole motor, fully assembled, tips the scales at 2883g." /></p>
+
+<h2 id="construction-plan">Construction Plan</h2>
+
+<p>Even though I had made another <a href="https://youtu.be/o5AgR_gQ89A">larger, heavier version of this actuator</a> about a year earlier, and since then had reduced the weight of the motor significantly, the last iteration of the actuator still ended up weighing 2883g. I had simulated the robot extensively, and I knew that the whole robot had to weigh less than 10kg, at the very most. The weight of just these two actuators alone unfortunately took up over half of the mass of the robot, and as a result I was desperate to make the structure as light as possible. Although using aluminum construction would probably have been slightly simpler, I decided to go with foam-and-fiberglass construction, since I had used it before on other projects and knew it was robust and strong enough for a structure like this.</p>
+
+<p>The main point of building this robot was to test the actuators, but I also wanted to try a few different composite construction techniques. While I have used nomex honeycomb sheets for simply curved surfaces, and used molds for complex surfaces, I had never tried using hot wire techniques or an expanding urethane foam for complex curved parts. To test all the combinations, I planned to make the robot in four pieces:</p>
+
+<ol>
+  <li>The body, which I would make from styrofoam and fiberglass, using moldless construction.</li>
+  <li>The hip joint, which attaches the body to the thigh, I would make from fiberglass and urethane foam, using inner and outer molds.</li>
+  <li>The thigh, which I would make from carbon fiber and urethane foam, using inner and outer molds.</li>
+  <li>The shank, which I would make from carbon fiber and urethan foam, using inner and outer molds.</li>
+</ol>
+
+<h2 id="day-1-mold-printing">Day 1: Mold-printing</h2>
+
+<p>The first day, I designed and 3D-printed an inner “plug” and outer “mold” on a pair of 3D systems Stratisys printers. The colors are different because the printers had different filiments on them when I printed them.</p>
+
+<p>The “plug” defines the inside shape of the part that I want to make:</p>
+
+<p class="center"><img src="2012-01-01_Canon_EOS_REBEL_T1i_IMG_10597_6f43657.jpg" alt="2012-01-01_Canon_EOS_REBEL_T1i_IMG_10597_6f43657" title="The two pieces of the plug." /></p>
+
+<p>And the “mold” defines the outside shape:</p>
+
+<p class="center"><img src="2012-01-01_Canon_EOS_REBEL_T1i_IMG_10600_e4bd0f0.jpg" alt="2012-01-01_Canon_EOS_REBEL_T1i_IMG_10600_e4bd0f0" title="The mold." /></p>
+
+<p>I ended up mounting the plug (not shown) and the mold on small melanine boards so that I could handle them better.</p>
+
+<p class="center"><img src="2012-01-01_Canon_EOS_REBEL_T1i_IMG_10601_5353810.jpg" alt="2012-01-01_Canon_EOS_REBEL_T1i_IMG_10601_5353810" title="The mold, installed in a board (top side)." /></p>
+
+<h2 id="day-2-hot-wiring">Day 2: Hot-Wiring</h2>
+
+<p>I stole a technique from Burt Rutan’s moldless composite construction books, and used two sheets of metal and an electrically heated nichrome “hot wire” to cut the body of the robot from a block of foam.</p>
+
+<p>Note: DO NOT USE URETHANE FOAM FOR HOTWIRING. Styrofoam fumes are still not good to breathe, but they are much less poisonous than urethane foam smoke.</p>
+
+<p>The first thing to do is to make a couple of sheet metal templates. When cutting out the sheets of metal, it’s a good idea to bolt the two pieces together so they come out identically shaped.</p>
+
+<p class="center"><img src="2012-01-02_Canon_EOS_REBEL_T1i_IMG_10611_313d00b.jpg" alt="2012-01-02_Canon_EOS_REBEL_T1i_IMG_10611_313d00b" title="Two sheets of aluminum bolted together." /></p>
+
+<p>The hot-wiring is pretty simple. Start with three blocks of styrofoam…</p>
+
+<p class="center"><img src="2012-01-02_Canon_EOS_REBEL_T1i_IMG_10606_0fc4ddf.jpg" alt="2012-01-02_Canon_EOS_REBEL_T1i_IMG_10606_0fc4ddf" title="Three blocks of styrofoam." /></p>
+
+<p>…then glue them together with spray adhesive, stack a heavy weight on top, and wait a few hours.</p>
+
+<p class="center"><img src="2012-01-02_Canon_EOS_REBEL_T1i_IMG_10609_1e2f4b6.jpg" alt="2012-01-02_Canon_EOS_REBEL_T1i_IMG_10609_1e2f4b6" title="A heavy weight pressing the styrofoam blocks together." /></p>
+
+<p>Clamp the metal cutouts to the block, and be careful to make sure they are not rotated relative to each other. We used machinist spacers to hold the templates a fixed distance from the tabletop when clamping them on. Likewise, make sure the templates are the correct distance from the front and back of the blocks. Be as precise as possible here, this is an important step.</p>
+
+<p class="center"><img src="2012-01-02_Canon_EOS_REBEL_T1i_IMG_10613_827e473.jpg" alt="2012-01-02_Canon_EOS_REBEL_T1i_IMG_10613_827e473" title="Clamp the metal cutouts to the block. (Left side)" /></p>
+
+<p class="center"><img src="2012-01-02_Canon_EOS_REBEL_T1i_IMG_10614_57f03c0.jpg" alt="2012-01-02_Canon_EOS_REBEL_T1i_IMG_10614_57f03c0" title="Clamp the metal cutouts to the block. (Right side)" /></p>
+
+<p>Now heat up a nichrome wire with a few amps of current. Depending on the diameter of the wire, more or less current will be needed. I recommend doing some test cuts, and adding some type of tensioning mechanism because the spring will stretch slightly as it heats and you want it to stay very taut. Here’s a short video of our test cuts:</p>
+
+<p>TODO</p>
+
+<p>When you are done, you should be able to lift off the piece you just cut with a hot wire, and leave long spider-web-like strands behind. The strands are easily brushed off with your hand.</p>
+
+<p class="center"><img src="2012-01-02_Canon_EOS_REBEL_T1i_IMG_10639_00936b0.jpg" alt="2012-01-02_Canon_EOS_REBEL_T1i_IMG_10639_00936b0" title="Lifting off the recently-cut foam;" /></p>
+
+<p class="center"><img src="2012-01-02_Canon_EOS_REBEL_T1i_IMG_10640_412fbf3.jpg" alt="2012-01-02_Canon_EOS_REBEL_T1i_IMG_10640_412fbf3" title="Spiderwebs" /></p>
+
+<p class="center"><img src="2012-01-02_Canon_EOS_REBEL_T1i_IMG_10642_b7ac046.jpg" alt="2012-01-02_Canon_EOS_REBEL_T1i_IMG_10642_b7ac046" title="The finished piece" /></p>
+
+<p>This is one of the few times where getting a good result is as easy as it looks. I don’t recommend any sawing motions or anything – just be smooth and count along with a friend as you go over all of the tick marks around the shape. I see no reason why you couldn’t achieve some pretty interesting lofted shapes, if each of the metal templates were different shapes.</p>
+
+<h2 id="day-5">Day 5:</h2>
+
+<p>The body of the robot now looks like this.</p>
+
+<p class="center"><img src="2012-01-05_Canon_EOS_REBEL_T1i_IMG_11190_a82bca7.jpg" alt="2012-01-05_Canon_EOS_REBEL_T1i_IMG_11190_a82bca7" title="The piece, ready for fiberglassing." /></p>
+
+<p>It’s time to apply fiberglass. The short version of what we are going to do is to lay fiberglass cloth over the top of the surface, spread epoxy through the fabric until it is fully wetted, and wait 8-24 hours for the epoxy to cure.</p>
+
+<p>Cut out the fiberglass cloth using sharp scissors on a clean table. It’s important to use gloves and keep your oily hands off of the fabric – epoxy will not stick to oil. For common thicknesses of fiberglass fabric, you’ll only need a couple of layers to get a reasonably hard surface that can still be cut with a sharp knife. If you put 4-5 layers on, it will be heavier and much more resistant to puncture. If you want to keep it light and strong, cut out enough fabric to put 2 layers everywhere, and then reinforce the edges that are likely to strike the ground with 4-5 layers. This is additive manufacturing, and it’s acceptable to only reinforce only the places you need. If you are going to drill into the fiberglass, you’ll want to build up 10 or even 20 layers, depending on how you are attaching a bolt to it.</p>
+
+<p class="center"><img src="2012-01-05_Canon_EOS_REBEL_T1i_IMG_11192_0f6dda3.jpg" alt="2012-01-05_Canon_EOS_REBEL_T1i_IMG_11192_0f6dda3" title="Fiberglass cloth." /></p>
+
+<p>Weigh out the appropriate amount of resin and hardener. Many formulations these days ask for equal amounts of resin and hardener, but be careful to check if the label is indicating equal units of volume or mass – they can be different!</p>
+
+<p class="center"><img src="2012-01-05_Canon_EOS_REBEL_T1i_IMG_11193_3ed4692.jpg" alt="2012-01-05_Canon_EOS_REBEL_T1i_IMG_11193_3ed4692" title="Desc." /></p>
+
+<p>Set a timer for 30 minutes, and have a friend handy whose hands are NOT covered in sticky resin. Now wet out the fabric with a disposable paintbrush, work quickly, and stipple all the resin into the fabric.</p>
+
+<p>TODO</p>
+
+<p>In my case, I use a vacuum bag over the part so that atmospheric pressure pushes the fabric tightly against the foam. It also removes excess resin. Keeping the fabrics tight against one another, and removing all excess resin is generally makes slightly lighter and stronger parts, but you can get great results even without the vacuum bag. Note that if you don’t use enough resin, it will be a structural disaster, so tread carefully along that particular weight optimization pathway. As a rule of thumb, it’s better to have too much resin than too little for hobbyist projects.</p>
+
+<p class="center"><img src="2012-01-05_Canon_EOS_REBEL_T1i_IMG_11191_ee89bd7.jpg" alt="2012-01-05_Canon_EOS_REBEL_T1i_IMG_11191_ee89bd7" title="Vacuum pump and vacuum bag." /></p>
+
+<p>Try to finish within the 30 minutes, then pull the vacuum. If you wait too long and the viscosity of the resin is too high, carefully use a hair dryer (or if you feel like living dangerously, a heat gun) to locally increase the temperature of the resin in specific areas to get the resin to flow more easily.</p>
+
+<p class="center"><img src="2012-01-05_Canon_EOS_REBEL_T1i_IMG_11196_69f122d.jpg" alt="2012-01-05_Canon_EOS_REBEL_T1i_IMG_11196_69f122d" title="Desc." /></p>
+
+<p>Vacuum bagging usually has three layers between the fibers and the vacuum bag itself. The innermost is a “peel ply” made of non-stick vinyl, which you use directly on top of the fiberglass when you intend to bond something else to it at a later stage. The peel ply leaves a matte surface on the part, which is good for adhesion of subsequent layers. Then there is the “breather ply”, which is a smooth plastic that has tiny holes in it through which the resin flows. Finally, the next outermost layer is thick cotton or felt “bleeder ply” which absorbs the excess resin, and then the vacuum bag itself. As the vacuum pumps down, you will see a bunch of dots in the bleeder ply as the resin flows through tiny holes in the breather ply.</p>
+
+<p class="center"><img src="2012-01-05_Canon_EOS_REBEL_T1i_IMG_11197_ded79bc.jpg" alt="2012-01-05_Canon_EOS_REBEL_T1i_IMG_11197_ded79bc" title="Desc." /></p>
+
+<p>The whole thing is pretty funny looking at this point:</p>
+
+<p class="center"><img src="2012-01-05_Canon_EOS_REBEL_T1i_IMG_11199_605601b.jpg" alt="2012-01-05_Canon_EOS_REBEL_T1i_IMG_11199_605601b" title="Desc." /></p>
+
+<p>As I waited for the body to cure under vacuum for for 4-6 hours, and then another 20 before “unbagging” the part, I also started to work on the exterior surface mold for the shank:</p>
+
+<p class="center"><img src="2012-01-05_Canon_EOS_REBEL_T1i_IMG_11200_ec10b6a.jpg" alt="2012-01-05_Canon_EOS_REBEL_T1i_IMG_11200_ec10b6a" title="Desc." /></p>
+
+<p>The gray paste is automotive bondo, which you should apply on with a minimum thickness needed to fill any gaps, and then sand as smooth as possible. Bondo dries fairly quickly and can help you fill gaps in the 3D printing texture that would otherwise show up on your molded part.</p>
+
+<p class="center"><img src="2012-01-05_Canon_EOS_REBEL_T1i_IMG_11202_d2741e9.jpg" alt="2012-01-05_Canon_EOS_REBEL_T1i_IMG_11202_d2741e9" title="Desc." /></p>
+
+<p>The last step (not shown here, but you’ll see soon) is to paint the mold with a glossy black color.</p>
+
+<h2 id="day-6">Day 6:</h2>
+
+<p>This is what the body part looks like after unbagging, removing the breather ply and bleeder ply, and just having the peel ply:</p>
+
+<p class="center"><img src="2012-01-06_Canon_EOS_REBEL_T1i_IMG_11203_7b36269.jpg" alt="2012-01-06_Canon_EOS_REBEL_T1i_IMG_11203_7b36269" title="Desc." /></p>
+
+<p>As you remove the peel ply, you may see blue sparks and static electricity. This is normal, but I can’t explain why.</p>
+
+<p>After removing the peel ply and trimming the fiberglass with a sharp knife, I had this:</p>
+
+<p class="center"><img src="2012-01-06_Canon_EOS_REBEL_T1i_IMG_11205_32a2c5f.jpg" alt="2012-01-06_Canon_EOS_REBEL_T1i_IMG_11205_32a2c5f" title="Desc." /></p>
+
+<p>Now it’s time to do the same trick again with the hot wire, and remove the interior foam of the body part…</p>
+
+<p class="center"><img src="2012-01-06_Canon_EOS_REBEL_T1i_IMG_11212_dc29dce.jpg" alt="2012-01-06_Canon_EOS_REBEL_T1i_IMG_11212_dc29dce" title="Desc." /></p>
+
+<p>Tada!</p>
+
+<p class="center"><img src="2012-01-06_Canon_EOS_REBEL_T1i_IMG_11215_bfadb38.jpg" alt="2012-01-06_Canon_EOS_REBEL_T1i_IMG_11215_bfadb38" title="Desc." /></p>
+
+<p>The weight is pretty good considering the size of the part. If I had it to do over again, I would have gone twice as thin with the foam, had I wished. Probably 1cm would have been sufficient instead of the 2cm that I left here.</p>
+
+<p class="center"><img src="2012-01-06_Canon_EOS_REBEL_T1i_IMG_11217_890f1d8.jpg" alt="2012-01-06_Canon_EOS_REBEL_T1i_IMG_11217_890f1d8" title="Desc." /></p>
+
+<p>At this point, I also glued on a back side to the foam box that is being made:</p>
+
+<p class="center"><img src="2012-01-07_Canon_EOS_REBEL_T1i_IMG_11226_d0d2c09.jpg" alt="2012-01-07_Canon_EOS_REBEL_T1i_IMG_11226_d0d2c09" title="Desc." /></p>
+
+<p>After the glue dried, I rounded the corner with some sandpaper. Foam is a real easy thing to work with.</p>
+
+<p class="center"><img src="2012-01-07_Canon_EOS_REBEL_T1i_IMG_11223_5583143.jpg" alt="2012-01-07_Canon_EOS_REBEL_T1i_IMG_11223_5583143" title="Desc." /></p>
+
+<h2 id="day-7">Day 7:</h2>
+
+<p>I don’t have as many photos as I should for this day, but here I’m assembling the the 3D printed mold for the thigh.</p>
+
+<p class="center"><img src="2012-01-07_Canon_EOS_REBEL_T1i_IMG_11220_aba4b6b.jpg" alt="2012-01-07_Canon_EOS_REBEL_T1i_IMG_11220_aba4b6b" title="Desc." /></p>
+
+<p>Once again, I covered the inside of the mold with bondo. In this case, I used a yellow bondo rather than gray, for no particular reason. In this photo, it is not sanded yet.</p>
+
+<p class="center"><img src="2012-01-07_Canon_EOS_REBEL_T1i_IMG_11221_c01af7a.jpg" alt="2012-01-07_Canon_EOS_REBEL_T1i_IMG_11221_c01af7a" title="Desc." /></p>
+
+<p>Most of the structures in this robot are open boxes, so I made the “box lids” out of foam, and sandwiched them between two sheets of fiberglass on a sheet of glass, and then pumped a vacuum on them to make very flat, lightweight pieces. Here’s what the foam looks like, but I don’t have any photos of the parts themselves:</p>
+
+<p class="center"><img src="2012-01-07_Canon_EOS_REBEL_T1i_IMG_11224_e5b01d1.jpg" alt="2012-01-07_Canon_EOS_REBEL_T1i_IMG_11224_e5b01d1" title="Desc." /></p>
+
+<p>Not shown today, I also did the vacuum bagged layup of the shank, which we will see tomorrow.</p>
+
+<p>Very importantly, I probably spent most of the day waxing, waxing, and re-waxing the painted black surfaces of the mold. Some people take this to a religious level and do it a half dozen times or more, and it is indeed religiously important for big molds that have never been used before. But for small molds, three times is usually enough for me. Epoxy will stick to any poorly waxed thing like the world’s strongest leech, and your part will be ruined.</p>
+
+<h2 id="day-8">Day 8:</h2>
+
+<p>We now can see the first carbon fiber part to pop out of the mold. The molded surface will have a fairly shiny and smooth texture to it where it contacted the mold.</p>
+
+<p class="center"><img src="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11235_a21fded.jpg" alt="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11235_a21fded" title="Desc." /></p>
+
+<p>While releasing the shank’s outer surface from the mold, I broke the mold. Good thing I’m only making one of these! Maybe I should have waxed more than 3x? Also note how I painted it black before waxing to better see bumps, imperfections, and the wax.</p>
+
+<p class="center"><img src="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11227_9577d6e.jpg" alt="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11227_9577d6e" title="Desc." /></p>
+
+<p>You can see the texture of the carbon fiber weave left on the mold, as it was pushed into the mold by the fiberglass.</p>
+
+<p class="center"><img src="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11228_2cead35.jpg" alt="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11228_2cead35" title="Desc." /></p>
+
+<p>The next thing is to trim the edge with a sharp knife, and wipe off any wax on the surface. Because this is a two-mold part, all wax needs to be removed so that another layer of carbon fiber can bond with the outside surface around the parting line.</p>
+
+<p class="center"><img src="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11238_fb029c5.jpg" alt="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11238_fb029c5" title="Desc." /></p>
+
+<p>The weight of the outer layer is really pretty light. Note the matte texture of the inside – a result of the peel ply.</p>
+
+<p class="center"><img src="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11243_01fc096.jpg" alt="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11243_01fc096" title="Desc." /></p>
+
+<p>The next thing to do will be to fill the gap between the outside surface and inside surface with expanding urethane foam. The next few frames show how the outer skin will fit over the plug.</p>
+
+<p class="center center"><img src="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11248_052eb49.jpg" alt="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11248_052eb49" title="Desc." /></p>
+<p class="center"><img src="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11249_8219042.jpg" alt="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11249_8219042" title="Desc." /></p>
+<p><img src="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11250_975f786.jpg" alt="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11250_975f786" title="Desc." /></p>
+
+<p>Time to fill the inside with polyurethane foam… (I will regret this tomorrow!)</p>
+
+<p class="center center"><img src="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11252_9038b7e.jpg" alt="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11252_9038b7e" title="Desc." /></p>
+<p><img src="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11254_b14bc7d.jpg" alt="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11254_b14bc7d" title="Desc." /></p>
+
+<p>I spent the rest of the day painting the interior of the thigh mold, and waxing a sheet of glass for use with the covering plates:</p>
+
+<p class="center center"><img src="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11256_b333c8c.jpg" alt="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11256_b333c8c" title="Desc." /></p>
+<p><img src="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11257_82e4ffe.jpg" alt="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11257_82e4ffe" title="Desc." /></p>
+
+<p>I also did the layup of the fiberglass layer on the outside of the body box:</p>
+
+<p class="center"><img src="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11245_0430ebc.jpg" alt="2012-01-08_Canon_EOS_REBEL_T1i_IMG_11245_0430ebc" title="Desc." /></p>
+
+<h2 id="day-9">Day 9:</h2>
+
+<p>The day dawned bright and exciting. Look at this great composite part, with a foam core all perfectly shaped.</p>
+
+<p class="center"><img src="2012-01-09_Canon_EOS_REBEL_T1i_IMG_11260_fc92bf7.jpg" alt="2012-01-09_Canon_EOS_REBEL_T1i_IMG_11260_fc92bf7" title="Desc." /></p>
+
+<p>Oh no! The urethane foam didn’t cure! I guess in my excitement I forgot that a 1-part expanding foam relies on oxygen to cure, so it won’t dry out in an enclosed space like this mold.</p>
+
+<p class="center center"><img src="2012-01-09_Canon_EOS_REBEL_T1i_IMG_11261_9dc62ca.jpg" alt="2012-01-09_Canon_EOS_REBEL_T1i_IMG_11261_9dc62ca" title="Desc." /></p>
+<p><img src="2012-01-09_Canon_EOS_REBEL_T1i_IMG_11262_55ad3f6.jpg" alt="2012-01-09_Canon_EOS_REBEL_T1i_IMG_11262_55ad3f6" title="Desc." /></p>
+
+<p>Discouraged by that dumb mistake, I ordered some different urethane foam, and spent the rest of the day waxing the thigh mold:</p>
+
+<p class="center"><img src="2012-01-09_Canon_EOS_REBEL_T1i_IMG_11265_36033dc.jpg" alt="2012-01-09_Canon_EOS_REBEL_T1i_IMG_11265_36033dc" title="Desc." /></p>
+
+<p>On the bright side, the body part fiberglass is coming along well.</p>
+
+<p class="center center"><img src="2012-01-09_Canon_EOS_REBEL_T1i_IMG_11270_100195d.jpg" alt="2012-01-09_Canon_EOS_REBEL_T1i_IMG_11270_100195d" title="Desc." /></p>
+<p><img src="2012-01-09_Canon_EOS_REBEL_T1i_IMG_11272_f6ef1f7.jpg" alt="2012-01-09_Canon_EOS_REBEL_T1i_IMG_11272_f6ef1f7" title="Desc." /></p>
+
+<h2 id="day-10">Day 10:</h2>
+
+<p>Time for some carbon fiber! Carbon fiber is easier to cut than fiberglass because it’s stiffer and more brittle.  I have it here between two sheets of plastic to keep it clean and dust-free.</p>
+
+<p class="center"><img src="2012-01-10_Canon_EOS_REBEL_T1i_IMG_1285_423078a.jpg" alt="2012-01-10_Canon_EOS_REBEL_T1i_IMG_1285_423078a" title="Desc." /></p>
+
+<p>The carbon fiber layup of the thigh looks a little weird before it is de-molded, though.</p>
+
+<p class="center"><img src="2012-01-10_Canon_EOS_REBEL_T1i_IMG_11273_d33472e.jpg" alt="2012-01-10_Canon_EOS_REBEL_T1i_IMG_11273_d33472e" title="Desc." /></p>
+
+<p>After trimming, it is looking better, but the outside texture is pretty dry, like I didn’t use as much resin as I should have. There should be a smoother texture on the mold-side of the carbon fiber. The only way to fix this is to go back and apply more resin to the outside with a paintbrush, and then sand it smooth later. It’s much more time-consuming than if I had simply used the right amount of resin the first time.</p>
+
+<p class="center"><img src="2012-01-10_Canon_EOS_REBEL_T1i_IMG_11275_aa30acb.jpg" alt="2012-01-10_Canon_EOS_REBEL_T1i_IMG_11275_aa30acb" title="Desc." /></p>
+
+<p>The robot is starting to take shape!</p>
+
+<p class="center"><img src="2012-01-10_Canon_EOS_REBEL_T1i_IMG_11283_0c84a30.jpg" alt="2012-01-10_Canon_EOS_REBEL_T1i_IMG_11283_0c84a30" title="Desc." /></p>
+
+<p>There’s one more part we have to make today: the hip-joint attachment for the body. I haven’t shown photos of this part yet, but it’s made the same way as everything else thus far.</p>
+
+<p class="center"><img src="2012-01-10_Canon_EOS_REBEL_T1i_IMG_11287_9586f77.jpg" alt="2012-01-10_Canon_EOS_REBEL_T1i_IMG_11287_9586f77" title="Desc." /></p>
+
+<p>I also did some trimming of the body of the robot, to cut the foam away from the edge fo the fiberglass and make a “lip” internally that the box lid will fit into.</p>
+
+<p class="center"><img src="2012-01-10_Canon_EOS_REBEL_T1i_IMG_11292_0f34dfc.jpg" alt="2012-01-10_Canon_EOS_REBEL_T1i_IMG_11292_0f34dfc" title="Desc." /></p>
+
+<h2 id="day-12">Day 12:</h2>
+
+<p>The hip joint attachement demolded very well, but there surface texture isn’t very good yet.</p>
+
+<p class="center"><img src="2012-01-12_Canon_EOS_REBEL_T1i_IMG_11295_d9eca45.jpg" alt="2012-01-12_Canon_EOS_REBEL_T1i_IMG_11295_d9eca45" title="Desc." /></p>
+
+<p>Adding that to the robot now gives it a more or less complete on the outside surface:</p>
+
+<p class="center"><img src="2012-01-12_Canon_EOS_REBEL_T1i_IMG_11296_ce333f0.jpg" alt="2012-01-12_Canon_EOS_REBEL_T1i_IMG_11296_ce333f0" title="Desc." /></p>
+
+<h2 id="day-14">Day 14:</h2>
+
+<p>Let’s try applying urethane foam again. Here I’ve got some two-part expanding foam. Because it’s two-part epoxy, it can cure without any oxygen, and is suitable for use in a mold cavity.</p>
+
+<p class="center"><img src="2012-01-14_Canon_EOS_REBEL_T1i_IMG_11390_d9ae10d.jpg" alt="2012-01-14_Canon_EOS_REBEL_T1i_IMG_11390_d9ae10d" title="Desc." /></p>
+
+<p>Even so, a test is probably a wise idea….</p>
+
+<p class="center"><img src="2012-01-14_Canon_EOS_REBEL_T1i_IMG_11391_5884894.jpg" alt="2012-01-14_Canon_EOS_REBEL_T1i_IMG_11391_5884894" title="Desc." /></p>
+
+<p>Since the test went well, jumped in with both feet and put the shank on its plug:</p>
+
+<p class="center"><img src="2012-01-14_Canon_EOS_REBEL_T1i_IMG_11399_dd97d80.jpg" alt="2012-01-14_Canon_EOS_REBEL_T1i_IMG_11399_dd97d80" title="Desc." /></p>
+
+<p>And likewise for the hip-attachement piece (not shown) and the thigh:</p>
+
+<p class="center"><img src="2012-01-14_Canon_EOS_REBEL_T1i_IMG_11401_7eb154e.jpg" alt="2012-01-14_Canon_EOS_REBEL_T1i_IMG_11401_7eb154e" title="Desc." /></p>
+
+<h2 id="day-15">Day 15:</h2>
+
+<p>This time the foam cured perfectly, and I was able to gently wiggle the foam off of plug.</p>
+
+<p class="center"><img src="2012-01-15_Canon_EOS_REBEL_T1i_IMG_11404_fecc58c.jpg" alt="2012-01-15_Canon_EOS_REBEL_T1i_IMG_11404_fecc58c" title="Desc." /></p>
+
+<p class="center"><img src="2012-01-15_Canon_EOS_REBEL_T1i_IMG_11406_fa164a0.jpg" alt="2012-01-15_Canon_EOS_REBEL_T1i_IMG_11406_fa164a0" title="Desc." /></p>
+
+<p>Adding the foam only added 108-72g = 36g of mass, yet made the part already much stiffer. When we add the inside layer of fiberglass to the foam, it is going to become incredibly stiff. Let’s just imagine that I did that…</p>
+
+<p class="center"><img src="2012-01-15_Canon_EOS_REBEL_T1i_IMG_11416_cc208d1.jpg" alt="2012-01-15_Canon_EOS_REBEL_T1i_IMG_11416_cc208d1" title="Desc." /></p>
+
+<p>Although it was only a single ply of carbon fiber, unlike the two plies on the outside surface, the inside layer added another 175g - 108g = 67g. This is probably mostly due to the weight of the resin, since I did not use a vacuum bag, and the 5-layer thick reinforcements I put on the large end for a metal piece that will be bolted on.</p>
+
+<p>A little more bad news today as well. Apparently, I got sloppy and didn’t wax the hip attachement plug enough.</p>
+
+<p class="center"><img src="2012-01-15_Canon_EOS_REBEL_T1i_IMG_11407_fb8a61f.jpg" alt="2012-01-15_Canon_EOS_REBEL_T1i_IMG_11407_fb8a61f" title="Desc." /></p>
+
+<p class="center"><img src="2012-01-15_Canon_EOS_REBEL_T1i_IMG_11414_3d50fce.jpg" alt="2012-01-15_Canon_EOS_REBEL_T1i_IMG_11414_3d50fce" title="Desc." /></p>
+
+<h2 id="days-16-and-17">Days 16 and 17:</h2>
+
+<p>Try, try again. At least this time I got the hip attachment foam to de-mold safely.</p>
+
+<p class="center"><img src="2012-01-16_Canon_EOS_REBEL_T1i_IMG_11426_2e0b12a.jpg" alt="2012-01-16_Canon_EOS_REBEL_T1i_IMG_11426_2e0b12a" title="Desc." /></p>
+
+<p>I applied some fiberglass cloth to the inside of this piece; fiberglass is pretty transparent when properly wetted out, so after curing, you can hardly see it:</p>
+
+<p class="center"><img src="2012-01-17_Canon_EOS_REBEL_T1i_IMG_11438_a8bf3c7.jpg" alt="2012-01-17_Canon_EOS_REBEL_T1i_IMG_11438_a8bf3c7" title="Desc." /></p>
+
+<p>I also added fiberglass cloth to the inside of the body box. Starting mass was 595g…</p>
+
+<p class="center"><img src="2012-01-16_Canon_EOS_REBEL_T1i_IMG_11424_85baad6.jpg" alt="2012-01-16_Canon_EOS_REBEL_T1i_IMG_11424_85baad6" title="Desc." /></p>
+
+<p>Adding the inside ply brought the mass up to 710g:</p>
+
+<p class="center"><img src="2012-01-17_Canon_EOS_REBEL_T1i_IMG_11443_40659be.jpg" alt="2012-01-17_Canon_EOS_REBEL_T1i_IMG_11443_40659be" title="Desc." /></p>
+
+<p>To back up a bit, when curing, I used the completed body lid, which weighs 134g…</p>
+
+<p class="center"><img src="2012-01-16_Canon_EOS_REBEL_T1i_IMG_11425_e7eab05.jpg" alt="2012-01-16_Canon_EOS_REBEL_T1i_IMG_11425_e7eab05" title="Desc." /></p>
+
+<p>To make sure the piece would fit perfectly, I sandwiched the lid between two sheets of non-stick plastic and put weights on top while it cured.</p>
+
+<p class="center"><img src="2012-01-16_Canon_EOS_REBEL_T1i_IMG_11427_59e2891.jpg" alt="2012-01-16_Canon_EOS_REBEL_T1i_IMG_11427_59e2891" title="Desc." /></p>
+
+<p>The hip attachement join needs a metal insert on it, so I added some extra fiberglass under it, and put the metal itself in the vacuum bag so it would be pushed in tight and fit perfectly.</p>
+
+<p class="center"><img src="2012-01-16_Canon_EOS_REBEL_T1i_IMG_11433_2afe8be.jpg" alt="2012-01-16_Canon_EOS_REBEL_T1i_IMG_11433_2afe8be" title="Desc." /></p>
+
+<p>The last thing to do today is to apply a layer of carbon fiber to the inside of the thigh. This part was big enough I could use a vacuum bag.</p>
+
+<p class="center"><img src="2012-01-16_Canon_EOS_REBEL_T1i_IMG_11418_c2b5aa2.jpg" alt="2012-01-16_Canon_EOS_REBEL_T1i_IMG_11418_c2b5aa2" title="Desc." /></p>
+
+<p class="center"><img src="2012-01-16_Canon_EOS_REBEL_T1i_IMG_11429_3db0475.jpg" alt="2012-01-16_Canon_EOS_REBEL_T1i_IMG_11429_3db0475" title="Desc." /></p>
+
+<h2 id="day-18">Day 18</h2>
+
+<p>Things are really coming together! The nearly-finished thigh part weighs 463g now, and is incredibly rigid.</p>
+
+<p class="center"><img src="2012-01-17_Canon_EOS_REBEL_T1i_IMG_11434_91162b2.jpg" alt="2012-01-17_Canon_EOS_REBEL_T1i_IMG_11434_91162b2" title="Desc." /></p>
+
+<p>After a bit of sanding on the sharpe edges, and screwing on the metal mounting pieces onto the shank and hip attachment points, both of those pieces also look good.</p>
+
+<p class="center"><img src="2012-01-18_Canon_EOS_REBEL_T1i_IMG_11445_39b722f.jpg" alt="2012-01-18_Canon_EOS_REBEL_T1i_IMG_11445_39b722f" title="Desc." /></p>
+
+<p class="center"><img src="2012-01-18_Canon_EOS_REBEL_T1i_IMG_11449_d0e71c4.jpg" alt="2012-01-18_Canon_EOS_REBEL_T1i_IMG_11449_d0e71c4" title="Desc." /></p>
+
+<p>The motors fit beautifully in the thigh piece.</p>
+
+<p class="center"><img src="2012-01-18_Canon_EOS_REBEL_T1i_IMG_11447_bbb94d2.jpg" alt="2012-01-18_Canon_EOS_REBEL_T1i_IMG_11447_bbb94d2" title="Desc." /></p>
+
+<p>And after a little trimming, the body box lid also fits well.</p>
+
+<p class="center"><img src="2012-01-18_Canon_EOS_REBEL_T1i_IMG_11450_9727db0.jpg" alt="2012-01-18_Canon_EOS_REBEL_T1i_IMG_11450_9727db0" title="Desc." /></p>
+
+<h2 id="day-20">Day 20</h2>
+
+<p>I added a touch-up coat of resin to the shank, and it looks good!</p>
+
+<p class="center"><img src="2012-01-20_Canon_EOS_REBEL_T1i_IMG_11457_d4701cf.jpg" alt="2012-01-20_Canon_EOS_REBEL_T1i_IMG_11457_d4701cf" title="Desc." /></p>
+
+<p>Similarly, a little extra epoxy made the thigh look good as well.</p>
+
+<p class="center"><img src="2012-01-20_Canon_EOS_REBEL_T1i_IMG_11451_d61edfd.jpg" alt="2012-01-20_Canon_EOS_REBEL_T1i_IMG_11451_d61edfd" title="Desc." /></p>
+
+<p>Because of the stress concentration that occurs where the metal bolts to the aluminum, I actually sandwiched the lip of the between two aluminum pieces:</p>
+
+<p class="center"><img src="2012-01-20_Canon_EOS_REBEL_T1i_IMG_11453_d43f5b7.jpg" alt="2012-01-20_Canon_EOS_REBEL_T1i_IMG_11453_d43f5b7" title="Desc." /></p>
+
+<p>(Not shown, but today I did the last fiberglassing to connect the hip attachment joint to the body. You’ll see the results tomorrow.)</p>
+
+<h2 id="day-22">Day 22</h2>
+
+<p>Time for some glamor photos of the pieces thus far:</p>
+
+<p class="center center"><img src="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11459_1864a14.jpg" alt="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11459_1864a14" title="Desc." /></p>
+<p class="center"><img src="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11460_621ccef.jpg" alt="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11460_621ccef" title="Desc." /></p>
+<p class="center"><img src="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11462_3d0da06.jpg" alt="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11462_3d0da06" title="Desc." /></p>
+<p class="center"><img src="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11470_2fc999a.jpg" alt="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11470_2fc999a" title="Desc." /></p>
+<p class="center"><img src="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11473_32dc801.jpg" alt="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11473_32dc801" title="Desc." /></p>
+<p class="center"><img src="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11474_8387840.jpg" alt="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11474_8387840" title="Desc." /></p>
+<p class="center"><img src="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11475_ee1eeae.jpg" alt="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11475_ee1eeae" title="Desc." /></p>
+<p class="center"><img src="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11476_9bc4044.jpg" alt="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11476_9bc4044" title="Desc." /></p>
+<p class="center"><img src="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11477_e32c4dd.jpg" alt="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11477_e32c4dd" title="Desc." /></p>
+<p><img src="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11479_4104aa3.jpg" alt="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11479_4104aa3" title="Desc." /></p>
+
+<p>And of course, the brush that made it all possible:</p>
+
+<p class="center"><img src="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11466_ee6f2e0.jpg" alt="2012-01-22_Canon_EOS_REBEL_T1i_IMG_11466_ee6f2e0" title="Desc." /></p>
+
+<h2 id="day-23">Day 23</h2>
+
+<p>Today was just assembly, mounting motors, running cables, and other fit and finish stuff.</p>
+
+<p class="center center"><img src="2012-01-23_Canon_EOS_REBEL_T1i_IMG_11486_0197df7.jpg" alt="2012-01-23_Canon_EOS_REBEL_T1i_IMG_11486_0197df7" title="Desc." /></p>
+<p class="center"><img src="2012-01-23_Canon_EOS_REBEL_T1i_IMG_11487_11e4a6f.jpg" alt="2012-01-23_Canon_EOS_REBEL_T1i_IMG_11487_11e4a6f" title="Desc." /></p>
+<p class="center"><img src="2012-01-23_Canon_EOS_REBEL_T1i_IMG_11489_e50868a.jpg" alt="2012-01-23_Canon_EOS_REBEL_T1i_IMG_11489_e50868a" title="Desc." /></p>
+<p class="center"><img src="2012-01-23_Canon_EOS_REBEL_T1i_IMG_11492_b09c36a.jpg" alt="2012-01-23_Canon_EOS_REBEL_T1i_IMG_11492_b09c36a" title="Desc." /></p>
+<p class="center"><img src="2012-01-23_Canon_EOS_REBEL_T1i_IMG_11500_3ca568e.jpg" alt="2012-01-23_Canon_EOS_REBEL_T1i_IMG_11500_3ca568e" title="Desc." /></p>
+<p><img src="2012-01-23_Canon_EOS_REBEL_T1i_IMG_11501_c229f73.jpg" alt="2012-01-23_Canon_EOS_REBEL_T1i_IMG_11501_c229f73" title="Desc." /></p>
+
+<h2 id="day-25">Day 25</h2>
+
+<p>Another day of assembly.</p>
+
+<p class="center center"><img src="2012-01-25_Canon_EOS_REBEL_T1i_IMG_11503_2c4ddaf.jpg" alt="2012-01-25_Canon_EOS_REBEL_T1i_IMG_11503_2c4ddaf" title="Desc." /></p>
+<p><img src="2012-01-25_Canon_EOS_REBEL_T1i_IMG_11504_1eb91f4.jpg" alt="2012-01-25_Canon_EOS_REBEL_T1i_IMG_11504_1eb91f4" title="Desc." /></p>
+
+<p>I added an emergency stop button to the top, so you can stop it quickly.</p>
+
+<p class="center"><img src="2012-01-25_Canon_EOS_REBEL_T1i_IMG_11507_6693d08.jpg" alt="2012-01-25_Canon_EOS_REBEL_T1i_IMG_11507_6693d08" title="Desc." /></p>
+
+<p class="center">And a power port on the back:</p>
+<p><img src="2012-01-25_Canon_EOS_REBEL_T1i_IMG_11508_7c06947.jpg" alt="2012-01-25_Canon_EOS_REBEL_T1i_IMG_11508_7c06947" title="Desc." /></p>
+
+<p>Cables are super important but easy to forget. I ran them axially out the shafts so that they could twist with minimal stress.</p>
+
+<p class="center"><img src="2012-01-25_Canon_EOS_REBEL_T1i_IMG_11510_6193025.jpg" alt="2012-01-25_Canon_EOS_REBEL_T1i_IMG_11510_6193025" title="Desc." /></p>
+
+<h2 id="day-27">Day 27</h2>
+
+<p>The robot is mostly assembled at this point. I added some rubber scuff strips to protect the edges because I expect the robot to fall quite a lot before I get the hopping algorithm dialed in.</p>
+
+<p class="center"><img src="2012-01-27_Canon_EOS_REBEL_T1i_IMG_11520_aecf5d7.jpg" alt="2012-01-27_Canon_EOS_REBEL_T1i_IMG_11520_aecf5d7" title="Desc." /></p>
+
+<p>Final weight, sans batteries, is 8.3kg. Heavier than I would like, but it should still be technically possible.</p>
+
+<p class="center"><img src="2012-01-27_Canon_EOS_REBEL_T1i_IMG_11527_7c8c47f.jpg" alt="2012-01-27_Canon_EOS_REBEL_T1i_IMG_11527_7c8c47f" title="Desc." /></p>
+
+<h2 id="day-28">Day 28</h2>
+
+<p>No actual robot construction today. Instead, I built a moveable backboard out of some lumber, drew 10cm squares on it, and positioned the robot over the treadmill it runs on.</p>
+
+<p class="center center"><img src="2012-01-28_Canon_EOS_REBEL_T1i_IMG_11533_d60c986.jpg" alt="2012-01-28_Canon_EOS_REBEL_T1i_IMG_11533_d60c986" title="Desc." /></p>
+<p><img src="2012-01-28_Canon_EOS_REBEL_T1i_IMG_11537_e8d2a00.jpg" alt="2012-01-28_Canon_EOS_REBEL_T1i_IMG_11537_e8d2a00" title="Desc." /></p>
+
+<h2 id="day-65">Day 65</h2>
+
+<p>At this point, I had spent a whole month writing software, trying to tune the balance algorithm I had used in simulation, reverse-engineering the UDP packet structure of the Vicon camera system, and discovering bugs in the motor electronics control software. You can see the Vicon camera marker reflectors that I used to orient the robot in 3D. I waaaaay underestimated the amount of time it would take to tune the control systems and account for all of the communication lag. I also way underestimated the number of sources of friction and inefficiency; I was getting only about half of the toqrue that I expected from the motors.</p>
+
+<p class="center"><img src="2012-03-10_Canon_EOS_REBEL_T1i_IMG_12036_beb9e28.jpg" alt="2012-03-10_Canon_EOS_REBEL_T1i_IMG_12036_beb9e28" title="Desc." /></p>
+
+<p>During testing, I added a big foam “heel” to the robot, since that place was striking the ground occasionally with a lot more force than I intended.</p>
+
+<p class="center"><img src="2012-03-10_Canon_EOS_REBEL_T1i_IMG_12037_f727d37.jpg" alt="2012-03-10_Canon_EOS_REBEL_T1i_IMG_12037_f727d37" title="Desc." /></p>
+
+<p>The scuff pads have also gotten some wear:</p>
+
+<p class="center"><img src="2012-03-10_Canon_EOS_REBEL_T1i_IMG_12066_42d5ebb.jpg" alt="2012-03-10_Canon_EOS_REBEL_T1i_IMG_12066_42d5ebb" title="Desc." /></p>
+
+<p>As has the rubber sports ball I used as the foot tip:</p>
+
+<p class="center"><img src="2012-03-10_Canon_EOS_REBEL_T1i_IMG_12068_63fc50a.jpg" alt="2012-03-10_Canon_EOS_REBEL_T1i_IMG_12068_63fc50a" title="Desc." /></p>
+
+<p>Other things learned during testing is that, unsurprisingly, a foam and fiberglass box is a great heat insulator. I added some small fans to pull air into the body and thigh to keep the motors and electronics cool.</p>
+
+<p class="center"><img src="2012-04-20_Canon_EOS_REBEL_T1i_IMG_12079_d18591f.jpg" alt="2012-04-20_Canon_EOS_REBEL_T1i_IMG_12079_d18591f" title="Desc." /></p>
+
+<p class="center"><img src="2012-04-20_Canon_EOS_REBEL_T1i_IMG_12082_3bcf8a9.jpg" alt="2012-04-20_Canon_EOS_REBEL_T1i_IMG_12082_3bcf8a9" title="Desc." /></p>
+
+<p>The robot usually looked like this in operation. I added some bungee cables at the top to make the falls less hard.</p>
+
+<p class="center"><img src="2012-04-22_Canon_EOS_REBEL_T1i_IMG_12087_8dd1f37.jpg" alt="2012-04-22_Canon_EOS_REBEL_T1i_IMG_12087_8dd1f37" title="Desc." /></p>
+
+<h2 id="conclusion">Conclusion:</h2>
+
+<p>To my great disappointment, it didn’t work! Even after all of this work making a light structure, and as much tuning as I could do, the robot was still too heavy to jump properly. Given the 111W motors, had I more properly accounted for the motor inefficiency and backboard friction, a more realistic estimate on a reasonable jumping weight would have been 4-6kg instead of 8-10kg. Thankfully, I had enough work with the compliant actuators and other work that I was able to complete my Ph.D. even without the robot hopping. And the spring mechanism was a great success, even if the hopping robot itself was not.</p>
+
+<p class="center"><img src="2012-04-26_Canon_EOS_450D_IMG_0040_35da09c.jpg" alt="2012-04-26_Canon_EOS_450D_IMG_0040_35da09c" title="Desc." /></p>
+
+<p>In closing, I would like to thank the Genovese for having shared their beautiful city with me for those years, and thank whatever Italian spirit of energy and passion kept me motivated during this fun and unusual project. I’m still just thankful that I had the experience.</p>
+
+<p class="center"><img src="2012-08-24_Canon_PowerShot_SD1200_IS_IMG_3377_4624bd8.jpg" alt="2012-08-24_Canon_PowerShot_SD1200_IS_IMG_3377_4624bd8" title="Desc." /></p>
+
+<h2 id="addendum-tutorial-photos">Addendum: Tutorial Photos</h2>
+
+<p>Here are some other photos that you may find helpful.</p>
+
+<p>Let’s start with the actual process of doing a fiberglass lay-up. When putting fiberglass onto a mold (or glass in this case), I find it helpful to paint the mold itself with epoxy to ensure there are no air bubbles trapped under the fabric.</p>
+
+<p class="center"><img src="2012-02-12_FinePix_S5700_S700_wet-resin-on-glass_e09103a.jpg" alt="2012-02-12_FinePix_S5700_S700_wet-resin-on-glass_e09103a" title="Desc." /></p>
+
+<p>As you wet out the fabric (using the tip of the brush to “stipple” as needed), you will see the fiberglass become clear.</p>
+
+<p class="center"><img src="2012-02-12_FinePix_S5700_S700_wet-brush-second-layer_057e8d6.jpg" alt="2012-02-12_FinePix_S5700_S700_wet-brush-second-layer_057e8d6" title="Desc." /></p>
+
+<p class="center"><img src="2012-02-12_FinePix_S5700_S700_wet-brush-out-fabric_ee6b9c8.jpg" alt="2012-02-12_FinePix_S5700_S700_wet-brush-out-fabric_ee6b9c8" title="Desc." /></p>
+
+<p>During a layup, it’s a good idea to have various things handy. A marker, lots of cups, a squeege, measuring syringes, disposable paintbrushes, and roller tools to help squeeze out excess resin. But the most essential tools are plastic gloves and tons and tons of paper towels to help clean up, and a timer to let you know how many minutes until your resin gels.</p>
+
+<p class="center"><img src="2012-02-12_FinePix_S5700_S700_wet-layup-supplies_7dd1f7f.jpg" alt="2012-02-12_FinePix_S5700_S700_wet-layup-supplies_7dd1f7f" title="Desc." /></p>
+
+<p>It’s usually a simple matter to peel 1-3 layers of carbon fiber off of a glass plate or mold. However, if you use more than 3 layers, or if the part is curved in a complicated way, the part will be more rigid and more difficult to remove if you have not waxed the glass properly.</p>
+
+<p class="center"><img src="2012-02-12_FinePix_S5700_S700_wet-peel-off-carbon_32af84f.jpg" alt="2012-02-12_FinePix_S5700_S700_wet-peel-off-carbon_32af84f" title="Desc." /></p>
+
+<p>Some people just wonder what various fabrics look like when cured. From left to right, some samples of fiberglass, kevlar, and carbon fiber, in thickenesses of 1, 2, and 3 plys of fabric.</p>
+
+<p class="center"><img src="2012-02-07_FinePix_S5700_S700_trimmed-samples_04adea4.jpg" alt="2012-02-07_FinePix_S5700_S700_trimmed-samples_04adea4" title="Desc." /></p>
+
+<p>Other people ask about core materials. As an experiment, I made a test piece of composite on a sheet of glass, and put three different cores on it. From left to right, nomex honeycomb, pvc foam, and styrofoam. For thick cores like this, it’s important to bevel the edges as I did. Note that the layer on the glass is already cured. It’s also important to note that you should add tiny pinholes through the foam, every 2cm or so, to help resin trapped under the foam cores flow through it as the vacuum pressure squeezes out any excess resin underneath the core material.</p>
+
+<p class="center"><img src="2012-02-12_FinePix_S5700_S700_cores-three-types_a74a5f8.jpg" alt="2012-02-12_FinePix_S5700_S700_cores-three-types_a74a5f8" title="Desc." /></p>
+
+<p>After applying another layer of carbon fiber and using a vacuum bag, you get this result:</p>
+
+<p class="center"><img src="2012-02-12_FinePix_S5700_S700_cores-with-backside_0df68b3.jpg" alt="2012-02-12_FinePix_S5700_S700_cores-with-backside_0df68b3" title="Desc." /></p>
+
+<p>After pulling it off the glass and flipping it over, the test piece looks like this:</p>
+
+<p class="center"><img src="2012-02-12_FinePix_S5700_S700_cores-frontside_ca4066b.jpg" alt="2012-02-12_FinePix_S5700_S700_cores-frontside_ca4066b" title="Desc." /></p>
+
+<p>Another trick you can use that is sometimes helpful is to pour resin over fabric, between two sheets of plastic. Then use a squeegee to wet out the fabric, and you have “homemade prepreg” (fabric with pre-impregnated resin) that will last for 30 minutes or so. Use some scissors to cut out a little piece of it and directly apply it to those hard-to-reach areas.</p>
+
+<p class="center"><img src="2012-02-12_FinePix_S5700_S700_poor-mans-prepreg_b5d40ad.jpg" alt="2012-02-12_FinePix_S5700_S700_poor-mans-prepreg_b5d40ad" title="Desc." /></p>
+
+<p>An example of a vacuum bag setup. The gummy, clay-like vacuum bag tape is expensiev, but well worth it for removing leaks. Try at all costs to keep resin out of your vacuum hose.</p>
+
+<p class="center"><img src="2012-02-12_FinePix_S5700_S700_vacuum-bag_ce76fa0.jpg" alt="2012-02-12_FinePix_S5700_S700_vacuum-bag_ce76fa0" title="Desc." /></p>
+
+<p>A close-up of the vacuum pump I used.</p>
+
+<p class="center"><img src="2012-02-12_FinePix_S5700_S700_vacuum-pump_06c25f5.jpg" alt="2012-02-12_FinePix_S5700_S700_vacuum-pump_06c25f5" title="Desc." /></p>
+
+<p>Here’s a sample piece of the Nomex honeycomb core after being cut out. It makes a really, really light and stiff part. This thing is just 1 layer of carbon and some paper honexcomb, and it’s just barely breakable with your hands. If the edges were sealed (leaving the nomex exposed to the air is a big no-no) as would be common in a non-sample part, it would be even harder to break or crush the core.</p>
+
+<p class="center"><img src="2012-02-12_FinePix_S5700_S700_weighing-honeycomb_0df929e.jpg" alt="2012-02-12_FinePix_S5700_S700_weighing-honeycomb_0df929e" title="Desc." /></p>
+
+<p>Kevlar is surprisingly resin-hungry, and absorbs a lot of epoxy in my experience. Even just a single layer of kevlar weighs as much as two layers of carbon fiber over nomex honeycomb. If you can stand the extra weight, though, xbKevlar is decidedly “tougher” and less brittle.</p>
+
+<p class="center"><img src="2012-02-12_FinePix_S5700_S700_weighing-kevlar_f3ad879.jpg" alt="2012-02-12_FinePix_S5700_S700_weighing-kevlar_f3ad879" title="Desc." /></p>
+
+<p>If this article interested you, perhaps look at the <a href="../../about/frp-seminar-slides.pdf">FRP tutorial slides I made</a>, or watch the <a href="https://youtu.be/x9cK6zSe-NQ">tutorial video</a>.</p>
+
+<iframe width="708" height="398" src="https://www.youtube.com/embed/x9cK6zSe-NQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="/blog/docker-postgres/" class="btn" title="Connecting a Clojure REPL to a PostgreSQL Docker Container">Previous</a>
+      
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2019 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = '';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>
