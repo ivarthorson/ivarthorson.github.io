@@ -1,0 +1,260 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Loading CSVs in Clojure &#8211; Art is Never Finished</title>
+<meta name="description" content="Loading CSVs in Clojure is really easy using clojure.data.csv. Depending on what you will do with the data, you can either represent it in tabular form (as a vector of vectors), or as a list of hashmaps. Both approaches have their advantages and disadvantages, and here are some very stock functions for how to achieve that:
+
+">
+<meta name="keywords" content="clojure, csv">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Loading CSVs in Clojure">
+<meta name="twitter:description" content="Loading CSVs in Clojure is really easy using clojure.data.csv. Depending on what you will do with the data, you can either represent it in tabular form (as a vector of vectors), or as a list of hashmaps. Both approaches have their advantages and disadvantages, and here are some very stock functions for how to achieve that:
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Loading CSVs in Clojure">
+<meta property="og:description" content="Loading CSVs in Clojure is really easy using clojure.data.csv. Depending on what you will do with the data, you can either represent it in tabular form (as a vector of vectors), or as a list of hashmaps. Both approaches have their advantages and disadvantages, and here are some very stock functions for how to achieve that:
+
+">
+<meta property="og:url" content="/blog/loading-csvs-in-clojure/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="/blog/loading-csvs-in-clojure/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="/about/" >About</a></li>
+		  
+		    
+		    <li><a href="/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="/tags/#clojure" title="Pages tagged clojure">clojure</a></li><li><a href="/tags/#csv" title="Pages tagged csv">csv</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Loading CSVs in Clojure</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2019-02-16T00:00:00-08:00"><i class="fa fa-calendar-o"></i> February 16, 2019</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>Loading CSVs in Clojure is really easy using <code class="highlighter-rouge">clojure.data.csv</code>. Depending on what you will do with the data, you can either represent it in tabular form (as a vector of vectors), or as a list of hashmaps. Both approaches have their advantages and disadvantages, and here are some very stock functions for how to achieve that:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>(ns net.roboloco.csvs
+  "Functions for loading and saving CSVs."
+  (:require [clojure.data.csv :as csv]))
+
+(defn empty-string-to-nil
+  "Returns a nil if given an empty string S, otherwise returns S."
+  [s]
+  (if (and (string? s) (empty? s))
+    nil
+    s))
+
+(defn dissoc-nils
+  "Drops keys with nil values, or nil keys, from the hashmap H."
+  [h]
+  (into {} (filter (fn [[k v]] (and v k)) h)))
+
+
+(defn load-csv
+  "Returns a data structure loaded from a CSV file at FILEPATH."
+  [filepath]
+  (with-open [reader (clojure.java.io/reader filepath)]
+    (-&gt;&gt; (csv/read-csv reader)
+         (map (fn [row] (map empty-string-to-nil row)))
+         (doall))))
+
+(defn save-csv
+  "Saves a vector of vectors DATA (i.e. a CSV) to disk at FILEPATH. "
+  [vec-of-vecs filepath]
+  (with-open [writer (clojure.java.io/writer filepath)]
+    (csv/write-csv writer vec-of-vecs)))
+
+(defn tabular-&gt;maps
+  "Converts a vector of vectors into a vector of maps. Assumes that the
+  first row of the CSV is a header that contains column names."
+  [tabular]
+  (let [header (first tabular)]
+    (-&gt; (map zipmap (repeat header) (rest tabular))
+        (mapv dissoc-nils))))
+
+(defn maps-&gt;tabular
+  "Converts a vector of vectors into a vector of maps."
+  [rowmaps]
+  (let [columns (vec (sort (into #{} (map name (flatten (map keys rowmaps))))))]
+    (vec (conj (for [row rowmaps]
+              (vec (for [col columns]
+                     (str (get row col "")))))
+            columns))))
+
+(comment
+
+  (def data (tabular-&gt;maps (load-csv "/path/to/mycsv.csv")))
+  
+  (save-csv! (maps-&gt;tabular data) "/some/other/path.csv")
+
+  )
+</code></pre>
+</div>
+
+<p>Note that the above functions are not lazy, which is a good choice for CSVs 90% of the time. If you find yourself working with very large datasets that cannot be loaded all at once, you might want to adjust <code class="highlighter-rouge">load-csv</code>, <code class="highlighter-rouge">tabular-&gt;maps</code>, and <code class="highlighter-rouge">maps-&gt;tabular</code> to work lazily and incrementally.</p>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="/blog/localhost-swagger-editor/" class="btn" title="A Localhost Swagger Editor">Previous</a>
+      
+      
+        <a href="/blog/composite-robot-construction/" class="btn" title="Composite Robot Construction">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2019 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = '';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

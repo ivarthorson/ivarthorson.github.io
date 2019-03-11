@@ -192,7 +192,14 @@
 
 <p>You may now hit control-d to quit the terminal if you want to close it. In my case, I often leave it open for debugging.</p>
 
-<p>Now spin a up a Clojure REPL, and run the following commands, one at a time, and note the output of each.</p>
+<p>Make a new Clojure project, and be sure to add these lines to the <code class="highlighter-rouge">:dependencies</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>             [org.clojure/java.jdbc "0.7.9"]
+             [org.postgresql/postgresql "42.2.5"]
+</code></pre>
+</div>
+
+<p>Now spin a up a Clojure REPL in that project, and run the following commands, one at a time, and note the output of each.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>(ns mytest (:require [clojure.java.jdbc :as sql]))
 
@@ -232,7 +239,15 @@
 
 <p>Note that if you want a second container for postgres – say, for a different project – you could make a second container called “my-postgres-container2” using the <code class="highlighter-rouge">docker run</code> command near the top of this. Make as many containers as you need, and start and stop them as required.</p>
 
-<p>Keeping the database in the container is fine during first steps and testing, but as your database gets bigger, you will want to use <a href="https://docs.docker.com/storage/volumes/">Docker Volumes</a> to be able to upgrade the Postgres version separately from the data itself.</p>
+<p>Keeping the database in the container is fine during first steps and testing, but it can be slow and wasteful of disk. The reccommended solution is use <a href="https://docs.docker.com/storage/volumes/">Docker Volumes</a> to be able to upgrade the Postgres version separately from the data itself.</p>
+
+<p>An example of how to do that is in this case is:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>docker volume create --name postgresvol
+
+docker run  --name my-postgres-container --env POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 --detach -v postgresvol:/var/lib/postgresql/data postgres
+</code></pre>
+</div>
 
 <h1 id="references">References</h1>
 
@@ -252,7 +267,7 @@
         <a href="/blog/clojure-apps-in-docker/" class="btn" title="Packaging and Running Clojure Apps Locally with Docker">Previous</a>
       
       
-        <a href="/blog/composite-robot-construction/" class="btn" title="Composite Robot Construction">Next</a>
+        <a href="/blog/localhost-swagger-editor/" class="btn" title="A Localhost Swagger Editor">Next</a>
       
     </nav><!-- /.pagination -->
   </article>

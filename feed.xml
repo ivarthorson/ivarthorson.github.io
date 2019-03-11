@@ -1,4 +1,489 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-02-26T17:42:42-08:00</updated><id>/</id><title type="html">Art is Never Finished</title><subtitle>...Only Abandoned. – Leonardo da Vinci</subtitle><entry><title type="html">Composite Robot Construction</title><link href="/blog/composite-robot-construction/" rel="alternate" type="text/html" title="Composite Robot Construction" /><published>2019-02-26T00:00:00-08:00</published><updated>2019-02-26T00:00:00-08:00</updated><id>/blog/composite-robot-construction</id><content type="html" xml:base="/blog/composite-robot-construction/">&lt;p&gt;This article describes the progress of a fiber-reinforced polymer monopod robot that I built over a period of about 30 days. My hope is that seeing some of the successes and failures I encountered will help you build your own composite robots. Foam and fiberglass are very versatile materials that are just as accessible to garage-level workshops as they are to research institutions, as I hope you will see.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-03-11T14:51:39-07:00</updated><id>/</id><title type="html">Art is Never Finished</title><subtitle>...Only Abandoned. – Leonardo da Vinci</subtitle><entry><title type="html">Automatic CSV to SQL ETL in Clojure</title><link href="/blog/csv-etl-in-clojure/" rel="alternate" type="text/html" title="Automatic CSV to SQL ETL in Clojure" /><published>2019-03-03T00:00:00-08:00</published><updated>2019-03-03T00:00:00-08:00</updated><id>/blog/csv-etl-in-clojure</id><content type="html" xml:base="/blog/csv-etl-in-clojure/">&lt;p&gt;This is another basic example to help beginners get started in &lt;a href=&quot;https://clojure.org&quot;&gt;Clojure&lt;/a&gt;, which is still my favorite programming language, almost 10 years after I first started using it. Like all languages, Clojure has some warts. But it also has a lot of very powerful and abstract concepts that many average programmers have not seen before, and like most mathematical concepts, the power of such abstractions are greatly underestimated by many people. Even fancy-sounding but easy-to-understand concepts like &lt;a href=&quot;https://en.wikipedia.org/wiki/Homoiconicity&quot;&gt;homoiconicity&lt;/a&gt; are still really underappreciated in the programming community.&lt;/p&gt;
+
+&lt;p&gt;Compared with other mathematically-oriented languages like Haskell, Clojure is also arguably a more practical choice for practical tasks – it’s designed for massive concurrency, and has more libraries than any other language. This is a bold but probably a true statement because, in addition to its own libraries, Clojure can use java libraries on the back-end and javascript libraries on the front-end, which are two of the most popular languages in existence.&lt;/p&gt;
+
+&lt;h2 id=&quot;tl-dr&quot;&gt;TL; DR&lt;/h2&gt;
+
+&lt;p&gt;In this article, I’ll present a simple example of setting up a SQL database from a bunch of CSV files. This is called an ETL job (Extract, Transfer, Load), which is a really common pattern in software.&lt;/p&gt;
+
+&lt;p&gt;Since most ETL jobs like this are quite simple, let’s make a trivial example slightly more realistic by trying to automatically infer the database schema automatically. Let’s also try to make it fast enough to be usable for files with a few million rows in it.&lt;/p&gt;
+
+&lt;p&gt;An overview of the approach that we will follow is:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Group CSVs by directory&lt;/strong&gt;, such that each directory corresponds to a SQL table that we would like to create.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Scan the the directory tree&lt;/strong&gt; to create a list of CSV files we want to scan.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Autodetect the data type of each column&lt;/strong&gt; across all files in each directory, and store the schema just outside the directory, so that it can be modified as needed.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Create the table from the autodetected schema&lt;/strong&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Load the CSV files into SQL tables&lt;/strong&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In past articles, we discussed how to &lt;a href=&quot;../loading-csvs-in-clojure&quot;&gt;read in CSVs&lt;/a&gt; and &lt;a href=&quot;../docker-postgres&quot;&gt;create a postgres database with docker&lt;/a&gt;. I’ll just assume that you read those already, that you have a Postgres instance running in docker already, so that we can get on with the ETL-specific code.&lt;/p&gt;
+
+&lt;h2 id=&quot;group-csvs-in-directories&quot;&gt;1. Group CSVs in Directories&lt;/h2&gt;
+
+&lt;p&gt;Let’s go get some census data from 2010 and download some data. The &lt;a href=&quot;http://census.ire.org/data/bulkdata.html&quot;&gt;census.ire.org&lt;/a&gt; website has a handy tool that let’s you download census data on each state. Since this is an example, we will only use five states’ worth of data.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://censusdata.ire.org/01/all_060_in_01.P1.csv&quot;&gt;Alabama&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://censusdata.ire.org/02/all_060_in_02.P1.csv&quot;&gt;Alaska&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://censusdata.ire.org/04/all_060_in_04.P1.csv&quot;&gt;Arizona&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://censusdata.ire.org/05/all_060_in_05.P1.csv&quot;&gt;Arkansas&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://censusdata.ire.org/06/all_060_in_06.P1.csv&quot;&gt;California&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Just making one table from a few small CSVs isn’t going to fully demonstrate this example, so let’s also fetch a much bigger dataset…the past 15 years of crime reports from Los Angeles, courtesy of &lt;a href=&quot;https://data.gov&quot;&gt;data.gov&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://data.lacity.org/api/views/y8tr-7khq/rows.csv?accessType=DOWNLOAD&quot;&gt;“Crime Data from 2010 to Present”&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Note that this file is MUCH larger than the census data; it is 6.8 million lines long, and has about 20 columns, and is 1.5G in size. It will be a better benchmark of performance than those short census files.&lt;/p&gt;
+
+&lt;p&gt;Now place all the files in a directory tree like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sqlcsv/
+├── census
+│   ├── all_060_in_01.P1.csv
+│   ├── all_060_in_02.P1.csv
+│   ├── all_060_in_04.P1.csv
+│   ├── all_060_in_05.P1.csv
+│   └── all_060_in_06.P1.csv
+└── crimes
+    └── Crimes_-_2001_to_present.csv
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;scan-directories&quot;&gt;2. Scan directories&lt;/h2&gt;
+
+&lt;p&gt;This is pretty easy using &lt;code class=&quot;highlighter-rouge&quot;&gt;file-seq&lt;/code&gt;. All we have to do is create a few functions for listing files and subdirectories.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(ns net.roboloco.files
+  (:require [java-time :as jt]
+            [clojure.java.io :as jio]))
+
+(defn list-files
+  &quot;Lists only the files in the directory string DIR.&quot;
+  [dir]
+  (-&amp;gt;&amp;gt; (file-seq (clojure.java.io/file dir))
+       (remove #(.isDirectory ^java.io.File %))))
+
+(defn list-subdirectories
+  &quot;Lists only the subdirectorys of the directory string DIR&quot;
+  [dir]
+  (-&amp;gt;&amp;gt; (file-seq (clojure.java.io/file dir))
+       (filter #(.isDirectory %))
+       (remove #(= % (clojure.java.io/file dir)))))
+
+(defn has-suffix?
+  &quot;Works on file object types.&quot;
+  [ ^String suffix ^java.io.File file]
+  (and (.isFile file)
+       (re-find (re-pattern (str &quot;.*\\.&quot; suffix &quot;$&quot;)) (.getName file))))
+
+(defn list-files-of-type 
+  &quot;Lists all files in the directory with the extension ext.&quot;
+  [dir ext]
+  (-&amp;gt;&amp;gt; (file-seq (clojure.java.io/file dir))
+       (filter (partial has-suffix? ext))))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Some string-cleaning utility functions will also come in handy:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(ns net.roboloco.util)
+
+(set! *warn-on-reflection* true)
+
+(defn alphanumeric?
+  &quot;TRUE when the string is completely alphanumeric.&quot;
+  [string]
+  (= string (apply str (re-seq #&quot;[a-z_A-Z0-9]&quot; string))))
+
+(defn spaces-to-underscores
+  &quot;Converts spaces to underscores.&quot;
+  [string]
+  (clojure.string/replace string #&quot;\s&quot; &quot;_&quot;))
+
+(defn periods-to-underscores
+  &quot;Converts spaces to underscores.&quot;
+  [string]
+  (clojure.string/replace string #&quot;\.&quot; &quot;_&quot;))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;We’ll also need some simple date-parsing functions:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(ns net.roboloco.dates
+  &quot;Code for handling strings reperesnting dates and datetimes.&quot;
+  (:require [java-time :as jt]))
+
+(set! *warn-on-reflection* true)
+
+(defn parse-date
+  &quot;Parses a standard date, like 2019-02-17.&quot;
+  [s]
+  (jt/local-date &quot;yyyy-MM-dd&quot; s))
+
+(defn parse-datetime
+  &quot;Returns the datetime format that Python's pandas usually saves in.&quot;
+  [s]
+  (jt/local-date-time &quot;yyyy-MM-dd HH:mm:ss&quot; s))
+
+(defn local-to-offset
+  &quot;Converts a local date time to an offset date time. By default, it assumes
+  that the local time is UTC, but you may change this with optional arg TZ.&quot;
+  [local-date-time &amp;amp; [tz]]
+  (let [tz (or tz &quot;UTC&quot;)]
+    (-&amp;gt; local-date-time
+        (jt/zoned-date-time tz)
+        (jt/offset-date-time))))
+
+(defn parse-RFC3339
+  &quot;Assuming a UTC datestamp with T and Z separator, for example:
+  2019-01-17T22:03:16Z
+  2019-01-17T22:03:16.383Z
+  2019-01-17T22:03:16.111222333Z&quot;
+  [s]
+  (local-to-offset
+   (condp = (count s)
+     20 (jt/local-date-time &quot;yyyy-MM-dd'T'HH:mm:ss'Z'&quot; s)
+     24 (jt/local-date-time &quot;yyyy-MM-dd'T'HH:mm:ss.SSS'Z'&quot; s)
+     27 (jt/local-date-time &quot;yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'&quot; s)
+     30 (jt/local-date-time &quot;yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS'Z'&quot; s))))
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;autodetect-the-schema&quot;&gt;3. Autodetect the Schema&lt;/h2&gt;
+
+&lt;p&gt;This is by far the most complex section of the program. For each element, the autodetector tests each of the parsing functions in &lt;code class=&quot;highlighter-rouge&quot;&gt;sql-types-and-parsers&lt;/code&gt;, and the first that works will be is considered the inferred SQL type. As I experimented with this at the REPL, I realized that testing every sql parser on every element was prohibitively slow, so I defined &lt;code class=&quot;highlighter-rouge&quot;&gt;guess-all-sql-types-in-column&lt;/code&gt; to reduce the rate of failed tests by remembering which parser last worked for each column.&lt;/p&gt;
+
+&lt;p&gt;Another note on optimization: although I initially assumed that I could make the CSV loading faster by scanning only the first N lines of each file, this ended up being error-prone in general, so I relented and allowed it to scan the whole file.&lt;/p&gt;
+
+&lt;p&gt;Note that this code only works for integers, floats, dates, datetimes, and strings (text), but that you could easily extend it by adding more things to &lt;code class=&quot;highlighter-rouge&quot;&gt;type-definitions&lt;/code&gt;.  An exception thrown if types do not match in different files.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(ns net.roboloco.guess-schema
+  (:require [clojure.data.csv]
+            [net.roboloco.dates :as dates]
+            [net.roboloco.files :as files]
+            [net.roboloco.util :as util]))
+
+(set! *warn-on-reflection* true)
+
+(def ^:dynamic *sql-types-and-parsers*
+  ;; This data structure defines all of the SQL data types, and the appropriate
+  ;; function to use when parsing a string containing that data type.
+  ;; Parsers will be tried in sequential order, and the first one that works is used.
+  ;; 
+  ;; SQL               String-&amp;gt;CLJ Parser
+  [[&quot;NULL&quot;             #(or (nil? %) (empty? %))]
+   [&quot;INTEGER&quot;          #(Integer/parseInt %)]
+   [&quot;DOUBLE PRECISION&quot; #(Float/parseFloat %)]
+   [&quot;DATE&quot;             dates/parse-date]
+   [&quot;TIMESTAMPTZ&quot;      dates/parse-RFC3339]
+   [&quot;TEXT&quot;             #(str %)]]) ;; this is always true, so is the &quot;default&quot; value
+
+(defn guess-sql-parser
+  &quot;Given an unknown string, this fn runs through all of the SQL types &amp;amp; parsers in 
+  sql-types-and-parsers and returns the first row with a working parser.&quot;
+  [string]
+  (loop [types-and-parsers *sql-types-and-parsers*]
+    (when-let [[sql-type parse-fn :as typerow] (first types-and-parsers)]
+      (if (try (parse-fn string)
+               (catch Exception e false))
+        typerow
+        (recur (next types-and-parsers))))))
+
+(defn guess-all-sql-types-in-column
+  &quot;Like guess-sql-type, but an optimized version for looking at a whole column.
+  In practice, this really reduces the number of tests and exceptions trapped
+  over the simpler but much slower solution: 
+         (set (flatten (map guess-sql-parser seq-of-strings)))&quot;
+  [seq-of-strings]
+  (loop [strings seq-of-strings
+         last-successful-parse-fn nil
+         types-found #{}]
+    (if-let [string (first strings)]
+      (if (try (last-successful-parse-fn string)
+               (catch Exception e false))
+        (recur (next strings)  ; Previously successful parser worked again
+               last-successful-parse-fn
+               types-found)
+        (if-let [[sql-type parse-fn] (guess-sql-parser string)]
+          (recur (next strings)  ; A new working parser was found
+                 parse-fn
+                 (conj types-found sql-type))
+          (recur (next strings)  ; No working parser found, move to next string
+                 last-successful-parse-fn
+                 (conj types-found nil))))
+      types-found)))
+
+(defn clean-column-names
+  &quot;Replaces whitespaces and periods in column names with underscores.&quot;
+  [columns]
+  (-&amp;gt;&amp;gt; columns
+       (map util/periods-to-underscores)
+       (mapv util/spaces-to-underscores)))
+
+(defn guess-csv-column-types
+  &quot;Returns a map of column name to the guessed SQL column type. Reads every
+  row in the CSV, and returns all types found for each column. Works in 
+  parallel and lazily on chunks of 1000 lines, to reduce the time to parse
+  very large files.&quot;
+  [csv-filepath]
+  (println &quot;Scanning:&quot; csv-filepath)
+  (with-open [reader (clojure.java.io/reader csv-filepath)]
+     (let [rows (clojure.data.csv/read-csv reader)
+           header (clean-column-names (first rows))
+           data-rows (rest rows)
+           chunk-size 10000]
+       (-&amp;gt;&amp;gt; data-rows          
+            (partition-all chunk-size)
+            (map #(apply map vector %)) ;; Convert list of rows into list of columns
+            (map #(pmap guess-all-sql-types-in-column %))
+            (map (fn [i data] (println (* 10000 (inc i)) &quot;rows scanned&quot;) data) (range))
+            (apply map (fn [&amp;amp; args] (reduce clojure.set/union args)))
+            (map vector header)
+            (into {})))))
+
+(defn scan-csvdir-and-make-schema
+  &quot;Scans the header of every .csv file in CSVDIR, and returns a hashmap
+  containing the schema of all the columns in the directory.
+  If a non-alphanumeric string is found, raises an exception. 
+  If the schema is inconsistent, raises an exception.&quot;
+  [csvdir]
+  (let [csv-schemas (-&amp;gt;&amp;gt; (files/list-files-of-type csvdir &quot;csv&quot;)
+                         (map guess-csv-column-types))
+        columns (set (flatten (map keys csv-schemas)))
+        problematic-columns (remove util/alphanumeric? columns)]
+    (when-not (empty? problematic-columns)
+      (throw (Exception. (str &quot;Non-alphanumeric characters found in column names:&quot;
+                              (apply str (interpose &quot;, &quot;  problematic-columns))))))
+    (into {} (for [col columns]
+               (let [all-types-for-col (-&amp;gt;&amp;gt; (map #(vec (get % col)) csv-schemas)
+                                            (flatten)
+                                            (remove nil?)
+                                            (set))
+                     nullable-suffix (if (get all-types-for-col &quot;NULL&quot;) 
+                                       &quot; NULL&quot;
+                                       &quot;&quot;)
+                     types (disj all-types-for-col &quot;NULL&quot;)]
+                 (cond
+                  (= 0 (count types))        [col nil]
+                  (= 1 (count types))        [col (str (first types) nullable-suffix)]
+                  ;; If it's mixed integer and float, make everything float
+                  (= #{&quot;INTEGER&quot; &quot;DOUBLE PRECISION&quot;} types) 
+                                             [col (str &quot;DOUBLE PRECISION&quot; nullable-suffix)]
+                  ;; If the default type of TEXT is in there, choose text
+                  (get types &quot;TEXT&quot;) [col (str &quot;TEXT&quot; nullable-suffix)]
+                  :otherwise  ;; Otherwise we have some weird error
+                  (throw (Exception. (str &quot;Inconsistent types across files for column: &quot; 
+                                           col (vec types))))))))))
+
+(defn parse-csv-rows-using-schema
+  &quot;Lazily parse CSV-ROWS using the schema.&quot;
+  [schema csv-rows]
+  (let [header (clean-column-names (first csv-rows))
+        types  (map #(get schema %) header)
+        empty-string-to-nil (fn [s] (if (and (string? s) (empty? s)) nil s))
+        raw-rows (map #(map empty-string-to-nil %) (rest csv-rows))
+        all-parsers (into {} *sql-types-and-parsers*)
+        row-parsers (mapv #(get all-parsers %) types)
+        typed-rows (for [raw-row raw-rows]
+                     (map (fn [parse-fn element]
+                            (when (and parse-fn (not (empty? element)))
+                              (try (parse-fn element)
+                                   (catch Exception e
+                                     (println &quot;Schema:&quot; schema)
+                                     (println &quot;Header:&quot; header)
+                                     (println &quot;Raw row:&quot; raw-row)
+                                     (throw e)))))
+                          row-parsers
+                          raw-row))
+        cnt (atom 0)
+        chunk-size 1000]
+    [header typed-rows]))
+
+(defn table-definition-sql-string
+  &quot;Returns a string suitable for creating a SQL table named TABLE-NAME, given
+  a hashmap SCHEMA of column names to column types. The ENDING-STRING is appended
+  to the end of the create table statement, if needed. &quot;
+  [table-name schema &amp;amp; [ending-string]]
+  (let [ending-string (or ending-string &quot;&quot;)
+        col-defs (-&amp;gt;&amp;gt; schema
+                      (sort-by first)
+                      (remove (comp nil? second))
+                      (map (fn [[col type]] (format &quot;\t%s %s&quot; col type)))
+                      (interpose &quot;,\n&quot;)
+                      (apply str))]
+    (format &quot;CREATE TABLE %s (\n%s %s\n);&quot;
+            table-name col-defs ending-string)))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;We are now ready to actually do the autodetection! Let’s create our main namespace:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(ns net.roboloco.csv2sql
+  (:gen-class)
+  (:require [clojure.data.csv]
+            [clojure.java.jdbc :as sql]
+            [net.roboloco.guess-schema :as guess]
+            [net.roboloco.files :as files]))
+
+(set! *warn-on-reflection* true)
+
+(defn table-schema-filename [dirname] (format &quot;%s-schema.edn&quot; dirname))
+(defn table-sql-filename [dirname] (format &quot;%s.sql&quot; dirname))
+
+(defn autodetect-sql-schemas!
+  &quot;Scans through the subdirectories of CSVDIR, infers the column data types,
+  and stores the inferred schema in CSVDIR so that you may manually edit it
+  before loading it in with MAKE-SQL-TABLES.&quot;
+  [csvdir]
+  (doseq [dir (files/list-subdirectories csvdir)]
+    (printf &quot;Autodetecting schema for: %s\n&quot; dir)
+    (let [tablename (.getName ^java.io.File dir)
+          schema (guess/scan-csvdir-and-make-schema dir)]
+      (when-not (empty? schema)
+        (let [table-sql (guess/table-definition-sql-string tablename schema)]
+          (println (str csvdir (table-schema-filename tablename)) schema)          
+          (spit (str csvdir (table-schema-filename tablename)) schema)
+          (spit (str csvdir (table-sql-filename tablename)) table-sql))))))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You may note that I’m storing the SQL schemas for each subdirectory in the root &lt;code class=&quot;highlighter-rouge&quot;&gt;sqlcsv/&lt;/code&gt; directory. This will let you hand-tune the schema as needed, if you want to make an index on one key or another, or make a particular column unique and required.&lt;/p&gt;
+
+&lt;h2 id=&quot;create-the-autodetected-schema&quot;&gt;4. Create the Autodetected Schema&lt;/h2&gt;
+
+&lt;p&gt;With the schema autodetected, we now need to create the tables. Continuing along with the &lt;code class=&quot;highlighter-rouge&quot;&gt;net.roboloco.csv2sql&lt;/code&gt; namespace, and assuming that you are using the same &lt;a href=&quot;../docker-postgres&quot;&gt;postgres database&lt;/a&gt; from a previous article:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(def default-db {:dbtype &quot;postgresql&quot; 
+                 :dbname   (or (System/getenv &quot;POSTGERS_DB&quot;)  &quot;csv2sql&quot;)
+                 :user     (or (System/getenv &quot;POSTGRES_USER&quot;) &quot;postgres&quot;)
+                 :password (or (System/getenv &quot;POSTGRES_PASS&quot;) &quot;mysecretpassword&quot;)})
+
+(defn connection-ok?
+  &quot;A predicate that tests if the database is connected.&quot;
+  [db]
+  (= {:result 15} (first (sql/query db [&quot;select 3*5 as result&quot;]))))
+
+(defn drop-existing-sql-tables!
+  &quot;For each subdirectory in DIRNAME, drop any tables with the same name.&quot;
+  [db csvdir]
+  (doseq [table-name (map (fn [f] (.getName ^java.io.File f))
+                          (files/list-subdirectories csvdir))]    
+    (let [cmd (format &quot;DROP TABLE IF EXISTS %s;&quot; table-name) ]
+      (sql/db-do-commands db cmd))))
+
+(defn make-sql-tables!
+  &quot;Makes the SQL tables from whatever is in the database. &quot;
+  [db csvdir]
+  (doseq [sql-file (map (fn [f] (.getName ^java.io.File f)) 
+                        (files/list-files-of-type csvdir &quot;sql&quot;))]
+    (let [table-sql (slurp sql-file)]
+      (println table-sql)
+      (sql/db-do-commands db table-sql))))
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;load-the-csv-files-into-sql&quot;&gt;5. Load the CSV files into SQL&lt;/h2&gt;
+
+&lt;p&gt;The final step is to load in the CSV file. As we do so, we need to parse the strings from the CSV using the schema so that they are converted into the proper data type for JDBC to properly insert them in Postgres.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(defn insert-csv!
+  &quot;Inserts the rows of the CSV into the database, converting the rows to the appropriate
+  type as they are loaded. Lazy, so it works on very large files. If a column is not
+  found in the schema, it is omitted and not inserted into the database. &quot;
+  [db table csvfile schema]
+  (with-open [reader (clojure.java.io/reader csvfile)]
+    (let [csv-rows (clojure.data.csv/read-csv reader)
+          [header typed-rows] (guess/parse-csv-rows-using-schema schema csv-rows)
+          cnt (atom 0)
+          chunk-size 1000]
+      (doseq [chunk-of-rows (partition-all chunk-size typed-rows)]
+        (let [line-num (swap! cnt inc)]
+            (println &quot;Inserted&quot;  (* chunk-size (inc @cnt)) &quot;rows&quot;))
+        (sql/insert-multi! db table header chunk-of-rows)))))
+
+(defn insert-all-csvs!
+  &quot;Loads all the subdirectories of CSVDIR as tables. Optional hashmap MANUAL-OPTIONS
+  lets you decide how to customize various tables; for example, you may want to set
+  an optional table.&quot;
+  [db csvdir]  
+  (doseq [dirname (map (fn [f] (.getName ^java.io.File f))
+                       (files/list-subdirectories csvdir))]
+    (let [filepath (str csvdir &quot;/&quot; (table-schema-filename dirname))
+          _ (println filepath)
+          schema (slurp filepath)]
+      (when-not (empty? schema)
+        (-&amp;gt;&amp;gt; (files/list-files-of-type (str csvdir &quot;/&quot; dirname) &quot;csv&quot;)
+             (map (fn [csvfile]
+                    (println (format &quot;Loading: %s&quot; csvfile))
+                    (insert-csv! db dirname csvfile schema)))
+             doall)))))
+
+(defn -main
+  []
+  (let [csvdir (System/getenv &quot;CSVDIR&quot;)
+        db default-db]
+    (when-not (connection-ok? db)
+      (throw (Exception. (str &quot;Unable to connect to DB:&quot; db))))
+    (autodetect-sql-schemas! csvdir)
+    (make-sql-tables! db csvdir)
+    (insert-all-csvs! db csvdir)
+    (println &quot;Done!&quot;)))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Nothing left to do but try it out! The final step is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;(-main)&lt;/code&gt; either at the REPL or add &lt;code class=&quot;highlighter-rouge&quot;&gt;gen-class&lt;/code&gt; to the namespace and build an uberjar with &lt;code class=&quot;highlighter-rouge&quot;&gt;(-main)&lt;/code&gt; set as the entry point (in &lt;code class=&quot;highlighter-rouge&quot;&gt;project.clj&lt;/code&gt;), and then launch it with an environment variable that sets the CSVDIR:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;lein uberjar
+
+CSVDIR=/path/to/your/sqlcsv/ java -jar target/csv2sql-0.1.0-SNAPSHOT-standalone.jar
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;The above is probably sufficient for this exercise – this ETL job will populate a database with a few million rows in a few minutes. On my laptop, it ingests about 5000-10000 rows per second, depending on the CSV.&lt;/p&gt;
+
+&lt;p&gt;Not bad a couple hundred lines of code, but it could probably still be trimmed/simplified. The above code may be found in the &lt;a href=&quot;https://github.com/ivarthorson/csv2sql&quot;&gt;csv2sql repo&lt;/a&gt; if you want to go further.&lt;/p&gt;
+
+&lt;p&gt;Some possible extensions to this would be:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Warn the user if 99.9% of the elements of a column are of one type, but there are a few values that are of a different type.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Add support for JSONs, rather than just CSVs. This would probably involve flattening nested JSONs so that &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;&lt;/code&gt; would become &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;a.b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;, and might involve generalizing the loader.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If your database supports tens or hundreds of millions of rows, add support for Parquet files, a common tabular data format for big data.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This little program was focused on ETL, and we should probably stop at that. Rather than bolt on a HTTP CRUD API here, it might make more sense to contain that functionality as a separate app.&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://clojure-doc.org/articles/ecosystem/java_jdbc/using_sql.html&quot;&gt;http://clojure-doc.org/articles/ecosystem/java_jdbc/using_sql.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.timescale.com/v1.2/using-timescaledb/writing-data&quot;&gt;https://docs.timescale.com/v1.2/using-timescaledb/writing-data&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="clojure" /><summary type="html">This is another basic example to help beginners get started in Clojure, which is still my favorite programming language, almost 10 years after I first started using it. Like all languages, Clojure has some warts. But it also has a lot of very powerful and abstract concepts that many average programmers have not seen before, and like most mathematical concepts, the power of such abstractions are greatly underestimated by many people. Even fancy-sounding but easy-to-understand concepts like homoiconicity are still really underappreciated in the programming community.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Composite Robot Construction</title><link href="/blog/composite-robot-construction/" rel="alternate" type="text/html" title="Composite Robot Construction" /><published>2019-02-26T00:00:00-08:00</published><updated>2019-02-26T00:00:00-08:00</updated><id>/blog/composite-robot-construction</id><content type="html" xml:base="/blog/composite-robot-construction/">&lt;p&gt;This article describes the progress of a fiber-reinforced polymer monopod robot that I built over a period of about 30 days. My hope is that seeing some of the successes and failures I encountered will help you build your own composite robots. Foam and fiberglass are very versatile materials that are just as accessible to garage-level workshops as they are to research institutions, as I hope you will see.&lt;/p&gt;
 
 &lt;p&gt;If this article interests you, perhaps look at the &lt;a href=&quot;../../about/frp-seminar-slides.pdf&quot;&gt;FRP tutorial slides I made&lt;/a&gt;, or watch the &lt;a href=&quot;https://youtu.be/x9cK6zSe-NQ&quot;&gt;tutorial video&lt;/a&gt;.&lt;/p&gt;
 
@@ -556,7 +1041,84 @@
 
 &lt;p&gt;If this article interested you, perhaps look at the &lt;a href=&quot;../../about/frp-seminar-slides.pdf&quot;&gt;FRP tutorial slides I made&lt;/a&gt;, or watch the &lt;a href=&quot;https://youtu.be/x9cK6zSe-NQ&quot;&gt;tutorial video&lt;/a&gt;.&lt;/p&gt;
 
-&lt;iframe width=&quot;708&quot; height=&quot;398&quot; src=&quot;https://www.youtube.com/embed/x9cK6zSe-NQ&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;</content><category term="robot" /><category term="robotics" /><category term="composites" /><category term="fiberglass" /><category term="carbon fiber" /><category term="jimi" /><summary type="html">This article describes the progress of a fiber-reinforced polymer monopod robot that I built over a period of about 30 days. My hope is that seeing some of the successes and failures I encountered will help you build your own composite robots. Foam and fiberglass are very versatile materials that are just as accessible to garage-level workshops as they are to research institutions, as I hope you will see.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Connecting a Clojure REPL to a PostgreSQL Docker Container</title><link href="/blog/docker-postgres/" rel="alternate" type="text/html" title="Connecting a Clojure REPL to a PostgreSQL Docker Container" /><published>2019-01-24T00:00:00-08:00</published><updated>2019-01-24T00:00:00-08:00</updated><id>/blog/docker-postgres</id><content type="html" xml:base="/blog/docker-postgres/">&lt;p&gt;In this tutorial, we’ll launch Postgres (a.k.a. PostgreSQL) in a Docker container, create a Postgres database, and connect to it from a Clojure REPL. Postgres is a great open source SQL database with a long history, and is a good choice for many small-to-medium scale projects.&lt;/p&gt;
+&lt;iframe width=&quot;708&quot; height=&quot;398&quot; src=&quot;https://www.youtube.com/embed/x9cK6zSe-NQ&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;</content><category term="robot" /><category term="robotics" /><category term="composites" /><category term="fiberglass" /><category term="carbon fiber" /><category term="jimi" /><summary type="html">This article describes the progress of a fiber-reinforced polymer monopod robot that I built over a period of about 30 days. My hope is that seeing some of the successes and failures I encountered will help you build your own composite robots. Foam and fiberglass are very versatile materials that are just as accessible to garage-level workshops as they are to research institutions, as I hope you will see.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Loading CSVs in Clojure</title><link href="/blog/loading-csvs-in-clojure/" rel="alternate" type="text/html" title="Loading CSVs in Clojure" /><published>2019-02-16T00:00:00-08:00</published><updated>2019-02-16T00:00:00-08:00</updated><id>/blog/loading-csvs-in-clojure</id><content type="html" xml:base="/blog/loading-csvs-in-clojure/">&lt;p&gt;Loading CSVs in Clojure is really easy using &lt;code class=&quot;highlighter-rouge&quot;&gt;clojure.data.csv&lt;/code&gt;. Depending on what you will do with the data, you can either represent it in tabular form (as a vector of vectors), or as a list of hashmaps. Both approaches have their advantages and disadvantages, and here are some very stock functions for how to achieve that:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(ns net.roboloco.csvs
+  &quot;Functions for loading and saving CSVs.&quot;
+  (:require [clojure.data.csv :as csv]))
+
+(defn empty-string-to-nil
+  &quot;Returns a nil if given an empty string S, otherwise returns S.&quot;
+  [s]
+  (if (and (string? s) (empty? s))
+    nil
+    s))
+
+(defn dissoc-nils
+  &quot;Drops keys with nil values, or nil keys, from the hashmap H.&quot;
+  [h]
+  (into {} (filter (fn [[k v]] (and v k)) h)))
+
+
+(defn load-csv
+  &quot;Returns a data structure loaded from a CSV file at FILEPATH.&quot;
+  [filepath]
+  (with-open [reader (clojure.java.io/reader filepath)]
+    (-&amp;gt;&amp;gt; (csv/read-csv reader)
+         (map (fn [row] (map empty-string-to-nil row)))
+         (doall))))
+
+(defn save-csv
+  &quot;Saves a vector of vectors DATA (i.e. a CSV) to disk at FILEPATH. &quot;
+  [vec-of-vecs filepath]
+  (with-open [writer (clojure.java.io/writer filepath)]
+    (csv/write-csv writer vec-of-vecs)))
+
+(defn tabular-&amp;gt;maps
+  &quot;Converts a vector of vectors into a vector of maps. Assumes that the
+  first row of the CSV is a header that contains column names.&quot;
+  [tabular]
+  (let [header (first tabular)]
+    (-&amp;gt; (map zipmap (repeat header) (rest tabular))
+        (mapv dissoc-nils))))
+
+(defn maps-&amp;gt;tabular
+  &quot;Converts a vector of vectors into a vector of maps.&quot;
+  [rowmaps]
+  (let [columns (vec (sort (into #{} (map name (flatten (map keys rowmaps))))))]
+    (vec (conj (for [row rowmaps]
+              (vec (for [col columns]
+                     (str (get row col &quot;&quot;)))))
+            columns))))
+
+(comment
+
+  (def data (tabular-&amp;gt;maps (load-csv &quot;/path/to/mycsv.csv&quot;)))
+  
+  (save-csv! (maps-&amp;gt;tabular data) &quot;/some/other/path.csv&quot;)
+
+  )
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Note that the above functions are not lazy, which is a good choice for CSVs 90% of the time. If you find yourself working with very large datasets that cannot be loaded all at once, you might want to adjust &lt;code class=&quot;highlighter-rouge&quot;&gt;load-csv&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;tabular-&amp;gt;maps&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;maps-&amp;gt;tabular&lt;/code&gt; to work lazily and incrementally.&lt;/p&gt;</content><category term="clojure" /><category term="csv" /><summary type="html">Loading CSVs in Clojure is really easy using clojure.data.csv. Depending on what you will do with the data, you can either represent it in tabular form (as a vector of vectors), or as a list of hashmaps. Both approaches have their advantages and disadvantages, and here are some very stock functions for how to achieve that:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">A Localhost Swagger Editor</title><link href="/blog/localhost-swagger-editor/" rel="alternate" type="text/html" title="A Localhost Swagger Editor" /><published>2019-02-14T00:00:00-08:00</published><updated>2019-02-14T00:00:00-08:00</updated><id>/blog/localhost-swagger-editor</id><content type="html" xml:base="/blog/localhost-swagger-editor/">&lt;p&gt;I’ve always edited swagger docs using the online editor, but thanks to docker, you may run it locally with equal ease:&lt;/p&gt;
+
+&lt;p&gt;From &lt;a href=&quot;https://github.com/swagger-api/swagger-editor&quot;&gt;https://github.com/swagger-api/swagger-editor&lt;/a&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker pull swaggerapi/swagger-editor
+docker run -d -p 80:8080 swaggerapi/swagger-editor
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Then browse to port 80 on localhost. If you want more than one tab to work in, launch a few more containers on ports 81, 82, and 83.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run -d -p 81:8080 swaggerapi/swagger-editor
+docker run -d -p 82:8080 swaggerapi/swagger-editor
+docker run -d -p 83:8080 swaggerapi/swagger-editor
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I can’t believe I never thought of this before.&lt;/p&gt;</content><category term="docker" /><category term="swagger" /><summary type="html">I’ve always edited swagger docs using the online editor, but thanks to docker, you may run it locally with equal ease:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Connecting a Clojure REPL to a PostgreSQL Docker Container</title><link href="/blog/docker-postgres/" rel="alternate" type="text/html" title="Connecting a Clojure REPL to a PostgreSQL Docker Container" /><published>2019-01-24T00:00:00-08:00</published><updated>2019-01-24T00:00:00-08:00</updated><id>/blog/docker-postgres</id><content type="html" xml:base="/blog/docker-postgres/">&lt;p&gt;In this tutorial, we’ll launch Postgres (a.k.a. PostgreSQL) in a Docker container, create a Postgres database, and connect to it from a Clojure REPL. Postgres is a great open source SQL database with a long history, and is a good choice for many small-to-medium scale projects.&lt;/p&gt;
 
 &lt;p&gt;First, we need to download the official Postgres image, named &lt;code class=&quot;highlighter-rouge&quot;&gt;postgres&lt;/code&gt;, create a new container, and start the image running in that container. Remember, in the parlance of Docker, “images” are the recipe and “containers” are the cake(s) made from that recipe. By default, Docker containers can make connections to the outside world, but the outside world cannot connect to containers. So we need to “publish” a port that has been exposed in the Docker image.&lt;/p&gt;
 
@@ -603,7 +1165,14 @@
 
 &lt;p&gt;You may now hit control-d to quit the terminal if you want to close it. In my case, I often leave it open for debugging.&lt;/p&gt;
 
-&lt;p&gt;Now spin a up a Clojure REPL, and run the following commands, one at a time, and note the output of each.&lt;/p&gt;
+&lt;p&gt;Make a new Clojure project, and be sure to add these lines to the &lt;code class=&quot;highlighter-rouge&quot;&gt;:dependencies&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;             [org.clojure/java.jdbc &quot;0.7.9&quot;]
+             [org.postgresql/postgresql &quot;42.2.5&quot;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now spin a up a Clojure REPL in that project, and run the following commands, one at a time, and note the output of each.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(ns mytest (:require [clojure.java.jdbc :as sql]))
 
@@ -643,7 +1212,15 @@
 
 &lt;p&gt;Note that if you want a second container for postgres – say, for a different project – you could make a second container called “my-postgres-container2” using the &lt;code class=&quot;highlighter-rouge&quot;&gt;docker run&lt;/code&gt; command near the top of this. Make as many containers as you need, and start and stop them as required.&lt;/p&gt;
 
-&lt;p&gt;Keeping the database in the container is fine during first steps and testing, but as your database gets bigger, you will want to use &lt;a href=&quot;https://docs.docker.com/storage/volumes/&quot;&gt;Docker Volumes&lt;/a&gt; to be able to upgrade the Postgres version separately from the data itself.&lt;/p&gt;
+&lt;p&gt;Keeping the database in the container is fine during first steps and testing, but it can be slow and wasteful of disk. The reccommended solution is use &lt;a href=&quot;https://docs.docker.com/storage/volumes/&quot;&gt;Docker Volumes&lt;/a&gt; to be able to upgrade the Postgres version separately from the data itself.&lt;/p&gt;
+
+&lt;p&gt;An example of how to do that is in this case is:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker volume create --name postgresvol
+
+docker run  --name my-postgres-container --env POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 --detach -v postgresvol:/var/lib/postgresql/data postgres
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
 
@@ -1174,7 +1751,7 @@ docker container stop my-app-container
 &lt;p&gt;To make a fully spherical dual-layer polyhedron from paper, you will need to make triangles of 3 sizes, and also some irregular pentagons:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;80 of &lt;script type=&quot;math/tex&quot;&gt;(a,a,a)&lt;/script&gt; triangles that will form the interior snub dodecahedron (3.3.3.5)&lt;/li&gt;
+  &lt;li&gt;80 of &lt;script type=&quot;math/tex&quot;&gt;(a,a,a)&lt;/script&gt; triangles that will form the interior snub dodecahedron (3.3.3.3.5)&lt;/li&gt;
   &lt;li&gt;240 of &lt;script type=&quot;math/tex&quot;&gt;(a,b,b)&lt;/script&gt; triangles that will form the tetrahedral spikes on the outside of the snub dodecahedron&lt;/li&gt;
   &lt;li&gt;160 of &lt;script type=&quot;math/tex&quot;&gt;(b,b,c)&lt;/script&gt; triangles that will hold the tetrahedral spikes together&lt;/li&gt;
   &lt;li&gt;60 of &lt;script type=&quot;math/tex&quot;&gt;(c,c,c,d,d)&lt;/script&gt; pentagons to form the exterior pentagonal hexacontahedron (V3.3.3.3.5)&lt;/li&gt;
@@ -1184,9 +1761,9 @@ docker container stop my-app-container
 
 &lt;p&gt;You can choose &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; however you want; this determines the interior size of the dome. The inner diameter &lt;script type=&quot;math/tex&quot;&gt;d_i&lt;/script&gt; of the dome is:&lt;/p&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;d_i \\approx 4.07974 a&lt;/script&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;d_i \approx 4.07974 a&lt;/script&gt;
 
-&lt;p&gt;I made these by cutting out long strips of paper &lt;script type=&quot;math/tex&quot;&gt;\frac{sqrt{3}/2}a&lt;/script&gt; wide, marking out a tick every &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; on one edge of the paper, and &lt;script type=&quot;math/tex&quot;&gt;\frac{1}{2}a, \frac{3}{2}a, \frac{5}{2}a, ...&lt;/script&gt; on the other edge, and then connecting the points to form equilateral triangles.&lt;/p&gt;
+&lt;p&gt;I made these by cutting out long strips of paper &lt;script type=&quot;math/tex&quot;&gt;\frac{\sqrt{3}/2}a&lt;/script&gt; wide, marking out a tick every &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; on one edge of the paper, and &lt;script type=&quot;math/tex&quot;&gt;\frac{1}{2}a, \frac{3}{2}a, \frac{5}{2}a, ...&lt;/script&gt; on the other edge, and then connecting the points to form equilateral triangles.&lt;/p&gt;
 
 &lt;h3 id=&quot;icoseles-triangles-abb&quot;&gt;Icoseles Triangles (a,b,b)&lt;/h3&gt;
 
@@ -1198,27 +1775,34 @@ docker container stop my-app-container
 
 &lt;h3 id=&quot;icosceles-triangles-bbc&quot;&gt;Icosceles Triangles (b,b,c)&lt;/h3&gt;
 
-&lt;p&gt;The value of &lt;script type=&quot;math/tex&quot;&gt;c&lt;/script&gt; is constrained by the values of &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;. Rather than dive into all the math, we’ll just use some pre-derived approximations to simplify our expressions.&lt;/p&gt;
+&lt;p&gt;The value of &lt;script type=&quot;math/tex&quot;&gt;c&lt;/script&gt; is constrained by the values of &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt;. Rather than dive into all the math, we’ll just use some pre-derived constants to simplify our expressions.&lt;/p&gt;
 
 &lt;p&gt;We start by &lt;a href=&quot;http://dmccooey.com/polyhedra/RsnubDodecahedron.html&quot;&gt;looking up the triangle center radius radius&lt;/a&gt; of the snub dodecahedron’s triangles:&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;r_{snub tri} \approx 2.0770896597432085994 a&lt;/script&gt;
 
-&lt;p&gt;To this, we add the height of the tetrahedral spikes &lt;script type=&quot;math/tex&quot;&gt;h_{tet}&lt;/script&gt; to get the radius of the pentagonal hexacontahedron &lt;script type=&quot;math/tex&quot;&gt;r_{pent}&lt;/script&gt;, which are easily derived from the pythogorean theorem and our knowledge that the inradius of a equilateral triangle &lt;script type=&quot;math/tex&quot;&gt;(a,a,a)&lt;/script&gt; is &lt;script type=&quot;math/tex&quot;&gt;\frac{\sqrt{3}}{3}a&lt;/script&gt;:&lt;/p&gt;
+&lt;p&gt;To this, we add the height of the tetrahedral spikes &lt;script type=&quot;math/tex&quot;&gt;h_{tet}&lt;/script&gt; to get the radius of the pentagonal hexacontahedron’s 3-vertexes &lt;script type=&quot;math/tex&quot;&gt;r_{pent3vertexes}&lt;/script&gt;. The value of &lt;script type=&quot;math/tex&quot;&gt;h_{tet}&lt;/script&gt; is easily derived from the pythogorean theorem and our knowledge that the inradius of a equilateral triangle &lt;script type=&quot;math/tex&quot;&gt;(a,a,a)&lt;/script&gt; is &lt;script type=&quot;math/tex&quot;&gt;\frac{\sqrt{3}}{6}a&lt;/script&gt;:&lt;/p&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;h_{tet} = \sqrt{b^2 - (\frac{\sqrt{3}}{3}a)^2}&lt;/script&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;h_{tet} = \sqrt{b^2 - (\frac{\sqrt{3}}{6}a)^2}&lt;/script&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;r_{pent vertexes} == r_{snub tri} + h_{tet}&lt;/script&gt;
+&lt;p&gt;Thus&lt;/p&gt;
 
-&lt;p&gt;Then once again, we &lt;a href=&quot;http://dmccooey.com/polyhedra/LpentagonalHexecontahedron.html&quot;&gt;look up the radius of the 3-vertexes of a pentagonal hexecontahedron’s pentagons&lt;/a&gt;.&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{eqnarray*}
+ r_{pent3vertexes} &amp; = &amp; r_{snub\_tri} + h_{tet} \\
+ &amp; \approx &amp; 2.0770896597432085994 a +  \sqrt{b^2 - (\frac{\sqrt{3}}{6}a)^2} \end{eqnarray*} %]]&gt;&lt;/script&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;r_{pent tri} \approx 2.1172098986276657420 a&lt;/script&gt;
+&lt;p&gt;Finally, we can convert &lt;script type=&quot;math/tex&quot;&gt;r_{pent3vertexes}&lt;/script&gt; into &lt;script type=&quot;math/tex&quot;&gt;c&lt;/script&gt; by multiplying it by the ratio of  the &lt;a href=&quot;http://dmccooey.com/polyhedra/LpentagonalHexecontahedron.html&quot;&gt;length constant of the short edges&lt;/a&gt; of the pentagon: to &lt;a href=&quot;http://dmccooey.com/polyhedra/LpentagonalHexecontahedron.html&quot;&gt;the radius of the 3-vertexes of a pentagonal hexecontahedron’s pentagons&lt;/a&gt;:&lt;/p&gt;
 
-&lt;p&gt;Therefore the edge lengths are&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;c = \frac{0.58289953474498241442}{2.1172098986276657420} r_{pent3vertexes}&lt;/script&gt;
+
+&lt;p&gt;That’s the general case solution.&lt;/p&gt;
+
+&lt;p&gt;If you are making the particular shape that I did (in which &lt;script type=&quot;math/tex&quot;&gt;a=1, b \approx 0.7071...&lt;/script&gt;) then &lt;script type=&quot;math/tex&quot;&gt;c \approx 0.7495688684810217&lt;/script&gt;.&lt;/p&gt;
 
 &lt;p&gt;It’s important to note that not all of the pentagonal hexecontahedron’s points are the same distance from its center; the 12 vertexes where 5 edges come together are actually about 10% farther out than the 80 vertexes where 3 edges come together.&lt;/p&gt;
 
-&lt;p&gt;Once again, the fastest way to make these is to cut out a strip of paper of width &lt;script type=&quot;math/tex&quot;&gt;h&lt;/script&gt;, and use the same trick that we did when making the &lt;script type=&quot;math/tex&quot;&gt;(a,a,a)&lt;/script&gt; equilateral triangles. That is, mark off regular distances of &lt;script type=&quot;math/tex&quot;&gt;c&lt;/script&gt;, offset by &lt;script type=&quot;math/tex&quot;&gt;\frac{1}{2}c&lt;/script&gt; on the other side, connect the dots diagonally, and cut out the resulting triangles.&lt;/p&gt;
+&lt;p&gt;Once again, the fastest way to make these triangles is to cut out a strip of paper of width &lt;script type=&quot;math/tex&quot;&gt;h&lt;/script&gt;, and use the same trick we used when making the equilateral triangles earlier. That is, we mark off regular distances of &lt;script type=&quot;math/tex&quot;&gt;c&lt;/script&gt;, offset by &lt;script type=&quot;math/tex&quot;&gt;\frac{1}{2}c&lt;/script&gt; on the other side, connect the dots diagonally, and cut out the resulting triangles.&lt;/p&gt;
 
 &lt;h3 id=&quot;pentagons-c-c-c-d-d&quot;&gt;Pentagons (c, c, c, d, d)&lt;/h3&gt;
 
@@ -1226,9 +1810,9 @@ docker container stop my-app-container
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;d \approx 1.7498525667362 c&lt;/script&gt;
 
-&lt;p&gt;When laying out the pentagon, don’t forget that the angle between the two &lt;script type=&quot;math/tex&quot;&gt;d&lt;/script&gt; sides is about 67.45351 degrees, and use appropriate symmetry.&lt;/p&gt;
+&lt;p&gt;When laying out the pentagon, don’t forget that the angle between the two &lt;script type=&quot;math/tex&quot;&gt;d&lt;/script&gt; sides is about 67.45351 degrees, and to use appropriate symmetry.&lt;/p&gt;
 
-&lt;p&gt;I don’t have any rules of thumb on cutting out those pentagons, sorry! Just make a template and get to work, I guess.&lt;/p&gt;
+&lt;p&gt;I don’t have any rules of thumb on the construction of those pentagons, sorry! Just make a template and get to work, I guess.&lt;/p&gt;
 
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
 
@@ -1995,81 +2579,4 @@ z^{\prime} &amp; = &amp; z\end{eqnarray*} %]]&gt;&lt;/script&gt;
 
 &lt;p&gt;Even now, as I stare at the infinite series for hyperbolic sine and cosine, and their definitions in terms of the all-important exponential function, I wonder if in fact that “things with the imaginary number are wrong” in the same way that &lt;a href=&quot;http://tauday.com/&quot;&gt;“pi is wrong”&lt;/a&gt;. It is not that sines are incorrect in an algebraic or mathematical sense, because they are clearly not. Rather, I am wondering whether, due to the way mathematics developed historically, perhaps we are using algebra that is more cumbersome than necessary to describe two legs of the same geometric elephant.&lt;/p&gt;
 
-&lt;p&gt;I would welcome good book recommendations connecting the essential geometry of hyperbolas to special relativity!&lt;/p&gt;</content><summary type="html">While studying An Introduction to Particle Physics on a recent flight to Japan – studying math that is way above my head is a nerdy hobby of mine – I came across a simple viewpoint on special relativity that really stunned me:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Reviving the Dead…Content</title><link href="/blog/reviving-the-dead/" rel="alternate" type="text/html" title="Reviving the Dead...Content" /><published>2017-05-30T00:00:00-07:00</published><updated>2017-05-30T00:00:00-07:00</updated><id>/blog/reviving-the-dead</id><content type="html" xml:base="/blog/reviving-the-dead/">&lt;p&gt;From 2003 until 2016, I had a personal website at &lt;a href=&quot;https://roboloco.net/&quot;&gt;roboloco.net&lt;/a&gt;. It lasted until last year, when I finally grew tired of upgrading applications, keeping comments free of spam, and the servers secure from hackers and the occasional website defacement. Thank you, GitHub, for providing this terrible sysadmin a free place to store this content, and one that requires no regular maintanance!&lt;/p&gt;
-
-&lt;p&gt;Now! To slowly revive some of the content that has been offline for the past year…does GitHub have a tool for poking me to do that as well?&lt;/p&gt;
-
-&lt;p&gt;I’ll start with the &lt;a href=&quot;/about&quot;&gt;about page&lt;/a&gt; as this is supposed to be a github.io page, after all.&lt;/p&gt;</content><category term="news" /><summary type="html">From 2003 until 2016, I had a personal website at roboloco.net. It lasted until last year, when I finally grew tired of upgrading applications, keeping comments free of spam, and the servers secure from hackers and the occasional website defacement. Thank you, GitHub, for providing this terrible sysadmin a free place to store this content, and one that requires no regular maintanance!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Project Euler Problem 89</title><link href="/project-euler/problem-89/" rel="alternate" type="text/html" title="Project Euler Problem 89" /><published>2010-11-16T09:28:30-08:00</published><updated>2010-11-16T09:28:30-08:00</updated><id>/project-euler/problem-89</id><content type="html" xml:base="/project-euler/problem-89/">&lt;p&gt;&lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=89&quot;&gt;Problem 89&lt;/a&gt; was kind of fun: we needed to convert some sloppily written roman-numerals into their more efficient, minimal representations.&lt;/p&gt;
-
-&lt;p&gt;There are two tricks to doing this easily:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;When converting from roman numerals to decimal digits, it is simplest to process the roman numeral from right to left.&lt;/li&gt;
-  &lt;li&gt;Since I can only be placed before V and X, X before L and C, and C before D and M, the symmetry of these results as you move up by powers of ten suggests that we use a few simple &lt;code class=&quot;highlighter-rouge&quot;&gt;cond&lt;/code&gt; statements to handle numbers from 1 to 10, and recurse to handle the increasingly higher powers of ten.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;The code to implement these rules wasn’t particularly long. As usual, zipmap is very concise at creating mappings from characters to digits.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;(&lt;span style=&quot;color: #729fcf;&quot;&gt;use&lt;/span&gt; '[clojure.contrib.duck-streams &lt;span style=&quot;color: #729fcf;&quot;&gt;:only&lt;/span&gt; (read-lines)])
-
-(&lt;span style=&quot;color: #8ae234;&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;r2n&lt;/span&gt; (zipmap &lt;span style=&quot;color: #Fd7f98;&quot;&gt;&quot;IVXLCDM&quot;&lt;/span&gt; [1 5 10 50 100 500 1000]))
-
-(&lt;span style=&quot;color: #8ae234;&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;n2r&lt;/span&gt; (zipmap (&lt;span style=&quot;color: #729fcf;&quot;&gt;vals&lt;/span&gt; r2n) (&lt;span style=&quot;color: #729fcf;&quot;&gt;keys&lt;/span&gt; r2n)))
-
-&lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;Do things in reverse and it's so much easier to solve!
-&lt;/span&gt;(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;de-romanize&lt;/span&gt;
-  &lt;span style=&quot;color: #888a85;&quot;&gt;&quot;Returns the decimal representation of a roman numeral string s. &quot;&lt;/span&gt;
-  ([s] (de-romanize (&lt;span style=&quot;color: #729fcf;&quot;&gt;reverse&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; r2n s)) 0 0))
-  ([s total mx] (&lt;span style=&quot;color: #8ae234;&quot;&gt;if-let&lt;/span&gt; [c (&lt;span style=&quot;color: #729fcf;&quot;&gt;first&lt;/span&gt; s)]
-                  (&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;gt;=&lt;/span&gt; c mx)
-                    (&lt;span style=&quot;color: #8ae234;&quot;&gt;recur&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;rest&lt;/span&gt; s) (&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; total c) (&lt;span style=&quot;color: #729fcf;&quot;&gt;max&lt;/span&gt; c mx))
-                    (&lt;span style=&quot;color: #8ae234;&quot;&gt;recur&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;rest&lt;/span&gt; s) (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; total c) mx))
-                  total)))
-
-(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;romanize&lt;/span&gt;
-  &lt;span style=&quot;color: #888a85;&quot;&gt;&quot;Returns the minimal roman numeral representation of n&quot;&lt;/span&gt;
-  ([n]
-     {&lt;span style=&quot;color: #729fcf;&quot;&gt;:pre&lt;/span&gt; [(&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;=&lt;/span&gt; n 10000 )]}
-     (romanize (&lt;span style=&quot;color: #729fcf;&quot;&gt;quot&lt;/span&gt; n 10) (&lt;span style=&quot;color: #729fcf;&quot;&gt;rem&lt;/span&gt; n 10) 1))
-  ([q r x]
-     (&lt;span style=&quot;color: #8ae234;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;gt;&lt;/span&gt; x 100)
-       (&lt;span style=&quot;color: #729fcf;&quot;&gt;repeat&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; q r) (n2r x))
-       (&lt;span style=&quot;color: #8ae234;&quot;&gt;-&amp;gt;&amp;gt;&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;concat&lt;/span&gt;
-             (romanize (&lt;span style=&quot;color: #729fcf;&quot;&gt;quot&lt;/span&gt; q 10) (&lt;span style=&quot;color: #729fcf;&quot;&gt;rem&lt;/span&gt; q 10) (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; x 10))
-             (&lt;span style=&quot;color: #8ae234;&quot;&gt;cond&lt;/span&gt;
-              (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; r 4) (&lt;span style=&quot;color: #729fcf;&quot;&gt;repeat&lt;/span&gt; r (n2r x))
-              (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; r 4) [(n2r x) (n2r (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; 5 x))]
-              (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; r 9) (&lt;span style=&quot;color: #729fcf;&quot;&gt;concat&lt;/span&gt; [(n2r (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; 5 x))] (&lt;span style=&quot;color: #729fcf;&quot;&gt;repeat&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; r 5) (n2r x))) 
-              (&lt;span style=&quot;color: #729fcf;&quot;&gt;=&lt;/span&gt; r 9) [(n2r x) (n2r (&lt;span style=&quot;color: #729fcf;&quot;&gt;*&lt;/span&gt; 10 x))]
-              &lt;span style=&quot;color: #729fcf;&quot;&gt;:else&lt;/span&gt; &lt;span style=&quot;color: #Fd7f98;&quot;&gt;&quot;&quot;&lt;/span&gt;))
-           (&lt;span style=&quot;color: #729fcf;&quot;&gt;apply&lt;/span&gt; str )))))
-
-(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;euler-89&lt;/span&gt; [file]
-  (&lt;span style=&quot;color: #729fcf;&quot;&gt;reduce&lt;/span&gt;
-   +
-   (&lt;span style=&quot;color: #8ae234;&quot;&gt;for&lt;/span&gt; [l (read-lines file)]
-     (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; l)
-        (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt; (romanize (de-romanize l)))))))
-
-(euler-89 &lt;span style=&quot;color: #Fd7f98;&quot;&gt;&quot;roman.txt&quot;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You may notice that I used preconditions to indicate the &lt;code class=&quot;highlighter-rouge&quot;&gt;romanize&lt;/code&gt; function only works for numbers less than 10000.&lt;/p&gt;</content><category term="project-euler" /><category term="roman numerals" /><summary type="html">Problem 89 was kind of fun: we needed to convert some sloppily written roman-numerals into their more efficient, minimal representations.</summary></entry><entry><title type="html">Project Euler Problem 87</title><link href="/project-euler/problem-87/" rel="alternate" type="text/html" title="Project Euler Problem 87" /><published>2010-10-20T08:27:12-07:00</published><updated>2010-10-20T08:27:12-07:00</updated><id>/project-euler/problem-87</id><content type="html" xml:base="/project-euler/problem-87/">&lt;p&gt;&lt;a href=&quot;http://projecteuler.net/index.php?section=problems&amp;amp;id=87&quot;&gt;Problem 87&lt;/a&gt; asks us to find how many numbers below 50 million that can be expressed as the sum of a prime square, cube, and fourth power.&lt;/p&gt;
-
-&lt;p&gt;By now we are old hands at this type of problem. By caching the exponents of prime numbers and using a set to filter out duplicates, we can find the solution in roughly 4 seconds:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;(&lt;span style=&quot;color: #8ae234;&quot;&gt;defn&lt;/span&gt; &lt;span style=&quot;color: #edd400; font-weight: bold;&quot;&gt;euler-87&lt;/span&gt; [top]
-  (&lt;span style=&quot;color: #729fcf;&quot;&gt;count&lt;/span&gt;
-   (&lt;span style=&quot;color: #729fcf;&quot;&gt;into&lt;/span&gt;
-    #{}
-    (&lt;span style=&quot;color: #8ae234;&quot;&gt;let&lt;/span&gt; [squares (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; #(expt % 2) primes)
-          cubes   (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; #(expt % 3) primes)
-          quads   (&lt;span style=&quot;color: #729fcf;&quot;&gt;map&lt;/span&gt; #(expt % 4) primes)]
-      (&lt;span style=&quot;color: #8ae234;&quot;&gt;for&lt;/span&gt; [i (&lt;span style=&quot;color: #729fcf;&quot;&gt;take-while&lt;/span&gt; #(&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; % top) squares)
-            j (&lt;span style=&quot;color: #729fcf;&quot;&gt;take-while&lt;/span&gt; #(&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; % (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; top i)) cubes)
-            k (&lt;span style=&quot;color: #729fcf;&quot;&gt;take-while&lt;/span&gt; #(&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; % (&lt;span style=&quot;color: #729fcf;&quot;&gt;-&lt;/span&gt; top i j)) quads)
-            s [(&lt;span style=&quot;color: #729fcf;&quot;&gt;+&lt;/span&gt; i j k)]
-            &lt;span style=&quot;color: #729fcf;&quot;&gt;:when&lt;/span&gt; (&lt;span style=&quot;color: #729fcf;&quot;&gt;&amp;lt;&lt;/span&gt; s top)]
-        s)))))
-
-(&lt;span style=&quot;color: #729fcf;&quot;&gt;time&lt;/span&gt; (euler-87 50000000))  &lt;span style=&quot;color: #A8AaA5;&quot;&gt;;; &lt;/span&gt;&lt;span style=&quot;color: #A8AaA5;&quot;&gt;&quot;Elapsed time: 3954.751452 msecs&quot;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content><category term="project-euler" /><category term="primes" /><summary type="html">Problem 87 asks us to find how many numbers below 50 million that can be expressed as the sum of a prime square, cube, and fourth power.</summary></entry></feed>
+&lt;p&gt;I would welcome good book recommendations connecting the essential geometry of hyperbolas to special relativity!&lt;/p&gt;</content><summary type="html">While studying An Introduction to Particle Physics on a recent flight to Japan – studying math that is way above my head is a nerdy hobby of mine – I came across a simple viewpoint on special relativity that really stunned me:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{&quot;feature&quot;=&gt;nil}" /></entry></feed>

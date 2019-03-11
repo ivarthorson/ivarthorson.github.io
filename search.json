@@ -2,9 +2,33 @@
 
   
     {
+      "title"			: "Automatic CSV to SQL ETL in Clojure",
+      "link"			: "/blog/csv-etl-in-clojure/",
+      "excerpt"		: "This is another basic example to help beginners get started in Clojure, which is still my favorite programming language, almost 10 years after I first started using it. Like all languages, Clojure has some warts. But it also has a lot of very powerful and abstract concepts that many average programmers have not seen before, and like most mathematical concepts, the power of such abstractions are greatly underestimated by many people. Even fancy-sounding but easy-to-understand concepts like homoiconicity are still really underappreciated in the programming community."
+    }
+  
+
+  
+    ,{
       "title"			: "Composite Robot Construction",
       "link"			: "/blog/composite-robot-construction/",
       "excerpt"		: "This article describes the progress of a fiber-reinforced polymer monopod robot that I built over a period of about 30 days. My hope is that seeing some of the successes and failures I encountered will help you build your own composite robots. Foam and fiberglass are very versatile materials that are just as accessible to garage-level workshops as they are to research institutions, as I hope you will see."
+    }
+  
+
+  
+    ,{
+      "title"			: "Loading CSVs in Clojure",
+      "link"			: "/blog/loading-csvs-in-clojure/",
+      "excerpt"		: "Loading CSVs in Clojure is really easy using clojure.data.csv. Depending on what you will do with the data, you can either represent it in tabular form (as a vector of vectors), or as a list of hashmaps. Both approaches have their advantages and disadvantages, and here are some very stock functions for how to achieve that:"
+    }
+  
+
+  
+    ,{
+      "title"			: "A Localhost Swagger Editor",
+      "link"			: "/blog/localhost-swagger-editor/",
+      "excerpt"		: "I’ve always edited swagger docs using the online editor, but thanks to docker, you may run it locally with equal ease:"
     }
   
 
