@@ -1,0 +1,218 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Jupyter Quick Install for Scientists &#8211; Art is Never Finished</title>
+<meta name="description" content="Python is a good language, but its tooling (like pip, conda, setup.py, setup.cfg, requirements.txt, and the awkward support for binaries needed for libraries like scipy, keras, etc), leaves much to be desired. And for most scientists, it’s simply not interesting using all these build tools when you just want to get coding quickly on a new machine.
+
+">
+<meta name="keywords" content="python, docker">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Jupyter Quick Install for Scientists">
+<meta name="twitter:description" content="Python is a good language, but its tooling (like pip, conda, setup.py, setup.cfg, requirements.txt, and the awkward support for binaries needed for libraries like scipy, keras, etc), leaves much to be desired. And for most scientists, it’s simply not interesting using all these build tools when you just want to get coding quickly on a new machine.
+
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jupyter Quick Install for Scientists">
+<meta property="og:description" content="Python is a good language, but its tooling (like pip, conda, setup.py, setup.cfg, requirements.txt, and the awkward support for binaries needed for libraries like scipy, keras, etc), leaves much to be desired. And for most scientists, it’s simply not interesting using all these build tools when you just want to get coding quickly on a new machine.
+
+">
+<meta property="og:url" content="/blog/jupyter-quick-install/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="/blog/jupyter-quick-install/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="/about/" >About</a></li>
+		  
+		    
+		    <li><a href="/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="/tags/#python" title="Pages tagged python">python</a></li><li><a href="/tags/#docker" title="Pages tagged docker">docker</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Jupyter Quick Install for Scientists</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2019-03-11T00:00:00-07:00"><i class="fa fa-calendar-o"></i> March 11, 2019</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p><a href="https://www.python.org">Python</a> is a good language, but its tooling (like <code class="highlighter-rouge">pip</code>, <code class="highlighter-rouge">conda</code>, <code class="highlighter-rouge">setup.py</code>, <code class="highlighter-rouge">setup.cfg</code>, <code class="highlighter-rouge">requirements.txt</code>, and the awkward support for binaries needed for libraries like scipy, keras, etc), leaves much to be desired. And for most scientists, it’s simply not interesting using all these build tools when you just want to get coding quickly on a new machine.</p>
+
+<p>The most simplest, most reliable way I’ve found to get jupyter installed is to first <a href="https://www.docker.com/get-started">install docker</a>. Then we just run a single command – please replace <code class="highlighter-rouge">/path/to/my/notebooks</code> with your actual local directory full of notebooks, before running it though!</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>docker run --rm -p 8888:8888 --mount type=bind,source=/path/to/my/notebooks,target=/home/jovyan/work --name my-py-notebook jupyter/scipy-notebook
+</code></pre>
+</div>
+
+<p>Now browse to <a href="http://localhost:8888">http://localhost:8888</a>, and copy in the token that was just printed out in the terminal you just started.</p>
+
+<p>The stuff saved in <code class="highlighter-rouge">/path/to/my/notebooks</code> will be persisted, but the docker container will be closed when you are done with it. Stop the container by typing this in a new terminal:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>docker stop my-py-notebook
+</code></pre>
+</div>
+
+<h2 id="references">References</h2>
+
+<ol>
+  <li><a href="https://github.com/jupyter/docker-stacks">https://github.com/jupyter/docker-stacks</a></li>
+</ol>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="/blog/csv-etl-in-clojure/" class="btn" title="Automatic CSV to SQL ETL in Clojure">Previous</a>
+      
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2019 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = '';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

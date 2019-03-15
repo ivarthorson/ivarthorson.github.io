@@ -1,4 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-03-11T14:51:39-07:00</updated><id>/</id><title type="html">Art is Never Finished</title><subtitle>...Only Abandoned. – Leonardo da Vinci</subtitle><entry><title type="html">Automatic CSV to SQL ETL in Clojure</title><link href="/blog/csv-etl-in-clojure/" rel="alternate" type="text/html" title="Automatic CSV to SQL ETL in Clojure" /><published>2019-03-03T00:00:00-08:00</published><updated>2019-03-03T00:00:00-08:00</updated><id>/blog/csv-etl-in-clojure</id><content type="html" xml:base="/blog/csv-etl-in-clojure/">&lt;p&gt;This is another basic example to help beginners get started in &lt;a href=&quot;https://clojure.org&quot;&gt;Clojure&lt;/a&gt;, which is still my favorite programming language, almost 10 years after I first started using it. Like all languages, Clojure has some warts. But it also has a lot of very powerful and abstract concepts that many average programmers have not seen before, and like most mathematical concepts, the power of such abstractions are greatly underestimated by many people. Even fancy-sounding but easy-to-understand concepts like &lt;a href=&quot;https://en.wikipedia.org/wiki/Homoiconicity&quot;&gt;homoiconicity&lt;/a&gt; are still really underappreciated in the programming community.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-03-15T07:57:49-07:00</updated><id>/</id><title type="html">Art is Never Finished</title><subtitle>...Only Abandoned. – Leonardo da Vinci</subtitle><entry><title type="html">Jupyter Quick Install for Scientists</title><link href="/blog/jupyter-quick-install/" rel="alternate" type="text/html" title="Jupyter Quick Install for Scientists" /><published>2019-03-11T00:00:00-07:00</published><updated>2019-03-11T00:00:00-07:00</updated><id>/blog/jupyter-quick-install</id><content type="html" xml:base="/blog/jupyter-quick-install/">&lt;p&gt;&lt;a href=&quot;https://www.python.org&quot;&gt;Python&lt;/a&gt; is a good language, but its tooling (like &lt;code class=&quot;highlighter-rouge&quot;&gt;pip&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;conda&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;setup.py&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;setup.cfg&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;requirements.txt&lt;/code&gt;, and the awkward support for binaries needed for libraries like scipy, keras, etc), leaves much to be desired. And for most scientists, it’s simply not interesting using all these build tools when you just want to get coding quickly on a new machine.&lt;/p&gt;
+
+&lt;p&gt;The most simplest, most reliable way I’ve found to get jupyter installed is to first &lt;a href=&quot;https://www.docker.com/get-started&quot;&gt;install docker&lt;/a&gt;. Then we just run a single command – please replace &lt;code class=&quot;highlighter-rouge&quot;&gt;/path/to/my/notebooks&lt;/code&gt; with your actual local directory full of notebooks, before running it though!&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run --rm -p 8888:8888 --mount type=bind,source=/path/to/my/notebooks,target=/home/jovyan/work --name my-py-notebook jupyter/scipy-notebook
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now browse to &lt;a href=&quot;http://localhost:8888&quot;&gt;http://localhost:8888&lt;/a&gt;, and copy in the token that was just printed out in the terminal you just started.&lt;/p&gt;
+
+&lt;p&gt;The stuff saved in &lt;code class=&quot;highlighter-rouge&quot;&gt;/path/to/my/notebooks&lt;/code&gt; will be persisted, but the docker container will be closed when you are done with it. Stop the container by typing this in a new terminal:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker stop my-py-notebook
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/jupyter/docker-stacks&quot;&gt;https://github.com/jupyter/docker-stacks&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="python" /><category term="docker" /><summary type="html">Python is a good language, but its tooling (like pip, conda, setup.py, setup.cfg, requirements.txt, and the awkward support for binaries needed for libraries like scipy, keras, etc), leaves much to be desired. And for most scientists, it’s simply not interesting using all these build tools when you just want to get coding quickly on a new machine.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Automatic CSV to SQL ETL in Clojure</title><link href="/blog/csv-etl-in-clojure/" rel="alternate" type="text/html" title="Automatic CSV to SQL ETL in Clojure" /><published>2019-03-03T00:00:00-08:00</published><updated>2019-03-03T00:00:00-08:00</updated><id>/blog/csv-etl-in-clojure</id><content type="html" xml:base="/blog/csv-etl-in-clojure/">&lt;p&gt;This is another basic example to help beginners get started in &lt;a href=&quot;https://clojure.org&quot;&gt;Clojure&lt;/a&gt;, which is still my favorite programming language, almost 10 years after I first started using it. Like all languages, Clojure has some warts. But it also has a lot of very powerful and abstract concepts that many average programmers have not seen before, and like most mathematical concepts, the power of such abstractions are greatly underestimated by many people. Even fancy-sounding but easy-to-understand concepts like &lt;a href=&quot;https://en.wikipedia.org/wiki/Homoiconicity&quot;&gt;homoiconicity&lt;/a&gt; are still really underappreciated in the programming community.&lt;/p&gt;
 
 &lt;p&gt;Compared with other mathematically-oriented languages like Haskell, Clojure is also arguably a more practical choice for practical tasks – it’s designed for massive concurrency, and has more libraries than any other language. This is a bold but probably a true statement because, in addition to its own libraries, Clojure can use java libraries on the back-end and javascript libraries on the front-end, which are two of the most popular languages in existence.&lt;/p&gt;
 
@@ -2534,49 +2554,4 @@ a\frac{1}{\|a\|}r\|b\| &amp; = &amp; a\frac{1}{\|a\|}\frac{ab}{\|a\|\|b\|}\|b\|\
   &lt;li&gt;&lt;em&gt;An Introduction to Geometric Algebra and Calculus&lt;/em&gt;, by Alan Bromborsky.&lt;/li&gt;
   &lt;li&gt;&lt;em&gt;Geometric Algebra&lt;/em&gt;, by Eric Chisolm.&lt;/li&gt;
   &lt;li&gt;&lt;em&gt;Spacetime Physics with Geometric Algebra 1&lt;/em&gt;, by David Hestenes.&lt;/li&gt;
-&lt;/ul&gt;</content><category term="math" /><category term="geometric algebra" /><summary type="html">Geometric Algebra (GA) is one of those things that we should have all learned in high school because it would have made physics and mathematics in college so much easier.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Hyperbolic Geometry &amp;amp; Special Relativity</title><link href="/blog/hyperbolic-geometry-and-special-relativity/" rel="alternate" type="text/html" title="Hyperbolic Geometry &amp; Special Relativity" /><published>2017-06-02T00:00:00-07:00</published><updated>2017-06-02T00:00:00-07:00</updated><id>/blog/hyperbolic-geometry-and-special-relativity</id><content type="html" xml:base="/blog/hyperbolic-geometry-and-special-relativity/">&lt;p&gt;While studying &lt;a href=&quot;https://arxiv.org/abs/0810.3328&quot;&gt;An Introduction to Particle Physics&lt;/a&gt; on a recent flight to Japan – studying math that is way above my head is a nerdy hobby of mine – I came across a simple viewpoint on special relativity that really stunned me:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Consider a spatial rotation around, say, the z-axis (or, equivalently, mixing the x and y coordinates). Such a transformation is called an &lt;strong&gt;Euler Transformation&lt;/strong&gt;, and takes the form&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{eqnarray*}
- t^{\prime} &amp; = &amp; t\\
- x^{\prime} &amp; = &amp; x\cos\theta+y\sin\theta\\
- y^{\prime} &amp; = &amp; -x\cos\theta+y\sin\theta\\
- z^{\prime} &amp; = &amp; z \end{eqnarray*} %]]&gt;&lt;/script&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;where \(\theta\) is the angle of rotation, called the &lt;strong&gt;Euler Angle&lt;/strong&gt;. We can simultaneously express a Lorentz transformation as a sort of “rotation” that mixes a spatial dimension and a time dimension, as follows&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{eqnarray*}
-t^{\prime} &amp; = &amp; t\cosh\theta-x\sinh\theta\\
-x^{\prime} &amp; = &amp; -t\sinh\theta+x\cosh\theta\\
-y^{\prime} &amp; = &amp; y\\
-z^{\prime} &amp; = &amp; z\end{eqnarray*} %]]&gt;&lt;/script&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;where \(\theta \) is defined by the relationship \(\beta = \tan(\theta) \).&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;After staring at that for a while, I was struck by the analogy between the “mixing” between coordinates when we rotate something, and the relativistic “mixing” between time and space when something accelerates. Although this is just an analogy and perhaps squeezing and stretching is a better metaphor than rotation in this case, is very tempting to search for the geometry of what is happening rather than just the algebra.&lt;/p&gt;
-
-&lt;p&gt;Whether it was the in flight wine or just the jet lag, I found myself lost in thought about the connection between hyperbolic geometry and special relativity – after all, what does it &lt;em&gt;mean&lt;/em&gt; to say that our space is curved in a way consistent with hyperbolic geometry? We all study flat, Euclidean spaces in school, and as a roboticist who worked a lot with rigid body dynamics I became pretty comfortable with the concepts surrounding rotation matrices, quaternions, and SO(3) groups, I but I don’t ever recall using the hyperbolic cosine even once in my life. This was surprising to me, as I use math on a fairly regular basis.&lt;/p&gt;
-
-&lt;p&gt;To try to clear the matter in my mind, I made a little table of some of the definitions of sine, cosine, and their hyperbolic equivalents:&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{eqnarray}
-\sin(x) &amp; = &amp; \frac{1}{2}(e^{ix}-e^{-ix}) &amp; = &amp; \sum_{k=0}^{\infty}\frac{(-1)^{k}x^{2k+1}}{(2k+1)!} \\
-\cos(x) &amp; = &amp; \frac{1}{2}(e^{ix}+e^{-ix}) &amp; = &amp; \sum_{k=0}^{\infty}\frac{(-1)^{k}x^{2k}}{(2k)!} \\
-\sinh(x) &amp; = &amp; \frac{1}{2}(e^{x}-e^{-x}) &amp; = &amp; \sum_{k=0}^{\infty}\frac{x^{2k+1}}{(2k+1)!} \\
-\cosh(x) &amp; = &amp; \frac{1}{2}(e^{x}+e^{-x}) &amp; = &amp; \sum_{k=0}^{\infty}\frac{x^{2k}}{(2k)!} \end{eqnarray} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;Look at how the hyperbolic trig functions have no need of the imaginary number \(i=\sqrt{-1}\) or the alternating -1’s in the infinite series. One of the most frustrating things about \(i\) is that it is so incredibly useful algebraically, but it also makes things more cumbersome because expressions in general become more – pardon the pun – complex. The geometric meaning of the imaginary number is often associated with rotations, but I wonder if there are more geometric ways of understanding the same operation that have no need for the imaginary number per se. I would prefer to see mathematical expressions that are as simple as possible, but no simpler.&lt;/p&gt;
-
-&lt;p&gt;Even now, as I stare at the infinite series for hyperbolic sine and cosine, and their definitions in terms of the all-important exponential function, I wonder if in fact that “things with the imaginary number are wrong” in the same way that &lt;a href=&quot;http://tauday.com/&quot;&gt;“pi is wrong”&lt;/a&gt;. It is not that sines are incorrect in an algebraic or mathematical sense, because they are clearly not. Rather, I am wondering whether, due to the way mathematics developed historically, perhaps we are using algebra that is more cumbersome than necessary to describe two legs of the same geometric elephant.&lt;/p&gt;
-
-&lt;p&gt;I would welcome good book recommendations connecting the essential geometry of hyperbolas to special relativity!&lt;/p&gt;</content><summary type="html">While studying An Introduction to Particle Physics on a recent flight to Japan – studying math that is way above my head is a nerdy hobby of mine – I came across a simple viewpoint on special relativity that really stunned me:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{&quot;feature&quot;=&gt;nil}" /></entry></feed>
+&lt;/ul&gt;</content><category term="math" /><category term="geometric algebra" /><summary type="html">Geometric Algebra (GA) is one of those things that we should have all learned in high school because it would have made physics and mathematics in college so much easier.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{&quot;feature&quot;=&gt;nil}" /></entry></feed>
