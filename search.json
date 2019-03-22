@@ -2,6 +2,14 @@
 
   
     {
+      "title"			: "Preferring Quantiles to Histograms",
+      "link"			: "/blog/percentiles-and-histograms/",
+      "excerpt"		: "The histogram is most scientists’ tool of choice for viewing the distribution of values of a single variable. But lately I have been exploring an alternative: quantiles (e.g. deciles, percentiles, etc). Viewing data in this way has several advantages to histograms, including robustness to outliers and a freedom from apriori assumptions about the range or smoothing level of the data."
+    }
+  
+
+  
+    ,{
       "title"			: "Jupyter Quick Install for Scientists",
       "link"			: "/blog/jupyter-quick-install/",
       "excerpt"		: "Python is a good language, but its tooling (like pip, conda, setup.py, setup.cfg, requirements.txt, and the awkward support for binaries needed for libraries like scipy, keras, etc), leaves much to be desired. And for most scientists, it’s simply not interesting using all these build tools when you just want to get coding quickly on a new machine."
@@ -811,20 +819,20 @@
   
 
   
-    ,{
-      "title"			: "Project Euler First 100 Problems",
-      "link"			: "/project-euler/",
-      "excerpt"		: ""
-    }
-  
-
-  
 
   
     ,{
       "title"			: "About",
       "link"			: "/about/",
       "excerpt"		: "About Me"
+    }
+  
+
+  
+    ,{
+      "title"			: "Project Euler First 100 Problems",
+      "link"			: "/project-euler/",
+      "excerpt"		: ""
     }
   
 

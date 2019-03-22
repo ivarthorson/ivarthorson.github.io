@@ -147,15 +147,15 @@
       <div class="entry-content">
         <p><a href="https://www.python.org">Python</a> is a good language, but its tooling (like <code class="highlighter-rouge">pip</code>, <code class="highlighter-rouge">conda</code>, <code class="highlighter-rouge">setup.py</code>, <code class="highlighter-rouge">setup.cfg</code>, <code class="highlighter-rouge">requirements.txt</code>, and the awkward support for binaries needed for libraries like scipy, keras, etc), leaves much to be desired. And for most scientists, it’s simply not interesting using all these build tools when you just want to get coding quickly on a new machine.</p>
 
-<p>The most simplest, most reliable way I’ve found to get jupyter installed is to first <a href="https://www.docker.com/get-started">install docker</a>. Then we just run a single command – please replace <code class="highlighter-rouge">/path/to/my/notebooks</code> with your actual local directory full of notebooks, before running it though!</p>
+<p>The most simplest, most reliable way I’ve found to get jupyter installed is to first <a href="https://www.docker.com/get-started">install docker</a>. Then we just run a single command – but before you do so, please replace <code class="highlighter-rouge">/path/to/my/notebooks</code> with your local directory where you have been storing notebooks.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>docker run --rm -p 8888:8888 --mount type=bind,source=/path/to/my/notebooks,target=/home/jovyan/work --name my-py-notebook jupyter/scipy-notebook
 </code></pre>
 </div>
 
-<p>Now browse to <a href="http://localhost:8888">http://localhost:8888</a>, and copy in the token that was just printed out in the terminal you just started.</p>
+<p>You’ll see some stuff printed out, but the only thing you care about is the “Token”. Now browse to <a href="http://localhost:8888">http://localhost:8888</a>, and paste in the token into the password field. Done!</p>
 
-<p>The stuff saved in <code class="highlighter-rouge">/path/to/my/notebooks</code> will be persisted, but the docker container will be closed when you are done with it. Stop the container by typing this in a new terminal:</p>
+<p>Because we bind-mounted <code class="highlighter-rouge">/path/to/my/notebooks</code>, your notebooks will be persisted, but the docker container will be closed when you are done with it. Stop the container by typing this in a new terminal:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>docker stop my-py-notebook
 </code></pre>
@@ -174,6 +174,8 @@
       
         <a href="/blog/csv-etl-in-clojure/" class="btn" title="Automatic CSV to SQL ETL in Clojure">Previous</a>
       
+      
+        <a href="/blog/percentiles-and-histograms/" class="btn" title="Preferring Quantiles to Histograms">Next</a>
       
     </nav><!-- /.pagination -->
   </article>
