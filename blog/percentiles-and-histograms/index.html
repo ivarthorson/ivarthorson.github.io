@@ -254,7 +254,11 @@
 
 <p>We will now explore using quantiles to represent the sampled distribution, and see how that differs from the histogram representation. For those of you who have forgotten what a “quantile” is, it is just a generalization of the concept of a percentile. The basic concept of quantiles is to sort some data by value, and then sequentially group the sorted data into <script type="math/tex">N</script> equal-size groups. When <script type="math/tex">N=10</script> points, we call them “deciles”. When <script type="math/tex">N=100</script>, we call them percentiles. A list of percentiles of family income would give us 101 numbers (from 0% to 100%). The 0th percentile would be the lowest income, the 50th percentile would be the median, and the 100th percentile would indicate the maximum family income in the data set.</p>
 
-<p>Let’s see how you could use the percentiles to generate a histogram-like plot. To make the comparison between histograms and quantiles fair, we will use the same number of quantiles as we did histogram bins.</p>
+<p>Let’s see how you could use the percentiles to generate a histogram-like plot. The basic idea is to use the precentiles to produce a cumulative distribution function, and then take a numerical derivative to get the probability density function.</p>
+
+<p class="center"><img src="fig-03-concept.jpg" alt="fig-03-concept.jpg" title="The concept." /></p>
+
+<p>Now let’s look at some code that will actually do this. To make the comparison between histograms and quantiles fair, we will use the same number of quantiles as we did histogram bins.</p>
 
 <div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">calc_quantiles</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">num_quantiles</span><span class="p">):</span>
     <span class="n">percentiles</span> <span class="o">=</span> <span class="p">[</span><span class="mf">100.0</span><span class="o">*</span><span class="n">p</span><span class="o">/</span><span class="n">num_quantiles</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_quantiles</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
