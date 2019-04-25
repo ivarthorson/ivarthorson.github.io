@@ -147,62 +147,62 @@
       <div class="entry-content">
         <p>Loading CSVs in Clojure is really easy using <code class="highlighter-rouge">clojure.data.csv</code>. Depending on what you will do with the data, you can either represent it in tabular form (as a vector of vectors), or as a list of hashmaps. Both approaches have their advantages and disadvantages, and here are some very stock functions for how to achieve that:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>(ns net.roboloco.csvs
-  "Functions for loading and saving CSVs."
-  (:require [clojure.data.csv :as csv]))
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">net.roboloco.csvs</span><span class="w">
+  </span><span class="s">"Functions for loading and saving CSVs."</span><span class="w">
+  </span><span class="p">(</span><span class="no">:require</span><span class="w"> </span><span class="p">[</span><span class="n">clojure.data.csv</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">csv</span><span class="p">]))</span><span class="w">
 
-(defn empty-string-to-nil
-  "Returns a nil if given an empty string S, otherwise returns S."
-  [s]
-  (if (and (string? s) (empty? s))
-    nil
-    s))
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">empty-string-to-nil</span><span class="w">
+  </span><span class="s">"Returns a nil if given an empty string S, otherwise returns S."</span><span class="w">
+  </span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">and</span><span class="w"> </span><span class="p">(</span><span class="nb">string?</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nf">empty?</span><span class="w"> </span><span class="n">s</span><span class="p">))</span><span class="w">
+    </span><span class="n">nil</span><span class="w">
+    </span><span class="n">s</span><span class="p">))</span><span class="w">
 
-(defn dissoc-nils
-  "Drops keys with nil values, or nil keys, from the hashmap H."
-  [h]
-  (into {} (filter (fn [[k v]] (and v k)) h)))
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">dissoc-nils</span><span class="w">
+  </span><span class="s">"Drops keys with nil values, or nil keys, from the hashmap H."</span><span class="w">
+  </span><span class="p">[</span><span class="n">h</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">into</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="p">(</span><span class="nb">filter</span><span class="w"> </span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="p">[[</span><span class="n">k</span><span class="w"> </span><span class="n">v</span><span class="p">]]</span><span class="w"> </span><span class="p">(</span><span class="nb">and</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="n">k</span><span class="p">))</span><span class="w"> </span><span class="n">h</span><span class="p">)))</span><span class="w">
 
 
-(defn load-csv
-  "Returns a data structure loaded from a CSV file at FILEPATH."
-  [filepath]
-  (with-open [reader (clojure.java.io/reader filepath)]
-    (-&gt;&gt; (csv/read-csv reader)
-         (map (fn [row] (map empty-string-to-nil row)))
-         (doall))))
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">load-csv</span><span class="w">
+  </span><span class="s">"Returns a data structure loaded from a CSV file at FILEPATH."</span><span class="w">
+  </span><span class="p">[</span><span class="n">filepath</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">with-open</span><span class="w"> </span><span class="p">[</span><span class="n">reader</span><span class="w"> </span><span class="p">(</span><span class="nf">clojure.java.io/reader</span><span class="w"> </span><span class="n">filepath</span><span class="p">)]</span><span class="w">
+    </span><span class="p">(</span><span class="nf">-&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">csv/read-csv</span><span class="w"> </span><span class="n">reader</span><span class="p">)</span><span class="w">
+         </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="n">empty-string-to-nil</span><span class="w"> </span><span class="n">row</span><span class="p">)))</span><span class="w">
+         </span><span class="p">(</span><span class="nb">doall</span><span class="p">))))</span><span class="w">
 
-(defn save-csv
-  "Saves a vector of vectors DATA (i.e. a CSV) to disk at FILEPATH. "
-  [vec-of-vecs filepath]
-  (with-open [writer (clojure.java.io/writer filepath)]
-    (csv/write-csv writer vec-of-vecs)))
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">save-csv</span><span class="w">
+  </span><span class="s">"Saves a vector of vectors DATA (i.e. a CSV) to disk at FILEPATH. "</span><span class="w">
+  </span><span class="p">[</span><span class="n">vec-of-vecs</span><span class="w"> </span><span class="n">filepath</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">with-open</span><span class="w"> </span><span class="p">[</span><span class="n">writer</span><span class="w"> </span><span class="p">(</span><span class="nf">clojure.java.io/writer</span><span class="w"> </span><span class="n">filepath</span><span class="p">)]</span><span class="w">
+    </span><span class="p">(</span><span class="nf">csv/write-csv</span><span class="w"> </span><span class="n">writer</span><span class="w"> </span><span class="n">vec-of-vecs</span><span class="p">)))</span><span class="w">
 
-(defn tabular-&gt;maps
-  "Converts a vector of vectors into a vector of maps. Assumes that the
-  first row of the CSV is a header that contains column names."
-  [tabular]
-  (let [header (first tabular)]
-    (-&gt; (map zipmap (repeat header) (rest tabular))
-        (mapv dissoc-nils))))
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">tabular-&gt;maps</span><span class="w">
+  </span><span class="s">"Converts a vector of vectors into a vector of maps. Assumes that the
+  first row of the CSV is a header that contains column names."</span><span class="w">
+  </span><span class="p">[</span><span class="n">tabular</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">header</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="n">tabular</span><span class="p">)]</span><span class="w">
+    </span><span class="p">(</span><span class="nb">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="nb">zipmap</span><span class="w"> </span><span class="p">(</span><span class="nb">repeat</span><span class="w"> </span><span class="n">header</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nb">rest</span><span class="w"> </span><span class="n">tabular</span><span class="p">))</span><span class="w">
+        </span><span class="p">(</span><span class="nf">mapv</span><span class="w"> </span><span class="n">dissoc-nils</span><span class="p">))))</span><span class="w">
 
-(defn maps-&gt;tabular
-  "Converts a vector of vectors into a vector of maps."
-  [rowmaps]
-  (let [columns (vec (sort (into #{} (map name (flatten (map keys rowmaps))))))]
-    (vec (conj (for [row rowmaps]
-              (vec (for [col columns]
-                     (str (get row col "")))))
-            columns))))
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">maps-&gt;tabular</span><span class="w">
+  </span><span class="s">"Converts a vector of vectors into a vector of maps."</span><span class="w">
+  </span><span class="p">[</span><span class="n">rowmaps</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">columns</span><span class="w"> </span><span class="p">(</span><span class="nf">vec</span><span class="w"> </span><span class="p">(</span><span class="nb">sort</span><span class="w"> </span><span class="p">(</span><span class="nb">into</span><span class="w"> </span><span class="o">#</span><span class="p">{}</span><span class="w"> </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="nb">name</span><span class="w"> </span><span class="p">(</span><span class="nf">flatten</span><span class="w"> </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="nb">keys</span><span class="w"> </span><span class="n">rowmaps</span><span class="p">))))))]</span><span class="w">
+    </span><span class="p">(</span><span class="nf">vec</span><span class="w"> </span><span class="p">(</span><span class="nb">conj</span><span class="w"> </span><span class="p">(</span><span class="k">for</span><span class="w"> </span><span class="p">[</span><span class="n">row</span><span class="w"> </span><span class="n">rowmaps</span><span class="p">]</span><span class="w">
+              </span><span class="p">(</span><span class="nf">vec</span><span class="w"> </span><span class="p">(</span><span class="k">for</span><span class="w"> </span><span class="p">[</span><span class="n">col</span><span class="w"> </span><span class="n">columns</span><span class="p">]</span><span class="w">
+                     </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="p">(</span><span class="nb">get</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="s">""</span><span class="p">)))))</span><span class="w">
+            </span><span class="n">columns</span><span class="p">))))</span><span class="w">
 
-(comment
+</span><span class="p">(</span><span class="nb">comment</span><span class="w">
 
-  (def data (tabular-&gt;maps (load-csv "/path/to/mycsv.csv")))
+  </span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">(</span><span class="nf">tabular-&gt;maps</span><span class="w"> </span><span class="p">(</span><span class="nf">load-csv</span><span class="w"> </span><span class="s">"/path/to/mycsv.csv"</span><span class="p">)))</span><span class="w">
   
-  (save-csv! (maps-&gt;tabular data) "/some/other/path.csv")
+  </span><span class="p">(</span><span class="nf">save-csv!</span><span class="w"> </span><span class="p">(</span><span class="nf">maps-&gt;tabular</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="s">"/some/other/path.csv"</span><span class="p">)</span><span class="w">
 
-  )
-</code></pre>
+  </span><span class="p">)</span><span class="w">
+</span></code></pre>
 </div>
 
 <p>Note that the above functions are not lazy, which is a good choice for CSVs 90% of the time. If you find yourself working with very large datasets that cannot be loaded all at once, you might want to adjust <code class="highlighter-rouge">load-csv</code>, <code class="highlighter-rouge">tabular-&gt;maps</code>, and <code class="highlighter-rouge">maps-&gt;tabular</code> to work lazily and incrementally.</p>

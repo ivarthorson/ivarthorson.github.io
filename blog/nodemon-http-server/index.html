@@ -5,16 +5,16 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>A Localhost Swagger Editor &#8211; Art is Never Finished</title>
-<meta name="description" content="I’ve always edited swagger docs using the online editor, but thanks to docker, you may run it locally with equal ease:
+<title>Nodemon HTTP Server &#8211; Art is Never Finished</title>
+<meta name="description" content="While playing with three.js today, I needed a hot-reloading JS webserver in a real hurry to serve out content. Here’s how to start a server at http://localhost:8080/ in just three lines:
 
 ">
-<meta name="keywords" content="docker, swagger">
+<meta name="keywords" content="javascript, js, three.js">
 
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="A Localhost Swagger Editor">
-<meta name="twitter:description" content="I’ve always edited swagger docs using the online editor, but thanks to docker, you may run it locally with equal ease:
+<meta name="twitter:title" content="Nodemon HTTP Server">
+<meta name="twitter:description" content="While playing with three.js today, I needed a hot-reloading JS webserver in a real hurry to serve out content. Here’s how to start a server at http://localhost:8080/ in just three lines:
 
 ">
 <meta name="twitter:site" content="@ivarthorson">
@@ -26,18 +26,18 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:title" content="A Localhost Swagger Editor">
-<meta property="og:description" content="I’ve always edited swagger docs using the online editor, but thanks to docker, you may run it locally with equal ease:
+<meta property="og:title" content="Nodemon HTTP Server">
+<meta property="og:description" content="While playing with three.js today, I needed a hot-reloading JS webserver in a real hurry to serve out content. Here’s how to start a server at http://localhost:8080/ in just three lines:
 
 ">
-<meta property="og:url" content="/blog/localhost-swagger-editor/">
+<meta property="og:url" content="/blog/nodemon-http-server/">
 <meta property="og:site_name" content="Art is Never Finished">
 
 
 
 
 
-<link rel="canonical" href="/blog/localhost-swagger-editor/">
+<link rel="canonical" href="/blog/nodemon-http-server/">
 <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
 
 <!-- https://t.co/dKP3o1e -->
@@ -126,10 +126,10 @@
     <div class="entry-wrapper">
       <header class="entry-header">
         <ul class="entry-tags">
-          <li><a href="/tags/#docker" title="Pages tagged docker">docker</a></li><li><a href="/tags/#swagger" title="Pages tagged swagger">swagger</a></li>
+          <li><a href="/tags/#javascript" title="Pages tagged javascript">javascript</a></li><li><a href="/tags/#js" title="Pages tagged js">js</a></li><li><a href="/tags/#three.js" title="Pages tagged three.js">three.js</a></li>
         </ul>
         
-          <h1 class="entry-title">A Localhost Swagger Editor</h1>
+          <h1 class="entry-title">Nodemon HTTP Server</h1>
         
       </header>
       <footer class="entry-meta">
@@ -138,41 +138,35 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2019-02-14T00:00:00-08:00"><i class="fa fa-calendar-o"></i> February 14, 2019</time></span>
+        <span class="entry-date date published"><time datetime="2019-03-27T00:00:00-07:00"><i class="fa fa-calendar-o"></i> March 27, 2019</time></span>
         
         
         
         
       </footer>
       <div class="entry-content">
-        <p>I’ve always edited swagger docs using the online editor, but thanks to docker, you may run it locally with equal ease:</p>
+        <p>While playing with <a href="https://threejs.org">three.js</a> today, I needed a hot-reloading JS webserver in a real hurry to serve out content. Here’s how to start a server at <a href="http://localhost:8080">http://localhost:8080/</a> in just three lines:</p>
 
-<p>From <a href="https://github.com/swagger-api/swagger-editor">https://github.com/swagger-api/swagger-editor</a>:</p>
-
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker pull swaggerapi/swagger-editor
-docker run -d -p 80:8080 swaggerapi/swagger-editor
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>npm install http-server -g   <span class="c"># Install the http-server tool</span>
+<span class="nb">cd</span> /to/some/directory        <span class="c"># Change to the directory you want to serve content from</span>
+nodemon <span class="sb">`</span>which http-server<span class="sb">`</span>  <span class="c"># Use nodemon to restart the http-server when any content changes</span>
 </code></pre>
 </div>
 
-<p>Then browse to port 80 on localhost. If you want more than one tab to work in, launch a few more containers on ports 81, 82, and 83.</p>
+<p>If you don’t need a server that restarts, consider using:</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run -d -p 81:8080 swaggerapi/swagger-editor
-docker run -d -p 82:8080 swaggerapi/swagger-editor
-docker run -d -p 83:8080 swaggerapi/swagger-editor
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>http-server . -p 8080
 </code></pre>
 </div>
 
-<p>I can’t believe I never thought of this before.</p>
 
         
       </div><!-- /.entry-content -->
     </div><!-- /.entry-wrapper -->
     <nav class="pagination" role="navigation">
       
-        <a href="/blog/docker-postgres/" class="btn" title="Connecting a Clojure REPL to a PostgreSQL Docker Container">Previous</a>
+        <a href="/blog/percentiles-and-histograms/" class="btn" title="Preferring Quantiles to Histograms">Previous</a>
       
-      
-        <a href="/blog/loading-csvs-in-clojure/" class="btn" title="Loading CSVs in Clojure">Next</a>
       
     </nav><!-- /.pagination -->
   </article>

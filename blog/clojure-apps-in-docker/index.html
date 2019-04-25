@@ -160,8 +160,8 @@
 
 <p>It’s probably not the latest and greatest way of making a front end and back end, but I find for many of my small apps <a href="https://reagent-project.github.io/">Reagent</a> for the front end and <a href="https://github.com/ring-clojure">Ring</a> for the back end are enough. Creating a project is simple:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>lein new reagent myapp +cider
-cd myapp
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>lein new reagent myapp +cider
+<span class="nb">cd </span>myapp
 git init
 </code></pre>
 </div>
@@ -172,7 +172,7 @@ git init
 
 <p><code class="highlighter-rouge">lein</code> makes packaging up a web server, front end, and assets all together extremely easy:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>lein uberjar
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>lein uberjar
 </code></pre>
 </div>
 
@@ -202,7 +202,7 @@ CMD java -jar app-standalone.jar
 
 <p>During the build process, Docker needs a “context” directory that contains all of the files needed to build the image. Since we have already packaged assets in the JAR, and compiled the source code into bytecode, we do not need to copy the source over in the build process. We can let the Docker build process use the “target” directory only. This can speed up the Docker build, and saves space because it is not copying resources twiec. The only downside is that it means we have to explicitly specify the Dockerfile to use explicitly, and explicitly specify the directory to use as the “context” directory. Run this from the root of the project directory:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>docker build --tag myapp -f Dockerfile target
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker build --tag myapp -f Dockerfile target
 </code></pre>
 </div>
 
@@ -212,19 +212,19 @@ CMD java -jar app-standalone.jar
 
 <p>If your app has no state (and it shouldn’t, if you are making a <a href="https://12factor.net">12-factor app</a>, you can now create a new container from your docker image, passing it whatever environment varibales you need, and exposing internal port 3000 to external port 3000:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>docker run --name my-app-container --env MY_ENV_VAR=some_value -p 3000:3000 -rm myapp
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run --name my-app-container --env <span class="nv">MY_ENV_VAR</span><span class="o">=</span>some_value -p 3000:3000 -rm myapp
 </code></pre>
 </div>
 
 <p>Check to see that it is running:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>docker containers ls
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker containers ls
 </code></pre>
 </div>
 
 <p>or more concisely,</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>docker ps
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker ps
 </code></pre>
 </div>
 
@@ -232,7 +232,7 @@ CMD java -jar app-standalone.jar
 
 <p>If you don’t want the container to delete itself when done, omit the <code class="highlighter-rouge">-rm</code> option, and maybe consider instead the <code class="highlighter-rouge">--detach</code> option so you get your shell back. If you aren’t building a new container regularly and the container is lying around, starting and stopping the named container is as simple as you would expect:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>docker container start my-app-container
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker container start my-app-container
 docker container stop my-app-container
 </code></pre>
 </div>

@@ -199,7 +199,7 @@
 
 <p>Now place all the files in a directory tree like this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>sqlcsv/
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>sqlcsv/
 ├── census
 │   ├── all_060_in_01.P1.csv
 │   ├── all_060_in_02.P1.csv
@@ -215,101 +215,101 @@
 
 <p>This is pretty easy using <code class="highlighter-rouge">file-seq</code>. All we have to do is create a few functions for listing files and subdirectories.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>(ns net.roboloco.files
-  (:require [java-time :as jt]
-            [clojure.java.io :as jio]))
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">net.roboloco.files</span><span class="w">
+  </span><span class="p">(</span><span class="no">:require</span><span class="w"> </span><span class="p">[</span><span class="n">java-time</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">jt</span><span class="p">]</span><span class="w">
+            </span><span class="p">[</span><span class="n">clojure.java.io</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">jio</span><span class="p">]))</span><span class="w">
 
-(defn list-files
-  "Lists only the files in the directory string DIR."
-  [dir]
-  (-&gt;&gt; (file-seq (clojure.java.io/file dir))
-       (remove #(.isDirectory ^java.io.File %))))
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">list-files</span><span class="w">
+  </span><span class="s">"Lists only the files in the directory string DIR."</span><span class="w">
+  </span><span class="p">[</span><span class="n">dir</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">-&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">file-seq</span><span class="w"> </span><span class="p">(</span><span class="nf">clojure.java.io/file</span><span class="w"> </span><span class="n">dir</span><span class="p">))</span><span class="w">
+       </span><span class="p">(</span><span class="nb">remove</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nf">.isDirectory</span><span class="w"> </span><span class="o">^</span><span class="n">java.io.File</span><span class="w"> </span><span class="n">%</span><span class="p">))))</span><span class="w">
 
-(defn list-subdirectories
-  "Lists only the subdirectorys of the directory string DIR"
-  [dir]
-  (-&gt;&gt; (file-seq (clojure.java.io/file dir))
-       (filter #(.isDirectory %))
-       (remove #(= % (clojure.java.io/file dir)))))
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">list-subdirectories</span><span class="w">
+  </span><span class="s">"Lists only the subdirectorys of the directory string DIR"</span><span class="w">
+  </span><span class="p">[</span><span class="n">dir</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">-&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">file-seq</span><span class="w"> </span><span class="p">(</span><span class="nf">clojure.java.io/file</span><span class="w"> </span><span class="n">dir</span><span class="p">))</span><span class="w">
+       </span><span class="p">(</span><span class="nb">filter</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nf">.isDirectory</span><span class="w"> </span><span class="n">%</span><span class="p">))</span><span class="w">
+       </span><span class="p">(</span><span class="nb">remove</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="n">%</span><span class="w"> </span><span class="p">(</span><span class="nf">clojure.java.io/file</span><span class="w"> </span><span class="n">dir</span><span class="p">)))))</span><span class="w">
 
-(defn has-suffix?
-  "Works on file object types."
-  [ ^String suffix ^java.io.File file]
-  (and (.isFile file)
-       (re-find (re-pattern (str ".*\\." suffix "$")) (.getName file))))
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">has-suffix?</span><span class="w">
+  </span><span class="s">"Works on file object types."</span><span class="w">
+  </span><span class="p">[</span><span class="w"> </span><span class="o">^</span><span class="n">String</span><span class="w"> </span><span class="n">suffix</span><span class="w"> </span><span class="o">^</span><span class="n">java.io.File</span><span class="w"> </span><span class="n">file</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">and</span><span class="w"> </span><span class="p">(</span><span class="nf">.isFile</span><span class="w"> </span><span class="n">file</span><span class="p">)</span><span class="w">
+       </span><span class="p">(</span><span class="nb">re-find</span><span class="w"> </span><span class="p">(</span><span class="nb">re-pattern</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="s">".*\\."</span><span class="w"> </span><span class="n">suffix</span><span class="w"> </span><span class="s">"$"</span><span class="p">))</span><span class="w"> </span><span class="p">(</span><span class="nf">.getName</span><span class="w"> </span><span class="n">file</span><span class="p">))))</span><span class="w">
 
-(defn list-files-of-type 
-  "Lists all files in the directory with the extension ext."
-  [dir ext]
-  (-&gt;&gt; (file-seq (clojure.java.io/file dir))
-       (filter (partial has-suffix? ext))))
-</code></pre>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">list-files-of-type</span><span class="w"> 
+  </span><span class="s">"Lists all files in the directory with the extension ext."</span><span class="w">
+  </span><span class="p">[</span><span class="n">dir</span><span class="w"> </span><span class="n">ext</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">-&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">file-seq</span><span class="w"> </span><span class="p">(</span><span class="nf">clojure.java.io/file</span><span class="w"> </span><span class="n">dir</span><span class="p">))</span><span class="w">
+       </span><span class="p">(</span><span class="nb">filter</span><span class="w"> </span><span class="p">(</span><span class="nb">partial</span><span class="w"> </span><span class="n">has-suffix?</span><span class="w"> </span><span class="n">ext</span><span class="p">))))</span><span class="w">
+</span></code></pre>
 </div>
 
 <p>Some string-cleaning utility functions will also come in handy:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>(ns net.roboloco.util)
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">net.roboloco.util</span><span class="p">)</span><span class="w">
 
-(set! *warn-on-reflection* true)
+</span><span class="p">(</span><span class="nf">set!</span><span class="w"> </span><span class="n">*warn-on-reflection*</span><span class="w"> </span><span class="n">true</span><span class="p">)</span><span class="w">
 
-(defn alphanumeric?
-  "TRUE when the string is completely alphanumeric."
-  [string]
-  (= string (apply str (re-seq #"[a-z_A-Z0-9]" string))))
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">alphanumeric?</span><span class="w">
+  </span><span class="s">"TRUE when the string is completely alphanumeric."</span><span class="w">
+  </span><span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="p">(</span><span class="nb">apply</span><span class="w"> </span><span class="nb">str</span><span class="w"> </span><span class="p">(</span><span class="nb">re-seq</span><span class="w"> </span><span class="o">#</span><span class="s">"[a-z_A-Z0-9]"</span><span class="w"> </span><span class="n">string</span><span class="p">))))</span><span class="w">
 
-(defn spaces-to-underscores
-  "Converts spaces to underscores."
-  [string]
-  (clojure.string/replace string #"\s" "_"))
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">spaces-to-underscores</span><span class="w">
+  </span><span class="s">"Converts spaces to underscores."</span><span class="w">
+  </span><span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">clojure.string/replace</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="o">#</span><span class="s">"\s"</span><span class="w"> </span><span class="s">"_"</span><span class="p">))</span><span class="w">
 
-(defn periods-to-underscores
-  "Converts spaces to underscores."
-  [string]
-  (clojure.string/replace string #"\." "_"))
-</code></pre>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">periods-to-underscores</span><span class="w">
+  </span><span class="s">"Converts spaces to underscores."</span><span class="w">
+  </span><span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">clojure.string/replace</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="o">#</span><span class="s">"\."</span><span class="w"> </span><span class="s">"_"</span><span class="p">))</span><span class="w">
+</span></code></pre>
 </div>
 
 <p>We’ll also need some simple date-parsing functions:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>(ns net.roboloco.dates
-  "Code for handling strings reperesnting dates and datetimes."
-  (:require [java-time :as jt]))
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">net.roboloco.dates</span><span class="w">
+  </span><span class="s">"Code for handling strings reperesnting dates and datetimes."</span><span class="w">
+  </span><span class="p">(</span><span class="no">:require</span><span class="w"> </span><span class="p">[</span><span class="n">java-time</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">jt</span><span class="p">]))</span><span class="w">
 
-(set! *warn-on-reflection* true)
+</span><span class="p">(</span><span class="nf">set!</span><span class="w"> </span><span class="n">*warn-on-reflection*</span><span class="w"> </span><span class="n">true</span><span class="p">)</span><span class="w">
 
-(defn parse-date
-  "Parses a standard date, like 2019-02-17."
-  [s]
-  (jt/local-date "yyyy-MM-dd" s))
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">parse-date</span><span class="w">
+  </span><span class="s">"Parses a standard date, like 2019-02-17."</span><span class="w">
+  </span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">jt/local-date</span><span class="w"> </span><span class="s">"yyyy-MM-dd"</span><span class="w"> </span><span class="n">s</span><span class="p">))</span><span class="w">
 
-(defn parse-datetime
-  "Returns the datetime format that Python's pandas usually saves in."
-  [s]
-  (jt/local-date-time "yyyy-MM-dd HH:mm:ss" s))
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">parse-datetime</span><span class="w">
+  </span><span class="s">"Returns the datetime format that Python's pandas usually saves in."</span><span class="w">
+  </span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">jt/local-date-time</span><span class="w"> </span><span class="s">"yyyy-MM-dd HH:mm:ss"</span><span class="w"> </span><span class="n">s</span><span class="p">))</span><span class="w">
 
-(defn local-to-offset
-  "Converts a local date time to an offset date time. By default, it assumes
-  that the local time is UTC, but you may change this with optional arg TZ."
-  [local-date-time &amp; [tz]]
-  (let [tz (or tz "UTC")]
-    (-&gt; local-date-time
-        (jt/zoned-date-time tz)
-        (jt/offset-date-time))))
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">local-to-offset</span><span class="w">
+  </span><span class="s">"Converts a local date time to an offset date time. By default, it assumes
+  that the local time is UTC, but you may change this with optional arg TZ."</span><span class="w">
+  </span><span class="p">[</span><span class="n">local-date-time</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">[</span><span class="n">tz</span><span class="p">]]</span><span class="w">
+  </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">tz</span><span class="w"> </span><span class="p">(</span><span class="nb">or</span><span class="w"> </span><span class="n">tz</span><span class="w"> </span><span class="s">"UTC"</span><span class="p">)]</span><span class="w">
+    </span><span class="p">(</span><span class="nb">-&gt;</span><span class="w"> </span><span class="n">local-date-time</span><span class="w">
+        </span><span class="p">(</span><span class="nf">jt/zoned-date-time</span><span class="w"> </span><span class="n">tz</span><span class="p">)</span><span class="w">
+        </span><span class="p">(</span><span class="nf">jt/offset-date-time</span><span class="p">))))</span><span class="w">
 
-(defn parse-RFC3339
-  "Assuming a UTC datestamp with T and Z separator, for example:
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">parse-RFC3339</span><span class="w">
+  </span><span class="s">"Assuming a UTC datestamp with T and Z separator, for example:
   2019-01-17T22:03:16Z
   2019-01-17T22:03:16.383Z
-  2019-01-17T22:03:16.111222333Z"
-  [s]
-  (local-to-offset
-   (condp = (count s)
-     20 (jt/local-date-time "yyyy-MM-dd'T'HH:mm:ss'Z'" s)
-     24 (jt/local-date-time "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" s)
-     27 (jt/local-date-time "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'" s)
-     30 (jt/local-date-time "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS'Z'" s))))
+  2019-01-17T22:03:16.111222333Z"</span><span class="w">
+  </span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">local-to-offset</span><span class="w">
+   </span><span class="p">(</span><span class="nf">condp</span><span class="w"> </span><span class="nb">=</span><span class="w"> </span><span class="p">(</span><span class="nb">count</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w">
+     </span><span class="mi">20</span><span class="w"> </span><span class="p">(</span><span class="nf">jt/local-date-time</span><span class="w"> </span><span class="s">"yyyy-MM-dd'T'HH:mm:ss'Z'"</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w">
+     </span><span class="mi">24</span><span class="w"> </span><span class="p">(</span><span class="nf">jt/local-date-time</span><span class="w"> </span><span class="s">"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w">
+     </span><span class="mi">27</span><span class="w"> </span><span class="p">(</span><span class="nf">jt/local-date-time</span><span class="w"> </span><span class="s">"yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w">
+     </span><span class="mi">30</span><span class="w"> </span><span class="p">(</span><span class="nf">jt/local-date-time</span><span class="w"> </span><span class="s">"yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS'Z'"</span><span class="w"> </span><span class="n">s</span><span class="p">))))</span><span class="w">
 
-</code></pre>
+</span></code></pre>
 </div>
 
 <h2 id="autodetect-the-schema">3. Autodetect the Schema</h2>
@@ -320,194 +320,194 @@
 
 <p>Note that this code only works for integers, floats, dates, datetimes, and strings (text), but that you could easily extend it by adding more things to <code class="highlighter-rouge">type-definitions</code>.  An exception thrown if types do not match in different files.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>(ns net.roboloco.guess-schema
-  (:require [clojure.data.csv]
-            [net.roboloco.dates :as dates]
-            [net.roboloco.files :as files]
-            [net.roboloco.util :as util]))
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">net.roboloco.guess-schema</span><span class="w">
+  </span><span class="p">(</span><span class="no">:require</span><span class="w"> </span><span class="p">[</span><span class="n">clojure.data.csv</span><span class="p">]</span><span class="w">
+            </span><span class="p">[</span><span class="n">net.roboloco.dates</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">dates</span><span class="p">]</span><span class="w">
+            </span><span class="p">[</span><span class="n">net.roboloco.files</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">files</span><span class="p">]</span><span class="w">
+            </span><span class="p">[</span><span class="n">net.roboloco.util</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">util</span><span class="p">]))</span><span class="w">
 
-(set! *warn-on-reflection* true)
+</span><span class="p">(</span><span class="nf">set!</span><span class="w"> </span><span class="n">*warn-on-reflection*</span><span class="w"> </span><span class="n">true</span><span class="p">)</span><span class="w">
 
-(def ^:dynamic *sql-types-and-parsers*
-  ;; This data structure defines all of the SQL data types, and the appropriate
-  ;; function to use when parsing a string containing that data type.
-  ;; Parsers will be tried in sequential order, and the first one that works is used.
-  ;; 
-  ;; SQL               String-&gt;CLJ Parser
-  [["NULL"             #(or (nil? %) (empty? %))]
-   ["INTEGER"          #(Integer/parseInt %)]
-   ["DOUBLE PRECISION" #(Float/parseFloat %)]
-   ["DATE"             dates/parse-date]
-   ["TIMESTAMPTZ"      dates/parse-RFC3339]
-   ["TEXT"             #(str %)]]) ;; this is always true, so is the "default" value
+</span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="o">^</span><span class="no">:dynamic</span><span class="w"> </span><span class="n">*sql-types-and-parsers*</span><span class="w">
+  </span><span class="c1">;; This data structure defines all of the SQL data types, and the appropriate
+</span><span class="w">  </span><span class="c1">;; function to use when parsing a string containing that data type.
+</span><span class="w">  </span><span class="c1">;; Parsers will be tried in sequential order, and the first one that works is used.
+</span><span class="w">  </span><span class="c1">;; 
+</span><span class="w">  </span><span class="c1">;; SQL               String-&gt;CLJ Parser
+</span><span class="w">  </span><span class="p">[[</span><span class="s">"NULL"</span><span class="w">             </span><span class="o">#</span><span class="p">(</span><span class="nb">or</span><span class="w"> </span><span class="p">(</span><span class="nb">nil?</span><span class="w"> </span><span class="n">%</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nf">empty?</span><span class="w"> </span><span class="n">%</span><span class="p">))]</span><span class="w">
+   </span><span class="p">[</span><span class="s">"INTEGER"</span><span class="w">          </span><span class="o">#</span><span class="p">(</span><span class="nf">Integer/parseInt</span><span class="w"> </span><span class="n">%</span><span class="p">)]</span><span class="w">
+   </span><span class="p">[</span><span class="s">"DOUBLE PRECISION"</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nf">Float/parseFloat</span><span class="w"> </span><span class="n">%</span><span class="p">)]</span><span class="w">
+   </span><span class="p">[</span><span class="s">"DATE"</span><span class="w">             </span><span class="n">dates/parse-date</span><span class="p">]</span><span class="w">
+   </span><span class="p">[</span><span class="s">"TIMESTAMPTZ"</span><span class="w">      </span><span class="n">dates/parse-RFC3339</span><span class="p">]</span><span class="w">
+   </span><span class="p">[</span><span class="s">"TEXT"</span><span class="w">             </span><span class="o">#</span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="n">%</span><span class="p">)]])</span><span class="w"> </span><span class="c1">;; this is always true, so is the "default" value
+</span><span class="w">
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">guess-sql-parser</span><span class="w">
+  </span><span class="s">"Given an unknown string, this fn runs through all of the SQL types &amp; parsers in 
+  sql-types-and-parsers and returns the first row with a working parser."</span><span class="w">
+  </span><span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">loop</span><span class="w"> </span><span class="p">[</span><span class="n">types-and-parsers</span><span class="w"> </span><span class="n">*sql-types-and-parsers*</span><span class="p">]</span><span class="w">
+    </span><span class="p">(</span><span class="nb">when-let</span><span class="w"> </span><span class="p">[[</span><span class="n">sql-type</span><span class="w"> </span><span class="n">parse-fn</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">typerow</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="n">types-and-parsers</span><span class="p">)]</span><span class="w">
+      </span><span class="p">(</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nf">try</span><span class="w"> </span><span class="p">(</span><span class="nf">parse-fn</span><span class="w"> </span><span class="n">string</span><span class="p">)</span><span class="w">
+               </span><span class="p">(</span><span class="nf">catch</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">false</span><span class="p">))</span><span class="w">
+        </span><span class="n">typerow</span><span class="w">
+        </span><span class="p">(</span><span class="nf">recur</span><span class="w"> </span><span class="p">(</span><span class="nb">next</span><span class="w"> </span><span class="n">types-and-parsers</span><span class="p">))))))</span><span class="w">
 
-(defn guess-sql-parser
-  "Given an unknown string, this fn runs through all of the SQL types &amp; parsers in 
-  sql-types-and-parsers and returns the first row with a working parser."
-  [string]
-  (loop [types-and-parsers *sql-types-and-parsers*]
-    (when-let [[sql-type parse-fn :as typerow] (first types-and-parsers)]
-      (if (try (parse-fn string)
-               (catch Exception e false))
-        typerow
-        (recur (next types-and-parsers))))))
-
-(defn guess-all-sql-types-in-column
-  "Like guess-sql-type, but an optimized version for looking at a whole column.
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">guess-all-sql-types-in-column</span><span class="w">
+  </span><span class="s">"Like guess-sql-type, but an optimized version for looking at a whole column.
   In practice, this really reduces the number of tests and exceptions trapped
   over the simpler but much slower solution: 
-         (set (flatten (map guess-sql-parser seq-of-strings)))"
-  [seq-of-strings]
-  (loop [strings seq-of-strings
-         last-successful-parse-fn nil
-         types-found #{}]
-    (if-let [string (first strings)]
-      (if (try (last-successful-parse-fn string)
-               (catch Exception e false))
-        (recur (next strings)  ; Previously successful parser worked again
-               last-successful-parse-fn
-               types-found)
-        (if-let [[sql-type parse-fn] (guess-sql-parser string)]
-          (recur (next strings)  ; A new working parser was found
-                 parse-fn
-                 (conj types-found sql-type))
-          (recur (next strings)  ; No working parser found, move to next string
-                 last-successful-parse-fn
-                 (conj types-found nil))))
-      types-found)))
+         (set (flatten (map guess-sql-parser seq-of-strings)))"</span><span class="w">
+  </span><span class="p">[</span><span class="n">seq-of-strings</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">loop</span><span class="w"> </span><span class="p">[</span><span class="n">strings</span><span class="w"> </span><span class="n">seq-of-strings</span><span class="w">
+         </span><span class="n">last-successful-parse-fn</span><span class="w"> </span><span class="n">nil</span><span class="w">
+         </span><span class="n">types-found</span><span class="w"> </span><span class="o">#</span><span class="p">{}]</span><span class="w">
+    </span><span class="p">(</span><span class="nb">if-let</span><span class="w"> </span><span class="p">[</span><span class="n">string</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="n">strings</span><span class="p">)]</span><span class="w">
+      </span><span class="p">(</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nf">try</span><span class="w"> </span><span class="p">(</span><span class="nf">last-successful-parse-fn</span><span class="w"> </span><span class="n">string</span><span class="p">)</span><span class="w">
+               </span><span class="p">(</span><span class="nf">catch</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">false</span><span class="p">))</span><span class="w">
+        </span><span class="p">(</span><span class="nf">recur</span><span class="w"> </span><span class="p">(</span><span class="nb">next</span><span class="w"> </span><span class="n">strings</span><span class="p">)</span><span class="w">  </span><span class="c1">; Previously successful parser worked again
+</span><span class="w">               </span><span class="n">last-successful-parse-fn</span><span class="w">
+               </span><span class="n">types-found</span><span class="p">)</span><span class="w">
+        </span><span class="p">(</span><span class="nb">if-let</span><span class="w"> </span><span class="p">[[</span><span class="n">sql-type</span><span class="w"> </span><span class="n">parse-fn</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nf">guess-sql-parser</span><span class="w"> </span><span class="n">string</span><span class="p">)]</span><span class="w">
+          </span><span class="p">(</span><span class="nf">recur</span><span class="w"> </span><span class="p">(</span><span class="nb">next</span><span class="w"> </span><span class="n">strings</span><span class="p">)</span><span class="w">  </span><span class="c1">; A new working parser was found
+</span><span class="w">                 </span><span class="n">parse-fn</span><span class="w">
+                 </span><span class="p">(</span><span class="nb">conj</span><span class="w"> </span><span class="n">types-found</span><span class="w"> </span><span class="n">sql-type</span><span class="p">))</span><span class="w">
+          </span><span class="p">(</span><span class="nf">recur</span><span class="w"> </span><span class="p">(</span><span class="nb">next</span><span class="w"> </span><span class="n">strings</span><span class="p">)</span><span class="w">  </span><span class="c1">; No working parser found, move to next string
+</span><span class="w">                 </span><span class="n">last-successful-parse-fn</span><span class="w">
+                 </span><span class="p">(</span><span class="nb">conj</span><span class="w"> </span><span class="n">types-found</span><span class="w"> </span><span class="n">nil</span><span class="p">))))</span><span class="w">
+      </span><span class="n">types-found</span><span class="p">)))</span><span class="w">
 
-(defn clean-column-names
-  "Replaces whitespaces and periods in column names with underscores."
-  [columns]
-  (-&gt;&gt; columns
-       (map util/periods-to-underscores)
-       (mapv util/spaces-to-underscores)))
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">clean-column-names</span><span class="w">
+  </span><span class="s">"Replaces whitespaces and periods in column names with underscores."</span><span class="w">
+  </span><span class="p">[</span><span class="n">columns</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">-&gt;&gt;</span><span class="w"> </span><span class="n">columns</span><span class="w">
+       </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="n">util/periods-to-underscores</span><span class="p">)</span><span class="w">
+       </span><span class="p">(</span><span class="nf">mapv</span><span class="w"> </span><span class="n">util/spaces-to-underscores</span><span class="p">)))</span><span class="w">
 
-(defn guess-csv-column-types
-  "Returns a map of column name to the guessed SQL column type. Reads every
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">guess-csv-column-types</span><span class="w">
+  </span><span class="s">"Returns a map of column name to the guessed SQL column type. Reads every
   row in the CSV, and returns all types found for each column. Works in 
   parallel and lazily on chunks of 1000 lines, to reduce the time to parse
-  very large files."
-  [csv-filepath]
-  (println "Scanning:" csv-filepath)
-  (with-open [reader (clojure.java.io/reader csv-filepath)]
-     (let [rows (clojure.data.csv/read-csv reader)
-           header (clean-column-names (first rows))
-           data-rows (rest rows)
-           chunk-size 10000]
-       (-&gt;&gt; data-rows          
-            (partition-all chunk-size)
-            (map #(apply map vector %)) ;; Convert list of rows into list of columns
-            (map #(pmap guess-all-sql-types-in-column %))
-            (map (fn [i data] (println (* 10000 (inc i)) "rows scanned") data) (range))
-            (apply map (fn [&amp; args] (reduce clojure.set/union args)))
-            (map vector header)
-            (into {})))))
+  very large files."</span><span class="w">
+  </span><span class="p">[</span><span class="n">csv-filepath</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="s">"Scanning:"</span><span class="w"> </span><span class="n">csv-filepath</span><span class="p">)</span><span class="w">
+  </span><span class="p">(</span><span class="nb">with-open</span><span class="w"> </span><span class="p">[</span><span class="n">reader</span><span class="w"> </span><span class="p">(</span><span class="nf">clojure.java.io/reader</span><span class="w"> </span><span class="n">csv-filepath</span><span class="p">)]</span><span class="w">
+     </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">rows</span><span class="w"> </span><span class="p">(</span><span class="nf">clojure.data.csv/read-csv</span><span class="w"> </span><span class="n">reader</span><span class="p">)</span><span class="w">
+           </span><span class="n">header</span><span class="w"> </span><span class="p">(</span><span class="nf">clean-column-names</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="n">rows</span><span class="p">))</span><span class="w">
+           </span><span class="n">data-rows</span><span class="w"> </span><span class="p">(</span><span class="nb">rest</span><span class="w"> </span><span class="n">rows</span><span class="p">)</span><span class="w">
+           </span><span class="n">chunk-size</span><span class="w"> </span><span class="mi">10000</span><span class="p">]</span><span class="w">
+       </span><span class="p">(</span><span class="nf">-&gt;&gt;</span><span class="w"> </span><span class="n">data-rows</span><span class="w">          
+            </span><span class="p">(</span><span class="nf">partition-all</span><span class="w"> </span><span class="n">chunk-size</span><span class="p">)</span><span class="w">
+            </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nb">apply</span><span class="w"> </span><span class="nb">map</span><span class="w"> </span><span class="nb">vector</span><span class="w"> </span><span class="n">%</span><span class="p">))</span><span class="w"> </span><span class="c1">;; Convert list of rows into list of columns
+</span><span class="w">            </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nf">pmap</span><span class="w"> </span><span class="n">guess-all-sql-types-in-column</span><span class="w"> </span><span class="n">%</span><span class="p">))</span><span class="w">
+            </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="n">data</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="p">(</span><span class="nb">*</span><span class="w"> </span><span class="mi">10000</span><span class="w"> </span><span class="p">(</span><span class="nb">inc</span><span class="w"> </span><span class="n">i</span><span class="p">))</span><span class="w"> </span><span class="s">"rows scanned"</span><span class="p">)</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nb">range</span><span class="p">))</span><span class="w">
+            </span><span class="p">(</span><span class="nb">apply</span><span class="w"> </span><span class="nb">map</span><span class="w"> </span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="w"> </span><span class="n">args</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">reduce</span><span class="w"> </span><span class="n">clojure.set/union</span><span class="w"> </span><span class="n">args</span><span class="p">)))</span><span class="w">
+            </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="nb">vector</span><span class="w"> </span><span class="n">header</span><span class="p">)</span><span class="w">
+            </span><span class="p">(</span><span class="nb">into</span><span class="w"> </span><span class="p">{})))))</span><span class="w">
 
-(defn scan-csvdir-and-make-schema
-  "Scans the header of every .csv file in CSVDIR, and returns a hashmap
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">scan-csvdir-and-make-schema</span><span class="w">
+  </span><span class="s">"Scans the header of every .csv file in CSVDIR, and returns a hashmap
   containing the schema of all the columns in the directory.
   If a non-alphanumeric string is found, raises an exception. 
-  If the schema is inconsistent, raises an exception."
-  [csvdir]
-  (let [csv-schemas (-&gt;&gt; (files/list-files-of-type csvdir "csv")
-                         (map guess-csv-column-types))
-        columns (set (flatten (map keys csv-schemas)))
-        problematic-columns (remove util/alphanumeric? columns)]
-    (when-not (empty? problematic-columns)
-      (throw (Exception. (str "Non-alphanumeric characters found in column names:"
-                              (apply str (interpose ", "  problematic-columns))))))
-    (into {} (for [col columns]
-               (let [all-types-for-col (-&gt;&gt; (map #(vec (get % col)) csv-schemas)
-                                            (flatten)
-                                            (remove nil?)
-                                            (set))
-                     nullable-suffix (if (get all-types-for-col "NULL") 
-                                       " NULL"
-                                       "")
-                     types (disj all-types-for-col "NULL")]
-                 (cond
-                  (= 0 (count types))        [col nil]
-                  (= 1 (count types))        [col (str (first types) nullable-suffix)]
-                  ;; If it's mixed integer and float, make everything float
-                  (= #{"INTEGER" "DOUBLE PRECISION"} types) 
-                                             [col (str "DOUBLE PRECISION" nullable-suffix)]
-                  ;; If the default type of TEXT is in there, choose text
-                  (get types "TEXT") [col (str "TEXT" nullable-suffix)]
-                  :otherwise  ;; Otherwise we have some weird error
-                  (throw (Exception. (str "Inconsistent types across files for column: " 
-                                           col (vec types))))))))))
+  If the schema is inconsistent, raises an exception."</span><span class="w">
+  </span><span class="p">[</span><span class="n">csvdir</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">csv-schemas</span><span class="w"> </span><span class="p">(</span><span class="nf">-&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">files/list-files-of-type</span><span class="w"> </span><span class="n">csvdir</span><span class="w"> </span><span class="s">"csv"</span><span class="p">)</span><span class="w">
+                         </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="n">guess-csv-column-types</span><span class="p">))</span><span class="w">
+        </span><span class="n">columns</span><span class="w"> </span><span class="p">(</span><span class="nb">set</span><span class="w"> </span><span class="p">(</span><span class="nf">flatten</span><span class="w"> </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="nb">keys</span><span class="w"> </span><span class="n">csv-schemas</span><span class="p">)))</span><span class="w">
+        </span><span class="n">problematic-columns</span><span class="w"> </span><span class="p">(</span><span class="nb">remove</span><span class="w"> </span><span class="n">util/alphanumeric?</span><span class="w"> </span><span class="n">columns</span><span class="p">)]</span><span class="w">
+    </span><span class="p">(</span><span class="nb">when-not</span><span class="w"> </span><span class="p">(</span><span class="nf">empty?</span><span class="w"> </span><span class="n">problematic-columns</span><span class="p">)</span><span class="w">
+      </span><span class="p">(</span><span class="nf">throw</span><span class="w"> </span><span class="p">(</span><span class="nf">Exception.</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="s">"Non-alphanumeric characters found in column names:"</span><span class="w">
+                              </span><span class="p">(</span><span class="nb">apply</span><span class="w"> </span><span class="nb">str</span><span class="w"> </span><span class="p">(</span><span class="nf">interpose</span><span class="w"> </span><span class="s">", "</span><span class="w">  </span><span class="n">problematic-columns</span><span class="p">))))))</span><span class="w">
+    </span><span class="p">(</span><span class="nb">into</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="p">(</span><span class="k">for</span><span class="w"> </span><span class="p">[</span><span class="n">col</span><span class="w"> </span><span class="n">columns</span><span class="p">]</span><span class="w">
+               </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">all-types-for-col</span><span class="w"> </span><span class="p">(</span><span class="nf">-&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nf">vec</span><span class="w"> </span><span class="p">(</span><span class="nb">get</span><span class="w"> </span><span class="n">%</span><span class="w"> </span><span class="n">col</span><span class="p">))</span><span class="w"> </span><span class="n">csv-schemas</span><span class="p">)</span><span class="w">
+                                            </span><span class="p">(</span><span class="nf">flatten</span><span class="p">)</span><span class="w">
+                                            </span><span class="p">(</span><span class="nb">remove</span><span class="w"> </span><span class="nb">nil?</span><span class="p">)</span><span class="w">
+                                            </span><span class="p">(</span><span class="nb">set</span><span class="p">))</span><span class="w">
+                     </span><span class="n">nullable-suffix</span><span class="w"> </span><span class="p">(</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">get</span><span class="w"> </span><span class="n">all-types-for-col</span><span class="w"> </span><span class="s">"NULL"</span><span class="p">)</span><span class="w"> 
+                                       </span><span class="s">" NULL"</span><span class="w">
+                                       </span><span class="s">""</span><span class="p">)</span><span class="w">
+                     </span><span class="n">types</span><span class="w"> </span><span class="p">(</span><span class="nb">disj</span><span class="w"> </span><span class="n">all-types-for-col</span><span class="w"> </span><span class="s">"NULL"</span><span class="p">)]</span><span class="w">
+                 </span><span class="p">(</span><span class="k">cond</span><span class="w">
+                  </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="nb">count</span><span class="w"> </span><span class="n">types</span><span class="p">))</span><span class="w">        </span><span class="p">[</span><span class="n">col</span><span class="w"> </span><span class="n">nil</span><span class="p">]</span><span class="w">
+                  </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">(</span><span class="nb">count</span><span class="w"> </span><span class="n">types</span><span class="p">))</span><span class="w">        </span><span class="p">[</span><span class="n">col</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="n">types</span><span class="p">)</span><span class="w"> </span><span class="n">nullable-suffix</span><span class="p">)]</span><span class="w">
+                  </span><span class="c1">;; If it's mixed integer and float, make everything float
+</span><span class="w">                  </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="o">#</span><span class="p">{</span><span class="s">"INTEGER"</span><span class="w"> </span><span class="s">"DOUBLE PRECISION"</span><span class="p">}</span><span class="w"> </span><span class="n">types</span><span class="p">)</span><span class="w"> 
+                                             </span><span class="p">[</span><span class="n">col</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="s">"DOUBLE PRECISION"</span><span class="w"> </span><span class="n">nullable-suffix</span><span class="p">)]</span><span class="w">
+                  </span><span class="c1">;; If the default type of TEXT is in there, choose text
+</span><span class="w">                  </span><span class="p">(</span><span class="nb">get</span><span class="w"> </span><span class="n">types</span><span class="w"> </span><span class="s">"TEXT"</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="n">col</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="s">"TEXT"</span><span class="w"> </span><span class="n">nullable-suffix</span><span class="p">)]</span><span class="w">
+                  </span><span class="no">:otherwise</span><span class="w">  </span><span class="c1">;; Otherwise we have some weird error
+</span><span class="w">                  </span><span class="p">(</span><span class="nf">throw</span><span class="w"> </span><span class="p">(</span><span class="nf">Exception.</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="s">"Inconsistent types across files for column: "</span><span class="w"> 
+                                           </span><span class="n">col</span><span class="w"> </span><span class="p">(</span><span class="nf">vec</span><span class="w"> </span><span class="n">types</span><span class="p">))))))))))</span><span class="w">
 
-(defn parse-csv-rows-using-schema
-  "Lazily parse CSV-ROWS using the schema."
-  [schema csv-rows]
-  (let [header (clean-column-names (first csv-rows))
-        types  (map #(get schema %) header)
-        empty-string-to-nil (fn [s] (if (and (string? s) (empty? s)) nil s))
-        raw-rows (map #(map empty-string-to-nil %) (rest csv-rows))
-        all-parsers (into {} *sql-types-and-parsers*)
-        row-parsers (mapv #(get all-parsers %) types)
-        typed-rows (for [raw-row raw-rows]
-                     (map (fn [parse-fn element]
-                            (when (and parse-fn (not (empty? element)))
-                              (try (parse-fn element)
-                                   (catch Exception e
-                                     (println "Schema:" schema)
-                                     (println "Header:" header)
-                                     (println "Raw row:" raw-row)
-                                     (throw e)))))
-                          row-parsers
-                          raw-row))
-        cnt (atom 0)
-        chunk-size 1000]
-    [header typed-rows]))
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">parse-csv-rows-using-schema</span><span class="w">
+  </span><span class="s">"Lazily parse CSV-ROWS using the schema."</span><span class="w">
+  </span><span class="p">[</span><span class="n">schema</span><span class="w"> </span><span class="n">csv-rows</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">header</span><span class="w"> </span><span class="p">(</span><span class="nf">clean-column-names</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="n">csv-rows</span><span class="p">))</span><span class="w">
+        </span><span class="n">types</span><span class="w">  </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nb">get</span><span class="w"> </span><span class="n">schema</span><span class="w"> </span><span class="n">%</span><span class="p">)</span><span class="w"> </span><span class="n">header</span><span class="p">)</span><span class="w">
+        </span><span class="n">empty-string-to-nil</span><span class="w"> </span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">and</span><span class="w"> </span><span class="p">(</span><span class="nb">string?</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nf">empty?</span><span class="w"> </span><span class="n">s</span><span class="p">))</span><span class="w"> </span><span class="n">nil</span><span class="w"> </span><span class="n">s</span><span class="p">))</span><span class="w">
+        </span><span class="n">raw-rows</span><span class="w"> </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="n">empty-string-to-nil</span><span class="w"> </span><span class="n">%</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nb">rest</span><span class="w"> </span><span class="n">csv-rows</span><span class="p">))</span><span class="w">
+        </span><span class="n">all-parsers</span><span class="w"> </span><span class="p">(</span><span class="nb">into</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="n">*sql-types-and-parsers*</span><span class="p">)</span><span class="w">
+        </span><span class="n">row-parsers</span><span class="w"> </span><span class="p">(</span><span class="nf">mapv</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nb">get</span><span class="w"> </span><span class="n">all-parsers</span><span class="w"> </span><span class="n">%</span><span class="p">)</span><span class="w"> </span><span class="n">types</span><span class="p">)</span><span class="w">
+        </span><span class="n">typed-rows</span><span class="w"> </span><span class="p">(</span><span class="k">for</span><span class="w"> </span><span class="p">[</span><span class="n">raw-row</span><span class="w"> </span><span class="n">raw-rows</span><span class="p">]</span><span class="w">
+                     </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="p">[</span><span class="n">parse-fn</span><span class="w"> </span><span class="n">element</span><span class="p">]</span><span class="w">
+                            </span><span class="p">(</span><span class="nb">when</span><span class="w"> </span><span class="p">(</span><span class="nb">and</span><span class="w"> </span><span class="n">parse-fn</span><span class="w"> </span><span class="p">(</span><span class="nb">not</span><span class="w"> </span><span class="p">(</span><span class="nf">empty?</span><span class="w"> </span><span class="n">element</span><span class="p">)))</span><span class="w">
+                              </span><span class="p">(</span><span class="nf">try</span><span class="w"> </span><span class="p">(</span><span class="nf">parse-fn</span><span class="w"> </span><span class="n">element</span><span class="p">)</span><span class="w">
+                                   </span><span class="p">(</span><span class="nf">catch</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="w">
+                                     </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="s">"Schema:"</span><span class="w"> </span><span class="n">schema</span><span class="p">)</span><span class="w">
+                                     </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="s">"Header:"</span><span class="w"> </span><span class="n">header</span><span class="p">)</span><span class="w">
+                                     </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="s">"Raw row:"</span><span class="w"> </span><span class="n">raw-row</span><span class="p">)</span><span class="w">
+                                     </span><span class="p">(</span><span class="nf">throw</span><span class="w"> </span><span class="n">e</span><span class="p">)))))</span><span class="w">
+                          </span><span class="n">row-parsers</span><span class="w">
+                          </span><span class="n">raw-row</span><span class="p">))</span><span class="w">
+        </span><span class="n">cnt</span><span class="w"> </span><span class="p">(</span><span class="nf">atom</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">
+        </span><span class="n">chunk-size</span><span class="w"> </span><span class="mi">1000</span><span class="p">]</span><span class="w">
+    </span><span class="p">[</span><span class="n">header</span><span class="w"> </span><span class="n">typed-rows</span><span class="p">]))</span><span class="w">
 
-(defn table-definition-sql-string
-  "Returns a string suitable for creating a SQL table named TABLE-NAME, given
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">table-definition-sql-string</span><span class="w">
+  </span><span class="s">"Returns a string suitable for creating a SQL table named TABLE-NAME, given
   a hashmap SCHEMA of column names to column types. The ENDING-STRING is appended
-  to the end of the create table statement, if needed. "
-  [table-name schema &amp; [ending-string]]
-  (let [ending-string (or ending-string "")
-        col-defs (-&gt;&gt; schema
-                      (sort-by first)
-                      (remove (comp nil? second))
-                      (map (fn [[col type]] (format "\t%s %s" col type)))
-                      (interpose ",\n")
-                      (apply str))]
-    (format "CREATE TABLE %s (\n%s %s\n);"
-            table-name col-defs ending-string)))
-</code></pre>
+  to the end of the create table statement, if needed. "</span><span class="w">
+  </span><span class="p">[</span><span class="n">table-name</span><span class="w"> </span><span class="n">schema</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">[</span><span class="n">ending-string</span><span class="p">]]</span><span class="w">
+  </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">ending-string</span><span class="w"> </span><span class="p">(</span><span class="nb">or</span><span class="w"> </span><span class="n">ending-string</span><span class="w"> </span><span class="s">""</span><span class="p">)</span><span class="w">
+        </span><span class="n">col-defs</span><span class="w"> </span><span class="p">(</span><span class="nf">-&gt;&gt;</span><span class="w"> </span><span class="n">schema</span><span class="w">
+                      </span><span class="p">(</span><span class="nb">sort-by</span><span class="w"> </span><span class="nb">first</span><span class="p">)</span><span class="w">
+                      </span><span class="p">(</span><span class="nb">remove</span><span class="w"> </span><span class="p">(</span><span class="nb">comp</span><span class="w"> </span><span class="nb">nil?</span><span class="w"> </span><span class="nb">second</span><span class="p">))</span><span class="w">
+                      </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="p">[[</span><span class="n">col</span><span class="w"> </span><span class="n">type</span><span class="p">]]</span><span class="w"> </span><span class="p">(</span><span class="nf">format</span><span class="w"> </span><span class="s">"\t%s %s"</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="n">type</span><span class="p">)))</span><span class="w">
+                      </span><span class="p">(</span><span class="nf">interpose</span><span class="w"> </span><span class="s">",\n"</span><span class="p">)</span><span class="w">
+                      </span><span class="p">(</span><span class="nb">apply</span><span class="w"> </span><span class="nb">str</span><span class="p">))]</span><span class="w">
+    </span><span class="p">(</span><span class="nf">format</span><span class="w"> </span><span class="s">"CREATE TABLE %s (\n%s %s\n);"</span><span class="w">
+            </span><span class="n">table-name</span><span class="w"> </span><span class="n">col-defs</span><span class="w"> </span><span class="n">ending-string</span><span class="p">)))</span><span class="w">
+</span></code></pre>
 </div>
 
 <p>We are now ready to actually do the autodetection! Let’s create our main namespace:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>(ns net.roboloco.csv2sql
-  (:gen-class)
-  (:require [clojure.data.csv]
-            [clojure.java.jdbc :as sql]
-            [net.roboloco.guess-schema :as guess]
-            [net.roboloco.files :as files]))
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">net.roboloco.csv2sql</span><span class="w">
+  </span><span class="p">(</span><span class="no">:gen-class</span><span class="p">)</span><span class="w">
+  </span><span class="p">(</span><span class="no">:require</span><span class="w"> </span><span class="p">[</span><span class="n">clojure.data.csv</span><span class="p">]</span><span class="w">
+            </span><span class="p">[</span><span class="n">clojure.java.jdbc</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">sql</span><span class="p">]</span><span class="w">
+            </span><span class="p">[</span><span class="n">net.roboloco.guess-schema</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">guess</span><span class="p">]</span><span class="w">
+            </span><span class="p">[</span><span class="n">net.roboloco.files</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">files</span><span class="p">]))</span><span class="w">
 
-(set! *warn-on-reflection* true)
+</span><span class="p">(</span><span class="nf">set!</span><span class="w"> </span><span class="n">*warn-on-reflection*</span><span class="w"> </span><span class="n">true</span><span class="p">)</span><span class="w">
 
-(defn table-schema-filename [dirname] (format "%s-schema.edn" dirname))
-(defn table-sql-filename [dirname] (format "%s.sql" dirname))
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">table-schema-filename</span><span class="w"> </span><span class="p">[</span><span class="n">dirname</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nf">format</span><span class="w"> </span><span class="s">"%s-schema.edn"</span><span class="w"> </span><span class="n">dirname</span><span class="p">))</span><span class="w">
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">table-sql-filename</span><span class="w"> </span><span class="p">[</span><span class="n">dirname</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nf">format</span><span class="w"> </span><span class="s">"%s.sql"</span><span class="w"> </span><span class="n">dirname</span><span class="p">))</span><span class="w">
 
-(defn autodetect-sql-schemas!
-  "Scans through the subdirectories of CSVDIR, infers the column data types,
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">autodetect-sql-schemas!</span><span class="w">
+  </span><span class="s">"Scans through the subdirectories of CSVDIR, infers the column data types,
   and stores the inferred schema in CSVDIR so that you may manually edit it
-  before loading it in with MAKE-SQL-TABLES."
-  [csvdir]
-  (doseq [dir (files/list-subdirectories csvdir)]
-    (printf "Autodetecting schema for: %s\n" dir)
-    (let [tablename (.getName ^java.io.File dir)
-          schema (guess/scan-csvdir-and-make-schema dir)]
-      (when-not (empty? schema)
-        (let [table-sql (guess/table-definition-sql-string tablename schema)]
-          (println (str csvdir (table-schema-filename tablename)) schema)          
-          (spit (str csvdir (table-schema-filename tablename)) schema)
-          (spit (str csvdir (table-sql-filename tablename)) table-sql))))))
-</code></pre>
+  before loading it in with MAKE-SQL-TABLES."</span><span class="w">
+  </span><span class="p">[</span><span class="n">csvdir</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">doseq</span><span class="w"> </span><span class="p">[</span><span class="n">dir</span><span class="w"> </span><span class="p">(</span><span class="nf">files/list-subdirectories</span><span class="w"> </span><span class="n">csvdir</span><span class="p">)]</span><span class="w">
+    </span><span class="p">(</span><span class="nf">printf</span><span class="w"> </span><span class="s">"Autodetecting schema for: %s\n"</span><span class="w"> </span><span class="n">dir</span><span class="p">)</span><span class="w">
+    </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">tablename</span><span class="w"> </span><span class="p">(</span><span class="nf">.getName</span><span class="w"> </span><span class="o">^</span><span class="n">java.io.File</span><span class="w"> </span><span class="n">dir</span><span class="p">)</span><span class="w">
+          </span><span class="n">schema</span><span class="w"> </span><span class="p">(</span><span class="nf">guess/scan-csvdir-and-make-schema</span><span class="w"> </span><span class="n">dir</span><span class="p">)]</span><span class="w">
+      </span><span class="p">(</span><span class="nb">when-not</span><span class="w"> </span><span class="p">(</span><span class="nf">empty?</span><span class="w"> </span><span class="n">schema</span><span class="p">)</span><span class="w">
+        </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">table-sql</span><span class="w"> </span><span class="p">(</span><span class="nf">guess/table-definition-sql-string</span><span class="w"> </span><span class="n">tablename</span><span class="w"> </span><span class="n">schema</span><span class="p">)]</span><span class="w">
+          </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="n">csvdir</span><span class="w"> </span><span class="p">(</span><span class="nf">table-schema-filename</span><span class="w"> </span><span class="n">tablename</span><span class="p">))</span><span class="w"> </span><span class="n">schema</span><span class="p">)</span><span class="w">          
+          </span><span class="p">(</span><span class="nf">spit</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="n">csvdir</span><span class="w"> </span><span class="p">(</span><span class="nf">table-schema-filename</span><span class="w"> </span><span class="n">tablename</span><span class="p">))</span><span class="w"> </span><span class="n">schema</span><span class="p">)</span><span class="w">
+          </span><span class="p">(</span><span class="nf">spit</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="n">csvdir</span><span class="w"> </span><span class="p">(</span><span class="nf">table-sql-filename</span><span class="w"> </span><span class="n">tablename</span><span class="p">))</span><span class="w"> </span><span class="n">table-sql</span><span class="p">))))))</span><span class="w">
+</span></code></pre>
 </div>
 
 <p>You may note that I’m storing the SQL schemas for each subdirectory in the root <code class="highlighter-rouge">sqlcsv/</code> directory. This will let you hand-tune the schema as needed, if you want to make an index on one key or another, or make a particular column unique and required.</p>
@@ -516,83 +516,83 @@
 
 <p>With the schema autodetected, we now need to create the tables. Continuing along with the <code class="highlighter-rouge">net.roboloco.csv2sql</code> namespace, and assuming that you are using the same <a href="../docker-postgres">postgres database</a> from a previous article:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>(def default-db {:dbtype "postgresql" 
-                 :dbname   (or (System/getenv "POSTGERS_DB")  "csv2sql")
-                 :user     (or (System/getenv "POSTGRES_USER") "postgres")
-                 :password (or (System/getenv "POSTGRES_PASS") "mysecretpassword")})
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">default-db</span><span class="w"> </span><span class="p">{</span><span class="no">:dbtype</span><span class="w"> </span><span class="s">"postgresql"</span><span class="w"> 
+                 </span><span class="no">:dbname</span><span class="w">   </span><span class="p">(</span><span class="nb">or</span><span class="w"> </span><span class="p">(</span><span class="nf">System/getenv</span><span class="w"> </span><span class="s">"POSTGERS_DB"</span><span class="p">)</span><span class="w">  </span><span class="s">"csv2sql"</span><span class="p">)</span><span class="w">
+                 </span><span class="no">:user</span><span class="w">     </span><span class="p">(</span><span class="nb">or</span><span class="w"> </span><span class="p">(</span><span class="nf">System/getenv</span><span class="w"> </span><span class="s">"POSTGRES_USER"</span><span class="p">)</span><span class="w"> </span><span class="s">"postgres"</span><span class="p">)</span><span class="w">
+                 </span><span class="no">:password</span><span class="w"> </span><span class="p">(</span><span class="nb">or</span><span class="w"> </span><span class="p">(</span><span class="nf">System/getenv</span><span class="w"> </span><span class="s">"POSTGRES_PASS"</span><span class="p">)</span><span class="w"> </span><span class="s">"mysecretpassword"</span><span class="p">)})</span><span class="w">
 
-(defn connection-ok?
-  "A predicate that tests if the database is connected."
-  [db]
-  (= {:result 15} (first (sql/query db ["select 3*5 as result"]))))
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">connection-ok?</span><span class="w">
+  </span><span class="s">"A predicate that tests if the database is connected."</span><span class="w">
+  </span><span class="p">[</span><span class="n">db</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="p">{</span><span class="no">:result</span><span class="w"> </span><span class="mi">15</span><span class="p">}</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="p">(</span><span class="nf">sql/query</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="p">[</span><span class="s">"select 3*5 as result"</span><span class="p">]))))</span><span class="w">
 
-(defn drop-existing-sql-tables!
-  "For each subdirectory in DIRNAME, drop any tables with the same name."
-  [db csvdir]
-  (doseq [table-name (map (fn [f] (.getName ^java.io.File f))
-                          (files/list-subdirectories csvdir))]    
-    (let [cmd (format "DROP TABLE IF EXISTS %s;" table-name) ]
-      (sql/db-do-commands db cmd))))
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">drop-existing-sql-tables!</span><span class="w">
+  </span><span class="s">"For each subdirectory in DIRNAME, drop any tables with the same name."</span><span class="w">
+  </span><span class="p">[</span><span class="n">db</span><span class="w"> </span><span class="n">csvdir</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">doseq</span><span class="w"> </span><span class="p">[</span><span class="n">table-name</span><span class="w"> </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nf">.getName</span><span class="w"> </span><span class="o">^</span><span class="n">java.io.File</span><span class="w"> </span><span class="n">f</span><span class="p">))</span><span class="w">
+                          </span><span class="p">(</span><span class="nf">files/list-subdirectories</span><span class="w"> </span><span class="n">csvdir</span><span class="p">))]</span><span class="w">    
+    </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">cmd</span><span class="w"> </span><span class="p">(</span><span class="nf">format</span><span class="w"> </span><span class="s">"DROP TABLE IF EXISTS %s;"</span><span class="w"> </span><span class="n">table-name</span><span class="p">)</span><span class="w"> </span><span class="p">]</span><span class="w">
+      </span><span class="p">(</span><span class="nf">sql/db-do-commands</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="n">cmd</span><span class="p">))))</span><span class="w">
 
-(defn make-sql-tables!
-  "Makes the SQL tables from whatever is in the database. "
-  [db csvdir]
-  (doseq [sql-file (map (fn [f] (.getName ^java.io.File f)) 
-                        (files/list-files-of-type csvdir "sql"))]
-    (let [table-sql (slurp sql-file)]
-      (println table-sql)
-      (sql/db-do-commands db table-sql))))
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">make-sql-tables!</span><span class="w">
+  </span><span class="s">"Makes the SQL tables from whatever is in the database. "</span><span class="w">
+  </span><span class="p">[</span><span class="n">db</span><span class="w"> </span><span class="n">csvdir</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">doseq</span><span class="w"> </span><span class="p">[</span><span class="n">sql-file</span><span class="w"> </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nf">.getName</span><span class="w"> </span><span class="o">^</span><span class="n">java.io.File</span><span class="w"> </span><span class="n">f</span><span class="p">))</span><span class="w"> 
+                        </span><span class="p">(</span><span class="nf">files/list-files-of-type</span><span class="w"> </span><span class="n">csvdir</span><span class="w"> </span><span class="s">"sql"</span><span class="p">))]</span><span class="w">
+    </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">table-sql</span><span class="w"> </span><span class="p">(</span><span class="nb">slurp</span><span class="w"> </span><span class="n">sql-file</span><span class="p">)]</span><span class="w">
+      </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="n">table-sql</span><span class="p">)</span><span class="w">
+      </span><span class="p">(</span><span class="nf">sql/db-do-commands</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="n">table-sql</span><span class="p">))))</span><span class="w">
 
-</code></pre>
+</span></code></pre>
 </div>
 
 <h2 id="load-the-csv-files-into-sql">5. Load the CSV files into SQL</h2>
 
 <p>The final step is to load in the CSV file. As we do so, we need to parse the strings from the CSV using the schema so that they are converted into the proper data type for JDBC to properly insert them in Postgres.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>(defn insert-csv!
-  "Inserts the rows of the CSV into the database, converting the rows to the appropriate
+<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">insert-csv!</span><span class="w">
+  </span><span class="s">"Inserts the rows of the CSV into the database, converting the rows to the appropriate
   type as they are loaded. Lazy, so it works on very large files. If a column is not
-  found in the schema, it is omitted and not inserted into the database. "
-  [db table csvfile schema]
-  (with-open [reader (clojure.java.io/reader csvfile)]
-    (let [csv-rows (clojure.data.csv/read-csv reader)
-          [header typed-rows] (guess/parse-csv-rows-using-schema schema csv-rows)
-          cnt (atom 0)
-          chunk-size 1000]
-      (doseq [chunk-of-rows (partition-all chunk-size typed-rows)]
-        (let [line-num (swap! cnt inc)]
-            (println "Inserted"  (* chunk-size (inc @cnt)) "rows"))
-        (sql/insert-multi! db table header chunk-of-rows)))))
+  found in the schema, it is omitted and not inserted into the database. "</span><span class="w">
+  </span><span class="p">[</span><span class="n">db</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">csvfile</span><span class="w"> </span><span class="n">schema</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">with-open</span><span class="w"> </span><span class="p">[</span><span class="n">reader</span><span class="w"> </span><span class="p">(</span><span class="nf">clojure.java.io/reader</span><span class="w"> </span><span class="n">csvfile</span><span class="p">)]</span><span class="w">
+    </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">csv-rows</span><span class="w"> </span><span class="p">(</span><span class="nf">clojure.data.csv/read-csv</span><span class="w"> </span><span class="n">reader</span><span class="p">)</span><span class="w">
+          </span><span class="p">[</span><span class="n">header</span><span class="w"> </span><span class="n">typed-rows</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nf">guess/parse-csv-rows-using-schema</span><span class="w"> </span><span class="n">schema</span><span class="w"> </span><span class="n">csv-rows</span><span class="p">)</span><span class="w">
+          </span><span class="n">cnt</span><span class="w"> </span><span class="p">(</span><span class="nf">atom</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">
+          </span><span class="n">chunk-size</span><span class="w"> </span><span class="mi">1000</span><span class="p">]</span><span class="w">
+      </span><span class="p">(</span><span class="nb">doseq</span><span class="w"> </span><span class="p">[</span><span class="n">chunk-of-rows</span><span class="w"> </span><span class="p">(</span><span class="nf">partition-all</span><span class="w"> </span><span class="n">chunk-size</span><span class="w"> </span><span class="n">typed-rows</span><span class="p">)]</span><span class="w">
+        </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">line-num</span><span class="w"> </span><span class="p">(</span><span class="nf">swap!</span><span class="w"> </span><span class="n">cnt</span><span class="w"> </span><span class="nb">inc</span><span class="p">)]</span><span class="w">
+            </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="s">"Inserted"</span><span class="w">  </span><span class="p">(</span><span class="nb">*</span><span class="w"> </span><span class="n">chunk-size</span><span class="w"> </span><span class="p">(</span><span class="nb">inc</span><span class="w"> </span><span class="err">@</span><span class="n">cnt</span><span class="p">))</span><span class="w"> </span><span class="s">"rows"</span><span class="p">))</span><span class="w">
+        </span><span class="p">(</span><span class="nf">sql/insert-multi!</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="n">chunk-of-rows</span><span class="p">)))))</span><span class="w">
 
-(defn insert-all-csvs!
-  "Loads all the subdirectories of CSVDIR as tables. Optional hashmap MANUAL-OPTIONS
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">insert-all-csvs!</span><span class="w">
+  </span><span class="s">"Loads all the subdirectories of CSVDIR as tables. Optional hashmap MANUAL-OPTIONS
   lets you decide how to customize various tables; for example, you may want to set
-  an optional table."
-  [db csvdir]  
-  (doseq [dirname (map (fn [f] (.getName ^java.io.File f))
-                       (files/list-subdirectories csvdir))]
-    (let [filepath (str csvdir "/" (table-schema-filename dirname))
-          _ (println filepath)
-          schema (slurp filepath)]
-      (when-not (empty? schema)
-        (-&gt;&gt; (files/list-files-of-type (str csvdir "/" dirname) "csv")
-             (map (fn [csvfile]
-                    (println (format "Loading: %s" csvfile))
-                    (insert-csv! db dirname csvfile schema)))
-             doall)))))
+  an optional table."</span><span class="w">
+  </span><span class="p">[</span><span class="n">db</span><span class="w"> </span><span class="n">csvdir</span><span class="p">]</span><span class="w">  
+  </span><span class="p">(</span><span class="nb">doseq</span><span class="w"> </span><span class="p">[</span><span class="n">dirname</span><span class="w"> </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nf">.getName</span><span class="w"> </span><span class="o">^</span><span class="n">java.io.File</span><span class="w"> </span><span class="n">f</span><span class="p">))</span><span class="w">
+                       </span><span class="p">(</span><span class="nf">files/list-subdirectories</span><span class="w"> </span><span class="n">csvdir</span><span class="p">))]</span><span class="w">
+    </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">filepath</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="n">csvdir</span><span class="w"> </span><span class="s">"/"</span><span class="w"> </span><span class="p">(</span><span class="nf">table-schema-filename</span><span class="w"> </span><span class="n">dirname</span><span class="p">))</span><span class="w">
+          </span><span class="n">_</span><span class="w"> </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="n">filepath</span><span class="p">)</span><span class="w">
+          </span><span class="n">schema</span><span class="w"> </span><span class="p">(</span><span class="nb">slurp</span><span class="w"> </span><span class="n">filepath</span><span class="p">)]</span><span class="w">
+      </span><span class="p">(</span><span class="nb">when-not</span><span class="w"> </span><span class="p">(</span><span class="nf">empty?</span><span class="w"> </span><span class="n">schema</span><span class="p">)</span><span class="w">
+        </span><span class="p">(</span><span class="nf">-&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">files/list-files-of-type</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="n">csvdir</span><span class="w"> </span><span class="s">"/"</span><span class="w"> </span><span class="n">dirname</span><span class="p">)</span><span class="w"> </span><span class="s">"csv"</span><span class="p">)</span><span class="w">
+             </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="p">[</span><span class="n">csvfile</span><span class="p">]</span><span class="w">
+                    </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="p">(</span><span class="nf">format</span><span class="w"> </span><span class="s">"Loading: %s"</span><span class="w"> </span><span class="n">csvfile</span><span class="p">))</span><span class="w">
+                    </span><span class="p">(</span><span class="nf">insert-csv!</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="n">dirname</span><span class="w"> </span><span class="n">csvfile</span><span class="w"> </span><span class="n">schema</span><span class="p">)))</span><span class="w">
+             </span><span class="nb">doall</span><span class="p">)))))</span><span class="w">
 
-(defn -main
-  []
-  (let [csvdir (System/getenv "CSVDIR")
-        db default-db]
-    (when-not (connection-ok? db)
-      (throw (Exception. (str "Unable to connect to DB:" db))))
-    (autodetect-sql-schemas! csvdir)
-    (make-sql-tables! db csvdir)
-    (insert-all-csvs! db csvdir)
-    (println "Done!")))
-</code></pre>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">-main</span><span class="w">
+  </span><span class="p">[]</span><span class="w">
+  </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">csvdir</span><span class="w"> </span><span class="p">(</span><span class="nf">System/getenv</span><span class="w"> </span><span class="s">"CSVDIR"</span><span class="p">)</span><span class="w">
+        </span><span class="n">db</span><span class="w"> </span><span class="n">default-db</span><span class="p">]</span><span class="w">
+    </span><span class="p">(</span><span class="nb">when-not</span><span class="w"> </span><span class="p">(</span><span class="nf">connection-ok?</span><span class="w"> </span><span class="n">db</span><span class="p">)</span><span class="w">
+      </span><span class="p">(</span><span class="nf">throw</span><span class="w"> </span><span class="p">(</span><span class="nf">Exception.</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="s">"Unable to connect to DB:"</span><span class="w"> </span><span class="n">db</span><span class="p">))))</span><span class="w">
+    </span><span class="p">(</span><span class="nf">autodetect-sql-schemas!</span><span class="w"> </span><span class="n">csvdir</span><span class="p">)</span><span class="w">
+    </span><span class="p">(</span><span class="nf">make-sql-tables!</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="n">csvdir</span><span class="p">)</span><span class="w">
+    </span><span class="p">(</span><span class="nf">insert-all-csvs!</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="n">csvdir</span><span class="p">)</span><span class="w">
+    </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="s">"Done!"</span><span class="p">)))</span><span class="w">
+</span></code></pre>
 </div>
 
 <p>Nothing left to do but try it out! The final step is to run <code class="highlighter-rouge">(-main)</code> either at the REPL or add <code class="highlighter-rouge">gen-class</code> to the namespace and build an uberjar with <code class="highlighter-rouge">(-main)</code> set as the entry point (in <code class="highlighter-rouge">project.clj</code>), and then launch it with an environment variable that sets the CSVDIR:</p>

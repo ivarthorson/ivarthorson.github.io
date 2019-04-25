@@ -2,9 +2,17 @@
 
   
     {
+      "title"			: "Nodemon HTTP Server",
+      "link"			: "/blog/nodemon-http-server/",
+      "excerpt"		: "While playing with three.js today, I needed a hot-reloading JS webserver in a real hurry to serve out content. Here’s how to start a server at http://localhost:8080/ in just three lines:"
+    }
+  
+
+  
+    ,{
       "title"			: "Preferring Quantiles to Histograms",
       "link"			: "/blog/percentiles-and-histograms/",
-      "excerpt"		: "The histogram is most scientists’ tool of choice for viewing the distribution of values of a single variable. But lately I have been exploring an alternative: quantiles (e.g. deciles, percentiles, etc). Viewing data in this way has several advantages to histograms, including robustness to outliers and a freedom from apriori assumptions about the range or smoothing level of the data."
+      "excerpt"		: "The histogram is most scientists’ tool of choice for viewing the distribution of values of a single variable. But lately I have been exploring an alternative: quantiles (e.g. deciles, percentiles, etc). Although viewing data in this way is not perfect, it has several advantages to histograms, including robustness to outliers and a freedom from apriori assumptions about the range or smoothing level of the data."
     }
   
 
@@ -819,20 +827,20 @@
   
 
   
+    ,{
+      "title"			: "Project Euler First 100 Problems",
+      "link"			: "/project-euler/",
+      "excerpt"		: ""
+    }
+  
+
+  
 
   
     ,{
       "title"			: "About",
       "link"			: "/about/",
       "excerpt"		: "About Me"
-    }
-  
-
-  
-    ,{
-      "title"			: "Project Euler First 100 Problems",
-      "link"			: "/project-euler/",
-      "excerpt"		: ""
     }
   
 
