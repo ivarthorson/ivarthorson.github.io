@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Project Euler Problem 1 &#8211; Art is Never Finished</title>
 <meta name="description" content="As part of my efforts to learn Clojure, I am starting to work through the Project Euler a little bit each day to sharpen my programming skills without the pressure of having to get any real work done. I’ll post my notes here as I go along for everyone to enjoy, critique, or just laugh at.
-
 ">
 <meta name="keywords" content="lazy-seqs, macros">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Project Euler Problem 1">
 <meta name="twitter:description" content="As part of my efforts to learn Clojure, I am starting to work through the Project Euler a little bit each day to sharpen my programming skills without the pressure of having to get any real work done. I’ll post my notes here as I go along for everyone to enjoy, critique, or just laugh at.
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project Euler Problem 1">
 <meta property="og:description" content="As part of my efforts to learn Clojure, I am starting to work through the Project Euler a little bit each day to sharpen my programming skills without the pressure of having to get any real work done. I’ll post my notes here as I go along for everyone to enjoy, critique, or just laugh at.
-
 ">
 <meta property="og:url" content="/project-euler/problem-01/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-04-06T22:23:33-07:00"><i class="fa fa-calendar-o"></i> April 06, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-04-07T05:23:33+00:00"><i class="fa fa-calendar-o"></i> April 07, 2010</time></span>
         
         
         
@@ -151,21 +148,20 @@
 
 <p>My first solution was:</p>
 
-<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">multiple-of-3-or-5?</span><span class="w"> 
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">multiple-of-3-or-5?</span><span class="w"> 
    </span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w">
    </span><span class="p">(</span><span class="nb">or</span><span class="w"> </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="nf">mod</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span><span class="w">
        </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="nf">mod</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="mi">5</span><span class="p">))))</span><span class="w">
 
 </span><span class="p">(</span><span class="nb">apply</span><span class="w"> </span><span class="nb">+</span><span class="w"> </span><span class="p">(</span><span class="nb">filter</span><span class="w"> </span><span class="n">multiple-of-3-or-5?</span><span class="w"> </span><span class="p">(</span><span class="nb">range</span><span class="w"> </span><span class="mi">1000</span><span class="p">)))</span><span class="w">
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
 <p>But, after looking at <a href="http://clojure-euler.wikispaces.com/Problem+001">other people’s solutions</a>, I noticed that:</p>
 
 <ol>
-  <li>Using <code class="highlighter-rouge">reduce</code> instead of <code class="highlighter-rouge">apply</code> would probably be more idiomatic, although I don’t notice any real performance difference.</li>
-  <li>Using <code class="highlighter-rouge">rem</code> instead of <code class="highlighter-rouge">mod</code> is clearer.</li>
-  <li>Using <code class="highlighter-rouge">zero?</code> instead of <code class="highlighter-rouge">(= 0 ...) </code> is also more idiomatic.</li>
+  <li>Using <code class="language-plaintext highlighter-rouge">reduce</code> instead of <code class="language-plaintext highlighter-rouge">apply</code> would probably be more idiomatic, although I don’t notice any real performance difference.</li>
+  <li>Using <code class="language-plaintext highlighter-rouge">rem</code> instead of <code class="language-plaintext highlighter-rouge">mod</code> is clearer.</li>
+  <li>Using <code class="language-plaintext highlighter-rouge">zero?</code> instead of <code class="language-plaintext highlighter-rouge">(= 0 ...) </code> is also more idiomatic.</li>
 </ol>
 
 <p>So my revised solution is:</p>
@@ -178,17 +174,16 @@
 
 <p>Solving this problem in lazy style with a clojure set is also an intriguing problem:</p>
 
-<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="w">    </span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">by-ns</span><span class="w"> </span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">iterate</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nb">+</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="n">%</span><span class="p">)</span><span class="w"> </span><span class="n">n</span><span class="p">))</span><span class="w">
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">    </span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">by-ns</span><span class="w"> </span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">iterate</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nb">+</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="n">%</span><span class="p">)</span><span class="w"> </span><span class="n">n</span><span class="p">))</span><span class="w">
     
     </span><span class="p">(</span><span class="nb">reduce</span><span class="w"> </span><span class="nb">+</span><span class="w"> </span><span class="p">(</span><span class="nb">-&gt;</span><span class="w"> </span><span class="o">#</span><span class="p">{}</span><span class="w">
                   </span><span class="p">(</span><span class="nb">into</span><span class="w"> </span><span class="p">(</span><span class="nb">take-while</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nb">&lt;</span><span class="w"> </span><span class="n">%</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nf">by-ns</span><span class="w"> </span><span class="mi">3</span><span class="p">)))</span><span class="w">
                   </span><span class="p">(</span><span class="nb">into</span><span class="w"> </span><span class="p">(</span><span class="nb">take-while</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nb">&lt;</span><span class="w"> </span><span class="n">%</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nf">by-ns</span><span class="w"> </span><span class="mi">5</span><span class="p">)))))</span><span class="w">
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
 <p>Performance for the lazy method isn’t as good as the naive remainder method for small numbers like 3 or 5, but this approach might yield some improvement for bigger divisors like 103 or 117.</p>
 
-<p>Now for some obfuscation…er, I mean beautification. Looking at the above, I wish there was a way to get ride of the arrow operator…if only <code class="highlighter-rouge">into</code> supported multiple collections…maybe we could call it <code class="highlighter-rouge">all-into</code>?</p>
+<p>Now for some obfuscation…er, I mean beautification. Looking at the above, I wish there was a way to get ride of the arrow operator…if only <code class="language-plaintext highlighter-rouge">into</code> supported multiple collections…maybe we could call it <code class="language-plaintext highlighter-rouge">all-into</code>?</p>
 
 <pre><code>(<span style="color: #8ae234;">defmacro</span> <span style="color: #edd400; font-weight: bold;">all-into</span> [to &amp; froms]
       <span style="color: #fd7f98;">"Returns a new coll consisting of to-coll with all items of all from-colls
@@ -199,7 +194,7 @@
                         (<span style="color: #729fcf;">take-while</span> #(<span style="color: #729fcf;">&lt;</span> % 1000) (by-ns 3))
                         (<span style="color: #729fcf;">take-while</span> #(<span style="color: #729fcf;">&lt;</span> % 1000) (by-ns 5))))</code></pre>
 
-<p>That’s a bit better, but didn’t really solve the problem. Since we’re already having fun with unnecessary macros, what we really need to do is remove the duplication in the <code class="highlighter-rouge">take-whiles</code>.</p>
+<p>That’s a bit better, but didn’t really solve the problem. Since we’re already having fun with unnecessary macros, what we really need to do is remove the duplication in the <code class="language-plaintext highlighter-rouge">take-whiles</code>.</p>
 
 <pre><code>(<span style="color: #8ae234;">defmacro</span> <span style="color: #edd400; font-weight: bold;">multi-take-while</span> [pred &amp; colls]
       <span style="color: #fd7f98;">"Applies pred to each lazy coll, and takes elements lazily from the first
@@ -236,7 +231,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

@@ -2,6 +2,30 @@
 
   
     {
+      "title"			: "Printing Photos from the Linux Command Line",
+      "link"			: "/blog/photo-prints-from-the-command-line/",
+      "excerpt"		: "Here’s a handy script that lets you leave your printer in its default mode (i.e. configured for printing ordinary documents on letter or A4) but also print photos from the command line. The handy thing here is you can then skip the annoyance of manually editing a bunch of printing menus to configure the paper size, tray, glossy paper, DPI, 4x6” page size, and a specific color profile."
+    }
+  
+
+  
+    ,{
+      "title"			: "Backing up Postgres Databases with Docker",
+      "link"			: "/blog/docker-postgres-container-backups/",
+      "excerpt"		: "Docker is a pretty good abstraction, but has it some leaks. Today I was trying to deploy a test Postgres database with some data stored in it, and ran into problems shipping the data around between my machines using Docker."
+    }
+  
+
+  
+    ,{
+      "title"			: "Symmetric Encryption in Python",
+      "link"			: "/blog/symmetric-encryption-snippet/",
+      "excerpt"		: "Hashing strings is useful for creating unique identifiers for strings, blobs of data, etc. In Python, it’s sometimes handy to make your own hashing function from AES. Here’s a brief snippet of how to do that for short messages. Kind of fun!"
+    }
+  
+
+  
+    ,{
       "title"			: "Nodemon HTTP Server",
       "link"			: "/blog/nodemon-http-server/",
       "excerpt"		: "While playing with three.js today, I needed a hot-reloading JS webserver in a real hurry to serve out content. Here’s how to start a server at http://localhost:8080/ in just three lines:"
@@ -34,6 +58,22 @@
 
   
     ,{
+      "title"			: "Notes on CSS Popup Tooltips",
+      "link"			: "/blog/css-popups/",
+      "excerpt"		: "Front-end website development is not my strongest area, so I’m just going to share some notes I took on how to make a hover “tooltip” on some text using CSS. I have a feeling this will come up again as handy sometime."
+    }
+  
+
+  
+    ,{
+      "title"			: "Python CSV Load Times and the Feather Format",
+      "link"			: "/blog/python-csv-benchmarks/",
+      "excerpt"		: "One of the most common data science tasks is loading structured data in tabular form. For “small data”, a popular format is often Comma-Separated-Value (CSV), which nearly everybody can read and write correctly. For so-called “big data”, one often needs a database, preferably SQL database like Postgres, or if the dataset gets very large, then often NoSQL becomes the only practical choice. Well, what do you do when you have “medium data”? Data that is still small enough to fit on a single computer, but is too large to load into memory?"
+    }
+  
+
+  
+    ,{
       "title"			: "Composite Robot Construction",
       "link"			: "/blog/composite-robot-construction/",
       "excerpt"		: "This article describes the progress of a fiber-reinforced polymer monopod robot that I built over a period of about 30 days. My hope is that seeing some of the successes and failures I encountered will help you build your own composite robots. Foam and fiberglass are very versatile materials that are just as accessible to garage-level workshops as they are to research institutions, as I hope you will see."
@@ -58,6 +98,14 @@
 
   
     ,{
+      "title"			: "A Metta Meditation",
+      "link"			: "/blog/a-metta-meditation/",
+      "excerpt"		: "Sometimes, the best thing to do when you hear a good idea is just to pass it on."
+    }
+  
+
+  
+    ,{
       "title"			: "Connecting a Clojure REPL to a PostgreSQL Docker Container",
       "link"			: "/blog/docker-postgres/",
       "excerpt"		: "In this tutorial, we’ll launch Postgres (a.k.a. PostgreSQL) in a Docker container, create a Postgres database, and connect to it from a Clojure REPL. Postgres is a great open source SQL database with a long history, and is a good choice for many small-to-medium scale projects."
@@ -69,6 +117,14 @@
       "title"			: "Packaging and Running Clojure Apps Locally with Docker",
       "link"			: "/blog/clojure-apps-in-docker/",
       "excerpt"		: "This is just a simple tutorial on how to package and deploy a Clojure application to a Docker file, which can then be deployed locally, on a server, or in the cloud."
+    }
+  
+
+  
+    ,{
+      "title"			: "Adding Page Numbers to PDFs",
+      "link"			: "/blog/adding-page-numbers-to-pdfs/",
+      "excerpt"		: "This is just a post to share a simple bash script for automatically adding page numbers to PDF files. It’s particularly handy when you need to renumber a new document that is the concatenation of multiple scanned PDFs that were concatenated using pdfunite, a useful command line tool on Debian."
     }
   
 
@@ -825,6 +881,12 @@
   
 
   
+    ,{
+      "title"			: "About",
+      "link"			: "/about/",
+      "excerpt"		: "About Me"
+    }
+  
 
   
     ,{
@@ -834,14 +896,6 @@
     }
   
 
-  
-
-  
-    ,{
-      "title"			: "About",
-      "link"			: "/about/",
-      "excerpt"		: "About Me"
-    }
   
 
   

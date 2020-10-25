@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Loading CSVs in Clojure &#8211; Art is Never Finished</title>
 <meta name="description" content="Loading CSVs in Clojure is really easy using clojure.data.csv. Depending on what you will do with the data, you can either represent it in tabular form (as a vector of vectors), or as a list of hashmaps. Both approaches have their advantages and disadvantages, and here are some very stock functions for how to achieve that:
-
 ">
 <meta name="keywords" content="clojure, csv">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Loading CSVs in Clojure">
 <meta name="twitter:description" content="Loading CSVs in Clojure is really easy using clojure.data.csv. Depending on what you will do with the data, you can either represent it in tabular form (as a vector of vectors), or as a list of hashmaps. Both approaches have their advantages and disadvantages, and here are some very stock functions for how to achieve that:
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Loading CSVs in Clojure">
 <meta property="og:description" content="Loading CSVs in Clojure is really easy using clojure.data.csv. Depending on what you will do with the data, you can either represent it in tabular form (as a vector of vectors), or as a list of hashmaps. Both approaches have their advantages and disadvantages, and here are some very stock functions for how to achieve that:
-
 ">
 <meta property="og:url" content="/blog/loading-csvs-in-clojure/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,16 +135,16 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2019-02-16T00:00:00-08:00"><i class="fa fa-calendar-o"></i> February 16, 2019</time></span>
+        <span class="entry-date date published"><time datetime="2019-02-16T00:00:00+00:00"><i class="fa fa-calendar-o"></i> February 16, 2019</time></span>
         
         
         
         
       </footer>
       <div class="entry-content">
-        <p>Loading CSVs in Clojure is really easy using <code class="highlighter-rouge">clojure.data.csv</code>. Depending on what you will do with the data, you can either represent it in tabular form (as a vector of vectors), or as a list of hashmaps. Both approaches have their advantages and disadvantages, and here are some very stock functions for how to achieve that:</p>
+        <p>Loading CSVs in Clojure is really easy using <code class="language-plaintext highlighter-rouge">clojure.data.csv</code>. Depending on what you will do with the data, you can either represent it in tabular form (as a vector of vectors), or as a list of hashmaps. Both approaches have their advantages and disadvantages, and here are some very stock functions for how to achieve that:</p>
 
-<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">net.roboloco.csvs</span><span class="w">
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">net.roboloco.csvs</span><span class="w">
   </span><span class="s">"Functions for loading and saving CSVs."</span><span class="w">
   </span><span class="p">(</span><span class="no">:require</span><span class="w"> </span><span class="p">[</span><span class="n">clojure.data.csv</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">csv</span><span class="p">]))</span><span class="w">
 
@@ -202,10 +199,9 @@
   </span><span class="p">(</span><span class="nf">save-csv!</span><span class="w"> </span><span class="p">(</span><span class="nf">maps-&gt;tabular</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="s">"/some/other/path.csv"</span><span class="p">)</span><span class="w">
 
   </span><span class="p">)</span><span class="w">
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
-<p>Note that the above functions are not lazy, which is a good choice for CSVs 90% of the time. If you find yourself working with very large datasets that cannot be loaded all at once, you might want to adjust <code class="highlighter-rouge">load-csv</code>, <code class="highlighter-rouge">tabular-&gt;maps</code>, and <code class="highlighter-rouge">maps-&gt;tabular</code> to work lazily and incrementally.</p>
+<p>Note that the above functions are not lazy, which is a good choice for CSVs 90% of the time. If you find yourself working with very large datasets that cannot be loaded all at once, you might want to adjust <code class="language-plaintext highlighter-rouge">load-csv</code>, <code class="language-plaintext highlighter-rouge">tabular-&gt;maps</code>, and <code class="language-plaintext highlighter-rouge">maps-&gt;tabular</code> to work lazily and incrementally.</p>
 
         
       </div><!-- /.entry-content -->
@@ -225,7 +221,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

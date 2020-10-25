@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Project Euler Problem 58 &#8211; Art is Never Finished</title>
 <meta name="description" content="I figuratively stubbed my toe on problem 58, engineering a rather complex solution when a simple loop would have sufficed.
-
 ">
 <meta name="keywords" content="fractions, higher-order, primes">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Project Euler Problem 58">
 <meta name="twitter:description" content="I figuratively stubbed my toe on problem 58, engineering a rather complex solution when a simple loop would have sufficed.
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project Euler Problem 58">
 <meta property="og:description" content="I figuratively stubbed my toe on problem 58, engineering a rather complex solution when a simple loop would have sufficed.
-
 ">
 <meta property="og:url" content="/project-euler/problem-58/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,14 +135,14 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-08-18T10:17:24-07:00"><i class="fa fa-calendar-o"></i> August 18, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-08-18T17:17:24+00:00"><i class="fa fa-calendar-o"></i> August 18, 2010</time></span>
         
         
         
         
       </footer>
       <div class="entry-content">
-        <p>I figuratively stubbed my toe on <a href="http://projecteuler.net/index.php?section=problems&amp;id=58">problem 58</a>, engineering a rather complex solution when a simple <code class="highlighter-rouge">loop</code> would have sufficed.</p>
+        <p>I figuratively stubbed my toe on <a href="http://projecteuler.net/index.php?section=problems&amp;id=58">problem 58</a>, engineering a rather complex solution when a simple <code class="language-plaintext highlighter-rouge">loop</code> would have sufficed.</p>
 
 <p>My first idea was to write a higher-order function that would accept a lazy seq (of finite or infinite length), and return the fraction of the elements thus far that satisfied a particular predicate. Then, I could just start passing corner elements through that higher-order wrapper until the number of primes thins out to the desired (&lt;10%) level.</p>
 
@@ -188,7 +185,7 @@
 (<span style="color: #729fcf;">time</span> (euler-58)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 5767.411147 msecs"
 </span></code></pre>
 
-<p>After writing that, I felt a little embarrassed about the extra work created by explicitly creating <code class="highlighter-rouge">sides</code> and then bundling it with the fractional values that are really important. Surely, an implicit solution would work just as well, and be a little more concise?</p>
+<p>After writing that, I felt a little embarrassed about the extra work created by explicitly creating <code class="language-plaintext highlighter-rouge">sides</code> and then bundling it with the fractional values that are really important. Surely, an implicit solution would work just as well, and be a little more concise?</p>
 
 <pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-58</span> []
   (<span style="color: #8ae234;">let</span> [fracs (<span style="color: #729fcf;">take-while</span> #(<span style="color: #8ae234;">or</span> (<span style="color: #729fcf;">=</span> % 0)  <span style="color: #A8AaA5;">; </span><span style="color: #A8AaA5;">Don't stop on 1st element
@@ -198,7 +195,7 @@
 
 <p>Hmmm…It’s shorter, but not really that much prettier. If anything, it’s probably harder to debug now with all those magic numbers floating around.</p>
 
-<p>At this point, I wondered what would have happened if I had avoided theoretical elegance and instead taken the obvious, practical solution: use <code class="highlighter-rouge">loop</code> and avoid completely my <code class="highlighter-rouge">frac-satisfying-pred</code> higher-order function.</p>
+<p>At this point, I wondered what would have happened if I had avoided theoretical elegance and instead taken the obvious, practical solution: use <code class="language-plaintext highlighter-rouge">loop</code> and avoid completely my <code class="language-plaintext highlighter-rouge">frac-satisfying-pred</code> higher-order function.</p>
 
 <pre><code>(<span style="color: #729fcf;">use</span> '[clojure.contrib.lazy-seqs <span style="color: #729fcf;">:only</span> (primes)])
 
@@ -221,7 +218,7 @@
 (<span style="color: #729fcf;">time</span> (euler-58-loop)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 5774.851647 msecs"
 </span></code></pre>
 
-<p>I’m a little surprised that this didn’t perform dramatically faster than my original code because <code class="highlighter-rouge">loop</code> usually is quite performant when used properly. I guess the bottleneck is somewhere else.</p>
+<p>I’m a little surprised that this didn’t perform dramatically faster than my original code because <code class="language-plaintext highlighter-rouge">loop</code> usually is quite performant when used properly. I guess the bottleneck is somewhere else.</p>
 
 <p>Ciao for now!</p>
 
@@ -243,7 +240,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

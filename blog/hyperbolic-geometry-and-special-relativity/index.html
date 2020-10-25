@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Hyperbolic Geometry & Special Relativity &#8211; Art is Never Finished</title>
 <meta name="description" content="While studying An Introduction to Particle Physics on a recent flight to Japan – studying math that is way above my head is a nerdy hobby of mine – I came across a simple viewpoint on special relativity that really stunned me:
-
 ">
 <meta name="keywords" content="">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Hyperbolic Geometry & Special Relativity">
 <meta name="twitter:description" content="While studying An Introduction to Particle Physics on a recent flight to Japan – studying math that is way above my head is a nerdy hobby of mine – I came across a simple viewpoint on special relativity that really stunned me:
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hyperbolic Geometry & Special Relativity">
 <meta property="og:description" content="While studying An Introduction to Particle Physics on a recent flight to Japan – studying math that is way above my head is a nerdy hobby of mine – I came across a simple viewpoint on special relativity that really stunned me:
-
 ">
 <meta property="og:url" content="/blog/hyperbolic-geometry-and-special-relativity/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2017-06-02T00:00:00-07:00"><i class="fa fa-calendar-o"></i> June 02, 2017</time></span>
+        <span class="entry-date date published"><time datetime="2017-06-02T00:00:00+00:00"><i class="fa fa-calendar-o"></i> June 02, 2017</time></span>
         
         
         
@@ -151,23 +148,21 @@
   <p>Consider a spatial rotation around, say, the z-axis (or, equivalently, mixing the x and y coordinates). Such a transformation is called an <strong>Euler Transformation</strong>, and takes the form</p>
 </blockquote>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{eqnarray*}
- t^{\prime} & = & t\\
- x^{\prime} & = & x\cos\theta+y\sin\theta\\
- y^{\prime} & = & -x\cos\theta+y\sin\theta\\
- z^{\prime} & = & z \end{eqnarray*} %]]></script>
+\[\begin{eqnarray*}
+ t^{\prime} &amp; = &amp; t\\
+ x^{\prime} &amp; = &amp; x\cos\theta+y\sin\theta\\
+ y^{\prime} &amp; = &amp; -x\cos\theta+y\sin\theta\\
+ z^{\prime} &amp; = &amp; z \end{eqnarray*}\]
 
 <blockquote>
   <p>where \(\theta\) is the angle of rotation, called the <strong>Euler Angle</strong>. We can simultaneously express a Lorentz transformation as a sort of “rotation” that mixes a spatial dimension and a time dimension, as follows</p>
 </blockquote>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{eqnarray*}
-t^{\prime} & = & t\cosh\theta-x\sinh\theta\\
-x^{\prime} & = & -t\sinh\theta+x\cosh\theta\\
-y^{\prime} & = & y\\
-z^{\prime} & = & z\end{eqnarray*} %]]></script>
+\[\begin{eqnarray*}
+t^{\prime} &amp; = &amp; t\cosh\theta-x\sinh\theta\\
+x^{\prime} &amp; = &amp; -t\sinh\theta+x\cosh\theta\\
+y^{\prime} &amp; = &amp; y\\
+z^{\prime} &amp; = &amp; z\end{eqnarray*}\]
 
 <blockquote>
   <p>where \(\theta \) is defined by the relationship \(\beta = \tan(\theta) \).</p>
@@ -179,12 +174,11 @@ z^{\prime} & = & z\end{eqnarray*} %]]></script>
 
 <p>To try to clear the matter in my mind, I made a little table of some of the definitions of sine, cosine, and their hyperbolic equivalents:</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{eqnarray}
-\sin(x) & = & \frac{1}{2}(e^{ix}-e^{-ix}) & = & \sum_{k=0}^{\infty}\frac{(-1)^{k}x^{2k+1}}{(2k+1)!} \\
-\cos(x) & = & \frac{1}{2}(e^{ix}+e^{-ix}) & = & \sum_{k=0}^{\infty}\frac{(-1)^{k}x^{2k}}{(2k)!} \\
-\sinh(x) & = & \frac{1}{2}(e^{x}-e^{-x}) & = & \sum_{k=0}^{\infty}\frac{x^{2k+1}}{(2k+1)!} \\
-\cosh(x) & = & \frac{1}{2}(e^{x}+e^{-x}) & = & \sum_{k=0}^{\infty}\frac{x^{2k}}{(2k)!} \end{eqnarray} %]]></script>
+\[\begin{eqnarray}
+\sin(x) &amp; = &amp; \frac{1}{2}(e^{ix}-e^{-ix}) &amp; = &amp; \sum_{k=0}^{\infty}\frac{(-1)^{k}x^{2k+1}}{(2k+1)!} \\
+\cos(x) &amp; = &amp; \frac{1}{2}(e^{ix}+e^{-ix}) &amp; = &amp; \sum_{k=0}^{\infty}\frac{(-1)^{k}x^{2k}}{(2k)!} \\
+\sinh(x) &amp; = &amp; \frac{1}{2}(e^{x}-e^{-x}) &amp; = &amp; \sum_{k=0}^{\infty}\frac{x^{2k+1}}{(2k+1)!} \\
+\cosh(x) &amp; = &amp; \frac{1}{2}(e^{x}+e^{-x}) &amp; = &amp; \sum_{k=0}^{\infty}\frac{x^{2k}}{(2k)!} \end{eqnarray}\]
 
 <p>Look at how the hyperbolic trig functions have no need of the imaginary number \(i=\sqrt{-1}\) or the alternating -1’s in the infinite series. One of the most frustrating things about \(i\) is that it is so incredibly useful algebraically, but it also makes things more cumbersome because expressions in general become more – pardon the pun – complex. The geometric meaning of the imaginary number is often associated with rotations, but I wonder if there are more geometric ways of understanding the same operation that have no need for the imaginary number per se. I would prefer to see mathematical expressions that are as simple as possible, but no simpler.</p>
 
@@ -210,7 +204,7 @@ z^{\prime} & = & z\end{eqnarray*} %]]></script>
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

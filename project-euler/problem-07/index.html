@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Project Euler Problem 7 &#8211; Art is Never Finished</title>
 <meta name="description" content="The seventh euler problem requires us to compute the 10001st prime number. To make this problem a bit harder, I decided that the function which will generate prime numbers must be lazy, or at least appear so to the consumer.
-
 ">
 <meta name="keywords" content="benchmarks, primes">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Project Euler Problem 7">
 <meta name="twitter:description" content="The seventh euler problem requires us to compute the 10001st prime number. To make this problem a bit harder, I decided that the function which will generate prime numbers must be lazy, or at least appear so to the consumer.
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project Euler Problem 7">
 <meta property="og:description" content="The seventh euler problem requires us to compute the 10001st prime number. To make this problem a bit harder, I decided that the function which will generate prime numbers must be lazy, or at least appear so to the consumer.
-
 ">
 <meta property="og:url" content="/project-euler/problem-07/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-06-04T01:29:30-07:00"><i class="fa fa-calendar-o"></i> June 04, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-06-04T08:29:30+00:00"><i class="fa fa-calendar-o"></i> June 04, 2010</time></span>
         
         
         
@@ -278,7 +275,7 @@
 (<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">lazy-primes-puzzler</span>  []
   (<span style="color: #729fcf;">concat</span> [2 3 5 7] (sieve (spin (wheel2357) 11))))</code></pre>
 
-<p>Interestingly, the code for <code class="highlighter-rouge">clojure.contrib.lazy-seq/primes</code> does not use the sieve of Eratosthenes, and uses the same algorithm that I used in <code class="highlighter-rouge">lazy-primes-2</code>. As near as I can tell, it exploits clojure’s memoization on lazy lists by carefully using the same var, rather than using an explicit vector as in <code class="highlighter-rouge">lazy-primes-2</code>. The automatic memoization makes it a little hard to benchmark directly, so I defined two new versions (the memoryless ‘<code class="highlighter-rouge">func</code>’) version, and the memoized ‘<code class="highlighter-rouge">var</code>’ version. By running ‘anti-memoization-hack’ between tests, the var containing the lazy seq will be reset between benchmarks so that memozation only occurs within a single benchmark run. Let’s compare their code:</p>
+<p>Interestingly, the code for <code class="language-plaintext highlighter-rouge">clojure.contrib.lazy-seq/primes</code> does not use the sieve of Eratosthenes, and uses the same algorithm that I used in <code class="language-plaintext highlighter-rouge">lazy-primes-2</code>. As near as I can tell, it exploits clojure’s memoization on lazy lists by carefully using the same var, rather than using an explicit vector as in <code class="language-plaintext highlighter-rouge">lazy-primes-2</code>. The automatic memoization makes it a little hard to benchmark directly, so I defined two new versions (the memoryless ‘<code class="language-plaintext highlighter-rouge">func</code>’) version, and the memoized ‘<code class="language-plaintext highlighter-rouge">var</code>’ version. By running ‘anti-memoization-hack’ between tests, the var containing the lazy seq will be reset between benchmarks so that memozation only occurs within a single benchmark run. Let’s compare their code:</p>
 
 <pre><code>(<span style="color: #729fcf;">use</span> 'clojure.contrib.def)
 
@@ -315,7 +312,7 @@
                         2 6 6 4 2 4 6 2 6 4 2 4 2 10 2 10])]
       (primes-from 11 wheel)))))</code></pre>
 
-<p>As you can see, <code class="highlighter-rouge">lazy-primes-contrib-var</code> will still exploit memoization, while <code class="highlighter-rouge">lazy-primes-contrib-func</code> will not have any memory at all, and act similar to those one-line <a href="http://www.haskell.org/haskellwiki/Prime_numbers">haskell snippets for making primes</a> that people throw around on the web.</p>
+<p>As you can see, <code class="language-plaintext highlighter-rouge">lazy-primes-contrib-var</code> will still exploit memoization, while <code class="language-plaintext highlighter-rouge">lazy-primes-contrib-func</code> will not have any memory at all, and act similar to those one-line <a href="http://www.haskell.org/haskellwiki/Prime_numbers">haskell snippets for making primes</a> that people throw around on the web.</p>
 
 <p>My favorite solution was by <a href="http://clj-me.cgrand.net/2009/07/30/everybody-loves-the-sieve-of-eratosthenes/">Cristophe Grande</a>, not just because he followed a similar approach to me, but also because he was very clever in his use of the hash map. He realized that there is no need to ‘queue’ the entries in the map as I had done; once a number has been marked ‘composite’ in the map, we don’t need to mark it again with each new factor we find. Instead of appending a vector of the prime factors under each composite number key, we could just continue searching for higher, as-yet-unmarked composite that we would have to find later anyway.</p>
 
@@ -411,12 +408,12 @@ user&gt; (<span style="color: #729fcf;">time</span> (<span style="color: #729fcf
 <p>My takeaway from this exercise was:</p>
 
 <ul>
-  <li>Implementing the sieve properly (unlike <code class="highlighter-rouge">lazy-primes-1</code>) is essential.</li>
+  <li>Implementing the sieve properly (unlike <code class="language-plaintext highlighter-rouge">lazy-primes-1</code>) is essential.</li>
   <li>A better algorithm (the Sieve vs Naive algorithm) wins.</li>
-  <li>A simpler datastructure (<code class="highlighter-rouge">lazy-primes-cgrande</code>) wins.</li>
-  <li>More sophisticated code may be mildly counterproductive. (<code class="highlighter-rouge">lazy-primes-puzzler</code>)</li>
-  <li>Hashmaps can be really fast! (<code class="highlighter-rouge">lazy-primes-cgrande</code>,<code class="highlighter-rouge">lazy-primes-3</code>)</li>
-  <li>Managing the list of primes manually (<code class="highlighter-rouge">lazy-primes-2</code>) is slightly faster than letting clojure memoize automatically (<code class="highlighter-rouge">clojure.contrib.lazy-seqs/primes</code>), but then again memoization will probably be better for most applications.</li>
+  <li>A simpler datastructure (<code class="language-plaintext highlighter-rouge">lazy-primes-cgrande</code>) wins.</li>
+  <li>More sophisticated code may be mildly counterproductive. (<code class="language-plaintext highlighter-rouge">lazy-primes-puzzler</code>)</li>
+  <li>Hashmaps can be really fast! (<code class="language-plaintext highlighter-rouge">lazy-primes-cgrande</code>,<code class="language-plaintext highlighter-rouge">lazy-primes-3</code>)</li>
+  <li>Managing the list of primes manually (<code class="language-plaintext highlighter-rouge">lazy-primes-2</code>) is slightly faster than letting clojure memoize automatically (<code class="language-plaintext highlighter-rouge">clojure.contrib.lazy-seqs/primes</code>), but then again memoization will probably be better for most applications.</li>
 </ul>
 
 
@@ -438,7 +435,7 @@ user&gt; (<span style="color: #729fcf;">time</span> (<span style="color: #729fcf
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

@@ -10,7 +10,6 @@
 
 (def fibonacci (map first (iterate (fn [[a b]] (vector b (+ a b))) [1 1])))
 
-
 ">
 <meta name="keywords" content="digits, fibonacci">
 
@@ -20,7 +19,6 @@
 <meta name="twitter:description" content="Problem 25 asks us to find the index of the first Fibonacci number to have more than 1000 digits. Here’s my first solution, which boils down to making a single, human-readable line at the end.
 
 (def fibonacci (map first (iterate (fn [[a b]] (vector b (+ a b))) [1 1])))
-
 
 ">
 <meta name="twitter:site" content="@ivarthorson">
@@ -36,7 +34,6 @@
 <meta property="og:description" content="Problem 25 asks us to find the index of the first Fibonacci number to have more than 1000 digits. Here’s my first solution, which boils down to making a single, human-readable line at the end.
 
 (def fibonacci (map first (iterate (fn [[a b]] (vector b (+ a b))) [1 1])))
-
 
 ">
 <meta property="og:url" content="/project-euler/problem-25/">
@@ -147,7 +144,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-07-09T03:28:58-07:00"><i class="fa fa-calendar-o"></i> July 09, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-07-09T10:28:58+00:00"><i class="fa fa-calendar-o"></i> July 09, 2010</time></span>
         
         
         
@@ -172,7 +169,7 @@
 (<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-25</span> []
   (<span style="color: #729fcf;">inc</span> (first-where #(<span style="color: #729fcf;">&gt;=</span> (num-digits %) 1000) fibonacci)))</code></pre>
 
-<p>But nearly equivalent performance can be achieved using <code class="highlighter-rouge">clojure-contrib.seq-utils</code>, and if we do so we need even fewer lines of code:</p>
+<p>But nearly equivalent performance can be achieved using <code class="language-plaintext highlighter-rouge">clojure-contrib.seq-utils</code>, and if we do so we need even fewer lines of code:</p>
 
 <pre><code>(<span style="color: #729fcf;">use</span> '[clojure.contrib.seq-utils <span style="color: #729fcf;">:only</span> (indexed find-first)])
 
@@ -182,7 +179,7 @@
   (<span style="color: #729fcf;">inc</span> (<span style="color: #729fcf;">first</span> (find-first #(<span style="color: #729fcf;">&gt;=</span> (<span style="color: #729fcf;">count</span> (<span style="color: #729fcf;">str</span> (<span style="color: #729fcf;">second</span> %))) 1000)
                       (indexed fibonacci)))))</code></pre>
 
-<p>As usual, proper exploitation of Clojure’s sequence abstraction gives us the shortest solution. Because <code class="highlighter-rouge">first-where</code> may be useful in the future, we could also redefine it as:</p>
+<p>As usual, proper exploitation of Clojure’s sequence abstraction gives us the shortest solution. Because <code class="language-plaintext highlighter-rouge">first-where</code> may be useful in the future, we could also redefine it as:</p>
 
 <pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">first-where</span> [condition seq]
   <span style="color: #Fd7f98;">"Returns index of the first item in seq that satisfies condition."</span>
@@ -208,7 +205,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

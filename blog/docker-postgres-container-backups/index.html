@@ -1,0 +1,370 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Backing up Postgres Databases with Docker &#8211; Art is Never Finished</title>
+<meta name="description" content="Docker is a pretty good abstraction, but has it some leaks. Today I was trying to deploy a test Postgres database with some data stored in it, and ran into problems shipping the data around between my machines using Docker.
+">
+<meta name="keywords" content="docker, postgres, sql">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Backing up Postgres Databases with Docker">
+<meta name="twitter:description" content="Docker is a pretty good abstraction, but has it some leaks. Today I was trying to deploy a test Postgres database with some data stored in it, and ran into problems shipping the data around between my machines using Docker.
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Backing up Postgres Databases with Docker">
+<meta property="og:description" content="Docker is a pretty good abstraction, but has it some leaks. Today I was trying to deploy a test Postgres database with some data stored in it, and ran into problems shipping the data around between my machines using Docker.
+">
+<meta property="og:url" content="/blog/docker-postgres-container-backups/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="/blog/docker-postgres-container-backups/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="/about/" >About</a></li>
+		  
+		    
+		    <li><a href="/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="/tags/#docker" title="Pages tagged docker">docker</a></li><li><a href="/tags/#postgres" title="Pages tagged postgres">postgres</a></li><li><a href="/tags/#sql" title="Pages tagged sql">sql</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Backing up Postgres Databases with Docker</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2019-04-26T00:00:00+00:00"><i class="fa fa-calendar-o"></i> April 26, 2019</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>Docker is a pretty good abstraction, but has it some leaks. Today I was trying to deploy a test Postgres database with some data stored in it, and ran into problems shipping the data around between my machines using Docker.</p>
+
+<p>In particular,</p>
+
+<ol>
+  <li>
+    <p><em>Why is there no ability to load/save docker volumes?</em> This is just a real headscratcher, and would be so nice to have built-in.</p>
+  </li>
+  <li>
+    <p><em>Why does <code class="language-plaintext highlighter-rouge">docker commit</code>, <code class="language-plaintext highlighter-rouge">docker save</code>, and <code class="language-plaintext highlighter-rouge">docker load</code> not work with Postgres?</em> My conclusion is that the container abstraction appears to be leaky, and that one <strong>must</strong> use <a href="https://stackoverflow.com/questions/24718706/backup-restore-a-dockerized-postgresql-database">Postgres-specific backup techniques to store what is in a container</a>.</p>
+  </li>
+</ol>
+
+<p>Let’s go through the five stages of Docker Grieving to see how I ended up at this perspective, using the data ingest technique from an <a href="../csv-etl-in-clojure">earlier post</a>.</p>
+
+<h2 id="stage-1-denial-that-docker-does-not-have-volume-saveload">Stage 1: Denial (that docker does not have volume save/load)</h2>
+
+<p>After creating and mounting docker volumes that contain the postgres data directories:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nv">$ APP</span><span class="o">=</span><span class="s2">"my-app-name"</span>
+
+<span class="nv">$ </span>docker volume save my-docker-postgres-volume | <span class="nb">gzip</span> <span class="nt">-c</span> <span class="o">&gt;</span> some-file.gz
+
+Usage:	docker volume COMMAND
+
+Manage volumes
+
+Commands:
+  create      Create a volume
+  inspect     Display detailed information on one or more volumes
+  <span class="nb">ls          </span>List volumes
+  prune       Remove all unused <span class="nb">local </span>volumes
+  <span class="nb">rm          </span>Remove one or more volumes
+
+Run <span class="s1">'docker volume COMMAND --help'</span> <span class="k">for </span>more information on a command.
+</code></pre></div></div>
+
+<p>…<a href="https://www.destroyallsoftware.com/talks/wat">wat</a>? There’s no <code class="language-plaintext highlighter-rouge">docker volume save</code> or <code class="language-plaintext highlighter-rouge">docker volume load</code>?</p>
+
+<h2 id="stage-2-anger-at-writing-my-own-backup-script">Stage 2: Anger (at writing my own backup script)</h2>
+
+<p>OK, let’s google this! <a href="https://stackoverflow.com/questions/26331651/how-can-i-backup-a-docker-container-with-its-data-volumes">Stack overflow</a> has some helpful suggestions, and the number of blog posts this is a common problem. Everybody seems to roll some variant of this approach:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Backup the volume, using a temporary "debian:jessie" instance to do make the tarball, and temporarily putting the resulting file in /tmp.</span>
+docker run <span class="nt">--rm</span> <span class="nt">-v</span> /tmp:/backup-to <span class="nt">-v</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-volume</span>:/backup-from debian:jessie <span class="nb">tar</span> <span class="nt">-czf</span> /backup-to/backup.tar.gz /backup-from
+<span class="nb">mv</span> <span class="nt">-f</span> /tmp/backup.tar.gz <span class="s2">"./</span><span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="s2">-postgres-volume.tar.gz"</span>
+
+<span class="c"># Create a new volume</span>
+docker volume create <span class="nt">--name</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-volume2</span>
+
+<span class="c"># Unpack the tar.gz into the volume2</span>
+<span class="nb">cp</span> <span class="s2">"./</span><span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="s2">-postgres-volume.tar.gz"</span> /tmp/backup.tar.gz
+docker run <span class="nt">--rm</span> <span class="nt">-v</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-volume2</span>:/recover <span class="nt">-v</span> /tmp:/backup debian:jessie bash <span class="nt">-c</span> <span class="s2">"cd /recover &amp;&amp; tar -xzf /backup/backup.tar.gz"</span>
+
+<span class="c"># Spawn a second ephemeral container to test the new volume</span>
+docker run  <span class="nt">--name</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-container2</span> <span class="nt">--env</span> <span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>mysecretpassword <span class="nt">-p</span> 5432:5432 <span class="nt">--detach</span> <span class="nt">--rm</span> <span class="nt">-v</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-volume2</span>:/var/lib/postgresql/data postgres
+</code></pre></div></div>
+
+<p>While it looks like everything succeed, when you try to actually connect, you’ll see an error message saying the database does not exist:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+Exception in thread "main" org.postgresql.util.PSQLException: FATAL: database "csv2sql" does not exist
+...
+
+</code></pre></div></div>
+
+<h2 id="stage-3-bargaining-and-trying-to-back-up-volumeless-images">Stage 3: Bargaining (and Trying to Back Up Volumeless Images)</h2>
+
+<p>OK, so maybe I can just forget about using Docker Volumes, and do the uglier thing and store all the data in the container itself, convert the container into an image, and then use <code class="language-plaintext highlighter-rouge">docker load</code> and <code class="language-plaintext highlighter-rouge">docker save</code> on the image.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Make a container (w/o any volumes)</span>
+docker run  <span class="nt">--name</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-standalone</span> <span class="nt">--env</span> <span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>mysecretpassword <span class="nt">-p</span> 5432:5432 <span class="nt">--detach</span> postgres
+
+<span class="c"># Link a temporary image to jump in and create the database: (will prompt for password)</span>
+docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--link</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-standalone</span>:postgres postgres psql <span class="nt">-h</span> postgres <span class="nt">-U</span> postgres <span class="nt">--command</span><span class="o">=</span><span class="s1">'CREATE DATABASE csv2sql'</span> 
+
+<span class="c"># Do the data ingest</span>
+<span class="c"># See: https://github.com/ivarthorson/csv2sql</span>
+<span class="nv">CSVDIR</span><span class="o">=</span>/path/to/csvs/ java <span class="nt">-jar</span> /path/to/csv2sql-0.1.0-SNAPSHOT-standalone.jar
+
+<span class="c"># Stop it</span>
+docker stop <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-standalone</span>
+
+<span class="c"># Make it an image</span>
+docker commit <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-standalone</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-standalone</span>:latest
+
+<span class="c"># Export it</span>
+docker save <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-standalone</span> | <span class="nb">gzip</span> <span class="nt">-c</span> <span class="o">&gt;</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-standalone-image</span>.tgz
+
+<span class="c"># Import it</span>
+docker load &lt; <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-docker-standalone-image</span>.tgz
+
+<span class="c"># Try to launch a new instance</span>
+docker run  <span class="nt">--name</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-container2</span> <span class="nt">--env</span> <span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>mysecretpassword <span class="nt">-p</span> 5432:5432 <span class="nt">--detach</span> <span class="nt">--rm</span> <span class="nt">-v</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-volume2</span>:/var/lib/postgresql/data <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres</span>
+
+</code></pre></div></div>
+
+<p>Same problem as before – the database doesn’t appear to exist to clients.</p>
+
+<h2 id="stage-4-depression">Stage 4: Depression</h2>
+
+<p><strong>(goes off to cry into his beer)</strong></p>
+
+<h2 id="stage-5-acceptance">Stage 5: Acceptance</h2>
+
+<p>I guess I’m missing something important here about how Postgres and Docker interact, but I was sick of this stupid problem, and sick of stupid Docker.</p>
+
+<p>I ended up building the uberjar and the postgres data dump like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="nv">APP</span><span class="o">=</span><span class="s2">"my-app"</span>
+
+<span class="nb">echo</span> <span class="s2">"Building an uberjar..."</span>
+lein <span class="k">do </span>clean, uberjar
+
+<span class="nb">cp</span> <span class="nt">-f</span> target/<span class="k">${</span><span class="nv">APP</span><span class="k">}</span>.jar standalone
+
+<span class="nb">echo</span> <span class="s2">"Building the </span><span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="s2">-postgres-container..."</span>
+docker container stop <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-container</span>
+docker container <span class="nb">rm</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-container</span>
+docker image <span class="nb">rm</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres</span>
+docker run  <span class="nt">--rm</span> <span class="nt">--name</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-container</span> <span class="nt">--env</span> <span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>mysecretpassword <span class="nt">-p</span> 5432:5432 <span class="nt">--detach</span> postgres
+<span class="nb">sleep </span>5  <span class="c"># Give postgres time to start up</span>
+
+<span class="nb">echo</span> <span class="s2">"Filling </span><span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="s2">-postgres-container with data..."</span>
+docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--link</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-container</span>:postgres <span class="nt">--env</span> <span class="nv">PGPASSWORD</span><span class="o">=</span>mysecretpassword postgres psql <span class="nt">-h</span> postgres <span class="nt">-U</span> postgres <span class="nt">--command</span><span class="o">=</span><span class="s1">'CREATE DATABASE csv2sql;'</span>
+<span class="c"># See: https://github.com/ivarthorson/csv2sql</span>
+<span class="nv">CSVDIR</span><span class="o">=</span>/path/to/csvs/ java <span class="nt">-jar</span> /path/to/csv2sql-0.1.0-SNAPSHOT-standalone.jar
+
+<span class="nb">echo</span> <span class="s2">"Exporting the database..."</span>
+docker <span class="nb">exec</span> <span class="nt">-t</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-container</span> pg_dumpall <span class="nt">-c</span> <span class="nt">-U</span> postgres | <span class="nb">gzip</span> <span class="nt">-c</span> <span class="o">&gt;</span> standalone/<span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres</span>.sql.gz
+
+docker stop <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-container</span>
+</code></pre></div></div>
+
+<p>From there, running the standalone (deployable) stuff is easy:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="nv">APP</span><span class="o">=</span><span class="s2">"my-app-name"</span>
+
+<span class="nv">THISDIR</span><span class="o">=</span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>
+<span class="nv">OBJ_DIR</span><span class="o">=</span><span class="k">${</span><span class="nv">THISDIR</span><span class="k">}</span><span class="s1">'/obj'</span>  <span class="c"># Please set this to where the object files are saved/stored</span>
+
+<span class="nb">echo</span> <span class="s2">"Using object directory: </span><span class="nv">$OBJ_DIR</span><span class="s2">"</span>
+
+<span class="nb">echo</span> <span class="s2">"Stupidly stopping and deleting any running containers...(errors are OK here)"</span>
+docker container stop <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-container</span>
+docker container <span class="nb">rm</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-container</span>
+
+<span class="nb">echo</span> <span class="s2">"Creating postgres container..."</span>
+docker run <span class="nt">--name</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-container</span> <span class="se">\</span>
+       <span class="nt">--env</span> <span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>mysecretpassword <span class="se">\</span>
+       <span class="nt">-p</span> 5432:5432 <span class="se">\</span>
+       <span class="nt">--rm</span> <span class="se">\</span>
+       <span class="nt">--detach</span> <span class="se">\</span>
+       postgres
+
+<span class="nb">echo</span> <span class="s2">"Waiting for postgres to start up..."</span>
+<span class="nb">sleep </span>5<span class="p">;</span>
+
+<span class="nb">echo</span> <span class="s2">"Dumping data into the postgres container..."</span>
+<span class="nb">cat</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres</span>.sql.gz | <span class="nb">gzip</span> <span class="nt">-c</span> <span class="nt">-d</span> | docker <span class="nb">exec</span> <span class="nt">-i</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span><span class="nt">-postgres-container</span> psql <span class="nt">-q</span> <span class="nt">-U</span> postgres
+
+<span class="nb">echo</span> <span class="s2">"Launching the HTTP Server"</span>
+java <span class="nt">-jar</span> <span class="k">${</span><span class="nv">APP</span><span class="k">}</span>.jar
+</code></pre></div></div>
+
+<p>I’m thinking of coining a new rule for myself:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"Docker is for managing software builds, not for managing data."
+</code></pre></div></div>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="/blog/symmetric-encryption-snippet/" class="btn" title="Symmetric Encryption in Python">Previous</a>
+      
+      
+        <a href="/blog/photo-prints-from-the-command-line/" class="btn" title="Printing Photos from the Linux Command Line">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2020 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = '';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Project Euler Problem 43 &#8211; Art is Never Finished</title>
 <meta name="description" content="More pandigital problem madness for problem 43. Honestly, I think the guys at Project Euler were running out of ideas or something.
-
 ">
 <meta name="keywords" content="pandigital, permutations">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Project Euler Problem 43">
 <meta name="twitter:description" content="More pandigital problem madness for problem 43. Honestly, I think the guys at Project Euler were running out of ideas or something.
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project Euler Problem 43">
 <meta property="og:description" content="More pandigital problem madness for problem 43. Honestly, I think the guys at Project Euler were running out of ideas or something.
-
 ">
 <meta property="og:url" content="/project-euler/problem-43/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-07-30T07:35:15-07:00"><i class="fa fa-calendar-o"></i> July 30, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-07-30T14:35:15+00:00"><i class="fa fa-calendar-o"></i> July 30, 2010</time></span>
         
         
         
@@ -165,7 +162,7 @@
 (<span style="color: #729fcf;">time</span> (euler-43)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 29441.089387 msecs"
 </span></code></pre>
 
-<p>The speed of the above algorithm could be greatly improved by not computing permutations whose first several digits do not satisfy the particular <code class="highlighter-rouge">special?</code> property for which we are testing. This means we could use <code class="highlighter-rouge">nth-permutation</code> from <a href="index.php?p=261">problem 24</a>, and check how many digits are matching sequentially. Then we can skip ahead as needed until we find a match.</p>
+<p>The speed of the above algorithm could be greatly improved by not computing permutations whose first several digits do not satisfy the particular <code class="language-plaintext highlighter-rouge">special?</code> property for which we are testing. This means we could use <code class="language-plaintext highlighter-rouge">nth-permutation</code> from <a href="index.php?p=261">problem 24</a>, and check how many digits are matching sequentially. Then we can skip ahead as needed until we find a match.</p>
 
 <pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">factorial</span> [n]
   (<span style="color: #729fcf;">reduce</span> * (<span style="color: #729fcf;">range</span> 2 (<span style="color: #729fcf;">inc</span> n))))
@@ -229,7 +226,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

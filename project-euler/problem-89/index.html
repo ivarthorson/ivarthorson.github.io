@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Project Euler Problem 89 &#8211; Art is Never Finished</title>
 <meta name="description" content="Problem 89 was kind of fun: we needed to convert some sloppily written roman-numerals into their more efficient, minimal representations.
-
 ">
 <meta name="keywords" content="roman numerals">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Project Euler Problem 89">
 <meta name="twitter:description" content="Problem 89 was kind of fun: we needed to convert some sloppily written roman-numerals into their more efficient, minimal representations.
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project Euler Problem 89">
 <meta property="og:description" content="Problem 89 was kind of fun: we needed to convert some sloppily written roman-numerals into their more efficient, minimal representations.
-
 ">
 <meta property="og:url" content="/project-euler/problem-89/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-11-16T09:28:30-08:00"><i class="fa fa-calendar-o"></i> November 16, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-11-16T17:28:30+00:00"><i class="fa fa-calendar-o"></i> November 16, 2010</time></span>
         
         
         
@@ -151,7 +148,7 @@
 
 <ol>
   <li>When converting from roman numerals to decimal digits, it is simplest to process the roman numeral from right to left.</li>
-  <li>Since I can only be placed before V and X, X before L and C, and C before D and M, the symmetry of these results as you move up by powers of ten suggests that we use a few simple <code class="highlighter-rouge">cond</code> statements to handle numbers from 1 to 10, and recurse to handle the increasingly higher powers of ten.</li>
+  <li>Since I can only be placed before V and X, X before L and C, and C before D and M, the symmetry of these results as you move up by powers of ten suggests that we use a few simple <code class="language-plaintext highlighter-rouge">cond</code> statements to handle numbers from 1 to 10, and recurse to handle the increasingly higher powers of ten.</li>
 </ol>
 
 <p>The code to implement these rules wasn’t particularly long. As usual, zipmap is very concise at creating mappings from characters to digits.</p>
@@ -199,7 +196,7 @@
 
 (euler-89 <span style="color: #Fd7f98;">"roman.txt"</span>)</code></pre>
 
-<p>You may notice that I used preconditions to indicate the <code class="highlighter-rouge">romanize</code> function only works for numbers less than 10000.</p>
+<p>You may notice that I used preconditions to indicate the <code class="language-plaintext highlighter-rouge">romanize</code> function only works for numbers less than 10000.</p>
 
         
       </div><!-- /.entry-content -->
@@ -219,7 +216,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

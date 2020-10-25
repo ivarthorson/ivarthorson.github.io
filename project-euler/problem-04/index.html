@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Project Euler Problem 4 &#8211; Art is Never Finished</title>
 <meta name="description" content="As usual, we begin with a  link to the problem.
-
 ">
 <meta name="keywords" content="palindromes">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Project Euler Problem 4">
 <meta name="twitter:description" content="As usual, we begin with a  link to the problem.
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project Euler Problem 4">
 <meta property="og:description" content="As usual, we begin with a  link to the problem.
-
 ">
 <meta property="og:url" content="/project-euler/problem-04/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-04-10T06:11:16-07:00"><i class="fa fa-calendar-o"></i> April 10, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-04-10T13:11:16+00:00"><i class="fa fa-calendar-o"></i> April 10, 2010</time></span>
         
         
         
@@ -163,7 +160,7 @@
 (<span style="color: #729fcf;">apply</span> max (<span style="color: #729fcf;">filter</span> palindromic? (<span style="color: #729fcf;">map</span> #(<span style="color: #729fcf;">apply</span> * %)
                                      (combinations-between 100 1000))))</code></pre>
 
-<p>Not beautiful, but it works. I’m not interested in delving into the problem structure of palindromic numbers here to optimize when the search can actually be stopped. You may notice the <code class="highlighter-rouge">reverse</code>’s that indicate I initially thought that trying combinations with decreasing magnitude would guarantee the largest palindromic number was found first, but this turned out to be not true.</p>
+<p>Not beautiful, but it works. I’m not interested in delving into the problem structure of palindromic numbers here to optimize when the search can actually be stopped. You may notice the <code class="language-plaintext highlighter-rouge">reverse</code>’s that indicate I initially thought that trying combinations with decreasing magnitude would guarantee the largest palindromic number was found first, but this turned out to be not true.</p>
 
 <p>Looking at <a href="http://clojure-euler.wikispaces.com/Problem+004">other solutions</a>, I wonder if indeed the more efficient approach is to generate the palindromes first, then look for factors? That way, we turn a problem we don’t know much about (palindromic number theory) into one we do (factorization).</p>
 
@@ -187,7 +184,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

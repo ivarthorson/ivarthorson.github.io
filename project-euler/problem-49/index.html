@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Project Euler Problem 49 &#8211; Art is Never Finished</title>
 <meta name="description" content="This problem was tricky. Although we get to reuse a significant amount of code for prime?, as-int, and choose-k, we still need to write two rather tricky functions to extract the special triples.
-
 ">
 <meta name="keywords" content="permutations, primes">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Project Euler Problem 49">
 <meta name="twitter:description" content="This problem was tricky. Although we get to reuse a significant amount of code for prime?, as-int, and choose-k, we still need to write two rather tricky functions to extract the special triples.
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project Euler Problem 49">
 <meta property="og:description" content="This problem was tricky. Although we get to reuse a significant amount of code for prime?, as-int, and choose-k, we still need to write two rather tricky functions to extract the special triples.
-
 ">
 <meta property="og:url" content="/project-euler/problem-49/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,14 +135,14 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-08-05T07:53:25-07:00"><i class="fa fa-calendar-o"></i> August 05, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-08-05T14:53:25+00:00"><i class="fa fa-calendar-o"></i> August 05, 2010</time></span>
         
         
         
         
       </footer>
       <div class="entry-content">
-        <p><a href="http://projecteuler.net/index.php?section=problems&amp;id=49">This problem</a> was tricky. Although we get to reuse a significant amount of code for <code class="highlighter-rouge">prime?</code>, <code class="highlighter-rouge">as-int</code>, and <code class="highlighter-rouge">choose-k</code>, we still need to write two rather tricky functions to extract the special triples.</p>
+        <p><a href="http://projecteuler.net/index.php?section=problems&amp;id=49">This problem</a> was tricky. Although we get to reuse a significant amount of code for <code class="language-plaintext highlighter-rouge">prime?</code>, <code class="language-plaintext highlighter-rouge">as-int</code>, and <code class="language-plaintext highlighter-rouge">choose-k</code>, we still need to write two rather tricky functions to extract the special triples.</p>
 
 <p>The solution I wrote actually is more general than may be needed because I wasn’t specifically looking for differences of 3330.</p>
 
@@ -184,7 +181,7 @@
         qs (<span style="color: #729fcf;">distinct</span> (<span style="color: #729fcf;">map</span> #(<span style="color: #729fcf;">sort</span> (p2q %)) ps))]
     (<span style="color: #729fcf;">remove</span> nil? (<span style="color: #729fcf;">map</span> has-special-triple? qs))))</code></pre>
 
-<p>Frankly, that may be one of the more incomprehensible things I have written so far. Here’s the breakdown: <code class="highlighter-rouge">has-special-triple?</code> checks to see that given a sorted list of numbers, there are three numbers that are spaced evenly apart. <code class="highlighter-rouge">euler-49</code> generates primes in the right range, makes lists of permutations of each prime, makes sure the permutations are prime and four digits long (because a 0 in the leading position counts as 3 digits), and then returns all groups that satisfy the <code class="highlighter-rouge">has-special-triple?</code> property.</p>
+<p>Frankly, that may be one of the more incomprehensible things I have written so far. Here’s the breakdown: <code class="language-plaintext highlighter-rouge">has-special-triple?</code> checks to see that given a sorted list of numbers, there are three numbers that are spaced evenly apart. <code class="language-plaintext highlighter-rouge">euler-49</code> generates primes in the right range, makes lists of permutations of each prime, makes sure the permutations are prime and four digits long (because a 0 in the leading position counts as 3 digits), and then returns all groups that satisfy the <code class="language-plaintext highlighter-rouge">has-special-triple?</code> property.</p>
 
 <p>Got it? ;-)</p>
 
@@ -206,7 +203,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

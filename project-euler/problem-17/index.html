@@ -13,7 +13,6 @@
     s
     (apply str (concat s "-"(verbally (- n sub))))))
 
-
 ">
 <meta name="keywords" content="strings, words">
 
@@ -26,7 +25,6 @@
   (if (zero? (mod n 10))
     s
     (apply str (concat s "-"(verbally (- n sub))))))
-
 
 ">
 <meta name="twitter:site" content="@ivarthorson">
@@ -45,7 +43,6 @@
   (if (zero? (mod n 10))
     s
     (apply str (concat s "-"(verbally (- n sub))))))
-
 
 ">
 <meta property="og:url" content="/project-euler/problem-17/">
@@ -156,7 +153,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-06-26T06:16:52-07:00"><i class="fa fa-calendar-o"></i> June 26, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-06-26T13:16:52+00:00"><i class="fa fa-calendar-o"></i> June 26, 2010</time></span>
         
         
         
@@ -225,7 +222,7 @@
 (<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-17</span> []
   (<span style="color: #729fcf;">count</span> (<span style="color: #729fcf;">filter</span> lc-alpha? (<span style="color: #729fcf;">apply</span> concat (<span style="color: #729fcf;">map</span> verbally (<span style="color: #729fcf;">range</span> 1 1001))))))</code></pre>
 
-<p>Obviously, the <code class="highlighter-rouge">verbally</code> function is the problem. Packaging up that cond statement into something more elegant (such as an array) would go a long way towards making this shorter, as some people at <a href="http://clojure-euler.wikispaces.com/Problem+017">clojure-euler</a> did for this problem. I leave further exploration to them.</p>
+<p>Obviously, the <code class="language-plaintext highlighter-rouge">verbally</code> function is the problem. Packaging up that cond statement into something more elegant (such as an array) would go a long way towards making this shorter, as some people at <a href="http://clojure-euler.wikispaces.com/Problem+017">clojure-euler</a> did for this problem. I leave further exploration to them.</p>
 
 <p>Finally, it’s interesting to also think about the question “What if other languages besides English have strange ways of counting that require some strange conditional patterns? “ For example, the French say “quatre-vingt-dix” (four twenties and ten) for the number 90, the Germans count in an irregular order (e.g. einhunderteinundzwanzig = “one-hundred, one-and-twenty”), and the Japanese don’t even break things into groups of thousands, millions, billions the way europeans do (Japanese count by <a href="http://japanese.about.com/library/bllesson10.htm">groups of 10,000</a> not 1,000. They would say the number 1,000,000 as “one-hundred ten-thousands”).</p>
 
@@ -249,7 +246,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

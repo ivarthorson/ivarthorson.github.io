@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Project Euler Problem 28 &#8211; Art is Never Finished</title>
 <meta name="description" content="Problem 28 asks us to find the sums of the diagonals in a square matrix of numbers created by spiraling outward from the number 1 in a clockwise direction.
-
 ">
 <meta name="keywords" content="diagonals, spiral">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Project Euler Problem 28">
 <meta name="twitter:description" content="Problem 28 asks us to find the sums of the diagonals in a square matrix of numbers created by spiraling outward from the number 1 in a clockwise direction.
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project Euler Problem 28">
 <meta property="og:description" content="Problem 28 asks us to find the sums of the diagonals in a square matrix of numbers created by spiraling outward from the number 1 in a clockwise direction.
-
 ">
 <meta property="og:url" content="/project-euler/problem-28/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-07-15T06:25:53-07:00"><i class="fa fa-calendar-o"></i> July 15, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-07-15T13:25:53+00:00"><i class="fa fa-calendar-o"></i> July 15, 2010</time></span>
         
         
         
@@ -174,14 +171,14 @@
 
 (euler-28-revised 1001)</code></pre>
 
-<p>Maybe that code is a bit dense, but it doesn’t have any recursion, which means it should be safe for the stack even for very big spirals. If <code class="highlighter-rouge">flatten</code> is incremental, it probably is safe for the heap as well and could be used to compute really really big spirals. Let’s check if <code class="highlighter-rouge">flatten</code> is incremental and lazy:</p>
+<p>Maybe that code is a bit dense, but it doesn’t have any recursion, which means it should be safe for the stack even for very big spirals. If <code class="language-plaintext highlighter-rouge">flatten</code> is incremental, it probably is safe for the heap as well and could be used to compute really really big spirals. Let’s check if <code class="language-plaintext highlighter-rouge">flatten</code> is incremental and lazy:</p>
 
 <pre><code><span style="color: #8ae234;">user&gt; </span><span style="font-weight: bold;">(take 6 (flatten (partition 2 1 (range))))</span>
 (0 1 1 2 2 3)</code></pre>
 
-<p>Since <code class="highlighter-rouge">flatten</code> is working lazily, I am going to guess that when combined with <code class="highlighter-rouge">reduce</code> in the above, only a very small number of elements are held in memory here and this will not damage the heap even with a gajillion elements.</p>
+<p>Since <code class="language-plaintext highlighter-rouge">flatten</code> is working lazily, I am going to guess that when combined with <code class="language-plaintext highlighter-rouge">reduce</code> in the above, only a very small number of elements are held in memory here and this will not damage the heap even with a gajillion elements.</p>
 
-<p>I added the <code class="highlighter-rouge">assert</code> just to prevent myself from accidentally giving the function meaningless input values, but I’ve seen very little clojure code that uses <code class="highlighter-rouge">assert</code> yet so I’m not sure of the proper idiom for using it.</p>
+<p>I added the <code class="language-plaintext highlighter-rouge">assert</code> just to prevent myself from accidentally giving the function meaningless input values, but I’ve seen very little clojure code that uses <code class="language-plaintext highlighter-rouge">assert</code> yet so I’m not sure of the proper idiom for using it.</p>
 
 
         
@@ -202,7 +199,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

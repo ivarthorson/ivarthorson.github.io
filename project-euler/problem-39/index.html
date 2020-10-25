@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Project Euler Problem 39 &#8211; Art is Never Finished</title>
 <meta name="description" content="I found this one to be rather interesting, but maybe I just had a lot of coffee this morning and am in an especially good mood. Problem 39 asks us to find the number n &lt; 1000 for which there are the most number of right triangles with integer sides and a perimeter of n.
-
 ">
 <meta name="keywords" content="triangles">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Project Euler Problem 39">
 <meta name="twitter:description" content="I found this one to be rather interesting, but maybe I just had a lot of coffee this morning and am in an especially good mood. Problem 39 asks us to find the number n &lt; 1000 for which there are the most number of right triangles with integer sides and a perimeter of n.
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project Euler Problem 39">
 <meta property="og:description" content="I found this one to be rather interesting, but maybe I just had a lot of coffee this morning and am in an especially good mood. Problem 39 asks us to find the number n &lt; 1000 for which there are the most number of right triangles with integer sides and a perimeter of n.
-
 ">
 <meta property="og:url" content="/project-euler/problem-39/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-07-26T07:27:46-07:00"><i class="fa fa-calendar-o"></i> July 26, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-07-26T14:27:46+00:00"><i class="fa fa-calendar-o"></i> July 26, 2010</time></span>
         
         
         
@@ -175,7 +172,7 @@
 (<span style="color: #729fcf;">time</span> (euler-39)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 33.017842 msecs"
 </span></code></pre>
 
-<p>Writing <code class="highlighter-rouge">pythagorean-perimeters</code> was a little tricky, but once that was in place, pushing everything into a hashmap was a simple way to record the number of ways a particular perimeter could be formed. Performance seems very good, although I think <code class="highlighter-rouge">euler-39</code> could still be improved somehow by using a standard sequence function…</p>
+<p>Writing <code class="language-plaintext highlighter-rouge">pythagorean-perimeters</code> was a little tricky, but once that was in place, pushing everything into a hashmap was a simple way to record the number of ways a particular perimeter could be formed. Performance seems very good, although I think <code class="language-plaintext highlighter-rouge">euler-39</code> could still be improved somehow by using a standard sequence function…</p>
 
 <pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-39</span> []
   (<span style="color: #8ae234;">let</span> [h (frequencies (<span style="color: #729fcf;">map</span> #(<span style="color: #729fcf;">apply</span> + %) (pythagorean-perimeters 1000)))]
@@ -201,7 +198,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

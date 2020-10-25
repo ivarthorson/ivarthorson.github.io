@@ -26,7 +26,6 @@
         path  (a*-search est neigh start goal?)]
     (reduce + (map cost path))))
 
-
 ">
 <meta name="keywords" content="a* algorithm, dijkstra's algorithm, search">
 
@@ -52,7 +51,6 @@
                  (when (&lt; 1 j) {[i (dec j)] (cost [i (dec j)])})))
         path  (a*-search est neigh start goal?)]
     (reduce + (map cost path))))
-
 
 ">
 <meta name="twitter:site" content="@ivarthorson">
@@ -84,7 +82,6 @@
                  (when (&lt; 1 j) {[i (dec j)] (cost [i (dec j)])})))
         path  (a*-search est neigh start goal?)]
     (reduce + (map cost path))))
-
 
 ">
 <meta property="og:url" content="/project-euler/problem-83/">
@@ -195,14 +192,14 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-10-18T09:23:14-07:00"><i class="fa fa-calendar-o"></i> October 18, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-10-18T16:23:14+00:00"><i class="fa fa-calendar-o"></i> October 18, 2010</time></span>
         
         
         
         
       </footer>
       <div class="entry-content">
-        <p><a href="http://projecteuler.net/index.php?section=problems&amp;id=83">Problem 83</a> can be solved with A* exactly like the we did in <a href="?p=660">problem 81</a>. The only code that needs to be changed is the neighbors function <code class="highlighter-rouge">neigh</code> and the estimated cost-to-goal function <code class="highlighter-rouge">est</code>. Everything else can be reused from problem 81.</p>
+        <p><a href="http://projecteuler.net/index.php?section=problems&amp;id=83">Problem 83</a> can be solved with A* exactly like the we did in <a href="?p=660">problem 81</a>. The only code that needs to be changed is the neighbors function <code class="language-plaintext highlighter-rouge">neigh</code> and the estimated cost-to-goal function <code class="language-plaintext highlighter-rouge">est</code>. Everything else can be reused from problem 81.</p>
 
 <pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-83</span> []
   (<span style="color: #8ae234;">let</span> [mat   (load-matrix <span style="color: #Fd7f98;">"/zzz/work/matrix.txt"</span>)
@@ -224,7 +221,7 @@
 
 (<span style="color: #729fcf;">time</span> (euler-83))</code></pre>
 
-<p>With <code class="highlighter-rouge">est</code> set to always return zero, the A* search becomes effectively a memory-hungry version of <a href="http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra’s Algorithm</a>.</p>
+<p>With <code class="language-plaintext highlighter-rouge">est</code> set to always return zero, the A* search becomes effectively a memory-hungry version of <a href="http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra’s Algorithm</a>.</p>
 
         
       </div><!-- /.entry-content -->
@@ -244,7 +241,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

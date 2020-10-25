@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Project Euler Problem 46 &#8211; Art is Never Finished</title>
 <meta name="description" content="Problem 46 asks us to find the smallest composite number that can’t be written as a prime number plus twice a square.
-
 ">
 <meta name="keywords" content="primes, squares">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Project Euler Problem 46">
 <meta name="twitter:description" content="Problem 46 asks us to find the smallest composite number that can’t be written as a prime number plus twice a square.
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project Euler Problem 46">
 <meta property="og:description" content="Problem 46 asks us to find the smallest composite number that can’t be written as a prime number plus twice a square.
-
 ">
 <meta property="og:url" content="/project-euler/problem-46/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-08-02T07:44:36-07:00"><i class="fa fa-calendar-o"></i> August 02, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-08-02T14:44:36+00:00"><i class="fa fa-calendar-o"></i> August 02, 2010</time></span>
         
         
         
@@ -147,7 +144,7 @@
       <div class="entry-content">
         <p><a href="http://projecteuler.net/index.php?section=problems&amp;id=46">Problem 46</a> asks us to find the smallest composite number that can’t be written as a prime number plus twice a square.</p>
 
-<p>My first attempt involved writing <code class="highlighter-rouge">compositable?</code> with the <code class="highlighter-rouge">for</code> construct. It works, but is inefficient.</p>
+<p>My first attempt involved writing <code class="language-plaintext highlighter-rouge">compositable?</code> with the <code class="language-plaintext highlighter-rouge">for</code> construct. It works, but is inefficient.</p>
 
 <pre><code>(<span style="color: #729fcf;">use</span> '[clojure.contrib.lazy-seqs <span style="color: #729fcf;">:only</span> (primes)])
 
@@ -165,9 +162,9 @@
 (<span style="color: #729fcf;">time</span> (euler-46)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 2674.650168 msecs"
 </span></code></pre>
 
-<p>Why the terrible performance? The <code class="highlighter-rouge">for</code> loop foolishly generates all possible combinations instead of just checking for valid combinations.</p>
+<p>Why the terrible performance? The <code class="language-plaintext highlighter-rouge">for</code> loop foolishly generates all possible combinations instead of just checking for valid combinations.</p>
 
-<p>To check only valid combinations, we need to use our old friend <code class="highlighter-rouge">prime?</code>:</p>
+<p>To check only valid combinations, we need to use our old friend <code class="language-plaintext highlighter-rouge">prime?</code>:</p>
 
 <pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">prime?</span> [n]
   (<span style="color: #8ae234;">and</span> (<span style="color: #729fcf;">&lt;</span> 1 n)
@@ -203,7 +200,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

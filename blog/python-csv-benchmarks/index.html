@@ -1,0 +1,266 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Python CSV Load Times and the Feather Format &#8211; Art is Never Finished</title>
+<meta name="description" content="One of the most common data science tasks is loading structured data in tabular form. For “small data”, a popular format is often Comma-Separated-Value (CSV), which nearly everybody can read and write correctly. For so-called “big data”, one often needs a database, preferably SQL database like Postgres, or if the dataset gets very large, then often NoSQL becomes the only practical choice. Well, what do you do when you have “medium data”? Data that is still small enough to fit on a single computer, but is too large to load into memory?
+">
+<meta name="keywords" content="python, benchmark, feather-format, csv-format">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Python CSV Load Times and the Feather Format">
+<meta name="twitter:description" content="One of the most common data science tasks is loading structured data in tabular form. For “small data”, a popular format is often Comma-Separated-Value (CSV), which nearly everybody can read and write correctly. For so-called “big data”, one often needs a database, preferably SQL database like Postgres, or if the dataset gets very large, then often NoSQL becomes the only practical choice. Well, what do you do when you have “medium data”? Data that is still small enough to fit on a single computer, but is too large to load into memory?
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python CSV Load Times and the Feather Format">
+<meta property="og:description" content="One of the most common data science tasks is loading structured data in tabular form. For “small data”, a popular format is often Comma-Separated-Value (CSV), which nearly everybody can read and write correctly. For so-called “big data”, one often needs a database, preferably SQL database like Postgres, or if the dataset gets very large, then often NoSQL becomes the only practical choice. Well, what do you do when you have “medium data”? Data that is still small enough to fit on a single computer, but is too large to load into memory?
+">
+<meta property="og:url" content="/blog/python-csv-benchmarks/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="/blog/python-csv-benchmarks/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="/about/" >About</a></li>
+		  
+		    
+		    <li><a href="/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="/tags/#python" title="Pages tagged python">python</a></li><li><a href="/tags/#benchmark" title="Pages tagged benchmark">benchmark</a></li><li><a href="/tags/#feather-format" title="Pages tagged feather-format">feather-format</a></li><li><a href="/tags/#csv-format" title="Pages tagged csv-format">csv-format</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Python CSV Load Times and the Feather Format</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2019-02-28T00:00:00+00:00"><i class="fa fa-calendar-o"></i> February 28, 2019</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>One of the most common data science tasks is loading structured data in tabular form. For “small data”, a popular format is often Comma-Separated-Value (CSV), which nearly everybody can read and write correctly. For so-called “big data”, one often needs a database, preferably SQL database like Postgres, or if the dataset gets very large, then often NoSQL becomes the only practical choice. Well, what do you do when you have “medium data”? Data that is still small enough to fit on a single computer, but is too large to load into memory?</p>
+
+<p><a href="https://parquet.apache.org/">Parquet</a> is pretty good, but I also rather like the <a href="https://arrow.apache.org/docs/python/feather.html">feather</a> format. It’s considerably faster than CSV, and can be read easily from <a href="https://arrow.apache.org/docs/python/feather.html">Pandas</a>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Format</th>
+      <th>Read Time [ms]</th>
+      <th>Write Time [ms]</th>
+      <th>Filesize [Bytes]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CSV.GZ</td>
+      <td>2148</td>
+      <td>15075</td>
+      <td>15,738,200</td>
+    </tr>
+    <tr>
+      <td>CSV</td>
+      <td>1842</td>
+      <td>7274</td>
+      <td>67,625,407</td>
+    </tr>
+    <tr>
+      <td>FEATHER</td>
+      <td>120</td>
+      <td>821</td>
+      <td>70,229,376</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Here’s a little snippet of code that I used to test out the formats. On my MacBook Pro, it’s about 18x faster to use feather files than gzipped CSVs for a particular timeseries data set that I was working on. Your mileage may vary, depending on your machine and your data set, of course.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import pandas as pd
+import datetime as dt
+
+# Uncomment to load CSV
+# t_start = dt.datetime.now()
+# df = pd.read_csv('data/timeseries.csv')
+# t_end = dt.datetime.now()
+# print(t_end - t_start)
+
+# Uncomment to save compressed CSV
+# t_start = dt.datetime.now()
+# df.to_csv('data/cleaned_fitstats_copy.csv.gz', compression='gzip')
+# t_end = dt.datetime.now()
+# print(t_end - t_start)
+
+# Uncomment to load uncompressed CSV
+# t_start = dt.datetime.now()
+# df = pd.read_csv('data/timeseries.csv.gz')
+# t_end = dt.datetime.now()
+# print(t_end - t_start)
+
+# Uncomment to save the feather
+# t_start = dt.datetime.now()
+# df.to_feather('data/timeseries.feather')
+# t_end = dt.datetime.now()
+# print(t_end - t_start)
+
+# Uncomment to load the feather file
+t_start = dt.datetime.now()
+df2 = pd.read_feather('data/timeseries.feather')
+t_end = dt.datetime.now()
+print(t_end - t_start)
+</code></pre></div></div>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="/blog/composite-robot-construction/" class="btn" title="Composite Robot Construction">Previous</a>
+      
+      
+        <a href="/blog/css-popups/" class="btn" title="Notes on CSS Popup Tooltips">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2020 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = '';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

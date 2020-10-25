@@ -11,7 +11,6 @@
 (defn multiple-of-all? [n factors]
   (every? #(zero? (rem n %)) factors))
 
-
 ">
 <meta name="keywords" content="gcd, lcm">
 
@@ -22,7 +21,6 @@
 
 (defn multiple-of-all? [n factors]
   (every? #(zero? (rem n %)) factors))
-
 
 ">
 <meta name="twitter:site" content="@ivarthorson">
@@ -39,7 +37,6 @@
 
 (defn multiple-of-all? [n factors]
   (every? #(zero? (rem n %)) factors))
-
 
 ">
 <meta property="og:url" content="/project-euler/problem-05/">
@@ -150,7 +147,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-04-10T23:41:40-07:00"><i class="fa fa-calendar-o"></i> April 10, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-04-11T06:41:40+00:00"><i class="fa fa-calendar-o"></i> April 11, 2010</time></span>
         
         
         
@@ -180,12 +177,12 @@
 <p>There are three clever things about this that I like:</p>
 
 <ol>
-  <li>Using recur in <code class="highlighter-rouge">gcd</code> leads to a simple, efficient definition.</li>
+  <li>Using recur in <code class="language-plaintext highlighter-rouge">gcd</code> leads to a simple, efficient definition.</li>
   <li>No functions use variable arity or require collections as arguments. Simple.</li>
-  <li>Using <code class="highlighter-rouge">reduce</code> is the right idiom for “multiplication-like” algorithms such as this.</li>
+  <li>Using <code class="language-plaintext highlighter-rouge">reduce</code> is the right idiom for “multiplication-like” algorithms such as this.</li>
 </ol>
 
-<p>Once again, it seems it is useful to check if a problem easily fits into the <code class="highlighter-rouge">reduce </code>abstraction.</p>
+<p>Once again, it seems it is useful to check if a problem easily fits into the <code class="language-plaintext highlighter-rouge">reduce </code>abstraction.</p>
 
         
       </div><!-- /.entry-content -->
@@ -205,7 +202,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

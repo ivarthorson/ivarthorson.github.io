@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Project Euler Problem 44 &#8211; Art is Never Finished</title>
 <meta name="description" content="Problem 44 asks us to find the smallest distance between two pentagonal numbers that produce another pentagonal number when added to or subtracted from each other.
-
 ">
 <meta name="keywords" content="pentagonal numbers">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Project Euler Problem 44">
 <meta name="twitter:description" content="Problem 44 asks us to find the smallest distance between two pentagonal numbers that produce another pentagonal number when added to or subtracted from each other.
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project Euler Problem 44">
 <meta property="og:description" content="Problem 44 asks us to find the smallest distance between two pentagonal numbers that produce another pentagonal number when added to or subtracted from each other.
-
 ">
 <meta property="og:url" content="/project-euler/problem-44/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-07-31T07:35:24-07:00"><i class="fa fa-calendar-o"></i> July 31, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-07-31T14:35:24+00:00"><i class="fa fa-calendar-o"></i> July 31, 2010</time></span>
         
         
         
@@ -147,7 +144,7 @@
       <div class="entry-content">
         <p><a href="http://projecteuler.net/index.php?section=problems&amp;id=44">Problem 44</a> asks us to find the smallest distance between two pentagonal numbers that produce another pentagonal number when added to or subtracted from each other.</p>
 
-<p>A <code class="highlighter-rouge">for</code> loop seemed to be the right idiom to quickly generate and then filter down to valid pentagonal combinations:</p>
+<p>A <code class="language-plaintext highlighter-rouge">for</code> loop seemed to be the right idiom to quickly generate and then filter down to valid pentagonal combinations:</p>
 
 <pre><code>(<span style="color: #729fcf;">use</span> '[clojure.contrib.math <span style="color: #729fcf;">:only</span> (abs)])
 
@@ -181,7 +178,7 @@
 <span style="color: #Fd7f98;">"Elapsed time: 94.981341 msecs"
 </span>500005000000000</code></pre>
 
-<p>Can you guess why? My theory is that using the bitshift avoids a type conversion to and from the ratio type created by the <code class="highlighter-rouge">(/ 1 2)</code> expression in the original definition. Let’s check that:</p>
+<p>Can you guess why? My theory is that using the bitshift avoids a type conversion to and from the ratio type created by the <code class="language-plaintext highlighter-rouge">(/ 1 2)</code> expression in the original definition. Let’s check that:</p>
 
 <pre><code>(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">pentagonal-nums</span>
      (<span style="color: #729fcf;">map</span> (<span style="color: #729fcf;">fn</span> [n] (<span style="color: #729fcf;">*</span> (<span style="color: #729fcf;">/</span> 1 2) n (<span style="color: #729fcf;">-</span> (<span style="color: #729fcf;">*</span> 3 n) 1))) (<span style="color: #729fcf;">iterate</span> inc 1)))
@@ -203,7 +200,7 @@ clojure.lang.Ratio</code></pre>
 
 <p>Looks like I was right!</p>
 
-<p>In conclusion, if we redefine <code class="highlighter-rouge">pentagonal-nums</code> to avoid that ratio type conversion and slightly improve <code class="highlighter-rouge">pentagonal?</code>, we get the following succinct and efficient solution:</p>
+<p>In conclusion, if we redefine <code class="language-plaintext highlighter-rouge">pentagonal-nums</code> to avoid that ratio type conversion and slightly improve <code class="language-plaintext highlighter-rouge">pentagonal?</code>, we get the following succinct and efficient solution:</p>
 
 <pre><code>(<span style="color: #729fcf;">use</span> '[clojure.contrib.math <span style="color: #729fcf;">:only</span> (abs)])
 
@@ -241,7 +238,7 @@ clojure.lang.Ratio</code></pre>
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

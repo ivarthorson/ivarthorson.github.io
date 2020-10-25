@@ -15,7 +15,6 @@
 (defn as-digits [num]
   (map #(Character/getNumericValue %) (str num)))
 
-
 ">
 <meta name="keywords" content="combinations, digits, pandigital, permutations">
 
@@ -30,7 +29,6 @@
 
 (defn as-digits [num]
   (map #(Character/getNumericValue %) (str num)))
-
 
 ">
 <meta name="twitter:site" content="@ivarthorson">
@@ -51,7 +49,6 @@
 
 (defn as-digits [num]
   (map #(Character/getNumericValue %) (str num)))
-
 
 ">
 <meta property="og:url" content="/project-euler/problem-32/">
@@ -162,7 +159,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-07-19T09:55:47-07:00"><i class="fa fa-calendar-o"></i> July 19, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-07-19T16:55:47+00:00"><i class="fa fa-calendar-o"></i> July 19, 2010</time></span>
         
         
         
@@ -218,7 +215,7 @@
 (<span style="color: #729fcf;">time</span> (euler-32-concise)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 3415.286711 msecs"
 </span></code></pre>
 
-<p>Yet again, the folks over at <a href="http://clojure-euler.wikispaces.com/Problem+032">clojure-euler</a> have even more performant solutions, but what was most surprising to me is how changing the definition of <code class="highlighter-rouge">pandigital-multiplication?</code> could speed up my code by 10x:</p>
+<p>Yet again, the folks over at <a href="http://clojure-euler.wikispaces.com/Problem+032">clojure-euler</a> have even more performant solutions, but what was most surprising to me is how changing the definition of <code class="language-plaintext highlighter-rouge">pandigital-multiplication?</code> could speed up my code by 10x:</p>
 
 <pre><code><span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">Using split (thanks, semmons99!)
 </span>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">pandigital-multiplication?</span> [a b]
@@ -227,7 +224,7 @@
 (<span style="color: #729fcf;">time</span> (euler-32-concise)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 161.618939 msecs"
 </span></code></pre>
 
-<p>Try as a might to modify it, I couldn’t get the algorithmically superior approach posted on <a href="http://clojure-euler.wikispaces.com/Problem+032">clojure-euler</a> by bibi (which uses <code class="highlighter-rouge">combinations</code> and <code class="highlighter-rouge">permutations</code> from <code class="highlighter-rouge">clojure.contrib.combinatorics</code>) to go faster than the above code. I guess the overhead of creating the combinations and permutations exceeds the benefit obtained through the reduction in the number of required tests for pandigitality.</p>
+<p>Try as a might to modify it, I couldn’t get the algorithmically superior approach posted on <a href="http://clojure-euler.wikispaces.com/Problem+032">clojure-euler</a> by bibi (which uses <code class="language-plaintext highlighter-rouge">combinations</code> and <code class="language-plaintext highlighter-rouge">permutations</code> from <code class="language-plaintext highlighter-rouge">clojure.contrib.combinatorics</code>) to go faster than the above code. I guess the overhead of creating the combinations and permutations exceeds the benefit obtained through the reduction in the number of required tests for pandigitality.</p>
 
         
       </div><!-- /.entry-content -->
@@ -247,7 +244,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

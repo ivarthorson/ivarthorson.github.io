@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>The Reinforced Pentakis Dodecahedron Dome &#8211; Art is Never Finished</title>
 <meta name="description" content="For your amusement, I would like to present a reinforced version of a geodesic dome that is many times stronger than conventional geodesic domes. It is essentially two concentric domes, one nested inside the other, connected entirely by tetrahedra in a way that both strengthens the dome and provides space for insulation. Compared to single-layer geodesic structures, this new structure uses about 2-3x more materials, but it is so much stronger that it is startling.
-
 ">
 <meta name="keywords" content="math, geometry, architecture">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="The Reinforced Pentakis Dodecahedron Dome">
 <meta name="twitter:description" content="For your amusement, I would like to present a reinforced version of a geodesic dome that is many times stronger than conventional geodesic domes. It is essentially two concentric domes, one nested inside the other, connected entirely by tetrahedra in a way that both strengthens the dome and provides space for insulation. Compared to single-layer geodesic structures, this new structure uses about 2-3x more materials, but it is so much stronger that it is startling.
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="The Reinforced Pentakis Dodecahedron Dome">
 <meta property="og:description" content="For your amusement, I would like to present a reinforced version of a geodesic dome that is many times stronger than conventional geodesic domes. It is essentially two concentric domes, one nested inside the other, connected entirely by tetrahedra in a way that both strengthens the dome and provides space for insulation. Compared to single-layer geodesic structures, this new structure uses about 2-3x more materials, but it is so much stronger that it is startling.
-
 ">
 <meta property="og:url" content="/blog/pentakis-dodecahedron-dome/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2017-11-05T00:00:00-07:00"><i class="fa fa-calendar-o"></i> November 05, 2017</time></span>
+        <span class="entry-date date published"><time datetime="2017-11-05T00:00:00+00:00"><i class="fa fa-calendar-o"></i> November 05, 2017</time></span>
         
         
         
@@ -208,11 +205,11 @@
 
 <p class="center"><img src="icosahedron.png" alt="icosahedron" title="An icosahedron. " /></p>
 
-<p>The next step is to divide the edges of each triangle into <script type="math/tex">v</script> smaller pieces, and then form smaller triangles connecting the new midpoints. In general, the <script type="math/tex">v</script>th level subdivision is made by breaking each edge of the triangle into <script type="math/tex">n</script> pieces:</p>
+<p>The next step is to divide the edges of each triangle into \(v\) smaller pieces, and then form smaller triangles connecting the new midpoints. In general, the \(v\)th level subdivision is made by breaking each edge of the triangle into \(n\) pieces:</p>
 
 <p class="center"><img src="subdivisions.png" alt="subdivided triangles" title="Subdivided triangles" /></p>
 
-<p>For the rest of this example, we will use the 2<script type="math/tex">v</script> subdivision. So let’s draw a 2<script type="math/tex">v</script> subdivided icosahedron:</p>
+<p>For the rest of this example, we will use the 2\(v\) subdivision. So let’s draw a 2\(v\) subdivided icosahedron:</p>
 
 <p class="center"><img src="icosahedron-subdivided-2v.png" alt="subdivided triangles" title="An icosahedron with its edges divided in 2, thus producing 4 new triangles." /></p>
 
@@ -220,11 +217,11 @@
 
 <p class="center"><img src="icosahedral-2v-sphere.png" alt="geodesic 1v, 2v, 3v" title="A sphere formed by pushing the new vertices out to the same radius as the other vertices." /></p>
 
-<p>Mathematically, this last operation is simply the constraint that every vertex <script type="math/tex">(x_i, y_i, z_i)</script> be the same distance <script type="math/tex">d</script> from the center of the polyhedron:</p>
+<p>Mathematically, this last operation is simply the constraint that every vertex \((x_i, y_i, z_i)\) be the same distance \(d\) from the center of the polyhedron:</p>
 
-<script type="math/tex; mode=display">d = \sqrt{x_i^2 + y_i^2 + z_i^2}</script>
+\[d = \sqrt{x_i^2 + y_i^2 + z_i^2}\]
 
-<p>Working out the analytic solutions for the lengths of the triangles in the <script type="math/tex">v</script>th subdivision of various polyhedra is within the abilities of many high school students, and perhaps even a few gifted middle school students, but it does take some patience and persistence. Thankfully, there are <a href="http://www.dirkbertels.net/computing/pentaDome_files/pentaDome_070206.pdf">many</a>… <a href="http://www.geometer.org/mathcircles/geodesic.pdf">good</a>… <a href="http://www.salsburg.com/geod/geodesicmath.pdf">examples</a> to start from if you are curious about calculating the coordinates.</p>
+<p>Working out the analytic solutions for the lengths of the triangles in the \(v\)th subdivision of various polyhedra is within the abilities of many high school students, and perhaps even a few gifted middle school students, but it does take some patience and persistence. Thankfully, there are <a href="http://www.dirkbertels.net/computing/pentaDome_files/pentaDome_070206.pdf">many</a>… <a href="http://www.geometer.org/mathcircles/geodesic.pdf">good</a>… <a href="http://www.salsburg.com/geod/geodesicmath.pdf">examples</a> to start from if you are curious about calculating the coordinates.</p>
 
 <p><a name="geodesic_advantages"></a></p>
 <h2 id="advantages-of-domes">Advantages of Domes</h2>
@@ -314,19 +311,19 @@
   <li><a href="http://mathworld.wolfram.com/pdf/PentakisDodecahedron.pdf">Paper template for a pentakis dodecahedron</a></li>
 </ul>
 
-<p>If you want to make new triangles and create your own reinforced pentakis dodecahedron of arbitrary size, the magic numbers for a dome of radius <script type="math/tex">r</script> are:</p>
+<p>If you want to make new triangles and create your own reinforced pentakis dodecahedron of arbitrary size, the magic numbers for a dome of radius \(r\) are:</p>
 
 <ul>
-  <li>The icosahedron’s equilateral triangles have three edges of length <script type="math/tex">l_1 = 1.0514622 r</script></li>
-  <li>The triakis icosahedron’s icoceles triangles have one edge of length <script type="math/tex">l_1</script> and two edges of length <script type="math/tex">l_2 = 0.66500310 r</script></li>
-  <li>The pentakis dodecahedron’s icoceles triangles have one edge of length <script type="math/tex">l_2</script> and two edges of length <script type="math/tex">l_3 = 1.12732203 l_2</script></li>
+  <li>The icosahedron’s equilateral triangles have three edges of length \(l_1 = 1.0514622 r\)</li>
+  <li>The triakis icosahedron’s icoceles triangles have one edge of length \(l_1\) and two edges of length \(l_2 = 0.66500310 r\)</li>
+  <li>The pentakis dodecahedron’s icoceles triangles have one edge of length \(l_2\) and two edges of length \(l_3 = 1.12732203 l_2\)</li>
 </ul>
 
 <p>If you would like to estimate the amount of flat material that you will need, you will find <a href="https://en.wikipedia.org/wiki/Heron%27s_formula">Heron’s Formula</a> useful:</p>
 
-<script type="math/tex; mode=display">A = \sqrt{s(s-a)(s-b)(s-c)}</script>
+\[A = \sqrt{s(s-a)(s-b)(s-c)}\]
 
-<p>where <script type="math/tex">A</script> is the area of a triangle, <script type="math/tex">s=\frac{1}{2}(a+b+c)</script> is half of the perimeter of the triangle, and <script type="math/tex">a,b,c</script> are the lengths of the sides of the triangle.</p>
+<p>where \(A\) is the area of a triangle, \(s=\frac{1}{2}(a+b+c)\) is half of the perimeter of the triangle, and \(a,b,c\) are the lengths of the sides of the triangle.</p>
 
 <h2 id="a-note-on-duality">A note on Duality</h2>
 
@@ -403,7 +400,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Project Euler Problem 26 &#8211; Art is Never Finished</title>
 <meta name="description" content="Project Euler Problem 26 asks us to find number d where 1/d gives the longest recurring cycle of digits. Obviously, since some numbers (such as 1/3) repeat forever when written in decimal form, a lazy solution that takes digits one by one is a good idea here.
-
 ">
 <meta name="keywords" content="repeating decimal, zipmap">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Project Euler Problem 26">
 <meta name="twitter:description" content="Project Euler Problem 26 asks us to find number d where 1/d gives the longest recurring cycle of digits. Obviously, since some numbers (such as 1/3) repeat forever when written in decimal form, a lazy solution that takes digits one by one is a good idea here.
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project Euler Problem 26">
 <meta property="og:description" content="Project Euler Problem 26 asks us to find number d where 1/d gives the longest recurring cycle of digits. Obviously, since some numbers (such as 1/3) repeat forever when written in decimal form, a lazy solution that takes digits one by one is a good idea here.
-
 ">
 <meta property="og:url" content="/project-euler/problem-26/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-07-13T08:53:43-07:00"><i class="fa fa-calendar-o"></i> July 13, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-07-13T15:53:43+00:00"><i class="fa fa-calendar-o"></i> July 13, 2010</time></span>
         
         
         
@@ -149,7 +146,7 @@
 
 <p>The intuitive way solve this problem is to realize that if we ever reach a point where the quotient and remainder are the same as a previously computed value, then we have reached the end of the repeating pattern of digits and further computation of digits will simply repeat what has come before.</p>
 
-<p>In my first solution, I used several functions from previous problems <code class="highlighter-rouge">max-at</code> from problem 14, and <code class="highlighter-rouge">first-where</code> from problem 25. I reprint them here:</p>
+<p>In my first solution, I used several functions from previous problems <code class="language-plaintext highlighter-rouge">max-at</code> from problem 14, and <code class="language-plaintext highlighter-rouge">first-where</code> from problem 25. I reprint them here:</p>
 
 <pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">first-where</span> [condition seq]
   <span style="color: #Fd7f98;">"Returns index of the first item in seq that satisfies condition."</span>
@@ -217,7 +214,7 @@
         periods (<span style="color: #729fcf;">map</span> decimal-period nums)]
     ((zipmap periods nums) (<span style="color: #729fcf;">apply</span> max periods))))</code></pre>
 
-<p>I think this is the first time I have seen an idiom using <code class="highlighter-rouge">zipmap</code>, so I found this solution particularly educational for both mathematics and programming in Clojure.</p>
+<p>I think this is the first time I have seen an idiom using <code class="language-plaintext highlighter-rouge">zipmap</code>, so I found this solution particularly educational for both mathematics and programming in Clojure.</p>
 
         
       </div><!-- /.entry-content -->
@@ -237,7 +234,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

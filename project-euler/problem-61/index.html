@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Project Euler Problem 61 &#8211; Art is Never Finished</title>
 <meta name="description" content="Problem 61 is yet another digit manipulation problem. This time, we have to find a set of six numbers that overlap in a cyclic fashion, and each number must be from a different one of six sets (triangular through octagonal number sets). The numbers are all 4 digits long and two digits overlap cyclically at each step.
-
 ">
 <meta name="keywords" content="cycles, digits, triangular numbers">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Project Euler Problem 61">
 <meta name="twitter:description" content="Problem 61 is yet another digit manipulation problem. This time, we have to find a set of six numbers that overlap in a cyclic fashion, and each number must be from a different one of six sets (triangular through octagonal number sets). The numbers are all 4 digits long and two digits overlap cyclically at each step.
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project Euler Problem 61">
 <meta property="og:description" content="Problem 61 is yet another digit manipulation problem. This time, we have to find a set of six numbers that overlap in a cyclic fashion, and each number must be from a different one of six sets (triangular through octagonal number sets). The numbers are all 4 digits long and two digits overlap cyclically at each step.
-
 ">
 <meta property="og:url" content="/project-euler/problem-61/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-08-21T02:07:14-07:00"><i class="fa fa-calendar-o"></i> August 21, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-08-21T09:07:14+00:00"><i class="fa fa-calendar-o"></i> August 21, 2010</time></span>
         
         
         
@@ -147,7 +144,7 @@
       <div class="entry-content">
         <p><a href="http://projecteuler.net/index.php?section=problems&amp;id=61">Problem 61</a> is yet another digit manipulation problem. This time, we have to find a set of six numbers that overlap in a cyclic fashion, and each number must be from a different one of six sets (triangular through octagonal number sets). The numbers are all 4 digits long and two digits overlap cyclically at each step.</p>
 
-<p>The idiom I came up with to solve this problem reminded me strongly of the way I solved <a href="index.php?p=558">problem 60</a>: build up a list of solutions that are stored in the tree-like computation created by the <code class="highlighter-rouge">for</code> loop, and then pull out the first valid answer.</p>
+<p>The idiom I came up with to solve this problem reminded me strongly of the way I solved <a href="index.php?p=558">problem 60</a>: build up a list of solutions that are stored in the tree-like computation created by the <code class="language-plaintext highlighter-rouge">for</code> loop, and then pull out the first valid answer.</p>
 
 <pre><code>(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">triangle-nums</span>   (<span style="color: #729fcf;">map</span> #(<span style="color: #729fcf;">/</span> (<span style="color: #729fcf;">*</span> % (<span style="color: #729fcf;">+</span> % 1)) 2) (<span style="color: #729fcf;">iterate</span> inc 1)))
 (<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">square-nums</span>     (<span style="color: #729fcf;">map</span> #(<span style="color: #729fcf;">*</span> % %) (<span style="color: #729fcf;">iterate</span> inc 1)))
@@ -195,7 +192,7 @@
 (<span style="color: #729fcf;">time</span> (euler-61)) <span style="color: #a8aaa5;">;; </span><span style="color: #a8aaa5;">"Elapsed time: 132.424044 msecs"
 </span></code></pre>
 
-<p>This code seems reasonably compact and performance is good, yet I still look <code class="highlighter-rouge">euler-61</code> and wonder if there is a better way to represent the idiom present in that for loop; perhaps some fancy threading function like <code class="highlighter-rouge">-&gt;</code> that would capture this abstraction better and remove the need for the <code class="highlighter-rouge">a b c d e f</code>’s.</p>
+<p>This code seems reasonably compact and performance is good, yet I still look <code class="language-plaintext highlighter-rouge">euler-61</code> and wonder if there is a better way to represent the idiom present in that for loop; perhaps some fancy threading function like <code class="language-plaintext highlighter-rouge">-&gt;</code> that would capture this abstraction better and remove the need for the <code class="language-plaintext highlighter-rouge">a b c d e f</code>’s.</p>
 
 <p>Then again, the simplicity of the above is attractive and probably valuable. Further compaction of this algorithm would probably affect readability, so I’ll just leave it here.</p>
 
@@ -219,7 +216,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

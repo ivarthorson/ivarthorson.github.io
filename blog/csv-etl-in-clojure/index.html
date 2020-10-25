@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Automatic CSV to SQL ETL in Clojure &#8211; Art is Never Finished</title>
 <meta name="description" content="This is another basic example to help beginners get started in Clojure, which is still my favorite programming language, almost 10 years after I first started using it. Like all languages, Clojure has some warts. But it also has a lot of very powerful and abstract concepts that many average programmers have not seen before, and like most mathematical concepts, the power of such abstractions are greatly underestimated by many people. Even fancy-sounding but easy-to-understand concepts like homoiconicity are still really underappreciated in the programming community.
-
 ">
 <meta name="keywords" content="clojure">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Automatic CSV to SQL ETL in Clojure">
 <meta name="twitter:description" content="This is another basic example to help beginners get started in Clojure, which is still my favorite programming language, almost 10 years after I first started using it. Like all languages, Clojure has some warts. But it also has a lot of very powerful and abstract concepts that many average programmers have not seen before, and like most mathematical concepts, the power of such abstractions are greatly underestimated by many people. Even fancy-sounding but easy-to-understand concepts like homoiconicity are still really underappreciated in the programming community.
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Automatic CSV to SQL ETL in Clojure">
 <meta property="og:description" content="This is another basic example to help beginners get started in Clojure, which is still my favorite programming language, almost 10 years after I first started using it. Like all languages, Clojure has some warts. But it also has a lot of very powerful and abstract concepts that many average programmers have not seen before, and like most mathematical concepts, the power of such abstractions are greatly underestimated by many people. Even fancy-sounding but easy-to-understand concepts like homoiconicity are still really underappreciated in the programming community.
-
 ">
 <meta property="og:url" content="/blog/csv-etl-in-clojure/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2019-03-03T00:00:00-08:00"><i class="fa fa-calendar-o"></i> March 03, 2019</time></span>
+        <span class="entry-date date published"><time datetime="2019-03-03T00:00:00+00:00"><i class="fa fa-calendar-o"></i> March 03, 2019</time></span>
         
         
         
@@ -177,7 +174,7 @@
 
 <p>In past articles, we discussed how to <a href="../loading-csvs-in-clojure">read in CSVs</a> and <a href="../docker-postgres">create a postgres database with docker</a>. I’ll just assume that you read those already, that you have a Postgres instance running in docker already, so that we can get on with the ETL-specific code.</p>
 
-<h2 id="group-csvs-in-directories">1. Group CSVs in Directories</h2>
+<h2 id="1-group-csvs-in-directories">1. Group CSVs in Directories</h2>
 
 <p>Let’s go get some census data from 2010 and download some data. The <a href="http://census.ire.org/data/bulkdata.html">census.ire.org</a> website has a handy tool that let’s you download census data on each state. Since this is an example, we will only use five states’ worth of data.</p>
 
@@ -199,7 +196,7 @@
 
 <p>Now place all the files in a directory tree like this:</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>sqlcsv/
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sqlcsv/
 ├── census
 │   ├── all_060_in_01.P1.csv
 │   ├── all_060_in_02.P1.csv
@@ -208,14 +205,13 @@
 │   └── all_060_in_06.P1.csv
 └── crimes
     └── Crimes_-_2001_to_present.csv
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<h2 id="scan-directories">2. Scan directories</h2>
+<h2 id="2-scan-directories">2. Scan directories</h2>
 
-<p>This is pretty easy using <code class="highlighter-rouge">file-seq</code>. All we have to do is create a few functions for listing files and subdirectories.</p>
+<p>This is pretty easy using <code class="language-plaintext highlighter-rouge">file-seq</code>. All we have to do is create a few functions for listing files and subdirectories.</p>
 
-<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">net.roboloco.files</span><span class="w">
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">net.roboloco.files</span><span class="w">
   </span><span class="p">(</span><span class="no">:require</span><span class="w"> </span><span class="p">[</span><span class="n">java-time</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">jt</span><span class="p">]</span><span class="w">
             </span><span class="p">[</span><span class="n">clojure.java.io</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">jio</span><span class="p">]))</span><span class="w">
 
@@ -243,12 +239,11 @@
   </span><span class="p">[</span><span class="n">dir</span><span class="w"> </span><span class="n">ext</span><span class="p">]</span><span class="w">
   </span><span class="p">(</span><span class="nf">-&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">file-seq</span><span class="w"> </span><span class="p">(</span><span class="nf">clojure.java.io/file</span><span class="w"> </span><span class="n">dir</span><span class="p">))</span><span class="w">
        </span><span class="p">(</span><span class="nb">filter</span><span class="w"> </span><span class="p">(</span><span class="nb">partial</span><span class="w"> </span><span class="n">has-suffix?</span><span class="w"> </span><span class="n">ext</span><span class="p">))))</span><span class="w">
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
 <p>Some string-cleaning utility functions will also come in handy:</p>
 
-<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">net.roboloco.util</span><span class="p">)</span><span class="w">
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">net.roboloco.util</span><span class="p">)</span><span class="w">
 
 </span><span class="p">(</span><span class="nf">set!</span><span class="w"> </span><span class="n">*warn-on-reflection*</span><span class="w"> </span><span class="n">true</span><span class="p">)</span><span class="w">
 
@@ -266,12 +261,11 @@
   </span><span class="s">"Converts spaces to underscores."</span><span class="w">
   </span><span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="w">
   </span><span class="p">(</span><span class="nf">clojure.string/replace</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="o">#</span><span class="s">"\."</span><span class="w"> </span><span class="s">"_"</span><span class="p">))</span><span class="w">
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
 <p>We’ll also need some simple date-parsing functions:</p>
 
-<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">net.roboloco.dates</span><span class="w">
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">net.roboloco.dates</span><span class="w">
   </span><span class="s">"Code for handling strings reperesnting dates and datetimes."</span><span class="w">
   </span><span class="p">(</span><span class="no">:require</span><span class="w"> </span><span class="p">[</span><span class="n">java-time</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">jt</span><span class="p">]))</span><span class="w">
 
@@ -309,18 +303,17 @@
      </span><span class="mi">27</span><span class="w"> </span><span class="p">(</span><span class="nf">jt/local-date-time</span><span class="w"> </span><span class="s">"yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w">
      </span><span class="mi">30</span><span class="w"> </span><span class="p">(</span><span class="nf">jt/local-date-time</span><span class="w"> </span><span class="s">"yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS'Z'"</span><span class="w"> </span><span class="n">s</span><span class="p">))))</span><span class="w">
 
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
-<h2 id="autodetect-the-schema">3. Autodetect the Schema</h2>
+<h2 id="3-autodetect-the-schema">3. Autodetect the Schema</h2>
 
-<p>This is by far the most complex section of the program. For each element, the autodetector tests each of the parsing functions in <code class="highlighter-rouge">sql-types-and-parsers</code>, and the first that works will be is considered the inferred SQL type. As I experimented with this at the REPL, I realized that testing every sql parser on every element was prohibitively slow, so I defined <code class="highlighter-rouge">guess-all-sql-types-in-column</code> to reduce the rate of failed tests by remembering which parser last worked for each column.</p>
+<p>This is by far the most complex section of the program. For each element, the autodetector tests each of the parsing functions in <code class="language-plaintext highlighter-rouge">sql-types-and-parsers</code>, and the first that works will be is considered the inferred SQL type. As I experimented with this at the REPL, I realized that testing every sql parser on every element was prohibitively slow, so I defined <code class="language-plaintext highlighter-rouge">guess-all-sql-types-in-column</code> to reduce the rate of failed tests by remembering which parser last worked for each column.</p>
 
 <p>Another note on optimization: although I initially assumed that I could make the CSV loading faster by scanning only the first N lines of each file, this ended up being error-prone in general, so I relented and allowed it to scan the whole file.</p>
 
-<p>Note that this code only works for integers, floats, dates, datetimes, and strings (text), but that you could easily extend it by adding more things to <code class="highlighter-rouge">type-definitions</code>.  An exception thrown if types do not match in different files.</p>
+<p>Note that this code only works for integers, floats, dates, datetimes, and strings (text), but that you could easily extend it by adding more things to <code class="language-plaintext highlighter-rouge">type-definitions</code>.  An exception thrown if types do not match in different files.</p>
 
-<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">net.roboloco.guess-schema</span><span class="w">
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">net.roboloco.guess-schema</span><span class="w">
   </span><span class="p">(</span><span class="no">:require</span><span class="w"> </span><span class="p">[</span><span class="n">clojure.data.csv</span><span class="p">]</span><span class="w">
             </span><span class="p">[</span><span class="n">net.roboloco.dates</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">dates</span><span class="p">]</span><span class="w">
             </span><span class="p">[</span><span class="n">net.roboloco.files</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">files</span><span class="p">]</span><span class="w">
@@ -329,18 +322,18 @@
 </span><span class="p">(</span><span class="nf">set!</span><span class="w"> </span><span class="n">*warn-on-reflection*</span><span class="w"> </span><span class="n">true</span><span class="p">)</span><span class="w">
 
 </span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="o">^</span><span class="no">:dynamic</span><span class="w"> </span><span class="n">*sql-types-and-parsers*</span><span class="w">
-  </span><span class="c1">;; This data structure defines all of the SQL data types, and the appropriate
-</span><span class="w">  </span><span class="c1">;; function to use when parsing a string containing that data type.
-</span><span class="w">  </span><span class="c1">;; Parsers will be tried in sequential order, and the first one that works is used.
-</span><span class="w">  </span><span class="c1">;; 
-</span><span class="w">  </span><span class="c1">;; SQL               String-&gt;CLJ Parser
-</span><span class="w">  </span><span class="p">[[</span><span class="s">"NULL"</span><span class="w">             </span><span class="o">#</span><span class="p">(</span><span class="nb">or</span><span class="w"> </span><span class="p">(</span><span class="nb">nil?</span><span class="w"> </span><span class="n">%</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nf">empty?</span><span class="w"> </span><span class="n">%</span><span class="p">))]</span><span class="w">
+  </span><span class="c1">;; This data structure defines all of the SQL data types, and the appropriate</span><span class="w">
+  </span><span class="c1">;; function to use when parsing a string containing that data type.</span><span class="w">
+  </span><span class="c1">;; Parsers will be tried in sequential order, and the first one that works is used.</span><span class="w">
+  </span><span class="c1">;; </span><span class="w">
+  </span><span class="c1">;; SQL               String-&gt;CLJ Parser</span><span class="w">
+  </span><span class="p">[[</span><span class="s">"NULL"</span><span class="w">             </span><span class="o">#</span><span class="p">(</span><span class="nb">or</span><span class="w"> </span><span class="p">(</span><span class="nb">nil?</span><span class="w"> </span><span class="n">%</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nf">empty?</span><span class="w"> </span><span class="n">%</span><span class="p">))]</span><span class="w">
    </span><span class="p">[</span><span class="s">"INTEGER"</span><span class="w">          </span><span class="o">#</span><span class="p">(</span><span class="nf">Integer/parseInt</span><span class="w"> </span><span class="n">%</span><span class="p">)]</span><span class="w">
    </span><span class="p">[</span><span class="s">"DOUBLE PRECISION"</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nf">Float/parseFloat</span><span class="w"> </span><span class="n">%</span><span class="p">)]</span><span class="w">
    </span><span class="p">[</span><span class="s">"DATE"</span><span class="w">             </span><span class="n">dates/parse-date</span><span class="p">]</span><span class="w">
    </span><span class="p">[</span><span class="s">"TIMESTAMPTZ"</span><span class="w">      </span><span class="n">dates/parse-RFC3339</span><span class="p">]</span><span class="w">
-   </span><span class="p">[</span><span class="s">"TEXT"</span><span class="w">             </span><span class="o">#</span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="n">%</span><span class="p">)]])</span><span class="w"> </span><span class="c1">;; this is always true, so is the "default" value
-</span><span class="w">
+   </span><span class="p">[</span><span class="s">"TEXT"</span><span class="w">             </span><span class="o">#</span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="n">%</span><span class="p">)]])</span><span class="w"> </span><span class="c1">;; this is always true, so is the "default" value</span><span class="w">
+
 </span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">guess-sql-parser</span><span class="w">
   </span><span class="s">"Given an unknown string, this fn runs through all of the SQL types &amp; parsers in 
   sql-types-and-parsers and returns the first row with a working parser."</span><span class="w">
@@ -364,15 +357,15 @@
     </span><span class="p">(</span><span class="nb">if-let</span><span class="w"> </span><span class="p">[</span><span class="n">string</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="n">strings</span><span class="p">)]</span><span class="w">
       </span><span class="p">(</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nf">try</span><span class="w"> </span><span class="p">(</span><span class="nf">last-successful-parse-fn</span><span class="w"> </span><span class="n">string</span><span class="p">)</span><span class="w">
                </span><span class="p">(</span><span class="nf">catch</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">false</span><span class="p">))</span><span class="w">
-        </span><span class="p">(</span><span class="nf">recur</span><span class="w"> </span><span class="p">(</span><span class="nb">next</span><span class="w"> </span><span class="n">strings</span><span class="p">)</span><span class="w">  </span><span class="c1">; Previously successful parser worked again
-</span><span class="w">               </span><span class="n">last-successful-parse-fn</span><span class="w">
+        </span><span class="p">(</span><span class="nf">recur</span><span class="w"> </span><span class="p">(</span><span class="nb">next</span><span class="w"> </span><span class="n">strings</span><span class="p">)</span><span class="w">  </span><span class="c1">; Previously successful parser worked again</span><span class="w">
+               </span><span class="n">last-successful-parse-fn</span><span class="w">
                </span><span class="n">types-found</span><span class="p">)</span><span class="w">
         </span><span class="p">(</span><span class="nb">if-let</span><span class="w"> </span><span class="p">[[</span><span class="n">sql-type</span><span class="w"> </span><span class="n">parse-fn</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nf">guess-sql-parser</span><span class="w"> </span><span class="n">string</span><span class="p">)]</span><span class="w">
-          </span><span class="p">(</span><span class="nf">recur</span><span class="w"> </span><span class="p">(</span><span class="nb">next</span><span class="w"> </span><span class="n">strings</span><span class="p">)</span><span class="w">  </span><span class="c1">; A new working parser was found
-</span><span class="w">                 </span><span class="n">parse-fn</span><span class="w">
+          </span><span class="p">(</span><span class="nf">recur</span><span class="w"> </span><span class="p">(</span><span class="nb">next</span><span class="w"> </span><span class="n">strings</span><span class="p">)</span><span class="w">  </span><span class="c1">; A new working parser was found</span><span class="w">
+                 </span><span class="n">parse-fn</span><span class="w">
                  </span><span class="p">(</span><span class="nb">conj</span><span class="w"> </span><span class="n">types-found</span><span class="w"> </span><span class="n">sql-type</span><span class="p">))</span><span class="w">
-          </span><span class="p">(</span><span class="nf">recur</span><span class="w"> </span><span class="p">(</span><span class="nb">next</span><span class="w"> </span><span class="n">strings</span><span class="p">)</span><span class="w">  </span><span class="c1">; No working parser found, move to next string
-</span><span class="w">                 </span><span class="n">last-successful-parse-fn</span><span class="w">
+          </span><span class="p">(</span><span class="nf">recur</span><span class="w"> </span><span class="p">(</span><span class="nb">next</span><span class="w"> </span><span class="n">strings</span><span class="p">)</span><span class="w">  </span><span class="c1">; No working parser found, move to next string</span><span class="w">
+                 </span><span class="n">last-successful-parse-fn</span><span class="w">
                  </span><span class="p">(</span><span class="nb">conj</span><span class="w"> </span><span class="n">types-found</span><span class="w"> </span><span class="n">nil</span><span class="p">))))</span><span class="w">
       </span><span class="n">types-found</span><span class="p">)))</span><span class="w">
 
@@ -397,8 +390,8 @@
            </span><span class="n">chunk-size</span><span class="w"> </span><span class="mi">10000</span><span class="p">]</span><span class="w">
        </span><span class="p">(</span><span class="nf">-&gt;&gt;</span><span class="w"> </span><span class="n">data-rows</span><span class="w">          
             </span><span class="p">(</span><span class="nf">partition-all</span><span class="w"> </span><span class="n">chunk-size</span><span class="p">)</span><span class="w">
-            </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nb">apply</span><span class="w"> </span><span class="nb">map</span><span class="w"> </span><span class="nb">vector</span><span class="w"> </span><span class="n">%</span><span class="p">))</span><span class="w"> </span><span class="c1">;; Convert list of rows into list of columns
-</span><span class="w">            </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nf">pmap</span><span class="w"> </span><span class="n">guess-all-sql-types-in-column</span><span class="w"> </span><span class="n">%</span><span class="p">))</span><span class="w">
+            </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nb">apply</span><span class="w"> </span><span class="nb">map</span><span class="w"> </span><span class="nb">vector</span><span class="w"> </span><span class="n">%</span><span class="p">))</span><span class="w"> </span><span class="c1">;; Convert list of rows into list of columns</span><span class="w">
+            </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nf">pmap</span><span class="w"> </span><span class="n">guess-all-sql-types-in-column</span><span class="w"> </span><span class="n">%</span><span class="p">))</span><span class="w">
             </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="n">data</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="p">(</span><span class="nb">*</span><span class="w"> </span><span class="mi">10000</span><span class="w"> </span><span class="p">(</span><span class="nb">inc</span><span class="w"> </span><span class="n">i</span><span class="p">))</span><span class="w"> </span><span class="s">"rows scanned"</span><span class="p">)</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nb">range</span><span class="p">))</span><span class="w">
             </span><span class="p">(</span><span class="nb">apply</span><span class="w"> </span><span class="nb">map</span><span class="w"> </span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="w"> </span><span class="n">args</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">reduce</span><span class="w"> </span><span class="n">clojure.set/union</span><span class="w"> </span><span class="n">args</span><span class="p">)))</span><span class="w">
             </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="nb">vector</span><span class="w"> </span><span class="n">header</span><span class="p">)</span><span class="w">
@@ -429,13 +422,13 @@
                  </span><span class="p">(</span><span class="k">cond</span><span class="w">
                   </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="nb">count</span><span class="w"> </span><span class="n">types</span><span class="p">))</span><span class="w">        </span><span class="p">[</span><span class="n">col</span><span class="w"> </span><span class="n">nil</span><span class="p">]</span><span class="w">
                   </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">(</span><span class="nb">count</span><span class="w"> </span><span class="n">types</span><span class="p">))</span><span class="w">        </span><span class="p">[</span><span class="n">col</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="n">types</span><span class="p">)</span><span class="w"> </span><span class="n">nullable-suffix</span><span class="p">)]</span><span class="w">
-                  </span><span class="c1">;; If it's mixed integer and float, make everything float
-</span><span class="w">                  </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="o">#</span><span class="p">{</span><span class="s">"INTEGER"</span><span class="w"> </span><span class="s">"DOUBLE PRECISION"</span><span class="p">}</span><span class="w"> </span><span class="n">types</span><span class="p">)</span><span class="w"> 
+                  </span><span class="c1">;; If it's mixed integer and float, make everything float</span><span class="w">
+                  </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="o">#</span><span class="p">{</span><span class="s">"INTEGER"</span><span class="w"> </span><span class="s">"DOUBLE PRECISION"</span><span class="p">}</span><span class="w"> </span><span class="n">types</span><span class="p">)</span><span class="w"> 
                                              </span><span class="p">[</span><span class="n">col</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="s">"DOUBLE PRECISION"</span><span class="w"> </span><span class="n">nullable-suffix</span><span class="p">)]</span><span class="w">
-                  </span><span class="c1">;; If the default type of TEXT is in there, choose text
-</span><span class="w">                  </span><span class="p">(</span><span class="nb">get</span><span class="w"> </span><span class="n">types</span><span class="w"> </span><span class="s">"TEXT"</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="n">col</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="s">"TEXT"</span><span class="w"> </span><span class="n">nullable-suffix</span><span class="p">)]</span><span class="w">
-                  </span><span class="no">:otherwise</span><span class="w">  </span><span class="c1">;; Otherwise we have some weird error
-</span><span class="w">                  </span><span class="p">(</span><span class="nf">throw</span><span class="w"> </span><span class="p">(</span><span class="nf">Exception.</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="s">"Inconsistent types across files for column: "</span><span class="w"> 
+                  </span><span class="c1">;; If the default type of TEXT is in there, choose text</span><span class="w">
+                  </span><span class="p">(</span><span class="nb">get</span><span class="w"> </span><span class="n">types</span><span class="w"> </span><span class="s">"TEXT"</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="n">col</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="s">"TEXT"</span><span class="w"> </span><span class="n">nullable-suffix</span><span class="p">)]</span><span class="w">
+                  </span><span class="no">:otherwise</span><span class="w">  </span><span class="c1">;; Otherwise we have some weird error</span><span class="w">
+                  </span><span class="p">(</span><span class="nf">throw</span><span class="w"> </span><span class="p">(</span><span class="nf">Exception.</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="s">"Inconsistent types across files for column: "</span><span class="w"> 
                                            </span><span class="n">col</span><span class="w"> </span><span class="p">(</span><span class="nf">vec</span><span class="w"> </span><span class="n">types</span><span class="p">))))))))))</span><span class="w">
 
 </span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">parse-csv-rows-using-schema</span><span class="w">
@@ -476,12 +469,11 @@
                       </span><span class="p">(</span><span class="nb">apply</span><span class="w"> </span><span class="nb">str</span><span class="p">))]</span><span class="w">
     </span><span class="p">(</span><span class="nf">format</span><span class="w"> </span><span class="s">"CREATE TABLE %s (\n%s %s\n);"</span><span class="w">
             </span><span class="n">table-name</span><span class="w"> </span><span class="n">col-defs</span><span class="w"> </span><span class="n">ending-string</span><span class="p">)))</span><span class="w">
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
 <p>We are now ready to actually do the autodetection! Let’s create our main namespace:</p>
 
-<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">net.roboloco.csv2sql</span><span class="w">
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">net.roboloco.csv2sql</span><span class="w">
   </span><span class="p">(</span><span class="no">:gen-class</span><span class="p">)</span><span class="w">
   </span><span class="p">(</span><span class="no">:require</span><span class="w"> </span><span class="p">[</span><span class="n">clojure.data.csv</span><span class="p">]</span><span class="w">
             </span><span class="p">[</span><span class="n">clojure.java.jdbc</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">sql</span><span class="p">]</span><span class="w">
@@ -507,16 +499,15 @@
           </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="n">csvdir</span><span class="w"> </span><span class="p">(</span><span class="nf">table-schema-filename</span><span class="w"> </span><span class="n">tablename</span><span class="p">))</span><span class="w"> </span><span class="n">schema</span><span class="p">)</span><span class="w">          
           </span><span class="p">(</span><span class="nf">spit</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="n">csvdir</span><span class="w"> </span><span class="p">(</span><span class="nf">table-schema-filename</span><span class="w"> </span><span class="n">tablename</span><span class="p">))</span><span class="w"> </span><span class="n">schema</span><span class="p">)</span><span class="w">
           </span><span class="p">(</span><span class="nf">spit</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="n">csvdir</span><span class="w"> </span><span class="p">(</span><span class="nf">table-sql-filename</span><span class="w"> </span><span class="n">tablename</span><span class="p">))</span><span class="w"> </span><span class="n">table-sql</span><span class="p">))))))</span><span class="w">
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
-<p>You may note that I’m storing the SQL schemas for each subdirectory in the root <code class="highlighter-rouge">sqlcsv/</code> directory. This will let you hand-tune the schema as needed, if you want to make an index on one key or another, or make a particular column unique and required.</p>
+<p>You may note that I’m storing the SQL schemas for each subdirectory in the root <code class="language-plaintext highlighter-rouge">sqlcsv/</code> directory. This will let you hand-tune the schema as needed, if you want to make an index on one key or another, or make a particular column unique and required.</p>
 
-<h2 id="create-the-autodetected-schema">4. Create the Autodetected Schema</h2>
+<h2 id="4-create-the-autodetected-schema">4. Create the Autodetected Schema</h2>
 
-<p>With the schema autodetected, we now need to create the tables. Continuing along with the <code class="highlighter-rouge">net.roboloco.csv2sql</code> namespace, and assuming that you are using the same <a href="../docker-postgres">postgres database</a> from a previous article:</p>
+<p>With the schema autodetected, we now need to create the tables. Continuing along with the <code class="language-plaintext highlighter-rouge">net.roboloco.csv2sql</code> namespace, and assuming that you are using the same <a href="../docker-postgres">postgres database</a> from a previous article:</p>
 
-<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">default-db</span><span class="w"> </span><span class="p">{</span><span class="no">:dbtype</span><span class="w"> </span><span class="s">"postgresql"</span><span class="w"> 
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">default-db</span><span class="w"> </span><span class="p">{</span><span class="no">:dbtype</span><span class="w"> </span><span class="s">"postgresql"</span><span class="w"> 
                  </span><span class="no">:dbname</span><span class="w">   </span><span class="p">(</span><span class="nb">or</span><span class="w"> </span><span class="p">(</span><span class="nf">System/getenv</span><span class="w"> </span><span class="s">"POSTGERS_DB"</span><span class="p">)</span><span class="w">  </span><span class="s">"csv2sql"</span><span class="p">)</span><span class="w">
                  </span><span class="no">:user</span><span class="w">     </span><span class="p">(</span><span class="nb">or</span><span class="w"> </span><span class="p">(</span><span class="nf">System/getenv</span><span class="w"> </span><span class="s">"POSTGRES_USER"</span><span class="p">)</span><span class="w"> </span><span class="s">"postgres"</span><span class="p">)</span><span class="w">
                  </span><span class="no">:password</span><span class="w"> </span><span class="p">(</span><span class="nb">or</span><span class="w"> </span><span class="p">(</span><span class="nf">System/getenv</span><span class="w"> </span><span class="s">"POSTGRES_PASS"</span><span class="p">)</span><span class="w"> </span><span class="s">"mysecretpassword"</span><span class="p">)})</span><span class="w">
@@ -543,14 +534,13 @@
       </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="n">table-sql</span><span class="p">)</span><span class="w">
       </span><span class="p">(</span><span class="nf">sql/db-do-commands</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="n">table-sql</span><span class="p">))))</span><span class="w">
 
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
-<h2 id="load-the-csv-files-into-sql">5. Load the CSV files into SQL</h2>
+<h2 id="5-load-the-csv-files-into-sql">5. Load the CSV files into SQL</h2>
 
 <p>The final step is to load in the CSV file. As we do so, we need to parse the strings from the CSV using the schema so that they are converted into the proper data type for JDBC to properly insert them in Postgres.</p>
 
-<div class="language-clojure highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">insert-csv!</span><span class="w">
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">insert-csv!</span><span class="w">
   </span><span class="s">"Inserts the rows of the CSV into the database, converting the rows to the appropriate
   type as they are loaded. Lazy, so it works on very large files. If a column is not
   found in the schema, it is omitted and not inserted into the database. "</span><span class="w">
@@ -562,7 +552,7 @@
           </span><span class="n">chunk-size</span><span class="w"> </span><span class="mi">1000</span><span class="p">]</span><span class="w">
       </span><span class="p">(</span><span class="nb">doseq</span><span class="w"> </span><span class="p">[</span><span class="n">chunk-of-rows</span><span class="w"> </span><span class="p">(</span><span class="nf">partition-all</span><span class="w"> </span><span class="n">chunk-size</span><span class="w"> </span><span class="n">typed-rows</span><span class="p">)]</span><span class="w">
         </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">line-num</span><span class="w"> </span><span class="p">(</span><span class="nf">swap!</span><span class="w"> </span><span class="n">cnt</span><span class="w"> </span><span class="nb">inc</span><span class="p">)]</span><span class="w">
-            </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="s">"Inserted"</span><span class="w">  </span><span class="p">(</span><span class="nb">*</span><span class="w"> </span><span class="n">chunk-size</span><span class="w"> </span><span class="p">(</span><span class="nb">inc</span><span class="w"> </span><span class="err">@</span><span class="n">cnt</span><span class="p">))</span><span class="w"> </span><span class="s">"rows"</span><span class="p">))</span><span class="w">
+            </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="s">"Inserted"</span><span class="w">  </span><span class="p">(</span><span class="nb">*</span><span class="w"> </span><span class="n">chunk-size</span><span class="w"> </span><span class="p">(</span><span class="nb">inc</span><span class="w"> </span><span class="o">@</span><span class="n">cnt</span><span class="p">))</span><span class="w"> </span><span class="s">"rows"</span><span class="p">))</span><span class="w">
         </span><span class="p">(</span><span class="nf">sql/insert-multi!</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="n">chunk-of-rows</span><span class="p">)))))</span><span class="w">
 
 </span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">insert-all-csvs!</span><span class="w">
@@ -592,16 +582,14 @@
     </span><span class="p">(</span><span class="nf">make-sql-tables!</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="n">csvdir</span><span class="p">)</span><span class="w">
     </span><span class="p">(</span><span class="nf">insert-all-csvs!</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="n">csvdir</span><span class="p">)</span><span class="w">
     </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="s">"Done!"</span><span class="p">)))</span><span class="w">
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
-<p>Nothing left to do but try it out! The final step is to run <code class="highlighter-rouge">(-main)</code> either at the REPL or add <code class="highlighter-rouge">gen-class</code> to the namespace and build an uberjar with <code class="highlighter-rouge">(-main)</code> set as the entry point (in <code class="highlighter-rouge">project.clj</code>), and then launch it with an environment variable that sets the CSVDIR:</p>
+<p>Nothing left to do but try it out! The final step is to run <code class="language-plaintext highlighter-rouge">(-main)</code> either at the REPL or add <code class="language-plaintext highlighter-rouge">gen-class</code> to the namespace and build an uberjar with <code class="language-plaintext highlighter-rouge">(-main)</code> set as the entry point (in <code class="language-plaintext highlighter-rouge">project.clj</code>), and then launch it with an environment variable that sets the CSVDIR:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>lein uberjar
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lein uberjar
 
 CSVDIR=/path/to/your/sqlcsv/ java -jar target/csv2sql-0.1.0-SNAPSHOT-standalone.jar
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="conclusion">Conclusion</h2>
 
@@ -616,7 +604,7 @@ CSVDIR=/path/to/your/sqlcsv/ java -jar target/csv2sql-0.1.0-SNAPSHOT-standalone.
     <p>Warn the user if 99.9% of the elements of a column are of one type, but there are a few values that are of a different type.</p>
   </li>
   <li>
-    <p>Add support for JSONs, rather than just CSVs. This would probably involve flattening nested JSONs so that <code class="highlighter-rouge"><span class="p">{</span><span class="nt">"a"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">}}</span></code> would become <code class="highlighter-rouge"><span class="p">{</span><span class="nt">"a.b"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">}</span></code>, and might involve generalizing the loader.</p>
+    <p>Add support for JSONs, rather than just CSVs. This would probably involve flattening nested JSONs so that <code class="language-plaintext highlighter-rouge">{"a": {"b": 2}}</code> would become <code class="language-plaintext highlighter-rouge">{"a.b": 2}</code>, and might involve generalizing the loader.</p>
   </li>
   <li>
     <p>If your database supports tens or hundreds of millions of rows, add support for Parquet files, a common tabular data format for big data.</p>
@@ -637,7 +625,7 @@ CSVDIR=/path/to/your/sqlcsv/ java -jar target/csv2sql-0.1.0-SNAPSHOT-standalone.
     </div><!-- /.entry-wrapper -->
     <nav class="pagination" role="navigation">
       
-        <a href="/blog/composite-robot-construction/" class="btn" title="Composite Robot Construction">Previous</a>
+        <a href="/blog/css-popups/" class="btn" title="Notes on CSS Popup Tooltips">Previous</a>
       
       
         <a href="/blog/jupyter-quick-install/" class="btn" title="Jupyter Quick Install for Scientists">Next</a>
@@ -650,7 +638,7 @@ CSVDIR=/path/to/your/sqlcsv/ java -jar target/csv2sql-0.1.0-SNAPSHOT-standalone.
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

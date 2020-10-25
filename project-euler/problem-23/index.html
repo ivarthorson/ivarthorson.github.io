@@ -12,7 +12,6 @@
   "Returns a list of the proper divisors of n."
   (filter #(zero? (mod n %)) (range 1 (+ 1 (/ n 2)))))
 
-
 ">
 <meta name="keywords" content="binomial coefficients, primes, proper divisors">
 
@@ -24,7 +23,6 @@
 (defn proper-divisors [n]
   "Returns a list of the proper divisors of n."
   (filter #(zero? (mod n %)) (range 1 (+ 1 (/ n 2)))))
-
 
 ">
 <meta name="twitter:site" content="@ivarthorson">
@@ -42,7 +40,6 @@
 (defn proper-divisors [n]
   "Returns a list of the proper divisors of n."
   (filter #(zero? (mod n %)) (range 1 (+ 1 (/ n 2)))))
-
 
 ">
 <meta property="og:url" content="/project-euler/problem-23/">
@@ -153,7 +150,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-07-02T01:38:01-07:00"><i class="fa fa-calendar-o"></i> July 02, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-07-02T08:38:01+00:00"><i class="fa fa-calendar-o"></i> July 02, 2010</time></span>
         
         
         
@@ -228,9 +225,9 @@
 (<span style="color: #729fcf;">time</span> (<span style="color: #729fcf;">reduce</span> + abundant-numbers)) 
 <span style="color: #Fd7f98;">"Elapsed time: 7342.117583 msecs"</span></code></pre>
 
-<p>It was difficult for me to come up with the algorithm behind <code class="highlighter-rouge">choose-k</code>, and it took more than an hour of concentration to figure out exactly how to make it properly recursive. It’s an interesting exercise which I solved by first writing <code class="highlighter-rouge">by-pairs</code>, then writing <code class="highlighter-rouge">by-triples</code>, then <code class="highlighter-rouge">by-quads</code>, etc until the pattern became obvious enough to refactor the code into a recursive definition.</p>
+<p>It was difficult for me to come up with the algorithm behind <code class="language-plaintext highlighter-rouge">choose-k</code>, and it took more than an hour of concentration to figure out exactly how to make it properly recursive. It’s an interesting exercise which I solved by first writing <code class="language-plaintext highlighter-rouge">by-pairs</code>, then writing <code class="language-plaintext highlighter-rouge">by-triples</code>, then <code class="language-plaintext highlighter-rouge">by-quads</code>, etc until the pattern became obvious enough to refactor the code into a recursive definition.</p>
 
-<p>Once <code class="highlighter-rouge">choose-k</code> worked smoothly, everything else flowed out smoothly, and the performance of this way of generating primes is much better! Nothing like a 5-fold improvement to brighten my day.</p>
+<p>Once <code class="language-plaintext highlighter-rouge">choose-k</code> worked smoothly, everything else flowed out smoothly, and the performance of this way of generating primes is much better! Nothing like a 5-fold improvement to brighten my day.</p>
 
 <p>Alas, this was not the only performance problem of the naive algorithm: generating all of those sums of abundant numbers had too heavy a performance toll. What is a better way?</p>
 
@@ -267,7 +264,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

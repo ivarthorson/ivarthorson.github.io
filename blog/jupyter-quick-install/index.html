@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Jupyter Quick Install for Scientists &#8211; Art is Never Finished</title>
 <meta name="description" content="Python is a good language, but its tooling (like pip, conda, setup.py, setup.cfg, requirements.txt, and the awkward support for binaries needed for libraries like scipy, keras, etc), leaves much to be desired. And for most scientists, it’s simply not interesting using all these build tools when you just want to get coding quickly on a new machine.
-
 ">
 <meta name="keywords" content="python, docker">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Jupyter Quick Install for Scientists">
 <meta name="twitter:description" content="Python is a good language, but its tooling (like pip, conda, setup.py, setup.cfg, requirements.txt, and the awkward support for binaries needed for libraries like scipy, keras, etc), leaves much to be desired. And for most scientists, it’s simply not interesting using all these build tools when you just want to get coding quickly on a new machine.
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jupyter Quick Install for Scientists">
 <meta property="og:description" content="Python is a good language, but its tooling (like pip, conda, setup.py, setup.cfg, requirements.txt, and the awkward support for binaries needed for libraries like scipy, keras, etc), leaves much to be desired. And for most scientists, it’s simply not interesting using all these build tools when you just want to get coding quickly on a new machine.
-
 ">
 <meta property="og:url" content="/blog/jupyter-quick-install/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,28 +135,26 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2019-03-11T00:00:00-07:00"><i class="fa fa-calendar-o"></i> March 11, 2019</time></span>
+        <span class="entry-date date published"><time datetime="2019-03-11T00:00:00+00:00"><i class="fa fa-calendar-o"></i> March 11, 2019</time></span>
         
         
         
         
       </footer>
       <div class="entry-content">
-        <p><a href="https://www.python.org">Python</a> is a good language, but its tooling (like <code class="highlighter-rouge">pip</code>, <code class="highlighter-rouge">conda</code>, <code class="highlighter-rouge">setup.py</code>, <code class="highlighter-rouge">setup.cfg</code>, <code class="highlighter-rouge">requirements.txt</code>, and the awkward support for binaries needed for libraries like scipy, keras, etc), leaves much to be desired. And for most scientists, it’s simply not interesting using all these build tools when you just want to get coding quickly on a new machine.</p>
+        <p><a href="https://www.python.org">Python</a> is a good language, but its tooling (like <code class="language-plaintext highlighter-rouge">pip</code>, <code class="language-plaintext highlighter-rouge">conda</code>, <code class="language-plaintext highlighter-rouge">setup.py</code>, <code class="language-plaintext highlighter-rouge">setup.cfg</code>, <code class="language-plaintext highlighter-rouge">requirements.txt</code>, and the awkward support for binaries needed for libraries like scipy, keras, etc), leaves much to be desired. And for most scientists, it’s simply not interesting using all these build tools when you just want to get coding quickly on a new machine.</p>
 
-<p>The most simplest, most reliable way I’ve found to get jupyter installed is to first <a href="https://www.docker.com/get-started">install docker</a>. Then we just run a single command – but before you do so, please replace <code class="highlighter-rouge">/path/to/my/notebooks</code> with your local directory where you have been storing notebooks.</p>
+<p>The most simplest, most reliable way I’ve found to get jupyter installed is to first <a href="https://www.docker.com/get-started">install docker</a>. Then we just run a single command – but before you do so, please replace <code class="language-plaintext highlighter-rouge">/path/to/my/notebooks</code> with your local directory where you have been storing notebooks.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>docker run --rm -p 8888:8888 --mount type=bind,source=/path/to/my/notebooks,target=/home/jovyan/work --name my-py-notebook jupyter/scipy-notebook
-</code></pre>
-</div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --rm -p 8888:8888 --mount type=bind,source=/path/to/my/notebooks,target=/home/jovyan/work --name my-py-notebook jupyter/scipy-notebook
+</code></pre></div></div>
 
 <p>You’ll see some stuff printed out, but the only thing you care about is the “Token”. Now browse to <a href="http://localhost:8888">http://localhost:8888</a>, and paste in the token into the password field. Done!</p>
 
-<p>Because we bind-mounted <code class="highlighter-rouge">/path/to/my/notebooks</code>, your notebooks will be persisted, but the docker container will be closed when you are done with it. Stop the container by typing this in a new terminal:</p>
+<p>Because we bind-mounted <code class="language-plaintext highlighter-rouge">/path/to/my/notebooks</code>, your notebooks will be persisted, but the docker container will be closed when you are done with it. Stop the container by typing this in a new terminal:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>docker stop my-py-notebook
-</code></pre>
-</div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stop my-py-notebook
+</code></pre></div></div>
 
 <h2 id="references">References</h2>
 
@@ -185,7 +180,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

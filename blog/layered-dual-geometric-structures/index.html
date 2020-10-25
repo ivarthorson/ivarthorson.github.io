@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Layered Tetrahedral Geometric Structures &#8211; Art is Never Finished</title>
 <meta name="description" content="This article describes another iteration of the dome-like structure that I discussed a few months ago. I still don’t have a good vocabulary for describing why I think these things are neat, except to say that I somehow find it relaxing to work on toy engineering problems once or twice a month. I guess de gustibus non est disputandum – “there’s no accounting for (bad) taste!”
-
 ">
 <meta name="keywords" content="math, geometry, architecture">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Layered Tetrahedral Geometric Structures">
 <meta name="twitter:description" content="This article describes another iteration of the dome-like structure that I discussed a few months ago. I still don’t have a good vocabulary for describing why I think these things are neat, except to say that I somehow find it relaxing to work on toy engineering problems once or twice a month. I guess de gustibus non est disputandum – “there’s no accounting for (bad) taste!”
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Layered Tetrahedral Geometric Structures">
 <meta property="og:description" content="This article describes another iteration of the dome-like structure that I discussed a few months ago. I still don’t have a good vocabulary for describing why I think these things are neat, except to say that I somehow find it relaxing to work on toy engineering problems once or twice a month. I guess de gustibus non est disputandum – “there’s no accounting for (bad) taste!”
-
 ">
 <meta property="og:url" content="/blog/layered-dual-geometric-structures/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2018-02-25T00:00:00-08:00"><i class="fa fa-calendar-o"></i> February 25, 2018</time></span>
+        <span class="entry-date date published"><time datetime="2018-02-25T00:00:00+00:00"><i class="fa fa-calendar-o"></i> February 25, 2018</time></span>
         
         
         
@@ -564,66 +561,65 @@
 <p>To make a fully spherical dual-layer polyhedron from paper, you will need to make triangles of 3 sizes, and also some irregular pentagons:</p>
 
 <ul>
-  <li>80 of <script type="math/tex">(a,a,a)</script> triangles that will form the interior snub dodecahedron (3.3.3.3.5)</li>
-  <li>240 of <script type="math/tex">(a,b,b)</script> triangles that will form the tetrahedral spikes on the outside of the snub dodecahedron</li>
-  <li>160 of <script type="math/tex">(b,b,c)</script> triangles that will hold the tetrahedral spikes together</li>
-  <li>60 of <script type="math/tex">(c,c,c,d,d)</script> pentagons to form the exterior pentagonal hexacontahedron (V3.3.3.3.5)</li>
+  <li>80 of \((a,a,a)\) triangles that will form the interior snub dodecahedron (3.3.3.3.5)</li>
+  <li>240 of \((a,b,b)\) triangles that will form the tetrahedral spikes on the outside of the snub dodecahedron</li>
+  <li>160 of \((b,b,c)\) triangles that will hold the tetrahedral spikes together</li>
+  <li>60 of \((c,c,c,d,d)\) pentagons to form the exterior pentagonal hexacontahedron (V3.3.3.3.5)</li>
 </ul>
 
 <h3 id="equilateral-triangles-aaa">Equilateral Triangles (a,a,a)</h3>
 
-<p>You can choose <script type="math/tex">a</script> however you want; this determines the interior size of the dome. The inner diameter <script type="math/tex">d_i</script> of the dome is:</p>
+<p>You can choose \(a\) however you want; this determines the interior size of the dome. The inner diameter \(d_i\) of the dome is:</p>
 
-<script type="math/tex; mode=display">d_i \approx 4.07974 a</script>
+\[d_i \approx 4.07974 a\]
 
-<p>I made these by cutting out long strips of paper <script type="math/tex">\frac{\sqrt{3}/2}a</script> wide, marking out a tick every <script type="math/tex">a</script> on one edge of the paper, and <script type="math/tex">\frac{1}{2}a, \frac{3}{2}a, \frac{5}{2}a, ...</script> on the other edge, and then connecting the points to form equilateral triangles.</p>
+<p>I made these by cutting out long strips of paper \(\frac{\sqrt{3}/2}a\) wide, marking out a tick every \(a\) on one edge of the paper, and \(\frac{1}{2}a, \frac{3}{2}a, \frac{5}{2}a, ...\) on the other edge, and then connecting the points to form equilateral triangles.</p>
 
 <h3 id="icoseles-triangles-abb">Icoseles Triangles (a,b,b)</h3>
 
-<p>You can also choose <script type="math/tex">b</script> to be any size you wish, provided that <script type="math/tex">2b >= a</script> so that triangles with edge lengths <script type="math/tex">(a,b,b)</script> exist. The larger <script type="math/tex">b</script> is, the larger the distance between the inner polythedron and outer polyhedron.</p>
+<p>You can also choose \(b\) to be any size you wish, provided that \(2b &gt;= a\) so that triangles with edge lengths \((a,b,b)\) exist. The larger \(b\) is, the larger the distance between the inner polythedron and outer polyhedron.</p>
 
-<p>Since we usually start with square paper, I find that cutting out little squares with edge lengths of <script type="math/tex">(a,a,a,a)</script> and then cutting along the two diagonals is a fast way to make four triangles. In this case,</p>
+<p>Since we usually start with square paper, I find that cutting out little squares with edge lengths of \((a,a,a,a)\) and then cutting along the two diagonals is a fast way to make four triangles. In this case,</p>
 
-<script type="math/tex; mode=display">b = \frac{\sqrt{2}}{2} a \approx 0.707107 a</script>
+\[b = \frac{\sqrt{2}}{2} a \approx 0.707107 a\]
 
 <h3 id="icosceles-triangles-bbc">Icosceles Triangles (b,b,c)</h3>
 
-<p>The value of <script type="math/tex">c</script> is constrained by the values of <script type="math/tex">a</script> and <script type="math/tex">b</script>. Rather than dive into all the math, we’ll just use some pre-derived constants to simplify our expressions.</p>
+<p>The value of \(c\) is constrained by the values of \(a\) and \(b\). Rather than dive into all the math, we’ll just use some pre-derived constants to simplify our expressions.</p>
 
 <p>We start by <a href="http://dmccooey.com/polyhedra/RsnubDodecahedron.html">looking up the triangle center radius radius</a> of the snub dodecahedron’s triangles:</p>
 
-<script type="math/tex; mode=display">r_{snub tri} \approx 2.0770896597432085994 a</script>
+\[r_{snub tri} \approx 2.0770896597432085994 a\]
 
-<p>To this, we add the height of the tetrahedral spikes <script type="math/tex">h_{tet}</script> to get the radius of the pentagonal hexacontahedron’s 3-vertexes <script type="math/tex">r_{pent3vertexes}</script>. The value of <script type="math/tex">h_{tet}</script> is easily derived from the pythogorean theorem and our knowledge that the inradius of a equilateral triangle <script type="math/tex">(a,a,a)</script> is <script type="math/tex">\frac{\sqrt{3}}{6}a</script>:</p>
+<p>To this, we add the height of the tetrahedral spikes \(h_{tet}\) to get the radius of the pentagonal hexacontahedron’s 3-vertexes \(r_{pent3vertexes}\). The value of \(h_{tet}\) is easily derived from the pythogorean theorem and our knowledge that the inradius of a equilateral triangle \((a,a,a)\) is \(\frac{\sqrt{3}}{6}a\):</p>
 
-<script type="math/tex; mode=display">h_{tet} = \sqrt{b^2 - (\frac{\sqrt{3}}{6}a)^2}</script>
+\[h_{tet} = \sqrt{b^2 - (\frac{\sqrt{3}}{6}a)^2}\]
 
 <p>Thus</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{eqnarray*}
- r_{pent3vertexes} & = & r_{snub\_tri} + h_{tet} \\
- & \approx & 2.0770896597432085994 a +  \sqrt{b^2 - (\frac{\sqrt{3}}{6}a)^2} \end{eqnarray*} %]]></script>
+\[\begin{eqnarray*}
+ r_{pent3vertexes} &amp; = &amp; r_{snub\_tri} + h_{tet} \\
+ &amp; \approx &amp; 2.0770896597432085994 a +  \sqrt{b^2 - (\frac{\sqrt{3}}{6}a)^2} \end{eqnarray*}\]
 
-<p>Finally, we can convert <script type="math/tex">r_{pent3vertexes}</script> into <script type="math/tex">c</script> by multiplying it by the ratio of  the <a href="http://dmccooey.com/polyhedra/LpentagonalHexecontahedron.html">length constant of the short edges</a> of the pentagon: to <a href="http://dmccooey.com/polyhedra/LpentagonalHexecontahedron.html">the radius of the 3-vertexes of a pentagonal hexecontahedron’s pentagons</a>:</p>
+<p>Finally, we can convert \(r_{pent3vertexes}\) into \(c\) by multiplying it by the ratio of  the <a href="http://dmccooey.com/polyhedra/LpentagonalHexecontahedron.html">length constant of the short edges</a> of the pentagon: to <a href="http://dmccooey.com/polyhedra/LpentagonalHexecontahedron.html">the radius of the 3-vertexes of a pentagonal hexecontahedron’s pentagons</a>:</p>
 
-<script type="math/tex; mode=display">c = \frac{0.58289953474498241442}{2.1172098986276657420} r_{pent3vertexes}</script>
+\[c = \frac{0.58289953474498241442}{2.1172098986276657420} r_{pent3vertexes}\]
 
 <p>That’s the general case solution.</p>
 
-<p>If you are making the particular shape that I did (in which <script type="math/tex">a=1, b \approx 0.7071...</script>) then <script type="math/tex">c \approx 0.7495688684810217</script>.</p>
+<p>If you are making the particular shape that I did (in which \(a=1, b \approx 0.7071...\)) then \(c \approx 0.7495688684810217\).</p>
 
 <p>It’s important to note that not all of the pentagonal hexecontahedron’s points are the same distance from its center; the 12 vertexes where 5 edges come together are actually about 10% farther out than the 80 vertexes where 3 edges come together.</p>
 
-<p>Once again, the fastest way to make these triangles is to cut out a strip of paper of width <script type="math/tex">h</script>, and use the same trick we used when making the equilateral triangles earlier. That is, we mark off regular distances of <script type="math/tex">c</script>, offset by <script type="math/tex">\frac{1}{2}c</script> on the other side, connect the dots diagonally, and cut out the resulting triangles.</p>
+<p>Once again, the fastest way to make these triangles is to cut out a strip of paper of width \(h\), and use the same trick we used when making the equilateral triangles earlier. That is, we mark off regular distances of \(c\), offset by \(\frac{1}{2}c\) on the other side, connect the dots diagonally, and cut out the resulting triangles.</p>
 
 <h3 id="pentagons-c-c-c-d-d">Pentagons (c, c, c, d, d)</h3>
 
-<p>Finding <script type="math/tex">d</script> from <script type="math/tex">c</script> is easy if you <a href="https://en.wikipedia.org/wiki/Pentagonal_hexecontahedron">look on wikipedia</a> to find the ratio of edge lengths:</p>
+<p>Finding \(d\) from \(c\) is easy if you <a href="https://en.wikipedia.org/wiki/Pentagonal_hexecontahedron">look on wikipedia</a> to find the ratio of edge lengths:</p>
 
-<script type="math/tex; mode=display">d \approx 1.7498525667362 c</script>
+\[d \approx 1.7498525667362 c\]
 
-<p>When laying out the pentagon, don’t forget that the angle between the two <script type="math/tex">d</script> sides is about 67.45351 degrees, and to use appropriate symmetry.</p>
+<p>When laying out the pentagon, don’t forget that the angle between the two \(d\) sides is about 67.45351 degrees, and to use appropriate symmetry.</p>
 
 <p>I don’t have any rules of thumb on the construction of those pentagons, sorry! Just make a template and get to work, I guess.</p>
 
@@ -651,7 +647,7 @@
         <a href="/blog/pentakis-dodecahedron-dome/" class="btn" title="The Reinforced Pentakis Dodecahedron Dome">Previous</a>
       
       
-        <a href="/blog/clojure-apps-in-docker/" class="btn" title="Packaging and Running Clojure Apps Locally with Docker">Next</a>
+        <a href="/blog/adding-page-numbers-to-pdfs/" class="btn" title="Adding Page Numbers to PDFs">Next</a>
       
     </nav><!-- /.pagination -->
   </article>
@@ -661,7 +657,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

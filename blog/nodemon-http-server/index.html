@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Nodemon HTTP Server &#8211; Art is Never Finished</title>
 <meta name="description" content="While playing with three.js today, I needed a hot-reloading JS webserver in a real hurry to serve out content. Here’s how to start a server at http://localhost:8080/ in just three lines:
-
 ">
 <meta name="keywords" content="javascript, js, three.js">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Nodemon HTTP Server">
 <meta name="twitter:description" content="While playing with three.js today, I needed a hot-reloading JS webserver in a real hurry to serve out content. Here’s how to start a server at http://localhost:8080/ in just three lines:
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nodemon HTTP Server">
 <meta property="og:description" content="While playing with three.js today, I needed a hot-reloading JS webserver in a real hurry to serve out content. Here’s how to start a server at http://localhost:8080/ in just three lines:
-
 ">
 <meta property="og:url" content="/blog/nodemon-http-server/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2019-03-27T00:00:00-07:00"><i class="fa fa-calendar-o"></i> March 27, 2019</time></span>
+        <span class="entry-date date published"><time datetime="2019-03-27T00:00:00+00:00"><i class="fa fa-calendar-o"></i> March 27, 2019</time></span>
         
         
         
@@ -147,17 +144,15 @@
       <div class="entry-content">
         <p>While playing with <a href="https://threejs.org">three.js</a> today, I needed a hot-reloading JS webserver in a real hurry to serve out content. Here’s how to start a server at <a href="http://localhost:8080">http://localhost:8080/</a> in just three lines:</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>npm install http-server -g   <span class="c"># Install the http-server tool</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install </span>http-server <span class="nt">-g</span>   <span class="c"># Install the http-server tool</span>
 <span class="nb">cd</span> /to/some/directory        <span class="c"># Change to the directory you want to serve content from</span>
 nodemon <span class="sb">`</span>which http-server<span class="sb">`</span>  <span class="c"># Use nodemon to restart the http-server when any content changes</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>If you don’t need a server that restarts, consider using:</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>http-server . -p 8080
-</code></pre>
-</div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http-server <span class="nb">.</span> <span class="nt">-p</span> 8080
+</code></pre></div></div>
 
 
         
@@ -168,6 +163,8 @@ nodemon <span class="sb">`</span>which http-server<span class="sb">`</span>  <sp
         <a href="/blog/percentiles-and-histograms/" class="btn" title="Preferring Quantiles to Histograms">Previous</a>
       
       
+        <a href="/blog/symmetric-encryption-snippet/" class="btn" title="Symmetric Encryption in Python">Next</a>
+      
     </nav><!-- /.pagination -->
   </article>
 </div><!-- /#main -->
@@ -176,7 +173,7 @@ nodemon <span class="sb">`</span>which http-server<span class="sb">`</span>  <sp
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

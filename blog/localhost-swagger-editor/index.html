@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>A Localhost Swagger Editor &#8211; Art is Never Finished</title>
 <meta name="description" content="I’ve always edited swagger docs using the online editor, but thanks to docker, you may run it locally with equal ease:
-
 ">
 <meta name="keywords" content="docker, swagger">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="A Localhost Swagger Editor">
 <meta name="twitter:description" content="I’ve always edited swagger docs using the online editor, but thanks to docker, you may run it locally with equal ease:
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="A Localhost Swagger Editor">
 <meta property="og:description" content="I’ve always edited swagger docs using the online editor, but thanks to docker, you may run it locally with equal ease:
-
 ">
 <meta property="og:url" content="/blog/localhost-swagger-editor/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2019-02-14T00:00:00-08:00"><i class="fa fa-calendar-o"></i> February 14, 2019</time></span>
+        <span class="entry-date date published"><time datetime="2019-02-14T00:00:00+00:00"><i class="fa fa-calendar-o"></i> February 14, 2019</time></span>
         
         
         
@@ -149,18 +146,16 @@
 
 <p>From <a href="https://github.com/swagger-api/swagger-editor">https://github.com/swagger-api/swagger-editor</a>:</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker pull swaggerapi/swagger-editor
-docker run -d -p 80:8080 swaggerapi/swagger-editor
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker pull swaggerapi/swagger-editor
+docker run <span class="nt">-d</span> <span class="nt">-p</span> 80:8080 swaggerapi/swagger-editor
+</code></pre></div></div>
 
 <p>Then browse to port 80 on localhost. If you want more than one tab to work in, launch a few more containers on ports 81, 82, and 83.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run -d -p 81:8080 swaggerapi/swagger-editor
-docker run -d -p 82:8080 swaggerapi/swagger-editor
-docker run -d -p 83:8080 swaggerapi/swagger-editor
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-d</span> <span class="nt">-p</span> 81:8080 swaggerapi/swagger-editor
+docker run <span class="nt">-d</span> <span class="nt">-p</span> 82:8080 swaggerapi/swagger-editor
+docker run <span class="nt">-d</span> <span class="nt">-p</span> 83:8080 swaggerapi/swagger-editor
+</code></pre></div></div>
 
 <p>I can’t believe I never thought of this before.</p>
 
@@ -169,7 +164,7 @@ docker run -d -p 83:8080 swaggerapi/swagger-editor
     </div><!-- /.entry-wrapper -->
     <nav class="pagination" role="navigation">
       
-        <a href="/blog/docker-postgres/" class="btn" title="Connecting a Clojure REPL to a PostgreSQL Docker Container">Previous</a>
+        <a href="/blog/a-metta-meditation/" class="btn" title="A Metta Meditation">Previous</a>
       
       
         <a href="/blog/loading-csvs-in-clojure/" class="btn" title="Loading CSVs in Clojure">Next</a>
@@ -182,7 +177,7 @@ docker run -d -p 83:8080 swaggerapi/swagger-editor
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

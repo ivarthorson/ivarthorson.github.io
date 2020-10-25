@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Project Euler Problem 59 &#8211; Art is Never Finished</title>
 <meta name="description" content="Another fun one! Problem 59 reminds me of those long-past days when I was a young boy, heavily armed with water pistols and secure in my friend’s tree house, trying to develop secret alphabets and substitutions ciphers to keep our secret documents out of the hands of our evil sisters, who generally had no interest in what we were writing anyway.
-
 ">
 <meta name="keywords" content="decryption, pmap, xor">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Project Euler Problem 59">
 <meta name="twitter:description" content="Another fun one! Problem 59 reminds me of those long-past days when I was a young boy, heavily armed with water pistols and secure in my friend’s tree house, trying to develop secret alphabets and substitutions ciphers to keep our secret documents out of the hands of our evil sisters, who generally had no interest in what we were writing anyway.
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project Euler Problem 59">
 <meta property="og:description" content="Another fun one! Problem 59 reminds me of those long-past days when I was a young boy, heavily armed with water pistols and secure in my friend’s tree house, trying to develop secret alphabets and substitutions ciphers to keep our secret documents out of the hands of our evil sisters, who generally had no interest in what we were writing anyway.
-
 ">
 <meta property="og:url" content="/project-euler/problem-59/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-08-19T10:20:55-07:00"><i class="fa fa-calendar-o"></i> August 19, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-08-19T17:20:55+00:00"><i class="fa fa-calendar-o"></i> August 19, 2010</time></span>
         
         
         
@@ -222,14 +219,14 @@
 
 <p>Much better! Now if those pesky girls add extra digits to their rotating XOR cipher, it only adds a linear increase in complexity to our decoding operation.</p>
 
-<p>As an aside: getting the key with the maximum value out of a hash map isn’t as straightforward as I would like. For the curious, here is another idiom for computing <code class="highlighter-rouge">best-char</code>:</p>
+<p>As an aside: getting the key with the maximum value out of a hash map isn’t as straightforward as I would like. For the curious, here is another idiom for computing <code class="language-plaintext highlighter-rouge">best-char</code>:</p>
 
 <pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">best-char</span> [s]
   (<span style="color: #729fcf;">first</span> (<span style="color: #729fcf;">apply</span> max-key second (zipmap letters (<span style="color: #729fcf;">map</span> #(char-score % s) letters)))))</code></pre>
 
 <p>And for our final trick, we can avoid even the linear increase in computation time by performing the computation of all the digits in parallel, meaning that finding keys up to n-digits long (where n is the number of cores in your computer) will take roughly the same amount of time as it takes to find a 3-digit key.</p>
 
-<p>Here’s our final version, with the <code class="highlighter-rouge">println</code>’s stripped out and a <code class="highlighter-rouge">pmap</code> introduced. Note the single-character difference between the sequential version and the parallel version:</p>
+<p>Here’s our final version, with the <code class="language-plaintext highlighter-rouge">println</code>’s stripped out and a <code class="language-plaintext highlighter-rouge">pmap</code> introduced. Note the single-character difference between the sequential version and the parallel version:</p>
 
 <pre><code>(<span style="color: #8ae234;">defn</span> <span style="color: #edd400; font-weight: bold;">euler-59-sequential</span> [keylength file]
   (<span style="color: #8ae234;">let</span> [msg (<span style="color: #729fcf;">map</span> #(<span style="color: #729fcf;">char</span> (Integer/parseInt %)) (<span style="color: #729fcf;">re-seq</span> #<span style="color: #Fd7f98;">"\d+"</span> (<span style="color: #729fcf;">rp</span> file)))
@@ -286,7 +283,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

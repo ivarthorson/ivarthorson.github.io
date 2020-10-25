@@ -1,0 +1,264 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Printing Photos from the Linux Command Line &#8211; Art is Never Finished</title>
+<meta name="description" content="Here’s a handy script that lets you leave your printer in its default mode (i.e. configured for printing ordinary documents on letter or A4) but also print photos from the command line. The handy thing here is you can then skip the annoyance of manually editing a bunch of printing menus to configure the paper size, tray, glossy paper, DPI, 4x6” page size, and a specific color profile.
+">
+<meta name="keywords" content="phototography, cups, gutenprint">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Printing Photos from the Linux Command Line">
+<meta name="twitter:description" content="Here’s a handy script that lets you leave your printer in its default mode (i.e. configured for printing ordinary documents on letter or A4) but also print photos from the command line. The handy thing here is you can then skip the annoyance of manually editing a bunch of printing menus to configure the paper size, tray, glossy paper, DPI, 4x6” page size, and a specific color profile.
+">
+<meta name="twitter:site" content="@ivarthorson">
+<meta name="twitter:creator" content="@ivarthorson">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Printing Photos from the Linux Command Line">
+<meta property="og:description" content="Here’s a handy script that lets you leave your printer in its default mode (i.e. configured for printing ordinary documents on letter or A4) but also print photos from the command line. The handy thing here is you can then skip the annoyance of manually editing a bunch of printing menus to configure the paper size, tray, glossy paper, DPI, 4x6” page size, and a specific color profile.
+">
+<meta property="og:url" content="/blog/photo-prints-from-the-command-line/">
+<meta property="og:site_name" content="Art is Never Finished">
+
+
+
+
+
+<link rel="canonical" href="/blog/photo-prints-from-the-command-line/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Art is Never Finished Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="/about/" >About</a></li>
+		  
+		    
+		    <li><a href="/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="/project-euler/" >Code</a></li>
+		  
+		    
+		    <li><a href="/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="/tags/" >Tags</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+      <h1 class="site-title animated fadeIn"><a href="/">Art is Never Finished</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">...Only Abandoned. – Leonardo da Vinci</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="/tags/#phototography" title="Pages tagged phototography">phototography</a></li><li><a href="/tags/#cups" title="Pages tagged cups">cups</a></li><li><a href="/tags/#gutenprint" title="Pages tagged gutenprint">gutenprint</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Printing Photos from the Linux Command Line</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
+        <span class="entry-date date published"><time datetime="2019-05-20T00:00:00+00:00"><i class="fa fa-calendar-o"></i> May 20, 2019</time></span>
+        
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>Here’s a handy script that lets you leave your printer in its default mode (i.e. configured for printing ordinary documents on letter or A4) but also print photos from the command line. The handy thing here is you can then skip the annoyance of manually editing a bunch of printing menus to configure the paper size, tray, glossy paper, DPI, 4x6” page size, and a specific color profile.</p>
+
+<p>I wanted to share this trick on printing because, while <a href="https://en.wikipedia.org/wiki/CUPS">CUPS</a> has, by-and-large, just worked for me in the past, I’ve been trying to get back into photography lately. Things are more fun when it is as easy as possible to capture, postprocess, and print photos, so I decided to optimize that last step a little more.</p>
+
+<h2 id="debian-cups-configuration">Debian CUPS Configuration</h2>
+
+<p>If you haven’t already configured CUPS for printing, you might want just review the basics of setting up printing on Debian for a printer like my Canon MG6220:</p>
+
+<ol>
+  <li>Install CUPS with <code class="language-plaintext highlighter-rouge">sudo apt-get install cups</code></li>
+  <li>Browse to <a href="http://localhost:631">http://localhost:631</a> to configure CUPS, add printers, and manage them. If you’re having trouble logging in to edit things, make sure you are a member of the <code class="language-plaintext highlighter-rouge">lpadmin</code> group.</li>
+  <li>There’s a bunch of settings for the default configuration, but I found the key settings to improve quality in general were found in the <a href="http://gimp-print.sourceforge.net/gutenprint-users-manual.pdf">Gutenprint manual</a>.
+    <ul>
+      <li>Set <code class="language-plaintext highlighter-rouge">General-&gt;Color Model</code> to <code class="language-plaintext highlighter-rouge">CMYK</code>, since my printer works in CMYK color space.</li>
+      <li>Set <code class="language-plaintext highlighter-rouge">Print Features Common -&gt; Ink Type</code> to <code class="language-plaintext highlighter-rouge">CMYK color</code>;</li>
+      <li>Set <code class="language-plaintext highlighter-rouge">Output Control Common -&gt; Color Correction</code> to <code class="language-plaintext highlighter-rouge">Raw</code> or <code class="language-plaintext highlighter-rouge">Uncorrected</code> to disable the default color enhancement algorithms that can interfere with your own color-tuning;</li>
+      <li>Set <code class="language-plaintext highlighter-rouge">Output Control Common -&gt; Image Type</code> to <code class="language-plaintext highlighter-rouge">Photograph</code> to get better photos</li>
+      <li>Set <code class="language-plaintext highlighter-rouge">Output Control Extra 1 -&gt; Dither Algorithm</code> to <code class="language-plaintext highlighter-rouge">EvenTone</code></li>
+    </ul>
+  </li>
+  <li>Finally, set the configured printer as the “default printer” if you want to use lpr.</li>
+</ol>
+
+<p>I find that these settings are good enough for general printing of any kind, and don’t harm photo prints as much as other settings can.</p>
+
+<h2 id="photo-printing-script">Photo Printing Script</h2>
+
+<p>To print a 4x6 photo from the command line, I opted to go for a two-stage approach.</p>
+
+<ol>
+  <li>
+    <p><strong>Do any printing-specific conversion/processing with imagemagick’s <code class="language-plaintext highlighter-rouge">convert</code></strong>. I wanted to not have to ever worry if a photo was landscape or portrait, so I used the <code class="language-plaintext highlighter-rouge">-rotate '90&gt;'</code> option here, and I also wanted the image to be resized to be 600DPI and to fill as much of a 5x7” photo paper as possible.</p>
+  </li>
+  <li>
+    <p><strong>Send the job with <code class="language-plaintext highlighter-rouge">lpr</code>.</strong> By using options to this command, one can specify to use the rear tray, a certain media size, and glossy paper without chainging any program’s defaults.</p>
+  </li>
+</ol>
+
+<p>There are a ton of options you can pass to <code class="language-plaintext highlighter-rouge">lpr</code>, so if you edit this script, you may find it helpful to use <code class="language-plaintext highlighter-rouge">lpoptions -l</code> and pipe that to <code class="language-plaintext highlighter-rouge">grep</code> to find the options you want.</p>
+
+<p>One last thing: the script uses <code class="language-plaintext highlighter-rouge">uuidgen</code>, so you’ll need to install those as well: <code class="language-plaintext highlighter-rouge">sudo apt-get install uuid-runtime imagemagick</code>.</p>
+
+<p>On to the script, which accepts a single argument of a JPG or PNG file to print.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash </span>
+
+<span class="nv">INFILE</span><span class="o">=</span><span class="nv">$1</span>
+<span class="nv">OUTFILE</span><span class="o">=</span><span class="s2">"/tmp/</span><span class="sb">`</span>uuidgen<span class="sb">`</span><span class="s2">"</span>
+
+<span class="nb">echo</span> <span class="s2">"Converting </span><span class="nv">$INFILE</span><span class="s2"> -&gt; </span><span class="nv">$OUTFILE</span><span class="s2">, rotating and resizing as needed"</span>
+convert <span class="nv">$INFILE</span> <span class="nt">-rotate</span> <span class="s1">'90&gt;'</span> <span class="nt">-units</span> PixelsPerInch <span class="nt">-density</span> 600 <span class="nt">-background</span> white <span class="nt">-gravity</span> center <span class="nt">-resize</span> 3000x4200 <span class="nt">-extent</span> 3000x4200 <span class="nt">-colorspace</span> cmyk <span class="nv">$OUTFILE</span>
+
+<span class="nb">echo</span> <span class="s2">"Printing </span><span class="nv">$OUTFILE</span><span class="s2">"</span>
+lpr <span class="nt">-o</span> <span class="nv">resolution</span><span class="o">=</span>600dpi <span class="nt">-o</span> media-type<span class="o">=</span>GlossyPaper <span class="nt">-o</span> <span class="nv">media</span><span class="o">=</span>Custom.5x7in <span class="nt">-o</span> orientation-requested<span class="o">=</span>3 <span class="nt">-o</span> <span class="nv">size</span><span class="o">=</span>one-sided <span class="nt">-o</span> fit-to-page <span class="nt">-o</span> <span class="nv">InputSlot</span><span class="o">=</span>Rear <span class="nt">-o</span> color-model<span class="o">=</span>CMYK <span class="nt">-P</span> Canon_MG6200_series <span class="nv">$OUTFILE</span>
+
+<span class="nb">echo</span> <span class="s2">"Deleting </span><span class="nv">$OUTFILE</span><span class="s2">"</span>
+<span class="nb">rm</span> <span class="nt">-f</span> <span class="nv">$OUTFILE</span>
+</code></pre></div></div>
+
+<h2 id="other-hints-on-print-tuning">Other Hints on Print Tuning</h2>
+
+<p>It’s a bit dated, but <code class="language-plaintext highlighter-rouge">cups-calibrate</code> can be used to get settings that improve color tuning and are convenient to use in a form like this. For example, the output of <code class="language-plaintext highlighter-rouge">cups-calibrate</code> is the option <code class="language-plaintext highlighter-rouge">-o profile=950,1000,1000,0,-200,-500,1000,0,0,-100,1000</code>, which can be added to the <code class="language-plaintext highlighter-rouge">lpr</code> command.</p>
+
+<p>I also found it handy to print test pages like this to get my grey/black ink transitions worked out:</p>
+
+<p class="center"><img src="CT107.jpg" alt="CT107" title="Grayscale test gradient." /></p>
+
+<p class="center"><img src="grayscale-matrix.png" alt="grayscale-matrix" title="Another Grayscale test gradient." /></p>
+
+<p>Happy printing!</p>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="/blog/docker-postgres-container-backups/" class="btn" title="Backing up Postgres Databases with Docker">Previous</a>
+      
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<div>&copy; 2020 Ivar Thorson. </div>
+<div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
+<div class="social-icons">
+	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/ivarthorson" title="Ivar Thorson on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = '';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

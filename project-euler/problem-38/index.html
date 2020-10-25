@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Project Euler Problem 38 &#8211; Art is Never Finished</title>
 <meta name="description" content="Problem 38 is essentially just a variation on old themes: find a particular concatenated number that is pandigital when multiplied by the numbers 1, 2, …n.  You may note the similarity of the code to problem 32. Without going into detail, here is the solution:
-
 ">
 <meta name="keywords" content="pandigital">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Project Euler Problem 38">
 <meta name="twitter:description" content="Problem 38 is essentially just a variation on old themes: find a particular concatenated number that is pandigital when multiplied by the numbers 1, 2, …n.  You may note the similarity of the code to problem 32. Without going into detail, here is the solution:
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project Euler Problem 38">
 <meta property="og:description" content="Problem 38 is essentially just a variation on old themes: find a particular concatenated number that is pandigital when multiplied by the numbers 1, 2, …n.  You may note the similarity of the code to problem 32. Without going into detail, here is the solution:
-
 ">
 <meta property="og:url" content="/project-euler/problem-38/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-07-25T06:21:53-07:00"><i class="fa fa-calendar-o"></i> July 25, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-07-25T13:21:53+00:00"><i class="fa fa-calendar-o"></i> July 25, 2010</time></span>
         
         
         
@@ -163,7 +160,7 @@
                     <span style="color: #729fcf;">:when</span> (pandigital-9? c)]
                 (as-int c))))</code></pre>
 
-<p>Looking at Chouser’s solution on<a href="http://clojure-euler.wikispaces.com/Problem+038"> clojure-euler</a>, I did notice that he chose to use <code class="highlighter-rouge">(.length s)</code> to get the length of a string, rather than <code class="highlighter-rouge">count</code> (which works in linear time). It’s easy for me to forget that buried underneath Clojure’s sequence library there also java’s string abstraction, but I wonder if using <code class="highlighter-rouge">length</code> is really more performant here…</p>
+<p>Looking at Chouser’s solution on<a href="http://clojure-euler.wikispaces.com/Problem+038"> clojure-euler</a>, I did notice that he chose to use <code class="language-plaintext highlighter-rouge">(.length s)</code> to get the length of a string, rather than <code class="language-plaintext highlighter-rouge">count</code> (which works in linear time). It’s easy for me to forget that buried underneath Clojure’s sequence library there also java’s string abstraction, but I wonder if using <code class="language-plaintext highlighter-rouge">length</code> is really more performant here…</p>
 
 <pre><code><span style="color: #8ae234;">user&gt; </span><span style="font-weight: bold;">(def sss (apply str (repeat 10000000 \a)))</span>
 #'user/sss
@@ -182,7 +179,7 @@
 "Elapsed time: 9.83E-4 msecs"
 </span>nil</code></pre>
 
-<p>For the purposes of this probably inaccurate micro-benchmark, it seems that using Clojure’s <code class="highlighter-rouge">count</code> is faster than using <code class="highlighter-rouge">length</code> However, the only conclusion I feel it is safe to draw here is that <code class="highlighter-rouge">count</code> seems to work in constant time for strings. I’m guessing that Chouser did this back in the end of 2008, when <code class="highlighter-rouge">length</code> on strings may have indeed been faster than an older, possibly linear time implementation of <code class="highlighter-rouge">count</code>. The situation now seems to be reversed.</p>
+<p>For the purposes of this probably inaccurate micro-benchmark, it seems that using Clojure’s <code class="language-plaintext highlighter-rouge">count</code> is faster than using <code class="language-plaintext highlighter-rouge">length</code> However, the only conclusion I feel it is safe to draw here is that <code class="language-plaintext highlighter-rouge">count</code> seems to work in constant time for strings. I’m guessing that Chouser did this back in the end of 2008, when <code class="language-plaintext highlighter-rouge">length</code> on strings may have indeed been faster than an older, possibly linear time implementation of <code class="language-plaintext highlighter-rouge">count</code>. The situation now seems to be reversed.</p>
 
 <p>Ciao for now!</p>
 
@@ -204,7 +201,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

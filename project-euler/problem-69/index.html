@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Project Euler Problem 69 &#8211; Art is Never Finished</title>
 <meta name="description" content="After a long and wonderful three week vacation (and another week of just getting back into the flow), it’s time to return to the daily little bit of practice to stay sharp. Let’s get started!
-
 ">
 <meta name="keywords" content="primes, totient">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Project Euler Problem 69">
 <meta name="twitter:description" content="After a long and wonderful three week vacation (and another week of just getting back into the flow), it’s time to return to the daily little bit of practice to stay sharp. Let’s get started!
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project Euler Problem 69">
 <meta property="og:description" content="After a long and wonderful three week vacation (and another week of just getting back into the flow), it’s time to return to the daily little bit of practice to stay sharp. Let’s get started!
-
 ">
 <meta property="og:url" content="/project-euler/problem-69/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-10-06T11:00:25-07:00"><i class="fa fa-calendar-o"></i> October 06, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-10-06T18:00:25+00:00"><i class="fa fa-calendar-o"></i> October 06, 2010</time></span>
         
         
         
@@ -149,7 +146,7 @@
 
 <p><a href="http://projecteuler.net/index.php?section=problems&amp;id=69">Problem 69</a> wasn’t a programming problem at all, it was a math problem. One could solve it with a few minutes of logic, a pencil, and paper.</p>
 
-<p>The key insight is that multiplying small primes together will result in products with the fewest number of relative primes. Because a small phi will maximize <code class="highlighter-rouge">n/phi(n)</code>, our answer is in fact simply the product of the first few primes.</p>
+<p>The key insight is that multiplying small primes together will result in products with the fewest number of relative primes. Because a small phi will maximize <code class="language-plaintext highlighter-rouge">n/phi(n)</code>, our answer is in fact simply the product of the first few primes.</p>
 
 <pre><code>(<span style="color: #729fcf;">use</span> '[clojure.contrib.lazy-seqs <span style="color: #729fcf;">:only</span> (primes)])
 
@@ -159,7 +156,7 @@
 (<span style="color: #729fcf;">time</span> (euler-69)) <span style="color: #A8AaA5;">;; </span><span style="color: #A8AaA5;">"Elapsed time: 0.263869 msecs"
 </span></code></pre>
 
-<p>I really was pleased when I realized how <code class="highlighter-rouge">reductions</code> made this code a one-liner. Problem solved!</p>
+<p>I really was pleased when I realized how <code class="language-plaintext highlighter-rouge">reductions</code> made this code a one-liner. Problem solved!</p>
 
 <p>Although not really necessary, if you need some help or insight into the totient function, you might enjoy playing with these functions, as I did.</p>
 
@@ -216,7 +213,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>

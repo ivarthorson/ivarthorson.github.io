@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 <title>Project Euler Problem 2 &#8211; Art is Never Finished</title>
 <meta name="description" content="For reference, here is the description of Project Euler Problem #2.
-
 ">
 <meta name="keywords" content="fibonacci">
 
@@ -15,7 +14,6 @@
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Project Euler Problem 2">
 <meta name="twitter:description" content="For reference, here is the description of Project Euler Problem #2.
-
 ">
 <meta name="twitter:site" content="@ivarthorson">
 <meta name="twitter:creator" content="@ivarthorson">
@@ -28,7 +26,6 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project Euler Problem 2">
 <meta property="og:description" content="For reference, here is the description of Project Euler Problem #2.
-
 ">
 <meta property="og:url" content="/project-euler/problem-02/">
 <meta property="og:site_name" content="Art is Never Finished">
@@ -138,7 +135,7 @@
           <img src="/images/ivar.jpg" class="bio-photo" alt="Ivar Thorson bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Ivar Thorson</span></span>
-        <span class="entry-date date published"><time datetime="2010-04-07T17:22:10-07:00"><i class="fa fa-calendar-o"></i> April 07, 2010</time></span>
+        <span class="entry-date date published"><time datetime="2010-04-08T00:22:10+00:00"><i class="fa fa-calendar-o"></i> April 08, 2010</time></span>
         
         
         
@@ -147,22 +144,22 @@
       <div class="entry-content">
         <p>For reference, <a href="http://projecteuler.net/index.php?section=problems&amp;id=2">here is the description of Project Euler Problem #2</a>.</p>
 
-<p>The code I came up to generate Fibonacci numbers turned out to be exactly the same as found in “Programming Clojure” by Stuart Halloway, so I guess the idiom using <code class="highlighter-rouge">iterate</code> was still lurking in my brain after reading it.</p>
+<p>The code I came up to generate Fibonacci numbers turned out to be exactly the same as found in “Programming Clojure” by Stuart Halloway, so I guess the idiom using <code class="language-plaintext highlighter-rouge">iterate</code> was still lurking in my brain after reading it.</p>
 
 <pre><code>(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">fibo</span> (<span style="color: #729fcf;">map</span> first (<span style="color: #729fcf;">iterate</span> (<span style="color: #729fcf;">fn</span> [[a b]] [b (<span style="color: #729fcf;">+</span> a b)]) [0 1])))
     
 (<span style="color: #729fcf;">reduce</span> + (<span style="color: #729fcf;">filter</span> even? (<span style="color: #729fcf;">take-while</span> #(<span style="color: #729fcf;">&gt;</span> 4000000 %) fibo)))</code></pre>
 
-<p>Among the other <a href="http://clojure-euler.wikispaces.com/Problem+002">solutions that people had posted</a>, I liked the (sort of Haskel-esque?) answer by achim_p. Using <code class="highlighter-rouge">partial</code> and <code class="highlighter-rouge">lazy-cat</code> were interesting choices. I repost his code here:</p>
+<p>Among the other <a href="http://clojure-euler.wikispaces.com/Problem+002">solutions that people had posted</a>, I liked the (sort of Haskel-esque?) answer by achim_p. Using <code class="language-plaintext highlighter-rouge">partial</code> and <code class="language-plaintext highlighter-rouge">lazy-cat</code> were interesting choices. I repost his code here:</p>
 
 <pre><code>(<span style="color: #8ae234;">def</span> <span style="color: #edd400; font-weight: bold;">fibs</span> (<span style="color: #729fcf;">lazy-cat</span> '(0 1) (<span style="color: #729fcf;">map</span> + fibs (<span style="color: #729fcf;">drop</span> 1 fibs))))
 
 (<span style="color: #729fcf;">reduce</span> + (<span style="color: #729fcf;">take-while</span> (<span style="color: #729fcf;">partial</span> &gt;= 4000000)
                       (<span style="color: #729fcf;">filter</span> even? fibs)))</code></pre>
 
-<p>In this case, using <code class="highlighter-rouge">(partial &gt; 4000000)</code> doesn’t really seem to be any shorter or clearer than an anonymous functions like  <code class="highlighter-rouge">#(&gt; 4000000 %)</code>. I wonder which is better style?</p>
+<p>In this case, using <code class="language-plaintext highlighter-rouge">(partial &gt; 4000000)</code> doesn’t really seem to be any shorter or clearer than an anonymous functions like  <code class="language-plaintext highlighter-rouge">#(&gt; 4000000 %)</code>. I wonder which is better style?</p>
 
-<p>As for performance, both the <code class="highlighter-rouge">iterate</code> and <code class="highlighter-rouge">lazy-cat</code> idioms for making lazy sequences seem to be roughly equivalent….blazing fast!</p>
+<p>As for performance, both the <code class="language-plaintext highlighter-rouge">iterate</code> and <code class="language-plaintext highlighter-rouge">lazy-cat</code> idioms for making lazy sequences seem to be roughly equivalent….blazing fast!</p>
 
         
       </div><!-- /.entry-content -->
@@ -182,7 +179,7 @@
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<div>&copy; 2019 Ivar Thorson. </div>
+<div>&copy; 2020 Ivar Thorson. </div>
 <div class="legaltext">Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using a modified version of the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</div>
 <div class="social-icons">
 	<a href="https://twitter.com/ivarthorson" title="Ivar Thorson on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
